@@ -34,7 +34,8 @@ Popover no modal (`role="dialog"` etiquetado por «Decision thresholds») anclad
 - **Panel de lectura**: `section` con `tabIndex=-1` nombrada por el asunto (región). Esc dentro devuelve el foco a la fila seleccionada.
 - **Categorías**: botones con `aria-current="true"` en la activa dentro de `nav` «Categories» (no son pestañas: cambian la vista de lista, no un panel adyacente). En el carril, el nombre sigue en texto `sr-only` y se muestra como tooltip al pasar el ratón y con foco de teclado.
 - Enlace «Skip to the messages» como primer elemento enfocable; `h1` con el nombre de la app en `sr-only`.
-- En escritorio el panel siempre muestra algo: la selección elegida o, si no hay, el primer correo de la lista (`resolveSelection`). Al mover un correo fuera de la lista, la selección pasa a su vecino (`neighborId`).
+- En escritorio el panel siempre muestra algo: la selección elegida o, si no hay, el primer correo de la lista (`resolveSelection`). Al mover un correo fuera de la lista, la selección pasa a su vecino (`neighborId`) y **el foco va a esa fila** cuando la lista se ha refrescado (`focusAfterMove`: la fila preferida si sigue en la lista, si no la primera, si no el contenedor de la lista), nunca se queda en `<body>`. En móvil la hoja se cierra con el correo movido aún montado y el foco pasa a la fila vecina en `onAfterClose`.
+- **Extracto**: se guarda cortado a 280 caracteres; `displayExcerpt` lo recorta hasta el último espacio y añade «…» para no partir palabras. Etiqueta «Preview» / «Vista previa»; la subsección de razones se llama «Reasons» / «Motivos».
 
 ### Responsive
 
@@ -98,7 +99,7 @@ Aun así, **el color nunca va solo**: toda categoría aparece con su nombre escr
 - **Worth reading**, **Commercial**: filas normales; el ciruela apagado hace retroceder a Commercial.
 - **Possible scam**: sin alarmismo. Icono de escudo relleno, badge con escudo y chips de evidencia en tono `risk` (tinta naranja sobre tinte). Nada de fondos rojos a pantalla completa ni parpadeos. Destaca porque es el único tono cálido **entre las categorías** y el de más croma. Los tonos de estado `--danger` y `--warning` se reservan para banners y errores, nunca aparecen en filas, y siempre van con icono + texto.
 - **Unsure**: gris; la fila explica por qué (chip «Minimum confidence n%»).
-- **Others**: entrada propia de la barra lateral (antes estaba oculta tras un `ToggleChip`).
+- **Others**: entrada propia de la barra lateral (antes estaba oculta tras un `ToggleChip`, que se ha eliminado).
 
 ## Tipografía
 
@@ -201,10 +202,9 @@ El anillo de foco de modo claro (`#1d63c9`) no llega a 3:1 sobre la barra oscura
 | `Button` | `<button type="button">` | variantes primary/secondary/ghost/danger; `loading` → `aria-busy` + `aria-disabled` e ignora clics (sin `disabled`, para no perder el foco), spinner `aria-hidden`, etiqueta visible; foco 2px |
 | `Badge` | `<span>` | etiqueta de categoría estática; punto o icono `aria-hidden` + texto (nunca solo color) |
 | `Chip` | `<span>` | razón/señal no interactiva; tonos neutral/risk/trust |
-| `ToggleChip` | `<button aria-pressed>` | único chip interactivo (mostrar/ocultar Others) |
 | `Meter` | `<div role="meter">` | `aria-valuenow/min/max`, `aria-label`, `aria-valuetext`; valor visible en texto; pista surface + anillo `--line-strong`; valores no finitos = mínimo |
 | `Slider` | `<input type="range">` | `<label for>` visible, `<output>` con el valor, `aria-valuetext` formateado, ayuda por `aria-describedby`; `onValueChange` en cada `input` |
-| `Sheet` | `<dialog>` modal | `showModal()` (fondo inerte), `aria-labelledby` al título, Esc cierra con un único manejador (`cancel`) que llama a `onClose` una sola vez, Tab/Shift+Tab atrapados, cuerpo desplazable enfocable (`tabIndex=0`, región nombrada por el título), foco vuelve al disparador, clic en el fondo cierra solo si pointerdown y click ocurren ambos en el fondo |
+| `Sheet` | `<dialog>` modal | `showModal()` (fondo inerte), `aria-labelledby` al título, Esc cierra con un único manejador (`cancel`) que llama a `onClose` una sola vez, Tab/Shift+Tab atrapados, cuerpo desplazable enfocable (`tabIndex=0`, región nombrada por el título), foco vuelve al disparador, clic en el fondo cierra solo si pointerdown y click ocurren ambos en el fondo; panel derecho desde 768px (`md`) y pantalla completa por debajo; `onAfterClose` se llama tras devolver el foco |
 | `Banner` | `<div>` | icono + texto + tinte; `live`: off / polite (`role="status"`) / assertive (`role="alert"`) |
 | `Field` (+ `Input`, `Select`) | `<label>` + control | etiqueta encima, ayuda y error debajo enlazados con `aria-describedby`, `aria-invalid`, `aria-required`; el error lleva icono; sin `"use client"` (usable desde Server Components) |
 
