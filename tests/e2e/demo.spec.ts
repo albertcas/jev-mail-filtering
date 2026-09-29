@@ -23,6 +23,7 @@ async function showColumn(page: Page, info: TestInfo, name: RegExp) {
 }
 
 const SCAM = /Possible scam|Posible estafa/;
+const ADVISORY = /Guidance only|Solo orientativo/;
 
 test("demo dashboard shows the classified inbox", async ({ page }, info) => {
   await page.goto("/");
@@ -35,6 +36,7 @@ test("demo dashboard shows the classified inbox", async ({ page }, info) => {
   }
   await showColumn(page, info, SCAM);
   await expect(page.getByText(SCAM_SUBJECT)).toBeVisible();
+  await expect(page.getByText(ADVISORY)).toBeVisible();
 });
 
 test("detail explains the scam decision", async ({ page }, info) => {
@@ -45,6 +47,9 @@ test("detail explains the scam decision", async ({ page }, info) => {
   await expect(dialog).toBeVisible();
   await expect(dialog.getByText(/Domain resembles paypal|Dominio parecido a paypal/).first()).toBeVisible();
   await expect(dialog.getByText(/Sender authentication failed|Autenticación del remitente fallida/).first()).toBeVisible();
+  // Scam detection is guidance (spec §7.2), and demo Message-IDs are fictional: no Gmail link.
+  await expect(dialog.getByText(ADVISORY)).toBeVisible();
+  await expect(dialog.getByRole("link", { name: /Open in Gmail|Abrir en Gmail/ })).toHaveCount(0);
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
 });

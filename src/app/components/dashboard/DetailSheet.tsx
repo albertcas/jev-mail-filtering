@@ -6,6 +6,7 @@ import {
   ArrowCounterClockwiseIcon,
   ArrowSquareOutIcon,
   CheckIcon,
+  InfoIcon,
   MinusIcon,
   ShieldWarningIcon,
   WarningCircleIcon,
@@ -42,7 +43,7 @@ export type DetailSheetProps = {
   item: DashboardItem | null;
   demo: boolean;
   thresholds: Thresholds | null;
-  /** Show "Open in Gmail" (the account is Gmail, or the demo). */
+  /** Show "Open in Gmail" (a real Gmail account; never the demo, whose Message-IDs are fictional). */
   showGmailLink: boolean;
   /** The last "Move to…" / "Undo" request failed. */
   moveError?: boolean;
@@ -170,6 +171,12 @@ export function DetailSheet({ open, item, demo, thresholds, showGmailLink, moveE
               width="4rem"
             />
           </div>
+          {item.category === "possible_scam" ? (
+            <p className="flex items-start gap-1.5 text-sm text-ink-2">
+              <InfoIcon aria-hidden size={16} className="mt-0.5 shrink-0" />
+              {t("dashboard.scamAdvisory")}
+            </p>
+          ) : null}
           {item.reasons.length > 0 ? (
             <ul className="flex flex-wrap gap-1.5">
               {item.reasons.map((r) => (

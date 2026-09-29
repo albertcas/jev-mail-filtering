@@ -87,6 +87,13 @@ export function Dashboard({ demo, gmail }: { demo: boolean; gmail: boolean }) {
     return () => clearInterval(id);
   }, [status?.syncing, refresh]);
 
+  // Idle poll: picks up a scheduled sync that starts later (then the fast poll above takes over).
+  useEffect(() => {
+    if (demo) return;
+    const id = setInterval(() => void refresh(), 30_000);
+    return () => clearInterval(id);
+  }, [demo, refresh]);
+
   // Keep "Last sync 3 minutes ago" honest.
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 30_000);
@@ -293,7 +300,7 @@ export function Dashboard({ demo, gmail }: { demo: boolean; gmail: boolean }) {
         item={current}
         demo={demo}
         thresholds={thresholds}
-        showGmailLink={gmail || demo}
+        showGmailLink={gmail && !demo}
         moveError={moveError}
         onClose={() => setSheetOpen(false)}
         onMove={onMove}

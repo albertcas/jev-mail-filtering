@@ -22,7 +22,8 @@
     "urgency": "Urgencia", "settings": "Ajustes",
     "connected": "Conectado", "connectionProblem": "Problema de conexión", "columns": "Categorías",
     "emptyTitle": "Aún no hay nada analizado", "emptyBody": "Sincroniza para traer tu correo reciente. Jev coloca cada correo en una columna aquí; tu buzón nunca se modifica.",
-    "noSubject": "(sin asunto)", "urgencyValue": "{value}/3", "minConfidenceChip": "Confianza mínima {value}"
+    "noSubject": "(sin asunto)", "urgencyValue": "{value}/3", "minConfidenceChip": "Confianza mínima {value}",
+    "scamAdvisory": "Solo orientativo: Jev puede pasar por alto una estafa o marcar un correo legítimo. Si dudas, contacta con el remitente por un canal de confianza."
   },
   "detail": {
     "title": "Por qué esta categoría", "probabilities": "Probabilidad por categoría", "judgments": "Juicios de Jev",

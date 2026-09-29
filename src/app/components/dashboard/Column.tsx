@@ -2,7 +2,7 @@
 
 import { useId, type HTMLAttributes } from "react";
 import { useTranslations } from "next-intl";
-import { ShieldWarningIcon } from "@phosphor-icons/react/ssr";
+import { InfoIcon, ShieldWarningIcon } from "@phosphor-icons/react/ssr";
 import type { DashboardItem } from "@/server/dashboard";
 import { cn } from "../ui";
 import { categoryMark } from "../ui/tones";
@@ -43,10 +43,14 @@ export type ColumnProps = {
 export function Column({ category, items, now, loading, entering, onOpen, minConfidence, hiddenOnMobile, tabbed, panelProps, className }: ColumnProps) {
   const t = useTranslations();
   const headingId = useId();
+  const advisoryId = useId();
+  // Spec §7.2: scam detection is guidance, not a verdict. Shown on phones too (outside the header).
+  const advisory = category === "possible_scam";
 
   return (
     <section
       aria-labelledby={panelProps?.role === "tabpanel" ? undefined : headingId}
+      aria-describedby={advisory ? advisoryId : undefined}
       {...panelProps}
       className={cn("flex min-w-0 flex-col", hiddenOnMobile && "max-md:hidden", className)}
     >
@@ -65,6 +69,12 @@ export function Column({ category, items, now, loading, entering, onOpen, minCon
           </span>
         </h2>
       </header>
+      {advisory ? (
+        <p id={advisoryId} className="flex items-start gap-1.5 pt-2.5 text-xs text-ink-3">
+          <InfoIcon aria-hidden size={14} className="mt-px shrink-0" />
+          {t("dashboard.scamAdvisory")}
+        </p>
+      ) : null}
 
       {loading ? (
         <div className="grid gap-2 pt-3">

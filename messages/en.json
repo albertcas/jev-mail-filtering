@@ -22,7 +22,8 @@
     "urgency": "Urgency", "settings": "Settings",
     "connected": "Connected", "connectionProblem": "Connection problem", "columns": "Categories",
     "emptyTitle": "Nothing analysed yet", "emptyBody": "Sync now to fetch your recent mail. Jev sorts each email into a column here; your mailbox is never changed.",
-    "noSubject": "(no subject)", "urgencyValue": "{value}/3", "minConfidenceChip": "Minimum confidence {value}"
+    "noSubject": "(no subject)", "urgencyValue": "{value}/3", "minConfidenceChip": "Minimum confidence {value}",
+    "scamAdvisory": "Guidance only: Jev can miss a scam or flag a genuine email. If in doubt, contact the sender through a channel you already trust."
   },
   "detail": {
     "title": "Why this category", "probabilities": "Category probabilities", "judgments": "Jev judgments",
