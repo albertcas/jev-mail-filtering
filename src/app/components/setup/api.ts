@@ -9,7 +9,8 @@ export type EstimateResult = ({ ok: true } & Estimate) | { ok: false; error: "au
 export type ImapInput = {
   provider: ProviderId;
   user: string;
-  password: string;
+  /** Omitted in .env mode to use IMAP_PASSWORD on the server. */
+  password?: string;
   displayName: string;
   host?: string;
   port?: number;

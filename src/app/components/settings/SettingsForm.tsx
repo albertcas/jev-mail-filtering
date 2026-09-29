@@ -12,8 +12,9 @@ import { DemoBanner } from "../dashboard/DemoBanner";
 import { ThresholdPanel } from "../dashboard/ThresholdPanel";
 import { setupApi } from "../setup/api";
 import { PROVIDER_NAMES } from "../setup/guide";
-import { Banner, Button, Field, Input, Select, cn } from "../ui";
-import { intervalOptions, intervalUnit, normalizeModel } from "./intervals";
+import { Banner, Button, Field, Input, Select, cn, useFocusFirstInvalid } from "../ui";
+import { intervalOptions, normalizeModel } from "./intervals";
+import { useIntervalLabel } from "./useIntervalLabel";
 
 export type SettingsFormProps = {
   demo: boolean;
@@ -44,6 +45,8 @@ const LANGUAGES = [
  */
 export function SettingsForm({ demo, locale, secretsKind, thresholds, account, intervalMinutes, model }: SettingsFormProps) {
   const t = useTranslations();
+  const intervalLabel = useIntervalLabel();
+  const [modelFormRef, focusInvalidModel] = useFocusFirstInvalid<HTMLFormElement>();
   const router = useRouter();
   const [interval, setIntervalValue] = useState(intervalMinutes);
   const [intervalState, setIntervalState] = useState<SaveState>("idle");
@@ -71,6 +74,7 @@ export function SettingsForm({ demo, locale, secretsKind, thresholds, account, i
     const m = normalizeModel(modelValue);
     if (!m) {
       setModelError(true);
+      focusInvalidModel();
       return;
     }
     setModelValue(m);
@@ -104,10 +108,6 @@ export function SettingsForm({ demo, locale, secretsKind, thresholds, account, i
     }
   };
 
-  const intervalLabel = (m: number) => {
-    const u = intervalUnit(m);
-    return t(`settings.${u.unit}`, { count: u.count });
-  };
 
   return (
     <div className="flex min-h-dvh w-full flex-col bg-canvas">
@@ -178,7 +178,7 @@ export function SettingsForm({ demo, locale, secretsKind, thresholds, account, i
           </Section>
 
           <Section title={t("settings.modelSection")} help={t("settings.modelHelp")}>
-            <form onSubmit={saveModel} className="grid grid-cols-[minmax(0,16rem)_auto] items-start gap-3" noValidate>
+            <form ref={modelFormRef} onSubmit={saveModel} className="grid grid-cols-[minmax(0,16rem)_auto] items-start gap-3" noValidate>
               <Field
                 label={t("settings.model")}
                 error={modelError ? t("settings.modelInvalid") : undefined}
@@ -201,6 +201,9 @@ export function SettingsForm({ demo, locale, secretsKind, thresholds, account, i
                   />
                 )}
               </Field>
+              <p role="status" className="sr-only">
+                {modelError ? t("settings.modelInvalid") : ""}
+              </p>
               {/* Aligns with the control, below the label (label 20px + gap 6px). */}
               <div className="pt-[1.625rem]">
                 <SaveButton state={modelState} disabled={demo} />
@@ -227,6 +230,10 @@ export function SettingsForm({ demo, locale, secretsKind, thresholds, account, i
                 </Select>
               )}
             </Field>
+            {/* Focus stays on the select; announce a failed change. */}
+            <p role="alert" className="sr-only">
+              {langState === "error" ? t("settings.saveFailed") : ""}
+            </p>
           </Section>
 
           <Section title={t("settings.account")} help={t("settings.accountHelp")}>

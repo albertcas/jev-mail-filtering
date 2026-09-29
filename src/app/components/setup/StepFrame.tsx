@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { cn } from "../ui";
 
 export type StepFrameProps = {
   title: ReactNode;
@@ -38,6 +39,6 @@ export function StepFrame({ title, intro, children, footer, autoFocus = true }: 
 }
 
 /** The surface that holds a step's form, separated from the instructions on the canvas. */
-export function FormCard({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`grid gap-4 rounded-lg border border-line bg-surface p-4 shadow-card md:p-5 ${className}`}>{children}</div>;
+export function FormCard({ children, className }: { children: ReactNode; className?: string }) {
+  return <div className={cn("grid gap-4 rounded-lg border border-line bg-surface p-4 shadow-card md:p-5", className)}>{children}</div>;
 }

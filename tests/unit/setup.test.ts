@@ -55,6 +55,10 @@ describe("wizard state", () => {
     expect(wizardReducer(at({ step: "scope", keyReady: false, folders: [] }), { type: "syncStarted" }).step).toBe("scope");
   });
 
+  it("jumps to the syncing view when a sync is already running", () => {
+    expect(wizardReducer(at({ step: "key" }), { type: "resumeSync" }).step).toBe("syncing");
+  });
+
   it("numbers the progress steps 1–3", () => {
     expect(progressIndex("welcome")).toBeNull();
     expect(progressIndex("key")).toBe(1);

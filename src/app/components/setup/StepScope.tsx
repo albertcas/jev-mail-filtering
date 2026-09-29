@@ -4,7 +4,8 @@ import { useEffect, useState, type ReactNode } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { formatCost } from "../dashboard/format";
 import { Banner, Field, Input, Select } from "../ui";
-import { intervalOptions, intervalUnit } from "../settings/intervals";
+import { intervalOptions } from "../settings/intervals";
+import { useIntervalLabel } from "../settings/useIntervalLabel";
 import { setupApi, type EstimateResult } from "./api";
 import { FormCard, StepFrame } from "./StepFrame";
 import { MAX_DAYS, MIN_DAYS, clampDays } from "./wizard-state";
@@ -30,6 +31,7 @@ const DEBOUNCE_MS = 300;
  */
 export function StepScope({ folders, scope, onScopeChange, syncError, maxPerSync, footer }: StepScopeProps) {
   const t = useTranslations();
+  const intervalLabel = useIntervalLabel();
   const locale = useLocale();
   // The days input is edited as text so it can be empty mid-typing; the scope keeps a valid number.
   const [daysText, setDaysText] = useState(String(scope.days));
@@ -51,10 +53,6 @@ export function StepScope({ folders, scope, onScopeChange, syncError, maxPerSync
     };
   }, [scope.folder, scope.days]);
 
-  const intervalLabel = (m: number) => {
-    const u = intervalUnit(m);
-    return t(`settings.${u.unit}`, { count: u.count });
-  };
 
   return (
     <StepFrame title={t("setup.scopeTitle")} intro={t("setup.scopeIntro")} footer={footer}>

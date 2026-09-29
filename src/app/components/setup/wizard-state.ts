@@ -21,6 +21,8 @@ export type WizardAction =
   | { type: "next" }
   | { type: "back" }
   | { type: "syncStarted" }
+  /** A sync is already running on the server (e.g. the page was reloaded mid first sync). */
+  | { type: "resumeSync" }
   | { type: "syncFailed" };
 
 /** The three numbered steps shown in the progress indicator. */
@@ -72,6 +74,8 @@ export function wizardReducer(s: WizardState, a: WizardAction): WizardState {
     }
     case "syncStarted":
       return s.step === "scope" && canAdvance(s) ? { ...s, step: "syncing" } : s;
+    case "resumeSync":
+      return { ...s, step: "syncing" };
     case "syncFailed":
       return s.step === "syncing" ? { ...s, step: "scope" } : s;
   }

@@ -81,7 +81,7 @@
         "step3": "Escribe abajo el servidor, tu correo y la contraseña."
       }
     },
-    "mailEnvNote": "En modo .env la contraseña de aplicación se lee de IMAP_PASSWORD. Lo que escribas aquí solo sirve para probar la conexión.",
+    "mailEnvNote": "En modo .env la contraseña de aplicación se toma de IMAP_PASSWORD. Déjalo vacío para usarla.", "mailEnvMissing": "En modo .env la contraseña de aplicación se lee de IMAP_PASSWORD, que no está definida. Añádela a tu fichero .env y reinicia; lo que escribas aquí solo sirve para probar la conexión.", "testToContinue": "Prueba la conexión para continuar",
     "passwordRequired": "Pega primero la contraseña de aplicación.", "emailRequired": "Escribe tu dirección de correo.", "hostRequired": "Escribe el servidor IMAP, por ejemplo imap.example.com.", "badRequest": "Revisa los campos e inténtalo de nuevo.",
     "scopeIntro": "Elige qué lee Jev en la primera pasada. Las siguientes sincronizaciones solo traen correo nuevo.",
     "daysHint": "Entre 1 y 90 días.", "estimating": "Calculando…", "estimateHint": "Estimación según el número de correos; el coste real depende de su longitud. Como máximo {max} correos por sincronización.",

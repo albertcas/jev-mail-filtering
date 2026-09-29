@@ -7,4 +7,5 @@ export { Meter, type MeterProps } from "./Meter";
 export { Sheet, type SheetProps } from "./Sheet";
 export { Slider, type SliderProps } from "./Slider";
 export { cn } from "./cn";
+export { useFocusFirstInvalid } from "./useFocusFirstInvalid";
 export type { CategoryTone, StatusTone } from "./tones";

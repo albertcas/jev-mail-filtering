@@ -4,6 +4,7 @@ import { ImapAuthError } from "@/core/mail/imap-source";
 import { PROVIDERS } from "@/core/mail/providers";
 import { checkRequest } from "@/server/guard";
 import { getContext } from "@/server/context";
+import { resolveImapPassword } from "@/server/imap-password";
 
 const Body = z.object({
   provider: z.enum(["gmail", "icloud", "yahoo", "imap"]),
@@ -11,7 +12,8 @@ const Body = z.object({
   port: z.number().int().optional(),
   secure: z.boolean().optional(),
   user: z.string().trim().min(3),
-  password: z.string().min(1),
+  // Optional only so .env mode can fall back to IMAP_PASSWORD (see resolveImapPassword).
+  password: z.string().optional(),
   displayName: z.string().default(""),
 });
 
@@ -21,6 +23,8 @@ export async function POST(req: Request) {
   if (denied) return denied;
   const b = Body.safeParse(await req.json().catch(() => null));
   if (!b.success) return Response.json({ ok: false, error: "bad_request" }, { status: 400 });
+  const password = await resolveImapPassword(b.data.password, c.secrets);
+  if (!password) return Response.json({ ok: false, error: "bad_request" }, { status: 400 });
   const preset = b.data.provider === "imap" ? null : PROVIDERS[b.data.provider];
   const parsed = AppConfigSchema.safeParse({
     ...(c.repo.getConfig() ?? {}),
@@ -33,12 +37,12 @@ export async function POST(req: Request) {
   });
   if (!parsed.success) return Response.json({ ok: false, error: "bad_request" }, { status: 400 });
   const config = parsed.data;
-  const source = c.imapSource(config, b.data.password);
+  const source = c.imapSource(config, password);
   try {
     const folders = await source.listFolders();
     c.repo.setConfig(config);
-    if (c.secrets.writable) await c.secrets.set("imap_password", b.data.password);
-    c.runner.start(config.intervalMinutes);
+    if (c.secrets.writable) await c.secrets.set("imap_password", password);
+    // The scheduler starts only once the user confirms the scope (PUT /api/settings).
     return Response.json({ ok: true, folders });
   } catch (err) {
     return Response.json({ ok: false, error: err instanceof ImapAuthError ? "auth" : "network" });

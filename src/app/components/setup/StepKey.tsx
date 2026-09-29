@@ -4,7 +4,7 @@ import { useId, useState, type FormEvent, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowsClockwiseIcon } from "@phosphor-icons/react/ssr";
 import type { Status } from "../dashboard/api";
-import { Banner, Button, Field, Input } from "../ui";
+import { Banner, Button, Field, Input, useFocusFirstInvalid } from "../ui";
 import { setupApi } from "./api";
 import { ExternalLink } from "./ExternalLink";
 import { FormCard, StepFrame } from "./StepFrame";
@@ -33,6 +33,7 @@ export function StepKey({ status, onKeyReady, onRecheck, footer }: StepKeyProps)
   const [rechecking, setRechecking] = useState(false);
   const [result, setResult] = useState<Result>(null);
   const howToId = useId();
+  const [formRef, focusInvalid] = useFocusFirstInvalid<HTMLFormElement>();
   const envMode = status.secretsKind === "env";
   const envHasKey = envMode && status.hasApiKey;
 
@@ -40,7 +41,14 @@ export function StepKey({ status, onKeyReady, onRecheck, footer }: StepKeyProps)
     e.preventDefault();
     const value = apiKey.trim();
     if (!value) {
+      if (status.hasApiKey) {
+        // Nothing to replace the stored key with: keep it and let the user continue.
+        setResult(null);
+        if (!envMode) onKeyReady(true);
+        return;
+      }
       setResult("empty");
+      focusInvalid();
       return;
     }
     setBusy(true);
@@ -93,7 +101,7 @@ export function StepKey({ status, onKeyReady, onRecheck, footer }: StepKeyProps)
           </section>
 
           <FormCard>
-            <form onSubmit={(e) => void verify(e)} className="grid gap-4" noValidate>
+            <form ref={formRef} onSubmit={(e) => void verify(e)} className="grid gap-4" noValidate>
               <Field
                 label={t("setup.keyLabel")}
                 hint={!envMode && status.hasApiKey ? t("setup.keySaved") : status.secretsKind === "keyring" ? t("setup.keyStored") : undefined}
@@ -132,9 +140,9 @@ export function StepKey({ status, onKeyReady, onRecheck, footer }: StepKeyProps)
                 {t("setup.network")}
               </Banner>
             ) : null}
-            {/* Announces invalid-key results, which are shown under the field. */}
+            {/* Announces the errors shown under the field. */}
             <p role="status" className="sr-only">
-              {result === "invalid_key" ? t("setup.keyInvalid") : ""}
+              {fieldError ?? ""}
             </p>
           </FormCard>
         </>

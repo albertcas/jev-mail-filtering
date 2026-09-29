@@ -3,7 +3,7 @@ import type { Thresholds } from "@/core/policy/thresholds";
 import type { DisplayCategory } from "@/core/policy/decide";
 
 export type Status = {
-  demo: boolean; configured: boolean; hasApiKey: boolean; syncing: boolean; pending: number;
+  demo: boolean; configured: boolean; hasApiKey: boolean; hasImapPassword: boolean; syncing: boolean; pending: number;
   totalTokens: number; estimatedCostUsd: number; secretsKind: "keyring" | "env" | "memory";
   lastRun: { finishedAt: number | null; error: string | null; fetched: number; classified: number; failed: number } | null;
 };

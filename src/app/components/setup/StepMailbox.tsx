@@ -3,7 +3,7 @@
 import { useId, useState, type FormEvent, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import type { ProviderId } from "@/core/mail/providers";
-import { Banner, Button, Field, Input, cn } from "../ui";
+import { Banner, Button, Field, Input, cn, useFocusFirstInvalid } from "../ui";
 import { setupApi } from "./api";
 import { FormCard, StepFrame } from "./StepFrame";
 import { PROVIDER_IDS, PROVIDER_NAMES } from "./guide";
@@ -29,6 +29,8 @@ export type StepMailboxProps = {
   folders: string[] | null;
   onConnected: (folders: string[]) => void;
   envMode: boolean;
+  /** .env mode with IMAP_PASSWORD set: the field may stay empty and the server uses it. */
+  envHasPassword: boolean;
   footer: ReactNode;
 };
 
@@ -37,7 +39,7 @@ export type StepMailboxProps = {
  * and Test connection (login + folder list). The password is only held in this
  * input and cleared once sent.
  */
-export function StepMailbox({ draft, onDraftChange, folders, onConnected, envMode, footer }: StepMailboxProps) {
+export function StepMailbox({ draft, onDraftChange, folders, onConnected, envMode, envHasPassword, footer }: StepMailboxProps) {
   const t = useTranslations();
   const guideId = useId();
   const [password, setPassword] = useState("");
@@ -45,6 +47,7 @@ export function StepMailbox({ draft, onDraftChange, folders, onConnected, envMod
   const [result, setResult] = useState<Result>(null);
   const [missing, setMissing] = useState<Missing>({});
   const other = draft.provider === "imap";
+  const [formRef, focusInvalid] = useFocusFirstInvalid<HTMLFormElement>();
 
   const set = (patch: Partial<MailboxDraft>) => {
     setResult(null);
@@ -57,10 +60,13 @@ export function StepMailbox({ draft, onDraftChange, folders, onConnected, envMod
     const miss: Missing = {
       user: draft.user.trim().length < 3,
       host: other && draft.host.trim().length === 0,
-      password: password.length === 0,
+      password: password.length === 0 && !envHasPassword,
     };
     setMissing(miss);
-    if (miss.user || miss.host || miss.password) return;
+    if (miss.user || miss.host || miss.password) {
+      focusInvalid();
+      return;
+    }
     setBusy(true);
     setResult(null);
     const secret = password;
@@ -69,7 +75,8 @@ export function StepMailbox({ draft, onDraftChange, folders, onConnected, envMod
       provider: draft.provider,
       user: draft.user.trim(),
       displayName: draft.displayName.trim(),
-      password: secret,
+      // Empty in .env mode = use IMAP_PASSWORD on the server.
+      ...(secret ? { password: secret } : {}),
       ...(other ? { host: draft.host.trim(), port: draft.port >= 1 && draft.port <= 65535 ? draft.port : 993, secure: draft.secure } : {}),
     });
     setBusy(false);
@@ -108,7 +115,7 @@ export function StepMailbox({ draft, onDraftChange, folders, onConnected, envMod
       <ProviderGuide provider={draft.provider} headingId={guideId} />
 
       <FormCard>
-        <form onSubmit={(e) => void test(e)} className="grid gap-4" noValidate>
+        <form ref={formRef} onSubmit={(e) => void test(e)} className="grid gap-4" noValidate>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label={t("setup.email")} required error={missing.user ? t("setup.emailRequired") : undefined}>
               {(p) => (
@@ -171,8 +178,8 @@ export function StepMailbox({ draft, onDraftChange, folders, onConnected, envMod
 
           <Field
             label={t("setup.appPassword")}
-            required
-            hint={envMode ? t("setup.mailEnvNote") : undefined}
+            required={!envHasPassword}
+            hint={envHasPassword ? t("setup.mailEnvNote") : envMode ? t("setup.mailEnvMissing") : undefined}
             error={missing.password ? t("setup.passwordRequired") : result === "auth" ? t("setup.mailAuth") : undefined}
           >
             {(p) => (
@@ -214,8 +221,17 @@ export function StepMailbox({ draft, onDraftChange, folders, onConnected, envMod
             {t("setup.badRequest")}
           </Banner>
         ) : null}
+        {/* Announces errors shown under the fields (focus also moves to the first one). */}
         <p role="status" className="sr-only">
-          {result === "auth" ? t("setup.mailAuth") : ""}
+          {missing.user
+            ? t("setup.emailRequired")
+            : missing.host
+              ? t("setup.hostRequired")
+              : missing.password
+                ? t("setup.passwordRequired")
+                : result === "auth"
+                  ? t("setup.mailAuth")
+                  : ""}
         </p>
       </FormCard>
     </StepFrame>

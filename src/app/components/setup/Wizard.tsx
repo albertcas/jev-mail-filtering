@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useReducer, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useReducer, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -69,10 +69,20 @@ export function Wizard({ configured, initialMailbox, initialScope, demoUrl, maxP
     [applyStatus],
   );
 
+  // Set when the page opens while a sync already runs: watch it instead of starting one.
+  const attachOnly = useRef(false);
+
   useEffect(() => {
     let alive = true;
     setupApi.status().then(
-      (s) => alive && applyStatus(s),
+      (s) => {
+        if (!alive) return;
+        applyStatus(s);
+        if (s.syncing) {
+          attachOnly.current = true;
+          dispatch({ type: "resumeSync" });
+        }
+      },
       () => alive && setStatusError(true),
     );
     return () => {
@@ -92,7 +102,8 @@ export function Wizard({ configured, initialMailbox, initialScope, demoUrl, maxP
         // Keep the last reading; the sync request itself reports failure.
       }
     }, POLL_MS);
-    (async () => {
+    /** Saves the scope and runs the first sync; false when it could not run. */
+    const start = async (): Promise<boolean> => {
       try {
         await setupApi.saveConfig({ folder: scope.folder, days: scope.days, intervalMinutes: scope.intervalMinutes });
       } catch {
@@ -100,15 +111,20 @@ export function Wizard({ configured, initialMailbox, initialScope, demoUrl, maxP
           setSyncError("failed");
           dispatch({ type: "syncFailed" });
         }
-        return;
+        return false;
       }
       const outcome = await setupApi.sync();
-      if (cancelled) return;
+      if (cancelled) return false;
       if (outcome !== "done") {
         setSyncError(outcome);
         dispatch({ type: "syncFailed" });
-        return;
+        return false;
       }
+      return true;
+    };
+    (async () => {
+      // A sync that was already running is only watched, never restarted.
+      if (!attachOnly.current && !(await start())) return;
       // Wait for the runner to report idle (a scheduled run may have been in flight).
       for (;;) {
         const s = await setupApi.status().catch(() => null);
@@ -197,10 +213,14 @@ export function Wizard({ configured, initialMailbox, initialScope, demoUrl, maxP
           setScope((s) => ({ ...s, folder: folders.includes(s.folder) ? s.folder : defaultFolder(folders) }));
         }}
         envMode={status.secretsKind === "env"}
+        envHasPassword={status.secretsKind === "env" && status.hasImapPassword}
         footer={
           <>
             {back}
-            {next(t("setup.continue"), () => dispatch({ type: "next" }))}
+            <div className="flex flex-wrap items-center justify-end gap-3">
+              {canAdvance(state) ? null : <p className="text-sm text-ink-3">{t("setup.testToContinue")}</p>}
+              {next(t("setup.continue"), () => dispatch({ type: "next" }))}
+            </div>
           </>
         }
       />

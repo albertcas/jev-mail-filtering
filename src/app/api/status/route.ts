@@ -13,6 +13,8 @@ export async function GET(req: Request) {
     demo: c.demo,
     configured: c.demo || c.repo.getConfig() !== null,
     hasApiKey: c.demo || (await c.secrets.get("typesafe_api_key")) !== null,
+    // Presence only, never the value.
+    hasImapPassword: c.demo || (await c.secrets.get("imap_password")) !== null,
     syncing: c.runner.isRunning,
     lastRun: c.repo.lastRun(),
     pending: c.repo.countPending(),

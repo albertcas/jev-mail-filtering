@@ -81,7 +81,7 @@
         "step3": "Enter the server, your email and the password below."
       }
     },
-    "mailEnvNote": "In .env mode the app password is read from IMAP_PASSWORD. What you type here is only used to test the connection.",
+    "mailEnvNote": "In .env mode the app password comes from IMAP_PASSWORD. Leave this empty to use it.", "mailEnvMissing": "In .env mode the app password is read from IMAP_PASSWORD, which isn't set. Add it to your .env file and restart; what you type here is only used to test the connection.", "testToContinue": "Test the connection to continue",
     "passwordRequired": "Paste the app password first.", "emailRequired": "Enter your email address.", "hostRequired": "Enter the IMAP server, for example imap.example.com.", "badRequest": "Check the fields and try again.",
     "scopeIntro": "Choose what Jev reads on the first run. Later syncs only fetch new mail.",
     "daysHint": "Between 1 and 90 days.", "estimating": "Estimating…", "estimateHint": "An estimate from the number of emails; the real cost depends on their length. At most {max} emails per sync.",
