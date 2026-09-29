@@ -23,7 +23,7 @@ import { Badge, Button, Chip, Meter, cn } from "../ui";
 import { CategoryMark } from "./CategoryIcon";
 import { RISK_REASONS, formatFullDate, formatScore, percent, toneOf, type ColumnId } from "./format";
 import { gmailSearchUrl } from "./gmail-link";
-import { urgencyLevel } from "./inbox";
+import { displayExcerpt, urgencyLevel } from "./inbox";
 import { ProbabilityBars } from "./ProbabilityBars";
 
 const MOVE_TARGETS: ColumnId[] = ["needs_reply", "worth_reading", "commercial", "possible_scam", "none"];
@@ -210,7 +210,7 @@ export function MessageDetail({ item, demo, thresholds, showGmailLink, moveError
             {t("detail.excerpt")}
           </h3>
           <p className="max-w-[68ch] rounded-lg border border-line bg-canvas px-4 py-3.5 text-md whitespace-pre-line text-ink-2">
-            {item.excerpt}
+            {displayExcerpt(item.excerpt)}
           </p>
         </section>
       ) : null}
@@ -221,7 +221,7 @@ export function MessageDetail({ item, demo, thresholds, showGmailLink, moveError
         </h3>
 
         {item.reasons.length > 0 ? (
-          <Subsection title={t("detail.title")}>
+          <Subsection title={t("detail.reasons")}>
             <ul className="flex flex-wrap gap-1.5">
               {item.reasons.map((r) => (
                 <li key={r.key} className="max-w-full">

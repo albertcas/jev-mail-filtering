@@ -32,11 +32,11 @@
     }
   },
   "detail": {
-    "title": "Why this category", "probabilities": "Category probabilities", "judgments": "Jev judgments",
+    "probabilities": "Category probabilities", "judgments": "Jev judgments",
     "signals": "Verified signals", "model": "Model {model}", "openInGmail": "Open in Gmail",
     "moveTo": "Not this? Move to…", "undo": "Undo my change", "close": "Close",
     "emptyTitle": "Select an email", "emptyHint": "Use the ↑ and ↓ keys to move through the list, and A to adjust the thresholds.",
-    "why": "Why", "excerpt": "Start of the email",
+    "why": "Why", "reasons": "Reasons", "excerpt": "Preview",
     "noul": {
       "asks_recipient_to_act": "Asks you to act", "personal_not_bulk": "Written for you", "promotional": "Promotional",
       "impersonation": "Impersonation", "pressure_tactics": "Pressure tactics", "requests_sensitive_data": "Asks for sensitive data",

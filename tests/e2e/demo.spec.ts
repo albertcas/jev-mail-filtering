@@ -58,6 +58,8 @@ test("detail explains the scam decision", async ({ page }, info) => {
   await expect(pane.getByText(/Sender authentication failed|Autenticación del remitente fallida/).first()).toBeVisible();
   // Scam detection is guidance (spec §7.2), and demo Message-IDs are fictional: no Gmail link.
   await expect(pane.getByText(ADVISORY)).toBeVisible();
+  await expect(pane.getByRole("heading", { name: /^(Reasons|Motivos)$/ })).toBeVisible();
+  await expect(pane.getByRole("heading", { name: /^(Preview|Vista previa)$/ })).toBeVisible();
   await expect(pane.getByRole("link", { name: /Open in Gmail|Abrir en Gmail/ })).toHaveCount(0);
   // Demo is read-only: moving is offered but disabled.
   await pane.getByRole("button", { name: /Not this\? Move to|¿No es esto\? Mover a/ }).click();

@@ -18,7 +18,7 @@
     "syncNow": "Sincronizar", "syncing": "Sincronizando…", "lastSync": "Última sincronización {time}", "never": "Sin sincronizar",
     "analyzed": "{count, plural, one {# correo analizado} other {# correos analizados}}",
     "cost": "≈ {cost} gastados en Jev", "pending": "{count} pendientes", "confidence": "Confianza {value}",
-    "urgency": "Urgencia", "settings": "Ajustes",
+    "urgency": "Urgencia", "settings": "Configuración",
     "connected": "Conectado", "connectionProblem": "Problema de conexión", "columns": "Categorías",
     "emptyTitle": "Aún no hay nada analizado", "emptyBody": "Sincroniza para traer tu correo reciente. Jev clasifica cada correo en una categoría aquí; tu buzón nunca se modifica.",
     "noSubject": "(sin asunto)", "urgencyValue": "{value}/3", "minConfidenceChip": "Confianza mínima {value}",
@@ -32,11 +32,11 @@
     }
   },
   "detail": {
-    "title": "Por qué esta categoría", "probabilities": "Probabilidad por categoría", "judgments": "Juicios de Jev",
+    "probabilities": "Probabilidad por categoría", "judgments": "Juicios de Jev",
     "signals": "Señales verificadas", "model": "Modelo {model}", "openInGmail": "Abrir en Gmail",
     "moveTo": "¿No es esto? Mover a…", "undo": "Deshacer mi cambio", "close": "Cerrar",
     "emptyTitle": "Selecciona un correo", "emptyHint": "Usa las teclas ↑ y ↓ para recorrer la lista y A para ajustar los umbrales.",
-    "why": "Por qué", "excerpt": "Inicio del correo",
+    "why": "Por qué", "reasons": "Motivos", "excerpt": "Vista previa",
     "noul": {
       "asks_recipient_to_act": "Te pide actuar", "personal_not_bulk": "Escrito para ti", "promotional": "Promocional",
       "impersonation": "Suplantación", "pressure_tactics": "Tácticas de presión", "requests_sensitive_data": "Pide datos sensibles",
@@ -60,7 +60,7 @@
     "firstSync": "Analizar mi bandeja", "envMode": "Los secretos se leen de tu fichero .env (modo Docker).",
     "stepOf": "Paso {current} de {total}", "progress": "Progreso de la configuración", "stepKey": "Clave de API", "stepMailbox": "Buzón", "stepScope": "Qué analizar",
     "back": "Atrás", "continue": "Continuar", "cancel": "Volver a la bandeja", "newTab": "(se abre en una pestaña nueva)",
-    "welcomeFact1": "Se ejecuta en tu ordenador. Tu correo y tus ajustes se quedan aquí.", "welcomeFact2": "Solo lectura. No se mueve, borra ni marca nada como leído.", "welcomeFact3": "De cada correo, el remitente, el asunto, el comienzo del texto, los dominios de los enlaces y los nombres de los adjuntos van a Jev, el modelo de TypeSafe, para clasificarlo.",
+    "welcomeFact1": "Se ejecuta en tu ordenador. Tu correo y tu configuración se quedan aquí.", "welcomeFact2": "Solo lectura. No se mueve, borra ni marca nada como leído.", "welcomeFact3": "De cada correo, el remitente, el asunto, el comienzo del texto, los dominios de los enlaces y los nombres de los adjuntos van a Jev, el modelo de TypeSafe, para clasificarlo.",
     "welcomeNeeds": "Necesitarás una clave de API de TypeSafe y una contraseña de aplicación de tu proveedor de correo. Son unos cinco minutos.",
     "keyIntro": "La clave permite a esta app llamar a Jev con tu propia cuenta de TypeSafe. Comprobarla es gratis.",
     "keyHowTo": "Cómo crear tu clave", "keySaved": "Ya hay una clave guardada en este ordenador. Pega una nueva solo si quieres sustituirla.",
@@ -86,7 +86,7 @@
       },
       "imap": {
         "step1": "Busca el servidor IMAP de tu proveedor. La mayoría usa el puerto 993 con TLS.",
-        "step2": "Si tu cuenta usa inicio de sesión en dos pasos, crea una contraseña de aplicación en sus ajustes de seguridad.",
+        "step2": "Si tu cuenta usa inicio de sesión en dos pasos, crea una contraseña de aplicación en su configuración de seguridad.",
         "step3": "Escribe abajo el servidor, tu correo y la contraseña."
       }
     },
@@ -99,7 +99,7 @@
     "syncingStarted": "Trayendo tu correo…", "syncNotReady": "El análisis no pudo empezar: falta la clave de API o la contraseña de aplicación. En modo .env, revisa TYPESAFE_API_KEY e IMAP_PASSWORD."
   },
   "settings": {
-    "title": "Ajustes", "thresholds": "Umbrales de decisión", "thresholdsHelp": "Los cambios se aplican al instante y no vuelven a llamar a Jev.",
+    "title": "Configuración", "thresholds": "Umbrales de decisión", "thresholdsHelp": "Los cambios se aplican al instante y no vuelven a llamar a Jev.",
     "scam": "Probabilidad mínima de estafa", "minConfidence": "Confianza mínima", "strongNoul": "Umbral de evidencia",
     "save": "Guardar", "saved": "Guardado", "interval": "Sincronizar cada (minutos)", "language": "Idioma",
     "danger": "Zona peligrosa", "wipe": "Borrar todos los datos locales", "wipeConfirm": "Se borrarán la base de datos local y las credenciales guardadas. Tu buzón no se toca. ¿Continuar?",
@@ -110,7 +110,7 @@
     "modelSection": "Modelo", "modelHelp": "Avanzado. jev-latest usa siempre el Jev más reciente. Fija una versión como jev-1.13.0 para que los resultados no cambien.", "model": "Modelo de Jev", "modelInvalid": "Escribe un nombre de modelo sin espacios, por ejemplo jev-latest.",
     "languageHelp": "Se aplica a este navegador.",
     "account": "Cuenta", "accountHelp": "El buzón que lee esta app.", "server": "Servidor", "reconfigure": "Reconfigurar", "reconfigureHelp": "Cambia el buzón, la contraseña de aplicación o la clave de API.",
-    "dangerHelp": "Elimina la base de datos local, tus ajustes y las credenciales guardadas. Tu buzón no se toca.", "wipeFailed": "No se pudieron borrar los datos. Inténtalo de nuevo.", "saveFailed": "No se pudo guardar. Inténtalo de nuevo."
+    "dangerHelp": "Elimina la base de datos local, tu configuración y las credenciales guardadas. Tu buzón no se toca.", "wipeFailed": "No se pudieron borrar los datos. Inténtalo de nuevo.", "saveFailed": "No se pudo guardar. Inténtalo de nuevo."
   },
   "errors": {
     "imap_auth": "Tu proveedor de correo rechazó la contraseña de aplicación.", "imap_unavailable": "No se pudo conectar con tu servidor de correo. Se muestran los resultados guardados.",

@@ -7,7 +7,7 @@ import type { DashboardItem } from "@/server/dashboard";
 import { Chip, cn } from "../ui";
 import { CategoryIcon, surfaceMark } from "./CategoryIcon";
 import { RISK_REASONS, formatFullDate, formatMailDate, percent, type ColumnId } from "./format";
-import { nextIndex, urgencyLevel } from "./inbox";
+import { displayExcerpt, nextIndex, urgencyLevel } from "./inbox";
 
 export type ActivateSource = "pointer" | "keyboard";
 
@@ -147,7 +147,7 @@ function Row({
       <span id={`${base}-subject`} className="truncate text-base text-ink">
         {item.subject || t("dashboard.noSubject")}
       </span>
-      {item.excerpt ? <span className="truncate text-sm text-ink-3">{item.excerpt}</span> : null}
+      {item.excerpt ? <span className="truncate text-sm text-ink-3">{displayExcerpt(item.excerpt)}</span> : null}
       {hasChips ? (
         <span id={`${base}-chips`} className="mt-1.5 flex flex-wrap gap-1">
           {item.category === "needs_reply" && item.urgency !== null ? <UrgencyChip score={item.urgency} /> : null}

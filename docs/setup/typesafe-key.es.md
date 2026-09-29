@@ -49,4 +49,4 @@ En Windows PowerShell: `$env:DEMO_MODE="1"; npm start`. Cuando el paquete esté 
 | *No se pudo conectar con el servicio* | Revisa tu conexión a internet, VPN o proxy, y vuelve a intentarlo. |
 | La clasificación se detiene más tarde con un error de clave o de permisos | La clave se revocó, o la cuenta se quedó sin saldo o perdió el acceso a Jev. Revisa la consola; lo ya clasificado sigue visible. |
 
-Para dejar de usar la clave, bórrala en la consola y pulsa **Ajustes → Borrar todos los datos locales** en la app.
+Para dejar de usar la clave, bórrala en la consola y pulsa **Configuración → Borrar todos los datos locales** en la app.
