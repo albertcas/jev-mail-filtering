@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { checkRequest } from "@/server/guard";
+import { checkRequest, isLocalHost } from "@/server/guard";
 
 const req = (method: string, headers: Record<string, string>) => new Request("http://127.0.0.1:3737/api/x", { method, headers });
 
@@ -20,5 +20,16 @@ describe("checkRequest", () => {
   it("in demo mode allows any host for reads and blocks all writes", () => {
     expect(checkRequest(req("GET", { host: "jev-demo.vercel.app" }), { demo: true, mutating: false })).toBeNull();
     expect(checkRequest(req("POST", { host: "jev-demo.vercel.app", origin: "https://jev-demo.vercel.app" }), { demo: true, mutating: true })?.status).toBe(403);
+  });
+});
+
+describe("isLocalHost", () => {
+  it("accepts loopback Host headers with or without a port", () => {
+    for (const h of ["127.0.0.1", "127.0.0.1:3737", "localhost", "localhost:3738", "[::1]", "[::1]:3737"]) expect(isLocalHost(h)).toBe(true);
+  });
+  it("rejects missing, foreign and look-alike hosts", () => {
+    for (const h of [null, "", "evil.com", "evil.com:3737", "localhost.evil.com", "127.0.0.1.nip.io", "[::2]:3737", "0.0.0.0:3737"]) {
+      expect(isLocalHost(h)).toBe(false);
+    }
   });
 });

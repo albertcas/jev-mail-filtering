@@ -85,3 +85,11 @@ test("mail content is rendered as text, never HTML", async ({ page }, info) => {
   await expect(dialog).toBeVisible();
   await expect(dialog.locator("img[src^='http'], iframe")).toHaveCount(0);
 });
+
+test("outside the demo, pages and API refuse non-local Host headers (DNS rebinding)", async ({ request }) => {
+  const SETUP_URL = "http://127.0.0.1:3738";
+  for (const path of ["/settings", "/setup", "/api/status"]) {
+    expect((await request.get(`${SETUP_URL}${path}`, { headers: { host: "rebind.attacker.example:3738" }, maxRedirects: 0 })).status()).toBe(403);
+  }
+  expect((await request.get(`${SETUP_URL}/api/status`)).status()).toBe(200);
+});
