@@ -1,0 +1,67 @@
+{
+  "name": "jev-mail-filtering",
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "jev-mail-filtering": "bin/cli.mjs"
+  },
+  "files": [
+    "bin",
+    ".next/standalone",
+    "README.md",
+    "README.es.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "next dev -H 127.0.0.1 -p 3737",
+    "build": "next build",
+    "start": "next start -H 127.0.0.1 -p 3737",
+    "lint": "eslint .",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:e2e": "playwright test",
+    "eval": "tsx scripts/eval.ts",
+    "fixtures:demo": "tsx scripts/build-demo-fixtures.ts",
+    "prepack": "npm run build && node scripts/prepare-package.mjs"
+  },
+  "dependencies": {
+    "@napi-rs/keyring": "^2.1.0",
+    "@typesafe-ai/sdk": "^0.6.0",
+    "better-sqlite3": "^13.0.3",
+    "drizzle-orm": "^0.45.3",
+    "html-to-text": "^10.0.1",
+    "imapflow": "^2.1.2",
+    "mailparser": "^3.9.31",
+    "next": "16.3.7",
+    "next-intl": "^4.14.7",
+    "open": "^11.0.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "tldts": "^7.4.16",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/html-to-text": "^9.0.4",
+    "@types/mailparser": "^3.9.0",
+    "@types/node": "^22.20.4",
+    "@types/nodemailer": "^8.0.2",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.7",
+    "nodemailer": "^10.0.12",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^5.0.2"
+  }
+}
