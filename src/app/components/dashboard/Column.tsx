@@ -52,17 +52,18 @@ export function Column({ category, items, now, loading, entering, onOpen, minCon
     >
       <header className={cn("sticky top-0 z-10 flex items-center gap-2 border-b border-line bg-canvas pt-1 pb-2.5", tabbed && "max-md:hidden")}>
         <CategoryMark category={category} />
-        <h2 id={headingId} className="min-w-0 flex-1 truncate text-base font-medium text-ink">
-          {t(`categories.${category}`)}
+        {/* The count is part of the heading ("Unsure 3"): headings list and tests read both. */}
+        <h2 id={headingId} className="flex min-w-0 flex-1 items-baseline gap-2 text-base font-medium text-ink">
+          <span className="min-w-0 flex-1 truncate">{t(`categories.${category}`)}</span>
+          <span
+            className={cn(
+              "tabular text-sm",
+              category === "needs_reply" && items.length > 0 ? "font-semibold text-ink" : "font-normal text-ink-3",
+            )}
+          >
+            {loading ? "" : items.length}
+          </span>
         </h2>
-        <span
-          className={cn(
-            "tabular text-sm",
-            category === "needs_reply" && items.length > 0 ? "font-semibold text-ink" : "text-ink-3",
-          )}
-        >
-          {loading ? "" : items.length}
-        </span>
       </header>
 
       {loading ? (

@@ -14,7 +14,7 @@ export function DemoBanner() {
           href={REPO_README_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-base font-medium text-ink underline decoration-current/40 hover:decoration-current"
+          className="inline-flex min-h-6 items-center text-base font-medium text-ink underline decoration-current/40 hover:decoration-current pointer-coarse:min-h-11"
         >
           {t("demo.install")}
         </a>

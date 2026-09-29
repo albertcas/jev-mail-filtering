@@ -47,8 +47,9 @@ export function Meter({
   const text = valueText ?? `${Math.round(fraction * 100)}%`;
 
   return (
-    <div className={cn("inline-flex items-center gap-2", className)}>
-      <div
+    // Phrasing content only (spans): meters sit inside card <button>s.
+    <span className={cn("inline-flex items-center gap-2", className)}>
+      <span
         role="meter"
         aria-label={label}
         aria-valuenow={clamped}
@@ -56,24 +57,24 @@ export function Meter({
         aria-valuemax={max}
         aria-valuetext={text}
         className={cn(
-          "relative min-w-0 overflow-hidden rounded-sm bg-surface shadow-[inset_0_0_0_1px_var(--line-strong)]",
+          "relative block min-w-0 overflow-hidden rounded-sm bg-surface shadow-[inset_0_0_0_1px_var(--line-strong)]",
           size === "sm" ? "h-1.5" : "h-2",
         )}
         style={{ width }}
       >
-        <div
+        <span
           className={cn(
             "absolute inset-y-0 left-0 rounded-sm transition-[width] duration-(--duration-base) ease-(--ease-out)",
             tone === "neutral" ? "bg-ink-2" : categoryMark[tone],
           )}
           style={{ width: `${fraction * 100}%` }}
         />
-      </div>
+      </span>
       {showValue ? (
         <span aria-hidden className="tabular shrink-0 text-xs text-ink-2">
           {text}
         </span>
       ) : null}
-    </div>
+    </span>
   );
 }

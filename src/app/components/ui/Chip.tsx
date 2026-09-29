@@ -48,7 +48,7 @@ export function ToggleChip({ children, pressed, className, type = "button", ...r
       aria-pressed={pressed}
       className={cn(
         base,
-        "cursor-pointer transition-colors duration-(--duration-fast) pointer-coarse:min-h-11",
+        "min-h-6 cursor-pointer transition-colors duration-(--duration-fast) pointer-coarse:min-h-11",
         pressed
           ? "border-accent bg-accent text-on-accent"
           : "border-line-strong text-ink-2 hover:bg-sunken hover:text-ink",

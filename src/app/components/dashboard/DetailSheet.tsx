@@ -193,7 +193,7 @@ export function DetailSheet({ open, item, demo, thresholds, showGmailLink, moveE
               return (
                 <li key={id} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
                   <span className={cn("truncate text-sm", hit ? "font-medium text-ink" : "text-ink-2")}>{t(`detail.noul.${id}`)}</span>
-                  <Meter value={v} label={t(`detail.noul.${id}`)} valueText={percent(v, locale)} width="5rem" className="[&>span]:w-10 [&>span]:text-right" />
+                  <Meter value={v} label={t(`detail.noul.${id}`)} valueText={percent(v, locale)} width="5rem" className="[&>span:last-child]:w-10 [&>span:last-child]:text-right" />
                 </li>
               );
             })}
@@ -205,7 +205,7 @@ export function DetailSheet({ open, item, demo, thresholds, showGmailLink, moveE
                 label={t("dashboard.urgency")}
                 valueText={t("dashboard.urgencyValue", { value: formatScore(item.detail.urgencyScore, locale) })}
                 width="5rem"
-                className="[&>span]:w-10 [&>span]:text-right"
+                className="[&>span:last-child]:w-10 [&>span:last-child]:text-right"
               />
             </li>
           </ul>
