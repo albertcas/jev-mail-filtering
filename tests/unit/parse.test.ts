@@ -35,3 +35,20 @@ describe("parseRawMessage (Review Focus #1)", () => {
     expect(typeof m.text).toBe("string");
   });
 });
+
+describe("parseRawMessage error containment", () => {
+  it("does not throw on an empty buffer", async () => {
+    const m = await parseRawMessage(Buffer.alloc(0), "INBOX", 1, 5);
+    expect(m.messageId).toBe("<INBOX.5.1@jev.local>");
+    expect(m.text).toBe("");
+    expect(m.links).toEqual([]);
+    expect(m.from.address).toBe("unknown@invalid");
+  });
+  it("does not throw on binary junk with NULs", async () => {
+    const junk = Buffer.from(Array.from({ length: 4096 }, (_, i) => (i * 131 + 7) % 256));
+    junk[10] = 0;
+    const m = await parseRawMessage(junk, "INBOX", 2, 5);
+    expect(typeof m.text).toBe("string");
+    expect(m.uid).toBe(2);
+  });
+});

@@ -19,10 +19,12 @@ export class FixtureMailSource implements MailSource {
     const afterUid = w.uidValidity === uidValidity ? w.afterUid : 0;
     const files = this.files();
     const messages: RawMessage[] = [];
-    for (let i = afterUid; i < files.length; i++) {
+    if (w.maxMessages <= 0) return { uidValidity, messages };
+    const start = Math.max(afterUid, files.length - w.maxMessages);
+    for (let i = start; i < files.length; i++) {
       messages.push(await parseRawMessage(readFileSync(join(this.opts.emlDir, files[i]!)), w.folder, i + 1, uidValidity));
     }
-    return { uidValidity, messages: messages.slice(-w.maxMessages) };
+    return { uidValidity, messages };
   }
 
   async loadContext(recipient: { name: string; address: string }): Promise<MailContext> {

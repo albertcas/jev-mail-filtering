@@ -27,26 +27,64 @@ function headerLines(lines: readonly { key: string; line: string }[], key: strin
   return lines.filter((l) => l.key === key).map((l) => l.line.slice(l.line.indexOf(":") + 1).replace(/\s+/g, " ").trim());
 }
 
-export async function parseRawMessage(source: Buffer, folder: string, uid: number, uidValidity: number): Promise<RawMessage> {
-  const p = await simpleParser(source, { skipImageLinks: true, skipTextToHtml: true });
-  const html = typeof p.html === "string" ? p.html : "";
-  const text = p.text?.trim() ? p.text : html ? convert(html, { wordwrap: false, selectors: [{ selector: "img", format: "skip" }] }) : "";
-  const refs = Array.isArray(p.references) ? p.references : p.references ? p.references.split(/\s+/) : [];
+function degraded(folder: string, uid: number, uidValidity: number): RawMessage {
   return {
     folder,
     uid,
-    messageId: p.messageId ?? `<${folder}.${uidValidity}.${uid}@jev.local>`,
-    inReplyTo: p.inReplyTo ?? null,
-    references: refs.filter(Boolean),
-    from: firstPerson(p.from) ?? { name: "", address: "unknown@invalid" },
-    replyTo: firstPerson(p.replyTo),
-    to: allAddresses(p.to),
-    subject: p.subject ?? "",
-    date: p.date ?? new Date(0),
-    text,
-    links: html ? extractLinks(html) : [],
-    attachments: p.attachments.map((a) => ({ filename: a.filename ?? "", contentType: a.contentType })),
-    authenticationResults: headerLines(p.headerLines, "authentication-results"),
-    listUnsubscribe: headerLines(p.headerLines, "list-unsubscribe")[0] ?? null,
+    messageId: `<${folder}.${uidValidity}.${uid}@jev.local>`,
+    inReplyTo: null,
+    references: [],
+    from: { name: "", address: "unknown@invalid" },
+    replyTo: null,
+    to: [],
+    subject: "",
+    date: new Date(0),
+    text: "",
+    links: [],
+    attachments: [],
+    authenticationResults: [],
+    listUnsubscribe: null,
   };
+}
+
+const MAX_LINK_HTML = 500_000;
+
+/** Never throws: a hostile message degrades to empty fields instead of rejecting the batch. */
+export async function parseRawMessage(source: Buffer, folder: string, uid: number, uidValidity: number): Promise<RawMessage> {
+  const base = degraded(folder, uid, uidValidity);
+  try {
+    const p = await simpleParser(source, { skipImageLinks: true, skipTextToHtml: true });
+    const html = typeof p.html === "string" ? p.html : "";
+    let text = "";
+    try {
+      text = p.text?.trim() ? p.text : html ? convert(html, { wordwrap: false, selectors: [{ selector: "img", format: "skip" }] }) : "";
+    } catch {
+      text = "";
+    }
+    let links: { text: string; href: string }[] = [];
+    try {
+      links = html ? extractLinks(html.slice(0, MAX_LINK_HTML)) : [];
+    } catch {
+      links = [];
+    }
+    const refs = Array.isArray(p.references) ? p.references : p.references ? p.references.split(/\s+/) : [];
+    return {
+      ...base,
+      messageId: p.messageId ?? base.messageId,
+      inReplyTo: p.inReplyTo ?? null,
+      references: refs.filter(Boolean),
+      from: firstPerson(p.from) ?? base.from,
+      replyTo: firstPerson(p.replyTo),
+      to: allAddresses(p.to),
+      subject: p.subject ?? "",
+      date: p.date ?? base.date,
+      text,
+      links,
+      attachments: p.attachments.map((a) => ({ filename: a.filename ?? "", contentType: a.contentType })),
+      authenticationResults: headerLines(p.headerLines, "authentication-results"),
+      listUnsubscribe: headerLines(p.headerLines, "list-unsubscribe")[0] ?? null,
+    };
+  } catch {
+    return base;
+  }
 }
