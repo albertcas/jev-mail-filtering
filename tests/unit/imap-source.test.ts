@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ImapAuthError, ImapMailSource } from "@/core/mail/imap-source";
+import { findSentFolder, ImapAuthError, ImapMailSource } from "@/core/mail/imap-source";
 import { PROVIDERS } from "@/core/mail/providers";
 
 describe("ImapMailSource (no server)", () => {
@@ -21,5 +21,14 @@ describe("PROVIDERS", () => {
       expect(p.port).toBe(993);
       expect(p.secure).toBe(true);
     }
+  });
+});
+
+describe("findSentFolder", () => {
+  it("returns the path of the \Sent special-use folder", () => {
+    expect(findSentFolder([{ path: "INBOX" }, { path: "Enviados", specialUse: "\\Sent" }])).toBe("Enviados");
+  });
+  it("returns null when there is none", () => {
+    expect(findSentFolder([{ path: "INBOX" }, { path: "Sent" }])).toBeNull();
   });
 });

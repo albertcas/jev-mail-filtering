@@ -14,7 +14,8 @@ async function send(subject: string, extra: Record<string, string> = {}) {
 describe.skipIf(!enabled)("ImapMailSource against GreenMail", () => {
   let src: ImapMailSource;
   beforeAll(async () => {
-    await fetch("http://127.0.0.1:8080/api/user", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email: user, login: user, password: "secret" }) });
+    const res = await fetch("http://127.0.0.1:8080/api/user", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email: user, login: user, password: "secret" }) });
+    if (!res.ok) throw new Error(`GreenMail setup failed: POST /api/user returned ${res.status}`);
     await send("one");
     await send("two");
     src = new ImapMailSource(conf);

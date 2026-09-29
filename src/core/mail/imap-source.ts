@@ -10,6 +10,13 @@ export class ImapAuthError extends Error {
   }
 }
 
+const SENT_WINDOW_MS = 180 * 86_400_000;
+
+/** Path of the \Sent special-use folder, or null when the server exposes none. */
+export function findSentFolder(list: { path: string; specialUse?: string }[]): string | null {
+  return list.find((b) => b.specialUse === "\\Sent")?.path ?? null;
+}
+
 type Conf = { host: string; port: number; secure: boolean; user: string; password: string };
 
 export class ImapMailSource implements MailSource {
@@ -25,9 +32,13 @@ export class ImapMailSource implements MailSource {
       auth: { user: this.conf.user, pass: this.conf.password },
       logger: false,
     });
+    // imapflow emits 'error' after connect (socket reset/timeout); without a listener Node would crash.
+    // `usable` turns false on such failures, so the next client() call rebuilds the connection.
+    c.on("error", () => undefined);
     try {
       await c.connect();
     } catch (err) {
+      try { c.close(); } catch { /* half-open client: best effort */ }
       if ((err as { authenticationFailed?: boolean }).authenticationFailed) throw new ImapAuthError(err);
       throw err;
     }
@@ -58,12 +69,12 @@ export class ImapMailSource implements MailSource {
 
   async loadContext(recipient: { name: string; address: string }): Promise<MailContext> {
     const c = await this.client();
-    const sent = (await c.list()).find((b) => b.specialUse === "\Sent");
+    const sentPath = findSentFolder(await c.list());
     const ctx: MailContext = { recipient, sentMessageIds: new Set(), sentRecipients: new Set() };
-    if (!sent) return ctx;
-    const lock = await c.getMailboxLock(sent.path, { readOnly: true });
+    if (!sentPath) return ctx;
+    const lock = await c.getMailboxLock(sentPath, { readOnly: true });
     try {
-      const since = new Date(Date.now() - 180 * 86_400_000);
+      const since = new Date(Date.now() - SENT_WINDOW_MS);
       for await (const m of c.fetch({ since }, { envelope: true })) {
         const id = m.envelope?.messageId?.trim();
         if (id) ctx.sentMessageIds.add(id);
