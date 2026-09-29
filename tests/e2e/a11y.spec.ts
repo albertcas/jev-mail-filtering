@@ -33,17 +33,33 @@ for (const colorScheme of ["light", "dark"] as const) {
 
     test("no WCAG A/AA violations on the dashboard", async ({ page }) => {
       await page.goto("/");
-      // Cards loaded (the visible column on phones).
-      await expect(page.locator("main li button").first()).toBeVisible();
+      // Rows loaded (sidebar or phone selector, list and, from 768px, the reading pane).
+      await expect(page.getByRole("option").first()).toBeVisible();
       await audit(page);
     });
 
-    test("no WCAG A/AA violations in the open detail sheet", async ({ page }, info) => {
+    test("no WCAG A/AA violations in the reading pane with a scam selected", async ({ page }, info) => {
       await page.goto("/");
-      if (info.project.name === "mobile") await page.getByRole("tab", { name: /Possible scam|Posible estafa/ }).click();
-      await page.getByText("Your account has been limited").click();
-      const dialog = page.getByRole("dialog");
-      await expect(dialog).toBeVisible();
+      await page
+        .getByRole("navigation", { name: /Categories|Categorías/ })
+        .getByRole("button", { name: /Possible scam|Posible estafa/ })
+        .click();
+      await page.getByRole("option", { name: /Your account has been limited/ }).click();
+      const pane =
+        info.project.name === "mobile"
+          ? page.getByRole("dialog", { name: "Your account has been limited" })
+          : page.getByRole("region", { name: "Your account has been limited" });
+      await expect(pane).toBeVisible();
+      // The move targets are part of the pane: audit them expanded too.
+      await pane.getByRole("button", { name: /Not this\? Move to|¿No es esto\? Mover a/ }).click();
+      await audit(page);
+    });
+
+    test("no WCAG A/AA violations with the Adjust popover open", async ({ page }) => {
+      await page.goto("/");
+      await expect(page.getByRole("option").first()).toBeVisible();
+      await page.getByRole("button", { name: /^(Adjust|Ajustar)/ }).click();
+      await expect(page.getByRole("dialog", { name: /Decision thresholds|Umbrales de decisión/ })).toBeVisible();
       await audit(page);
     });
 
