@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { cn } from "./cn";
 
 type ChipTone = "neutral" | "risk" | "trust";
@@ -31,32 +31,5 @@ export function Chip({ children, tone = "neutral", icon, className }: ChipProps)
       ) : null}
       <span className="truncate">{children}</span>
     </span>
-  );
-}
-
-export type ToggleChipProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> & {
-  children: ReactNode;
-  /** Toggle state, exposed as aria-pressed. */
-  pressed: boolean;
-};
-
-/** The only interactive chip: a filter toggle. A real <button> with aria-pressed. */
-export function ToggleChip({ children, pressed, className, type = "button", ...rest }: ToggleChipProps) {
-  return (
-    <button
-      type={type}
-      aria-pressed={pressed}
-      className={cn(
-        base,
-        "min-h-6 cursor-pointer transition-colors duration-(--duration-fast) pointer-coarse:min-h-11",
-        pressed
-          ? "border-accent bg-accent text-on-accent"
-          : "border-line-strong text-ink-2 hover:bg-sunken hover:text-ink",
-        className,
-      )}
-      {...rest}
-    >
-      {children}
-    </button>
   );
 }

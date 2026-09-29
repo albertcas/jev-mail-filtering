@@ -1,7 +1,7 @@
 export { Badge, type BadgeProps } from "./Badge";
 export { Banner, type BannerProps } from "./Banner";
 export { Button, type ButtonProps } from "./Button";
-export { Chip, ToggleChip, type ChipProps, type ToggleChipProps } from "./Chip";
+export { Chip, type ChipProps } from "./Chip";
 export { Field, Input, Select, type FieldControlProps, type FieldProps } from "./Field";
 export { Meter, type MeterProps } from "./Meter";
 export { Sheet, type SheetProps } from "./Sheet";
