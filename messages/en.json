@@ -1,0 +1,59 @@
+{
+  "app": { "name": "JEV Mail Filtering", "tagline": "Your inbox, triaged by Jev. Locally, read-only." },
+  "categories": {
+    "needs_reply": "Needs reply", "worth_reading": "Worth reading", "commercial": "Commercial",
+    "possible_scam": "Possible scam", "unsure": "Unsure", "none": "Others"
+  },
+  "reason": {
+    "resembles": "Domain resembles {brand}", "authFailed": "Sender authentication failed",
+    "mismatchedLinks": "Links point somewhere else", "replyToDiffers": "Replies go to another domain",
+    "riskyAttachment": "Risky attachment", "impersonation": "Impersonates an organisation",
+    "requestsSensitiveData": "Asks for sensitive data", "pressureTactics": "Pressure tactics",
+    "addressesClassifier": "Tries to instruct automated filters", "ongoingThread": "You replied in this thread",
+    "knownSender": "You have written to this sender", "asksToAct": "Asks you to act",
+    "personal": "Written for you", "promotional": "Promotional", "bulkUnsubscribe": "Bulk mail (unsubscribe link)",
+    "manualOverride": "Moved by you"
+  },
+  "dashboard": {
+    "syncNow": "Sync now", "syncing": "Syncing…", "lastSync": "Last sync {time}", "never": "Never synced",
+    "analyzed": "{count, plural, one {# email analysed} other {# emails analysed}}",
+    "cost": "≈ {cost} spent on Jev", "pending": "{count} pending", "emptyColumn": "Nothing here",
+    "showOthers": "Show others ({count})", "hideOthers": "Hide others", "confidence": "Confidence {value}",
+    "urgency": "Urgency", "settings": "Settings"
+  },
+  "detail": {
+    "title": "Why this category", "probabilities": "Category probabilities", "judgments": "Jev judgments",
+    "signals": "Verified signals", "model": "Model {model}", "openInGmail": "Open in Gmail",
+    "moveTo": "Not this? Move to…", "undo": "Undo my change", "close": "Close",
+    "noul": {
+      "asks_recipient_to_act": "Asks you to act", "personal_not_bulk": "Written for you", "promotional": "Promotional",
+      "impersonation": "Impersonation", "pressure_tactics": "Pressure tactics", "requests_sensitive_data": "Asks for sensitive data",
+      "addresses_the_classifier": "Instructs automated filters"
+    },
+    "signal": {
+      "sender_authentication": "Sender authentication", "reply_to_differs_from_sender": "Reply-To differs",
+      "domain_resembles": "Lookalike domain", "has_unsubscribe_header": "Unsubscribe header",
+      "recipient_has_replied_in_thread": "You replied in thread", "recipient_has_written_to_sender_before": "Known sender",
+      "risky_attachments": "Risky attachments", "mismatched_links": "Mismatched links"
+    }
+  },
+  "setup": {
+    "welcomeTitle": "Triage your inbox with Jev", "welcomeBody": "This app runs on your computer and only reads your mail. For each email, a short excerpt is sent to TypeSafe's Jev model to classify it. Nothing is moved, deleted or marked as read.",
+    "tryDemo": "Try with a demo inbox", "start": "Connect my inbox",
+    "keyTitle": "1. TypeSafe API key", "keyStep1": "Open the TypeSafe console and sign in.", "keyStep2": "Create a new API key.", "keyStep3": "Paste it here.", "keyOpen": "Open console.typesafe.ai", "keyLabel": "API key", "verify": "Verify", "keyOk": "Key verified", "keyInvalid": "That key was rejected", "network": "Could not reach the service. Check your connection.",
+    "mailTitle": "2. Your mailbox", "provider": "Provider", "other": "Other IMAP", "email": "Email address", "displayName": "Your name (optional)", "appPassword": "App password", "host": "IMAP server", "port": "Port", "secure": "Use TLS", "testConnection": "Test connection", "mailOk": "Connected: {count} folders found", "mailAuth": "The server rejected the email or app password", "howTo": "How to create an app password",
+    "scopeTitle": "3. What to analyse", "folder": "Folder", "days": "Days back", "estimate": "About {count} emails · ≈ {cost}",
+    "firstSync": "Analyse my inbox", "envMode": "Secrets are read from your .env file (Docker mode)."
+  },
+  "settings": {
+    "title": "Settings", "thresholds": "Decision thresholds", "thresholdsHelp": "Changes apply instantly and never call Jev again.",
+    "scam": "Minimum scam probability", "minConfidence": "Minimum confidence", "strongNoul": "Evidence threshold",
+    "save": "Save", "saved": "Saved", "interval": "Sync every (minutes)", "language": "Language",
+    "danger": "Danger zone", "wipe": "Delete all local data", "wipeConfirm": "This deletes the local database and stored credentials. Your mailbox is not touched. Continue?"
+  },
+  "errors": {
+    "imap_auth": "Your mail provider rejected the app password.", "imap_unavailable": "Could not reach your mail server. Showing saved results.",
+    "jev_auth": "Your TypeSafe key was rejected or has no credit.", "fixLink": "Fix it"
+  },
+  "demo": { "banner": "Demo with fictional data", "install": "Install it locally →", "readOnly": "Disabled in the demo" }
+}
