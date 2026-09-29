@@ -1,4 +1,4 @@
-import { AuthenticationError, PermissionDeniedError } from "@typesafe-ai/sdk";
+import { APIError, AuthenticationError, PermissionDeniedError } from "@typesafe-ai/sdk";
 import type { Classifier } from "@/core/classify/jev-classifier";
 import { buildState, excerpt, type JevState } from "@/core/classify/state";
 import { CLASSIFY_CONCURRENCY, MAX_MESSAGES_PER_SYNC } from "@/core/config";
@@ -13,6 +13,11 @@ export type SyncDeps = {
   folder: string; days: number; now?: () => Date; concurrency?: number;
 };
 export type SyncReport = { fetched: number; classified: number; failed: number; error: null | "imap_auth" | "imap_unavailable" | "jev_auth" };
+
+/** The key is wrong, lacks access to Jev, or has no credit left (402): retrying cannot help. */
+function isJevAuthError(err: unknown): boolean {
+  return err instanceof AuthenticationError || err instanceof PermissionDeniedError || (err instanceof APIError && err.status === 402);
+}
 
 export async function runSync(d: SyncDeps): Promise<SyncReport> {
   const now = d.now ?? (() => new Date());
@@ -70,12 +75,13 @@ export async function runSync(d: SyncDeps): Promise<SyncReport> {
           d.repo.saveClassification(msg.id, answers, now());
           report.classified++;
         } catch (err) {
-          if (err instanceof AuthenticationError || err instanceof PermissionDeniedError) {
+          if (isJevAuthError(err)) {
             // jev_auth takes precedence over imap_unavailable.
             report.error = "jev_auth";
             stopped = true;
             return;
           }
+          console.error(`sync: classification failed for message ${msg.id}: ${err instanceof Error ? err.name : "error"}`);
           d.repo.recordFailure(msg.id);
           report.failed++;
         }
@@ -97,6 +103,10 @@ export class SyncRunner {
     return this.#current !== null;
   }
 
+  get isScheduled(): boolean {
+    return this.#timer !== null;
+  }
+
   /** Resolves once no sync is in flight (never rejects: the run's own caller sees its error). */
   async whenIdle(): Promise<void> {
     while (this.#current) await this.#current.catch(() => undefined);
@@ -108,7 +118,10 @@ export class SyncRunner {
         const d = await Promise.resolve().then(() => this.makeDeps());
         if (!d) return null;
         try {
-          return await runSync(d);
+          const report = await runSync(d);
+          // A rejected IMAP password would fail every run: pause until the user reconfigures (start() again).
+          if (report.error === "imap_auth") this.stop();
+          return report;
         } finally {
           await d.source.close();
         }

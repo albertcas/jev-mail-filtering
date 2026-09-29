@@ -78,4 +78,10 @@ describe("repo", () => {
     if (existsSync(wal)) expect(statSync(wal).size).toBe(0);
     expect(statSync(file).size).toBeLessThan(50 * 2000);
   });
+  it.skipIf(process.platform === "win32")("creates the data dir and DB file owner-only", () => {
+    const dir = join(mkdtempSync(join(tmpdir(), "jev-perm-")), "nested");
+    openDatabase(join(dir, "data.db"));
+    expect(statSync(dir).mode & 0o777).toBe(0o700);
+    expect(statSync(join(dir, "data.db")).mode & 0o777).toBe(0o600);
+  });
 });

@@ -1,7 +1,7 @@
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it, vi } from "vitest";
-import { AuthenticationError, PermissionDeniedError } from "@typesafe-ai/sdk";
+import { APIError, AuthenticationError, PermissionDeniedError } from "@typesafe-ai/sdk";
 import { openDatabase } from "@/core/store/db";
 import { createRepo } from "@/core/store/repo";
 import { FixtureMailSource } from "@/core/mail/fixture-source";
@@ -101,6 +101,22 @@ describe("runSync failure modes", () => {
     expect(calls).toBe(before);
     expect(d.repo.lastRun()).toMatchObject({ fetched: report.fetched, classified: report.classified, failed: report.failed, error: "jev_auth" });
   });
+  it("HTTP 402 (no credit) is also jev_auth", async () => {
+    const d = deps({ classify: async () => { throw APIError.fromResponse(402, undefined, new Headers()); } });
+    expect((await runSync(d)).error).toBe("jev_auth");
+  });
+  it("logs classification failures by error name only", async () => {
+    const log = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      const d = deps({ classify: async () => { throw new TypeError("secret mail text"); } });
+      await runSync(d);
+      const lines = log.mock.calls.map((c) => c.join(" "));
+      expect(lines.some((l) => l.includes("TypeError"))).toBe(true);
+      expect(lines.some((l) => l.includes("secret mail text"))).toBe(false);
+    } finally {
+      log.mockRestore();
+    }
+  });
   it("permission denied is also jev_auth", async () => {
     const d = deps({ classify: async () => { throw new PermissionDeniedError(403, undefined, new Headers(), "no"); } });
     expect((await runSync(d)).error).toBe("jev_auth");
@@ -140,6 +156,17 @@ describe("SyncRunner", () => {
     await expect(r.trigger()).rejects.toThrow("sync boom");
     expect(r.isRunning).toBe(false);
     expect(await r.trigger()).toMatchObject({ classified: 3 });
+  });
+  it("an IMAP auth error stops the scheduler until the user reconfigures", async () => {
+    const d = { ...deps({ classify: async () => okAnswers }), source: failingSource(new ImapAuthError()) };
+    const r = new SyncRunner(async () => d);
+    r.start(15);
+    expect(r.isScheduled).toBe(true);
+    expect(await r.trigger()).toMatchObject({ error: "imap_auth" });
+    expect(r.isScheduled).toBe(false);
+    r.start(15); // PUT /api/settings after a successful reconfiguration
+    expect(r.isScheduled).toBe(true);
+    r.stop();
   });
   it("whenIdle resolves at once when idle and only after the in-flight run otherwise", async () => {
     await new SyncRunner(async () => null).whenIdle();
