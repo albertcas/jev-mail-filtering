@@ -14,6 +14,8 @@ export type ThresholdPanelProps = {
   onChange: (thresholds: Thresholds) => void;
   onSave: (thresholds: Thresholds) => Promise<unknown>;
   defaultOpen?: boolean;
+  /** Sliders locked (Settings in the demo, where nothing can change). */
+  disabled?: boolean;
 };
 
 const KEYS = ["scam", "minConfidence", "strongNoul"] as const;
@@ -24,7 +26,7 @@ const DEBOUNCE_MS = 150;
  * 150 ms, no apply button, never calls Jev again). Collapsed, the toggle still
  * shows the current values.
  */
-export function ThresholdPanel({ value, canSave, onChange, onSave, defaultOpen = false }: ThresholdPanelProps) {
+export function ThresholdPanel({ value, canSave, onChange, onSave, defaultOpen = false, disabled = false }: ThresholdPanelProps) {
   const t = useTranslations();
   const locale = useLocale();
   const panelId = useId();
@@ -96,6 +98,7 @@ export function ThresholdPanel({ value, canSave, onChange, onSave, defaultOpen =
               max={1}
               step={0.05}
               formatValue={(v) => percent(v, locale)}
+              disabled={disabled}
               onValueChange={(v) => update(k, v)}
             />
           ))}

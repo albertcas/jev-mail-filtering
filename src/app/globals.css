@@ -169,6 +169,27 @@
   --shadow-raised: 0 2px 4px color-mix(in srgb, var(--shadow-color) 8%, transparent), 0 12px 32px color-mix(in srgb, var(--shadow-color) 14%, transparent);
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Setup wizard: each step settles in once (the flow's single motion moment);
+     the first-sync bar sweeps while the run is in progress. Both collapse with
+     prefers-reduced-motion (duration token = 0ms / motion-reduce utilities). */
+  --animate-step: step-in var(--duration-move) var(--ease-out) both;
+  --animate-indeterminate: indeterminate 1.6s var(--ease-out) infinite;
+
+  @keyframes step-in {
+    from {
+      opacity: 0;
+      translate: 0 6px;
+    }
+  }
+  @keyframes indeterminate {
+    from {
+      translate: -100% 0;
+    }
+    to {
+      translate: 300% 0;
+    }
+  }
 }
 
 @layer base {
