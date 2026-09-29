@@ -46,3 +46,19 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 7
+  package:
+    strategy:
+      matrix: { os: [ubuntu-latest, windows-latest] }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm pack
+      - shell: bash
+        run: |
+          mkdir -p /tmp/try && cd /tmp/try && npm init -y >/dev/null
+          npm i "$GITHUB_WORKSPACE"/jev-mail-filtering-*.tgz
+          (npx jev-mail-filtering --demo --no-open &) ; sleep 20
+          curl -sf http://127.0.0.1:3737/api/status | grep '"demo":true'

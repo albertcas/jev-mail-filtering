@@ -27,7 +27,7 @@
     "test:e2e": "playwright test",
     "eval": "tsx scripts/eval.ts",
     "fixtures:demo": "tsx scripts/build-demo-fixtures.ts",
-    "prepack": "npm run build && node scripts/prepare-package.mjs"
+    "prepack": "next build --webpack && node scripts/prepare-package.mjs"
   },
   "dependencies": {
     "@napi-rs/keyring": "^2.1.0",
