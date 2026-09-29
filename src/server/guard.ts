@@ -1,0 +1,24 @@
+const LOCAL_HOSTS = new Set(["127.0.0.1", "localhost", "[::1]"]);
+
+function hostname(hostHeader: string | null): string | null {
+  if (!hostHeader) return null;
+  return hostHeader.startsWith("[") ? hostHeader.slice(0, hostHeader.indexOf("]") + 1) : hostHeader.split(":")[0]!;
+}
+
+export function checkRequest(req: Request, opts: { demo: boolean; mutating: boolean }): Response | null {
+  const forbid = (reason: string) => Response.json({ error: reason }, { status: 403 });
+  if (opts.demo) return opts.mutating ? forbid("demo_read_only") : null;
+  const host = hostname(req.headers.get("host"));
+  if (!host || !LOCAL_HOSTS.has(host)) return forbid("non_local_host");
+  if (opts.mutating) {
+    const origin = req.headers.get("origin");
+    if (!origin) return forbid("missing_origin");
+    try {
+      // WHATWG URL keeps brackets for IPv6 hostnames ("[::1]").
+      if (!LOCAL_HOSTS.has(new URL(origin).hostname)) return forbid("cross_origin");
+    } catch {
+      return forbid("bad_origin");
+    }
+  }
+  return null;
+}
