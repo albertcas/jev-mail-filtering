@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { AppConfigSchema } from "@/core/config";
 import { parseThresholds } from "@/core/policy/thresholds";
 import { checkRequest } from "@/server/guard";
 import { getContext } from "@/server/context";
+import { mergeConfig } from "@/server/merge-config";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +13,7 @@ export async function GET(req: Request) {
   return Response.json({ config: c.repo.getConfig(), thresholds: c.repo.getThresholds() });
 }
 
-const Body = z.object({ config: AppConfigSchema.partial().optional(), thresholds: z.unknown().optional() });
+const Body = z.object({ config: z.record(z.string(), z.unknown()).optional(), thresholds: z.unknown().optional() });
 
 export async function PUT(req: Request) {
   const c = await getContext();
@@ -25,7 +25,12 @@ export async function PUT(req: Request) {
   if (body.data.config) {
     const current = c.repo.getConfig();
     if (!current) return Response.json({ error: "not_configured" }, { status: 409 });
-    const next = AppConfigSchema.parse({ ...current, ...body.data.config });
+    let next;
+    try {
+      next = mergeConfig(current, body.data.config);
+    } catch {
+      return Response.json({ error: "bad_request" }, { status: 400 });
+    }
     c.repo.setConfig(next);
     c.runner.start(next.intervalMinutes);
   }

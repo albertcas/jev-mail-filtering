@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { AVG_TOKENS_PER_EMAIL, JEV_PRICE_PER_TOKEN, MAX_MESSAGES_PER_SYNC } from "@/core/config";
+import { ImapAuthError } from "@/core/mail/imap-source";
 import { checkRequest } from "@/server/guard";
 import { getContext } from "@/server/context";
 
@@ -18,6 +19,11 @@ export async function POST(req: Request) {
     const estimatedTokens = count * AVG_TOKENS_PER_EMAIL;
     c.repo.setConfig({ ...config, folder: b.data.folder, days: b.data.days });
     return Response.json({ count, estimatedTokens, estimatedCostUsd: estimatedTokens * JEV_PRICE_PER_TOKEN });
+  } catch (err) {
+    // Never log or echo the error: it may carry connection details.
+    return err instanceof ImapAuthError
+      ? Response.json({ error: "auth" }, { status: 502 })
+      : Response.json({ error: "network" }, { status: 502 });
   } finally {
     await source.close();
   }

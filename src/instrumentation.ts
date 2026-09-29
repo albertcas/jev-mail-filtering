@@ -6,6 +6,8 @@ export async function register() {
   const config = c.repo.getConfig();
   if (config) {
     c.runner.start(config.intervalMinutes);
-    void c.runner.trigger();
+    c.runner.trigger().catch((err: unknown) => {
+      console.error("[jev] initial sync failed:", err instanceof Error ? err.name : "unknown");
+    });
   }
 }

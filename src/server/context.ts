@@ -26,7 +26,14 @@ export const DEMO_RECIPIENT = { name: "Alex Rivera", address: "alex@example.com"
 const g = globalThis as typeof globalThis & { __jevCtx?: Promise<AppContext> };
 
 export function getContext(): Promise<AppContext> {
-  g.__jevCtx ??= build();
+  if (!g.__jevCtx) {
+    const p = build();
+    g.__jevCtx = p;
+    // A failed build must not stay cached forever: let the next request retry.
+    p.catch(() => {
+      if (g.__jevCtx === p) g.__jevCtx = undefined;
+    });
+  }
   return g.__jevCtx;
 }
 

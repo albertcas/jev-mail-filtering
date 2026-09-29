@@ -15,7 +15,10 @@ export function checkRequest(req: Request, opts: { demo: boolean; mutating: bool
     if (!origin) return forbid("missing_origin");
     try {
       // WHATWG URL keeps brackets for IPv6 hostnames ("[::1]").
-      if (!LOCAL_HOSTS.has(new URL(origin).hostname)) return forbid("cross_origin");
+      const o = new URL(origin);
+      if (!LOCAL_HOSTS.has(o.hostname)) return forbid("cross_origin");
+      // Same host:port as the Host header, so pages on other local ports cannot write.
+      if (o.host !== req.headers.get("host")) return forbid("cross_origin");
     } catch {
       return forbid("bad_origin");
     }

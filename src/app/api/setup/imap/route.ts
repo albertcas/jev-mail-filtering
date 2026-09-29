@@ -22,7 +22,7 @@ export async function POST(req: Request) {
   const b = Body.safeParse(await req.json().catch(() => null));
   if (!b.success) return Response.json({ ok: false, error: "bad_request" }, { status: 400 });
   const preset = b.data.provider === "imap" ? null : PROVIDERS[b.data.provider];
-  const config = AppConfigSchema.parse({
+  const parsed = AppConfigSchema.safeParse({
     ...(c.repo.getConfig() ?? {}),
     provider: b.data.provider,
     host: preset?.host ?? b.data.host,
@@ -31,6 +31,8 @@ export async function POST(req: Request) {
     user: b.data.user,
     displayName: b.data.displayName,
   });
+  if (!parsed.success) return Response.json({ ok: false, error: "bad_request" }, { status: 400 });
+  const config = parsed.data;
   const source = c.imapSource(config, b.data.password);
   try {
     const folders = await source.listFolders();

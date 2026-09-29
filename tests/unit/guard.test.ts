@@ -13,6 +13,10 @@ describe("checkRequest", () => {
     expect(checkRequest(req("POST", { host: "127.0.0.1:3737", origin: "https://evil.com" }), { demo: false, mutating: true })?.status).toBe(403);
     expect(checkRequest(req("POST", { host: "127.0.0.1:3737" }), { demo: false, mutating: true })?.status).toBe(403);
   });
+  it("blocks writes from another local port and allows matching IPv6", () => {
+    expect(checkRequest(req("POST", { host: "127.0.0.1:3737", origin: "http://127.0.0.1:4000" }), { demo: false, mutating: true })?.status).toBe(403);
+    expect(checkRequest(req("POST", { host: "[::1]:3737", origin: "http://[::1]:3737" }), { demo: false, mutating: true })).toBeNull();
+  });
   it("in demo mode allows any host for reads and blocks all writes", () => {
     expect(checkRequest(req("GET", { host: "jev-demo.vercel.app" }), { demo: true, mutating: false })).toBeNull();
     expect(checkRequest(req("POST", { host: "jev-demo.vercel.app", origin: "https://jev-demo.vercel.app" }), { demo: true, mutating: true })?.status).toBe(403);
