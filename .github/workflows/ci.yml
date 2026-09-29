@@ -15,3 +15,18 @@ jobs:
       - run: npm test
       - run: npm run build
         env: { DEMO_MODE: "1" }
+  integration:
+    runs-on: ubuntu-latest
+    services:
+      greenmail:
+        image: greenmail/standalone:2.1.0
+        ports: ["3025:3025", "3143:3143", "8080:8080"]
+        env:
+          GREENMAIL_OPTS: "-Dgreenmail.setup.test.smtp -Dgreenmail.setup.test.imap -Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users.login=email -Dgreenmail.auth.disabled=false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run test:integration
+        env: { GREENMAIL: "1" }
