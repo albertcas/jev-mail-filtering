@@ -1,0 +1,21 @@
+From: "PayPal" <service@paypa1-secure.com>
+Reply-To: help@other-domain.ru
+To: yo@mail.com
+Subject: Your account has been limited
+Message-ID: <phish-1@paypa1-secure.com>
+Date: Wed, 23 Sep 2026 03:12:00 +0000
+Authentication-Results: mx.mail.com; spf=fail smtp.mailfrom=paypa1-secure.com; dkim=none; dmarc=fail
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="b1"
+
+--b1
+Content-Type: text/html; charset=UTF-8
+
+<p>Verify now at <a href="https://paypa1-secure.com/login">https://www.paypal.com/verify</a> within 24 hours or your account will be closed.</p>
+--b1
+Content-Type: application/octet-stream; name="invoice.pdf.exe"
+Content-Disposition: attachment; filename="invoice.pdf.exe"
+Content-Transfer-Encoding: base64
+
+TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAA=
+--b1--
