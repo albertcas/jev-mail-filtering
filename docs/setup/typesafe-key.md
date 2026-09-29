@@ -36,10 +36,10 @@ Jev is billed per input token (about $0.042 per million at the time of writing; 
 If you are on the waiting list, you can still see the app working with the demo inbox, which uses recorded Jev answers and needs no key:
 
 ```bash
-npx jev-mail-filtering --demo
+DEMO_MODE=1 npm start    # from a clone, after npm install and npm run build (see the README)
 ```
 
-Or select **Try with a demo inbox** on the first screen of the wizard.
+On Windows PowerShell: `$env:DEMO_MODE="1"; npm start`. Once the package is published on npm, `npx jev-mail-filtering --demo` will do the same without cloning.
 
 ## Common problems
 

@@ -58,7 +58,7 @@
     "keyStored": "Saved in your system keychain, never in the browser.", "keyEnvMissing": "Add the key to your .env file as TYPESAFE_API_KEY and restart the app. You can check a key here first; it won't be saved.",
     "keyEnvOk": "The key works. Add it to your .env file as TYPESAFE_API_KEY and restart the app to continue.", "recheck": "Check again", "keyRequired": "Paste your API key first.",
     "mailIntro": "Your provider needs an app password: a separate password just for this app that you can revoke at any time. Your usual password won't work.",
-    "guideOpen": "Open the app password page", "guideFull": "Full guide with screenshots",
+    "guideOpen": "Open the app password page", "guideFull": "Full step-by-step guide",
     "guide": {
       "gmail": {
         "step1": "Turn on 2-Step Verification in your Google Account. App passwords only appear once it's on.",

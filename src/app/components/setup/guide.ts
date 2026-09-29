@@ -11,17 +11,17 @@ export type ProviderGuide = {
   steps: string[];
   /** The provider's own page where app passwords are created; null for other IMAP. */
   appPasswordUrl: string | null;
-  /** The long-form guide (with screenshots) in the repository. */
+  /** The long-form guide in the repository, in the UI language when a translation exists. */
   docsUrl: string;
 };
 
 /** Steps and links for creating an app password with a given provider. */
-export function providerGuide(provider: ProviderId): ProviderGuide {
+export function providerGuide(provider: ProviderId, locale = "en"): ProviderGuide {
   return {
     provider,
     steps: [1, 2, 3].map((n) => `setup.guide.${provider}.step${n}`),
     appPasswordUrl: provider === "imap" ? null : PROVIDERS[provider].appPasswordUrl,
-    docsUrl: `${DOCS_BASE}/${provider}.md`,
+    docsUrl: `${DOCS_BASE}/${provider}${locale === "es" ? ".es" : ""}.md`,
   };
 }
 

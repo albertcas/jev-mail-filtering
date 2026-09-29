@@ -4,15 +4,9 @@
 
 **Tu bandeja de entrada, ordenada por IA, en tu propio ordenador.** JEV Mail Filtering lee tu buzón por IMAP (solo lectura), hace unas pocas preguntas precisas sobre cada correo a Jev, el modelo de [TypeSafe](https://typesafe.ai), y lo ordena todo en un panel: qué necesita respuesta, qué merece la pena leer, qué es publicidad y qué parece una estafa.
 
-![Panel de la bandeja de demostración: correos repartidos en Necesario contestar, Interesante de revisar, Comercial, Posible estafa y Sin clasificar](docs/assets/demo.gif)
+![Panel de la bandeja de demostración: correos repartidos en Necesario contestar, Interesante de revisar, Comercial, Posible estafa y Sin clasificar](https://raw.githubusercontent.com/albertcas/jev-mail-filtering/main/docs/assets/demo.gif)
 
-Pruébalo sin clave de API ni buzón, con 50 correos ficticios y respuestas de Jev grabadas:
-
-```bash
-npx jev-mail-filtering --demo
-```
-
-Está prevista una demo alojada en la web.
+Puedes probarlo sin clave de API ni buzón: el modo demo usa 50 correos ficticios y respuestas de Jev grabadas. Ejecútalo [desde el código fuente](#desde-el-código-fuente) con `DEMO_MODE=1 npm start`. Está prevista una demo alojada en la web.
 
 ## Qué hace
 
@@ -33,25 +27,45 @@ El ruido automático (rebotes, resúmenes de redes sociales) va a un filtro **Ot
 
 | Claro | Oscuro | Móvil |
 |---|---|---|
-| ![Panel, tema claro](docs/assets/dashboard-light.png) | ![Panel, tema oscuro](docs/assets/dashboard-dark.png) | ![Panel en un móvil](docs/assets/mobile.png) |
+| ![Panel, tema claro](https://raw.githubusercontent.com/albertcas/jev-mail-filtering/main/docs/assets/dashboard-light.png) | ![Panel, tema oscuro](https://raw.githubusercontent.com/albertcas/jev-mail-filtering/main/docs/assets/dashboard-dark.png) | ![Panel en un móvil](https://raw.githubusercontent.com/albertcas/jev-mail-filtering/main/docs/assets/mobile.png) |
 
 ## Inicio rápido
 
 Necesitas Node.js 20 o superior, una clave de API de TypeSafe con acceso a Jev y una cuenta de correo que admita contraseñas de aplicación.
 
-1. **Arranca la app:**
-   ```bash
-   npx jev-mail-filtering
-   ```
-   Abre `http://127.0.0.1:3737` en tu navegador (añade `--no-open` para evitarlo). El asistente de configuración te guía en el resto.
+1. **Arranca la app** [desde el código fuente](#desde-el-código-fuente) (o [con npx](#con-npx-cuando-se-publique-en-npm) cuando el paquete se publique en npm) y abre `http://127.0.0.1:3737`. El asistente de configuración te guía en el resto.
 2. **Crea una clave de API de TypeSafe:** consulta [docs/setup/typesafe-key.es.md](docs/setup/typesafe-key.es.md).
 3. **Crea una contraseña de aplicación para tu buzón:** [Gmail](docs/setup/gmail.es.md) · [iCloud Mail](docs/setup/icloud.es.md) · [Yahoo Mail](docs/setup/yahoo.es.md) · [Otro IMAP](docs/setup/imap.es.md).
 
 El asistente comprueba la clave y la conexión, muestra una estimación de coste y lanza la primera sincronización. Después, la app sincroniza cada 15 minutos (configurable) mientras está en marcha. Las credenciales se guardan en el llavero de tu sistema operativo y los datos en `~/.jev-mail-filtering/`.
 
+### Desde el código fuente
+
+```bash
+git clone https://github.com/albertcas/jev-mail-filtering.git
+cd jev-mail-filtering
+npm install
+npm run build
+npm start                  # tu bandeja: asistente de configuración en http://127.0.0.1:3737
+DEMO_MODE=1 npm start      # o la bandeja de demostración: sin clave ni buzón
+```
+
+En Windows PowerShell, arranca la demo con `$env:DEMO_MODE="1"; npm start`. `npm start` muestra un aviso de Next.js sobre `output: standalone`; puedes ignorarlo.
+
+### Con npx (cuando se publique en npm)
+
+Cuando el paquete esté publicado en npm, no hará falta clonar el repositorio:
+
+```bash
+npx jev-mail-filtering           # abre http://127.0.0.1:3737 en tu navegador (--no-open para evitarlo)
+npx jev-mail-filtering --demo    # bandeja de demostración
+```
+
 ### Docker
 
 ```bash
+git clone https://github.com/albertcas/jev-mail-filtering.git
+cd jev-mail-filtering
 cp .env.example .env    # después rellena TYPESAFE_API_KEY e IMAP_PASSWORD
 docker compose up -d
 ```

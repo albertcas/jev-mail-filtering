@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import type { ProviderId } from "@/core/mail/providers";
 import { ExternalLink } from "./ExternalLink";
 import { Steps } from "./Steps";
@@ -8,11 +8,12 @@ import { providerGuide } from "./guide";
 
 /**
  * How to create an app password with the chosen provider: three numbered steps,
- * the provider's own page, and the long guide with screenshots in the repository.
+ * the provider's own page, and the step-by-step guide in the repository (in the UI language).
  */
 export function ProviderGuide({ provider, headingId }: { provider: ProviderId; headingId: string }) {
   const t = useTranslations();
-  const guide = providerGuide(provider);
+  const locale = useLocale();
+  const guide = providerGuide(provider, locale);
   return (
     <section aria-labelledby={headingId} className="grid gap-4">
       <h2 id={headingId} className="text-base font-semibold text-ink">

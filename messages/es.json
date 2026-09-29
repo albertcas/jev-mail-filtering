@@ -58,7 +58,7 @@
     "keyStored": "Se guarda en el llavero del sistema, nunca en el navegador.", "keyEnvMissing": "Añade la clave a tu fichero .env como TYPESAFE_API_KEY y reinicia la app. Puedes comprobar una clave aquí antes; no se guardará.",
     "keyEnvOk": "La clave funciona. Añádela a tu fichero .env como TYPESAFE_API_KEY y reinicia la app para continuar.", "recheck": "Volver a comprobar", "keyRequired": "Pega primero tu clave de API.",
     "mailIntro": "Tu proveedor necesita una contraseña de aplicación: una contraseña aparte, solo para esta app, que puedes revocar cuando quieras. Tu contraseña habitual no sirve.",
-    "guideOpen": "Abrir la página de contraseñas de aplicación", "guideFull": "Guía completa con capturas",
+    "guideOpen": "Abrir la página de contraseñas de aplicación", "guideFull": "Guía completa paso a paso",
     "guide": {
       "gmail": {
         "step1": "Activa la verificación en dos pasos en tu cuenta de Google. Las contraseñas de aplicación solo aparecen cuando está activa.",

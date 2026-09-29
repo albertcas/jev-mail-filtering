@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import en from "../../messages/en.json";
 import es from "../../messages/es.json";
 import {
@@ -86,6 +88,20 @@ describe("provider guides", () => {
     expect(g.appPasswordUrl).toBe("https://myaccount.google.com/apppasswords");
     expect(g.docsUrl).toBe("https://github.com/albertcas/jev-mail-filtering/blob/main/docs/setup/gmail.md");
     expect(providerGuide("imap").appPasswordUrl).toBeNull();
+  });
+
+  it("link the Spanish guide when the UI is in Spanish", () => {
+    expect(providerGuide("icloud", "es").docsUrl).toBe("https://github.com/albertcas/jev-mail-filtering/blob/main/docs/setup/icloud.es.md");
+    expect(providerGuide("icloud", "en").docsUrl).toBe("https://github.com/albertcas/jev-mail-filtering/blob/main/docs/setup/icloud.md");
+  });
+
+  it("link guides that exist in the repository, in both languages", () => {
+    for (const p of PROVIDER_IDS) {
+      for (const locale of ["en", "es"]) {
+        const file = providerGuide(p, locale).docsUrl.split("/blob/main/")[1]!;
+        expect(existsSync(join(process.cwd(), file)), file).toBe(true);
+      }
+    }
   });
 
   it("have three translated steps for every provider in both languages", () => {

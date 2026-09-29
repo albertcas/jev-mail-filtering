@@ -36,10 +36,10 @@ Jev se factura por token de entrada (unos 0,042 $ por millón en el momento de e
 Si estás en lista de espera, puedes ver igualmente la app en marcha con la bandeja de demostración, que usa respuestas de Jev grabadas y no necesita clave:
 
 ```bash
-npx jev-mail-filtering --demo
+DEMO_MODE=1 npm start    # desde un clon, tras npm install y npm run build (consulta el README)
 ```
 
-O pulsa **Probar con un buzón de demo** en la primera pantalla del asistente.
+En Windows PowerShell: `$env:DEMO_MODE="1"; npm start`. Cuando el paquete esté publicado en npm, `npx jev-mail-filtering --demo` hará lo mismo sin clonar.
 
 ## Problemas frecuentes
 

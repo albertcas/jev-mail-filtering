@@ -2,6 +2,14 @@
   "name": "jev-mail-filtering",
   "version": "0.1.0",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albertcas/jev-mail-filtering.git"
+  },
+  "homepage": "https://github.com/albertcas/jev-mail-filtering#readme",
+  "bugs": {
+    "url": "https://github.com/albertcas/jev-mail-filtering/issues"
+  },
   "type": "module",
   "engines": {
     "node": ">=20"

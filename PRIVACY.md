@@ -50,7 +50,7 @@ Credentials (the TypeSafe key and the IMAP app password) are stored in your oper
 
 ## Demo mode
 
-`npx jev-mail-filtering --demo` uses 50 fictional emails and answers recorded in advance. It does not connect to any mail server or to TypeSafe.
+Demo mode (`DEMO_MODE=1 npm start` from source, or `npx jev-mail-filtering --demo` once the package is published on npm) uses 50 fictional emails and answers recorded in advance. It does not connect to any mail server or to TypeSafe.
 
 ## Scam detection is advisory
 

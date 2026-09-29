@@ -4,15 +4,9 @@
 
 **Your inbox, triaged by AI, on your own computer.** JEV Mail Filtering reads your mailbox over IMAP (read-only), asks [TypeSafe](https://typesafe.ai)'s Jev model a few precise questions about each email, and sorts everything into a dashboard: what needs a reply, what is worth reading, what is marketing and what looks like a scam.
 
-![Dashboard of the demo inbox: emails sorted into Needs reply, Worth reading, Commercial, Possible scam and Unsure](docs/assets/demo.gif)
+![Dashboard of the demo inbox: emails sorted into Needs reply, Worth reading, Commercial, Possible scam and Unsure](https://raw.githubusercontent.com/albertcas/jev-mail-filtering/main/docs/assets/demo.gif)
 
-Try it without an API key or a mailbox, with 50 fictional emails and recorded Jev answers:
-
-```bash
-npx jev-mail-filtering --demo
-```
-
-A hosted demo is planned.
+You can try it without an API key or a mailbox: demo mode uses 50 fictional emails and recorded Jev answers. Run it [from source](#from-source) with `DEMO_MODE=1 npm start`. A hosted demo is planned.
 
 ## What it does
 
@@ -33,25 +27,45 @@ Automated noise (bounces, social network digests) goes to an **Others** filter, 
 
 | Light | Dark | Phone |
 |---|---|---|
-| ![Dashboard, light theme](docs/assets/dashboard-light.png) | ![Dashboard, dark theme](docs/assets/dashboard-dark.png) | ![Dashboard on a phone](docs/assets/mobile.png) |
+| ![Dashboard, light theme](https://raw.githubusercontent.com/albertcas/jev-mail-filtering/main/docs/assets/dashboard-light.png) | ![Dashboard, dark theme](https://raw.githubusercontent.com/albertcas/jev-mail-filtering/main/docs/assets/dashboard-dark.png) | ![Dashboard on a phone](https://raw.githubusercontent.com/albertcas/jev-mail-filtering/main/docs/assets/mobile.png) |
 
 ## Quick start
 
 You need Node.js 20 or later, a TypeSafe API key with access to Jev, and an email account that supports app passwords.
 
-1. **Start the app:**
-   ```bash
-   npx jev-mail-filtering
-   ```
-   It opens `http://127.0.0.1:3737` in your browser (add `--no-open` to skip that). The setup wizard guides you through the rest.
+1. **Start the app** [from source](#from-source) (or [with npx](#with-npx-once-published-on-npm) once the package is published on npm) and open `http://127.0.0.1:3737`. The setup wizard guides you through the rest.
 2. **Create a TypeSafe API key:** see [docs/setup/typesafe-key.md](docs/setup/typesafe-key.md).
 3. **Create an app password for your mailbox:** [Gmail](docs/setup/gmail.md) · [iCloud Mail](docs/setup/icloud.md) · [Yahoo Mail](docs/setup/yahoo.md) · [Other IMAP](docs/setup/imap.md).
 
 The wizard checks the key and the connection, shows a cost estimate and runs the first sync. After that the app syncs every 15 minutes (configurable) while it is running. Credentials are stored in your operating system's keychain and data in `~/.jev-mail-filtering/`.
 
+### From source
+
+```bash
+git clone https://github.com/albertcas/jev-mail-filtering.git
+cd jev-mail-filtering
+npm install
+npm run build
+npm start                  # your inbox: setup wizard on http://127.0.0.1:3737
+DEMO_MODE=1 npm start      # or the demo inbox: no key or mailbox needed
+```
+
+On Windows PowerShell, start the demo with `$env:DEMO_MODE="1"; npm start`. `npm start` prints a Next.js warning about `output: standalone`; you can ignore it.
+
+### With npx (once published on npm)
+
+After the package is published on npm, you will not need to clone the repository:
+
+```bash
+npx jev-mail-filtering           # opens http://127.0.0.1:3737 in your browser (--no-open to skip)
+npx jev-mail-filtering --demo    # demo inbox
+```
+
 ### Docker
 
 ```bash
+git clone https://github.com/albertcas/jev-mail-filtering.git
+cd jev-mail-filtering
 cp .env.example .env    # then fill in TYPESAFE_API_KEY and IMAP_PASSWORD
 docker compose up -d
 ```
