@@ -1,10 +1,12 @@
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it, vi } from "vitest";
-import { AuthenticationError } from "@typesafe-ai/sdk";
+import { AuthenticationError, PermissionDeniedError } from "@typesafe-ai/sdk";
 import { openDatabase } from "@/core/store/db";
 import { createRepo } from "@/core/store/repo";
 import { FixtureMailSource } from "@/core/mail/fixture-source";
+import { ImapAuthError } from "@/core/mail/imap-source";
+import type { MailSource } from "@/core/mail/source";
 import { runSync, SyncRunner, type SyncDeps } from "@/core/sync/run-sync";
 import type { Classifier } from "@/core/classify/jev-classifier";
 import type { JevAnswers } from "@/core/classify/answers";
@@ -57,6 +59,54 @@ describe("runSync", () => {
   });
 });
 
+function failingSource(err: Error): MailSource {
+  return {
+    fetchNew: async () => { throw err; },
+    loadContext: async (recipient) => ({ recipient, sentMessageIds: new Set(), sentRecipients: new Set() }),
+    countSince: async () => 0,
+    listFolders: async () => [],
+    close: async () => {},
+  };
+}
+
+describe("runSync failure modes", () => {
+  it("imap auth error: no classification, run recorded", async () => {
+    const classify = vi.fn(async () => okAnswers);
+    const d = { ...deps({ classify }), source: failingSource(new ImapAuthError()) };
+    expect((await runSync(d)).error).toBe("imap_auth");
+    expect(classify).not.toHaveBeenCalled();
+    expect(d.repo.lastRun()).toMatchObject({ error: "imap_auth" });
+    expect(d.repo.lastRun()?.finishedAt).not.toBeNull();
+  });
+  it("imap unavailable still classifies pending messages", async () => {
+    const base = deps({ classify: async () => { throw new Error("boom"); } });
+    await runSync(base);
+    expect(base.repo.countPending()).toBe(3);
+    const d = { ...base, classifier: { classify: async () => okAnswers }, source: failingSource(new Error("down")) };
+    expect(await runSync(d)).toMatchObject({ error: "imap_unavailable", classified: 3, failed: 0 });
+    expect(d.repo.countPending()).toBe(0);
+  });
+  it("jev auth stops all workers before returning", async () => {
+    let calls = 0;
+    const classify = async () => {
+      if (calls++ === 0) throw new AuthenticationError(401, undefined, new Headers(), "bad key");
+      await new Promise((r) => setTimeout(r, 20));
+      return okAnswers;
+    };
+    const d = { ...deps({ classify }), concurrency: 4 };
+    const report = await runSync(d);
+    expect(report.error).toBe("jev_auth");
+    const before = calls;
+    await new Promise((r) => setTimeout(r, 60));
+    expect(calls).toBe(before);
+    expect(d.repo.lastRun()).toMatchObject({ fetched: report.fetched, classified: report.classified, failed: report.failed, error: "jev_auth" });
+  });
+  it("permission denied is also jev_auth", async () => {
+    const d = deps({ classify: async () => { throw new PermissionDeniedError(403, undefined, new Headers(), "no"); } });
+    expect((await runSync(d)).error).toBe("jev_auth");
+  });
+});
+
 describe("SyncRunner", () => {
   it("coalesces concurrent triggers", async () => {
     const d = deps({ classify: async () => okAnswers });
@@ -68,5 +118,27 @@ describe("SyncRunner", () => {
   });
   it("returns null when not configured", async () => {
     expect(await new SyncRunner(async () => null).trigger()).toBeNull();
+  });
+  it("closes the source, and can run again after completion", async () => {
+    const d = deps({ classify: async () => okAnswers });
+    const close = vi.spyOn(d.source, "close");
+    const make = vi.fn(async () => d);
+    const r = new SyncRunner(make);
+    await r.trigger();
+    expect(close).toHaveBeenCalledTimes(1);
+    expect(r.isRunning).toBe(false);
+    await r.trigger();
+    expect(make).toHaveBeenCalledTimes(2);
+  });
+  it("recovers when makeDeps throws synchronously", async () => {
+    const d = deps({ classify: async () => okAnswers });
+    let first = true;
+    const r = new SyncRunner((() => {
+      if (first) { first = false; throw new Error("sync boom"); }
+      return Promise.resolve(d);
+    }) as () => Promise<SyncDeps | null>);
+    await expect(r.trigger()).rejects.toThrow("sync boom");
+    expect(r.isRunning).toBe(false);
+    expect(await r.trigger()).toMatchObject({ classified: 3 });
   });
 });
