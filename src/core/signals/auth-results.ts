@@ -1,19 +1,16 @@
 import type { AuthResult } from "@/core/types";
 import { registrableDomain } from "./lookalike";
 
-function method(header: string, name: string): string | null {
-  const m = header.match(new RegExp(`\\b${name}=([a-z]+)`, "i"));
+function extractMethodResult(clause: string, methodName: string): string | null {
+  const pattern = new RegExp(`\\b${methodName}=([a-z]+)`, "i");
+  const m = clause.match(pattern);
   return m?.[1]?.toLowerCase() ?? null;
 }
 
-function extractTag(header: string, tag: string): string[] {
-  const pattern = new RegExp(`${tag}=([^;\\s]+)`, "gi");
-  const results: string[] = [];
-  let match;
-  while ((match = pattern.exec(header)) !== null) {
-    results.push(match[1]!);
-  }
-  return results;
+function extractTag(clause: string, tag: string): string | null {
+  const pattern = new RegExp(`${tag}=([^;\\s]+)`, "i");
+  const m = clause.match(pattern);
+  return m?.[1] ?? null;
 }
 
 /** Reads the top-most Authentication-Results header (added by the recipient's server). */
@@ -21,28 +18,34 @@ export function parseAuthenticationResults(headers: string[], fromDomain: string
   const top = headers[0];
   if (!top) return "none";
 
-  // DMARC takes precedence when present
-  const dmarc = method(top, "dmarc");
-  if (dmarc === "pass") return "pass";
-  if (dmarc === "fail") return "fail";
+  // Split header into clauses (semicolon-separated)
+  const clauses = top.split(";").map((c) => c.trim()).filter((c) => c);
 
-  // Check for explicit failures (these win over passes)
-  const dkim = method(top, "dkim");
-  const spf = method(top, "spf");
-  if (dkim === "fail" || spf === "fail" || spf === "softfail") return "fail";
+  // Check for DMARC first (takes precedence)
+  for (const clause of clauses) {
+    const dmarc = extractMethodResult(clause, "dmarc");
+    if (dmarc === "pass") return "pass";
+    if (dmarc === "fail") return "fail";
+  }
+
+  // Check for explicit failures in DKIM/SPF (these win over passes)
+  for (const clause of clauses) {
+    const dkim = extractMethodResult(clause, "dkim");
+    const spf = extractMethodResult(clause, "spf");
+    if (dkim === "fail" || spf === "fail" || spf === "softfail") return "fail";
+  }
 
   // No DMARC and no explicit failures - check for aligned pass results
   if (!fromDomain) return "none";
 
-  // Check DKIM alignments (can have multiple dkim= entries)
-  const dkimResults = extractTag(top, "dkim");
-  for (const result of dkimResults) {
-    if (result === "pass") {
-      // Look for header.d= or header.i=@domain alignment
-      const headerD = extractTag(top, "header\\.d")?.[0];
-      const headerI = extractTag(top, "header\\.i")?.[0];
-
+  // Check DKIM pass clauses with their own header.d/header.i alignment
+  for (const clause of clauses) {
+    const dkim = extractMethodResult(clause, "dkim");
+    if (dkim === "pass") {
+      const headerD = extractTag(clause, "header\\.d");
       if (headerD && registrableDomain(headerD) === fromDomain) return "pass";
+
+      const headerI = extractTag(clause, "header\\.i");
       if (headerI) {
         const domain = headerI.split("@").pop();
         if (domain && registrableDomain(domain) === fromDomain) return "pass";
@@ -50,12 +53,11 @@ export function parseAuthenticationResults(headers: string[], fromDomain: string
     }
   }
 
-  // Check SPF alignments (can have multiple spf= entries)
-  const spfResults = extractTag(top, "spf");
-  for (const result of spfResults) {
-    if (result === "pass") {
-      // Look for smtp.mailfrom= alignment
-      const mailfrom = extractTag(top, "smtp\\.mailfrom")?.[0];
+  // Check SPF pass clauses with their own smtp.mailfrom alignment
+  for (const clause of clauses) {
+    const spf = extractMethodResult(clause, "spf");
+    if (spf === "pass") {
+      const mailfrom = extractTag(clause, "smtp\\.mailfrom");
       if (mailfrom && registrableDomain(mailfrom) === fromDomain) return "pass";
     }
   }

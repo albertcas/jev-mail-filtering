@@ -44,6 +44,15 @@ describe("parseAuthenticationResults", () => {
   it("accepts aligned dkim=pass with header.i", () => {
     expect(parseAuthenticationResults(["mx; dkim=pass header.i=@mail.a.com"], "a.com")).toBe("pass");
   });
+  it("fails on any dkim=fail in multi-clause header", () => {
+    expect(parseAuthenticationResults(["mx; dkim=pass header.d=a.com; dkim=fail header.d=x.com"], "a.com")).toBe("fail");
+  });
+  it("fails on any spf=fail in multi-clause header", () => {
+    expect(parseAuthenticationResults(["mx; spf=pass smtp.mailfrom=a.com; spf=fail smtp.mailfrom=a.com"], "a.com")).toBe("fail");
+  });
+  it("accepts second aligned dkim=pass when first is not aligned", () => {
+    expect(parseAuthenticationResults(["mx; dkim=pass header.d=attacker.com; dkim=pass header.d=paypal.com"], "paypal.com")).toBe("pass");
+  });
 });
 
 describe("resemblesBrand", () => {
