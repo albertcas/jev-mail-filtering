@@ -41,7 +41,7 @@
     "@napi-rs/keyring": "^2.1.0",
     "@phosphor-icons/react": "^2.1.10",
     "@typesafe-ai/sdk": "^0.6.0",
-    "better-sqlite3": "^13.0.3",
+    "better-sqlite3": "^12.11.1",
     "drizzle-orm": "^0.45.3",
     "html-to-text": "^10.0.1",
     "imapflow": "^2.1.2",
