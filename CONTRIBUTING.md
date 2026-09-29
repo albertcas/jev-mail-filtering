@@ -1,6 +1,8 @@
 # Contributing
 
-Thanks for your interest. Issues and pull requests are welcome. For anything larger than a small fix, please open an issue first so we can agree on the approach.
+Thanks for your interest. Issues and pull requests are welcome. For anything larger than a small fix, please open an issue first so we can agree on the approach. By taking part you agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+You don't need a TypeSafe API key or a real mailbox to contribute: the tests replay recorded Jev answers and demo mode uses fictional emails.
 
 ## Setup
 

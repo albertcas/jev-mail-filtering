@@ -1,0 +1,59 @@
+name: Bug report
+description: Something doesn't work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! **Never paste email content, addresses, API keys or app passwords here.** Describe the email in general terms instead ("a newsletter from a shop", "an invoice with a PDF").
+        Security problems go to [SECURITY.md](https://github.com/albertcas/jev-mail-filtering/blob/main/SECURITY.md), not here.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Start with `npm start`
+        2. ...
+    validations:
+      required: true
+  - type: dropdown
+    id: how
+    attributes:
+      label: How do you run it?
+      options:
+        - From source (npm start)
+        - Demo mode (DEMO_MODE=1)
+        - Docker
+        - npx
+    validations:
+      required: true
+  - type: dropdown
+    id: provider
+    attributes:
+      label: Mail provider
+      options:
+        - Gmail
+        - iCloud
+        - Yahoo
+        - Other IMAP
+        - Not relevant
+  - type: input
+    id: env
+    attributes:
+      label: Operating system and Node.js version
+      placeholder: "Windows 11, Node 22.20.0 (output of `node -v`)"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error messages or logs
+      description: Terminal output or the message shown in the app. Remove any personal data first.
+      render: text
