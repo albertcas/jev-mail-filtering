@@ -21,7 +21,8 @@
     "showOthers": "Mostrar otros ({count})", "hideOthers": "Ocultar otros", "confidence": "Confianza {value}",
     "urgency": "Urgencia", "settings": "Ajustes",
     "connected": "Conectado", "connectionProblem": "Problema de conexión", "columns": "Categorías",
-    "emptyTitle": "Aún no hay nada analizado", "emptyBody": "Sincroniza para traer tu correo reciente. Jev coloca cada correo en una columna aquí; tu buzón nunca se modifica."
+    "emptyTitle": "Aún no hay nada analizado", "emptyBody": "Sincroniza para traer tu correo reciente. Jev coloca cada correo en una columna aquí; tu buzón nunca se modifica.",
+    "noSubject": "(sin asunto)", "urgencyValue": "{value}/3", "minConfidenceChip": "Confianza mínima {value}"
   },
   "detail": {
     "title": "Por qué esta categoría", "probabilities": "Probabilidad por categoría", "judgments": "Juicios de Jev",
@@ -38,7 +39,8 @@
       "recipient_has_replied_in_thread": "Respondiste en el hilo", "recipient_has_written_to_sender_before": "Remitente conocido",
       "risky_attachments": "Adjuntos peligrosos", "mismatched_links": "Enlaces engañosos"
     },
-    "value": { "yes": "Sí", "no": "No", "pass": "Correcta", "fail": "Fallida", "none": "Ausente" }
+    "value": { "yes": "Sí", "no": "No", "pass": "Correcta", "fail": "Fallida", "none": "Ausente" },
+    "scamThreshold": "Probabilidad mínima de estafa: {value}"
   },
   "setup": {
     "welcomeTitle": "Clasifica tu bandeja con Jev", "welcomeBody": "Esta app se ejecuta en tu ordenador y solo lee tu correo. De cada correo se envía un fragmento corto al modelo Jev de TypeSafe para clasificarlo. No se mueve, borra ni marca nada como leído.",
@@ -56,7 +58,8 @@
   },
   "errors": {
     "imap_auth": "Tu proveedor de correo rechazó la contraseña de aplicación.", "imap_unavailable": "No se pudo conectar con tu servidor de correo. Se muestran los resultados guardados.",
-    "jev_auth": "Tu clave de TypeSafe fue rechazada o no tiene saldo.", "fixLink": "Arreglarlo"
+    "jev_auth": "Tu clave de TypeSafe fue rechazada o no tiene saldo.", "fixLink": "Arreglarlo",
+    "overrideFailed": "No se pudo guardar tu cambio. Inténtalo de nuevo.", "syncFailed": "No se pudo sincronizar. Inténtalo de nuevo en un momento.", "retry": "Reintentar"
   },
   "demo": { "banner": "Demo con datos ficticios", "install": "Instálalo en local →", "readOnly": "Desactivado en la demo" }
 }

@@ -21,7 +21,8 @@
     "showOthers": "Show others ({count})", "hideOthers": "Hide others", "confidence": "Confidence {value}",
     "urgency": "Urgency", "settings": "Settings",
     "connected": "Connected", "connectionProblem": "Connection problem", "columns": "Categories",
-    "emptyTitle": "Nothing analysed yet", "emptyBody": "Sync now to fetch your recent mail. Jev sorts each email into a column here; your mailbox is never changed."
+    "emptyTitle": "Nothing analysed yet", "emptyBody": "Sync now to fetch your recent mail. Jev sorts each email into a column here; your mailbox is never changed.",
+    "noSubject": "(no subject)", "urgencyValue": "{value}/3", "minConfidenceChip": "Minimum confidence {value}"
   },
   "detail": {
     "title": "Why this category", "probabilities": "Category probabilities", "judgments": "Jev judgments",
@@ -38,7 +39,8 @@
       "recipient_has_replied_in_thread": "You replied in thread", "recipient_has_written_to_sender_before": "Known sender",
       "risky_attachments": "Risky attachments", "mismatched_links": "Mismatched links"
     },
-    "value": { "yes": "Yes", "no": "No", "pass": "Passed", "fail": "Failed", "none": "Not present" }
+    "value": { "yes": "Yes", "no": "No", "pass": "Passed", "fail": "Failed", "none": "Not present" },
+    "scamThreshold": "Minimum scam probability: {value}"
   },
   "setup": {
     "welcomeTitle": "Triage your inbox with Jev", "welcomeBody": "This app runs on your computer and only reads your mail. For each email, a short excerpt is sent to TypeSafe's Jev model to classify it. Nothing is moved, deleted or marked as read.",
@@ -56,7 +58,8 @@
   },
   "errors": {
     "imap_auth": "Your mail provider rejected the app password.", "imap_unavailable": "Could not reach your mail server. Showing saved results.",
-    "jev_auth": "Your TypeSafe key was rejected or has no credit.", "fixLink": "Fix it"
+    "jev_auth": "Your TypeSafe key was rejected or has no credit.", "fixLink": "Fix it",
+    "overrideFailed": "Could not save your change. Try again.", "syncFailed": "The sync could not run. Try again in a moment.", "retry": "Retry"
   },
   "demo": { "banner": "Demo with fictional data", "install": "Install it locally →", "readOnly": "Disabled in the demo" }
 }

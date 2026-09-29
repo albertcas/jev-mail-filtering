@@ -73,7 +73,8 @@ export function Header({ status, demo, now, analysed, syncing, onSync }: HeaderP
         ) : null}
       </div>
 
-      <ul className="flex w-full flex-wrap items-center gap-x-4 gap-y-1 text-sm text-ink-3">
+      <div className="flex w-full flex-wrap items-center gap-x-4 gap-y-1 text-sm text-ink-3">
+        <ul className="flex flex-wrap items-center gap-x-4 gap-y-1">
         {!demo && status?.lastRun ? (
           <li className="inline-flex items-center gap-1.5">
             <span
@@ -85,10 +86,12 @@ export function Header({ status, demo, now, analysed, syncing, onSync }: HeaderP
         ) : null}
         {analysed !== null ? <li className="tabular">{t("dashboard.analyzed", { count: analysed })}</li> : null}
         {status ? <li className="tabular">{t("dashboard.cost", { cost: formatCost(status.estimatedCostUsd, locale) })}</li> : null}
-        <li role="status">
-          {busy && status && status.pending > 0 ? t("dashboard.pending", { count: status.pending }) : ""}
-        </li>
-      </ul>
+        </ul>
+        {/* Always mounted so screen readers track it; empty until a sync has work queued. */}
+        <p role="status" className="tabular">
+          {busy && status && status.pending > 0 ? t("dashboard.pending", { count: status.pending }) : null}
+        </p>
+      </div>
     </header>
   );
 }

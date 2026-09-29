@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import type { CategoryLabel } from "@/core/classify/answers";
 import { Meter, cn } from "../ui";
 import { percent, toneOf, type ColumnId } from "./format";
@@ -20,6 +20,7 @@ export type ProbabilityBarsProps = {
  */
 export function ProbabilityBars({ probabilities, highlight, scamThreshold }: ProbabilityBarsProps) {
   const t = useTranslations();
+  const locale = useLocale();
   const rows = (Object.entries(probabilities) as [CategoryLabel, number][])
     .map(([c, p]) => [c, Number.isFinite(p) ? p : 0] as const)
     .sort((a, b) => b[1] - a[1]);
@@ -37,7 +38,7 @@ export function ProbabilityBars({ probabilities, highlight, scamThreshold }: Pro
                 <Meter
                   value={p}
                   label={name}
-                  valueText={percent(p)}
+                  valueText={percent(p, locale)}
                   showValue={false}
                   size="md"
                   width="100%"
@@ -53,7 +54,7 @@ export function ProbabilityBars({ probabilities, highlight, scamThreshold }: Pro
                 ) : null}
               </span>
               <span aria-hidden className={cn("tabular text-right text-sm", chosen ? "font-semibold text-ink" : "text-ink-2")}>
-                {percent(p)}
+                {percent(p, locale)}
               </span>
             </li>
           );
@@ -62,7 +63,7 @@ export function ProbabilityBars({ probabilities, highlight, scamThreshold }: Pro
       {scamThreshold !== undefined ? (
         <p className="mt-3 flex items-center gap-2 text-xs text-ink-3">
           <span aria-hidden className="h-3 w-0.5 rounded-full bg-ink" />
-          {t("settings.scam")}: <span className="tabular">{percent(scamThreshold)}</span>
+          <span className="tabular">{t("detail.scamThreshold", { value: percent(scamThreshold, locale) })}</span>
         </p>
       ) : null}
     </div>

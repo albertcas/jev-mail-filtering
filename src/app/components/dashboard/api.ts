@@ -19,7 +19,9 @@ export const api = {
   messages: (t?: Thresholds) =>
     fetch(`/api/messages${t ? `?${new URLSearchParams(Object.entries(t).map(([k, v]) => [k, String(v)]))}` : ""}`, { cache: "no-store" })
       .then(json<{ items: DashboardItem[]; thresholds: Thresholds }>),
-  sync: () => fetch("/api/sync", { method: "POST" }).then((r) => r.json()),
+  // A run that reached the mailbox resolves (its own error, e.g. imap_auth, shows up in /api/status);
+  // a refused request (not configured, demo, guard) rejects so the page can say so.
+  sync: () => fetch("/api/sync", { method: "POST" }).then(json<{ fetched: number; classified: number; failed: number; error: string | null }>),
   override: (id: number, category: DisplayCategory | "none" | null) =>
     fetch(`/api/messages/${id}/override`, { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify({ category }) }).then(json),
   saveThresholds: (thresholds: Thresholds) =>

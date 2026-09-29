@@ -8,6 +8,7 @@ import {
   CheckIcon,
   MinusIcon,
   ShieldWarningIcon,
+  WarningCircleIcon,
   WarningIcon,
 } from "@phosphor-icons/react/ssr";
 import { NOUL_IDS } from "@/core/classify/answers";
@@ -17,7 +18,7 @@ import type { Signals } from "@/core/types";
 import type { DashboardItem } from "@/server/dashboard";
 import { Badge, Button, Chip, Meter, Sheet, cn } from "../ui";
 import { CategoryMark } from "./Column";
-import { RISK_REASONS, formatFullDate, percent, toneOf, type ColumnId } from "./format";
+import { RISK_REASONS, formatFullDate, formatScore, percent, toneOf, type ColumnId } from "./format";
 import { gmailSearchUrl } from "./gmail-link";
 import { ProbabilityBars } from "./ProbabilityBars";
 
@@ -43,6 +44,8 @@ export type DetailSheetProps = {
   thresholds: Thresholds | null;
   /** Show "Open in Gmail" (the account is Gmail, or the demo). */
   showGmailLink: boolean;
+  /** The last "Move to…" / "Undo" request failed. */
+  moveError?: boolean;
   onClose: () => void;
   onMove: (category: DisplayCategory | "none" | null) => Promise<void>;
 };
@@ -59,7 +62,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   );
 }
 
-export function DetailSheet({ open, item, demo, thresholds, showGmailLink, onClose, onMove }: DetailSheetProps) {
+export function DetailSheet({ open, item, demo, thresholds, showGmailLink, moveError, onClose, onMove }: DetailSheetProps) {
   const t = useTranslations();
   const locale = useLocale();
   if (!item) return null;
@@ -103,6 +106,14 @@ export function DetailSheet({ open, item, demo, thresholds, showGmailLink, onClo
         ))}
       </div>
       {demo ? <p className="text-xs text-ink-3">{t("demo.readOnly")}</p> : null}
+      <p role="alert" className={moveError ? "flex items-start gap-1.5 text-sm text-danger" : "sr-only"}>
+        {moveError ? (
+          <>
+            <WarningCircleIcon aria-hidden size={16} weight="bold" className="mt-px shrink-0" />
+            {t("errors.overrideFailed")}
+          </>
+        ) : null}
+      </p>
       <div className="flex flex-wrap items-center gap-2 empty:hidden">
         {item.overridden ? (
           <Button
@@ -135,7 +146,7 @@ export function DetailSheet({ open, item, demo, thresholds, showGmailLink, onClo
       open={open}
       onClose={onClose}
       closeLabel={t("detail.close")}
-      title={item.subject || "—"}
+      title={item.subject || t("dashboard.noSubject")}
       description={
         <>
           <span className="break-all">{sender}</span> · <time dateTime={new Date(item.date).toISOString()}>{formatFullDate(item.date, locale)}</time>
@@ -154,8 +165,8 @@ export function DetailSheet({ open, item, demo, thresholds, showGmailLink, onClo
             </Badge>
             <Meter
               value={item.confidence}
-              label={t("dashboard.confidence", { value: percent(item.confidence) })}
-              valueText={t("dashboard.confidence", { value: percent(item.confidence) })}
+              label={t("dashboard.confidence", { value: percent(item.confidence, locale) })}
+              valueText={t("dashboard.confidence", { value: percent(item.confidence, locale) })}
               width="4rem"
             />
           </div>
@@ -182,7 +193,7 @@ export function DetailSheet({ open, item, demo, thresholds, showGmailLink, onClo
               return (
                 <li key={id} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
                   <span className={cn("truncate text-sm", hit ? "font-medium text-ink" : "text-ink-2")}>{t(`detail.noul.${id}`)}</span>
-                  <Meter value={v} label={t(`detail.noul.${id}`)} valueText={percent(v)} width="5rem" className="[&>span]:w-8 [&>span]:text-right" />
+                  <Meter value={v} label={t(`detail.noul.${id}`)} valueText={percent(v, locale)} width="5rem" className="[&>span]:w-10 [&>span]:text-right" />
                 </li>
               );
             })}
@@ -192,9 +203,9 @@ export function DetailSheet({ open, item, demo, thresholds, showGmailLink, onClo
                 value={item.detail.urgencyScore}
                 max={3}
                 label={t("dashboard.urgency")}
-                valueText={`${item.detail.urgencyScore.toFixed(1)}/3`}
+                valueText={t("dashboard.urgencyValue", { value: formatScore(item.detail.urgencyScore, locale) })}
                 width="5rem"
-                className="[&>span]:w-8 [&>span]:text-right"
+                className="[&>span]:w-10 [&>span]:text-right"
               />
             </li>
           </ul>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { CaretDownIcon, CheckIcon, SlidersHorizontalIcon } from "@phosphor-icons/react/ssr";
 import type { Thresholds } from "@/core/policy/thresholds";
 import { Button, Slider, cn } from "../ui";
@@ -26,6 +26,7 @@ const DEBOUNCE_MS = 150;
  */
 export function ThresholdPanel({ value, canSave, onChange, onSave, defaultOpen = false }: ThresholdPanelProps) {
   const t = useTranslations();
+  const locale = useLocale();
   const panelId = useId();
   // Only rendered once thresholds arrive from the client fetch, so reading the
   // viewport here cannot cause a hydration mismatch. Phones start collapsed.
@@ -62,7 +63,7 @@ export function ThresholdPanel({ value, canSave, onChange, onSave, defaultOpen =
     }
   };
 
-  const summary = KEYS.map((k) => percent(draft[k])).join(" · ");
+  const summary = KEYS.map((k) => percent(draft[k], locale)).join(" · ");
 
   return (
     <div className="rounded-lg border border-line bg-surface">
@@ -94,7 +95,7 @@ export function ThresholdPanel({ value, canSave, onChange, onSave, defaultOpen =
               min={0}
               max={1}
               step={0.05}
-              formatValue={percent}
+              formatValue={(v) => percent(v, locale)}
               onValueChange={(v) => update(k, v)}
             />
           ))}

@@ -28,7 +28,15 @@ export const RISK_REASONS = new Set([
   "reason.addressesClassifier",
 ]);
 
-export const percent = (v: number) => `${Math.round((Number.isFinite(v) ? v : 0) * 100)}%`;
+/** Whole-number percentage in the locale's style ("82%" in en, "82 %" in es). Non-finite = 0. */
+export function percent(v: number, locale: string): string {
+  return new Intl.NumberFormat(locale, { style: "percent", maximumFractionDigits: 0 }).format(Number.isFinite(v) ? v : 0);
+}
+
+/** A 0–3 urgency score with one decimal in the locale's style ("2.8" / "2,8"). */
+export function formatScore(v: number, locale: string): string {
+  return new Intl.NumberFormat(locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(Number.isFinite(v) ? v : 0);
+}
 
 /** USD with 4 decimals under a cent (Jev costs fractions of a cent), 2 otherwise. */
 export function formatCost(usd: number, locale: string): string {

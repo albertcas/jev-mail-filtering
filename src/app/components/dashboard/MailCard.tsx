@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { ArrowBendDownRightIcon } from "@phosphor-icons/react/ssr";
 import type { DashboardItem } from "@/server/dashboard";
 import { Chip, Meter, cn } from "../ui";
-import { RISK_REASONS, formatFullDate, formatMailDate, percent } from "./format";
+import { RISK_REASONS, formatFullDate, formatMailDate, formatScore, percent } from "./format";
 
 export type MailCardProps = {
   item: DashboardItem;
@@ -50,7 +50,7 @@ export function MailCard({ item, now, entering, minConfidence, onOpen }: MailCar
       </span>
 
       <span className="line-clamp-2 text-base font-medium text-pretty text-ink group-hover:underline decoration-line-strong">
-        {item.subject || "—"}
+        {item.subject || t("dashboard.noSubject")}
       </span>
 
       {!compact && item.excerpt ? (
@@ -61,8 +61,8 @@ export function MailCard({ item, now, entering, minConfidence, onOpen }: MailCar
         <span className="inline-flex items-center gap-1.5 text-xs text-ink-3">
           <Meter
             value={item.confidence}
-            label={t("dashboard.confidence", { value: percent(item.confidence) })}
-            valueText={percent(item.confidence)}
+            label={t("dashboard.confidence", { value: percent(item.confidence, locale) })}
+            valueText={percent(item.confidence, locale)}
           />
         </span>
         {item.category === "needs_reply" && item.urgency !== null ? (
@@ -73,7 +73,7 @@ export function MailCard({ item, now, entering, minConfidence, onOpen }: MailCar
               max={3}
               tone="needs-reply"
               label={t("dashboard.urgency")}
-              valueText={`${item.urgency.toFixed(1)}/3`}
+              valueText={t("dashboard.urgencyValue", { value: formatScore(item.urgency, locale) })}
               width="2.5rem"
             />
           </span>
@@ -84,7 +84,7 @@ export function MailCard({ item, now, entering, minConfidence, onOpen }: MailCar
         <span className="flex flex-wrap gap-1">
           {explainUnsure ? (
             <Chip className="border-line-strong">
-              {t("settings.minConfidence")} <span className="tabular">{percent(minConfidence ?? 0)}</span>
+              {t("dashboard.minConfidenceChip", { value: percent(minConfidence ?? 0, locale) })}
             </Chip>
           ) : null}
           {reasons.map((r) =>

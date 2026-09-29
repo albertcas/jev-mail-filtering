@@ -7,7 +7,7 @@ import { sortForColumn } from "@/core/policy/sort";
 import type { Thresholds } from "@/core/policy/thresholds";
 import type { DisplayCategory } from "@/core/policy/decide";
 import type { DashboardItem } from "@/server/dashboard";
-import { Banner, ToggleChip, cn } from "../ui";
+import { Banner, Button, ToggleChip, cn } from "../ui";
 import { api, type Status } from "./api";
 import { Header } from "./Header";
 import { CategoryMark, Column } from "./Column";
@@ -39,6 +39,8 @@ export function Dashboard({ demo, gmail }: { demo: boolean; gmail: boolean }) {
   const [showOthers, setShowOthers] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [loadError, setLoadError] = useState(false);
+  const [syncError, setSyncError] = useState(false);
+  const [moveError, setMoveError] = useState(false);
   const [moved, setMoved] = useState<ReadonlySet<number>>(new Set());
   const [tab, setTab] = useState<Col>("needs_reply");
   const [now, setNow] = useState(() => Date.now());
@@ -49,12 +51,19 @@ export function Dashboard({ demo, gmail }: { demo: boolean; gmail: boolean }) {
   const seq = useRef(0);
   // Column of each item at the previous refresh, to animate only cards that moved.
   const lastColumn = useRef<Map<number, string>>(new Map());
+  // Thresholds the board is (or is about to be) computed with. Every refresh that
+  // is not a slider change reads this at call time, so a sync that finishes
+  // minutes later never recomputes the board with thresholds the sliders left behind.
+  const latestThresholds = useRef<Thresholds | null>(null);
 
+  /** Reload status + items. Pass `th` only for a new threshold choice; otherwise the latest one is used. */
   const refresh = useCallback(async (th?: Thresholds) => {
+    if (th) latestThresholds.current = th;
     const mine = ++seq.current;
     try {
-      const [s, m] = await Promise.all([api.status(), api.messages(th)]);
+      const [s, m] = await Promise.all([api.status(), api.messages(latestThresholds.current ?? undefined)]);
       if (mine !== seq.current) return;
+      latestThresholds.current = m.thresholds;
       const prev = lastColumn.current;
       setMoved(new Set(m.items.filter((i) => prev.has(i.id) && prev.get(i.id) !== i.category).map((i) => i.id)));
       lastColumn.current = new Map(m.items.map((i) => [i.id, i.category]));
@@ -74,9 +83,9 @@ export function Dashboard({ demo, gmail }: { demo: boolean; gmail: boolean }) {
   // Poll while a sync runs (cheap local request).
   useEffect(() => {
     if (!status?.syncing) return;
-    const id = setInterval(() => void refresh(thresholds ?? undefined), 2000);
+    const id = setInterval(() => void refresh(), 2000);
     return () => clearInterval(id);
-  }, [status?.syncing, refresh, thresholds]);
+  }, [status?.syncing, refresh]);
 
   // Keep "Last sync 3 minutes ago" honest.
   useEffect(() => {
@@ -98,30 +107,36 @@ export function Dashboard({ demo, gmail }: { demo: boolean; gmail: boolean }) {
   const onSync = async () => {
     if (demo || syncing) return;
     setSyncing(true);
-    const th = thresholds ?? undefined;
-    const run = api.sync().catch(() => null);
+    setSyncError(false);
+    const run = api.sync().then(
+      () => true,
+      () => false,
+    );
     // Pick up status.syncing early so polling streams new cards in while it runs.
-    setTimeout(() => void refresh(th), 400);
-    await run;
+    setTimeout(() => void refresh(), 400);
+    const ok = await run;
     setSyncing(false);
-    await refresh(th);
+    setSyncError(!ok);
+    await refresh();
   };
 
   const open = (item: DashboardItem) => {
+    setMoveError(false);
     setSelected(item);
     setSheetOpen(true);
   };
 
   const onMove = async (category: DisplayCategory | "none" | null) => {
     if (!selected) return;
+    setMoveError(false);
     try {
       await api.override(selected.id, category);
     } catch {
-      setLoadError(true);
+      setMoveError(true); // shown inside the sheet, where the user is
       return;
     }
     setSheetOpen(false);
-    await refresh(thresholds ?? undefined);
+    await refresh();
   };
 
   const onTabKey = (e: KeyboardEvent<HTMLDivElement>) => {
@@ -149,8 +164,29 @@ export function Dashboard({ demo, gmail }: { demo: boolean; gmail: boolean }) {
         {demo ? <DemoBanner /> : null}
         <Header status={status} demo={demo} now={now} analysed={items?.length ?? null} syncing={syncing} onSync={() => void onSync()} />
         {status?.lastRun?.error ? <ErrorBanner error={status.lastRun.error} /> : null}
+        {syncError ? (
+          <Banner
+            tone="warning"
+            live="polite"
+            action={
+              <Button size="sm" onClick={() => void onSync()}>
+                {t("errors.retry")}
+              </Button>
+            }
+          >
+            {t("errors.syncFailed")}
+          </Banner>
+        ) : null}
         {loadError ? (
-          <Banner tone="warning" live="polite">
+          <Banner
+            tone="warning"
+            live="polite"
+            action={
+              <Button size="sm" onClick={() => void refresh()}>
+                {t("errors.retry")}
+              </Button>
+            }
+          >
             {t("setup.network")}
           </Banner>
         ) : null}
@@ -258,6 +294,7 @@ export function Dashboard({ demo, gmail }: { demo: boolean; gmail: boolean }) {
         demo={demo}
         thresholds={thresholds}
         showGmailLink={gmail || demo}
+        moveError={moveError}
         onClose={() => setSheetOpen(false)}
         onMove={onMove}
       />
