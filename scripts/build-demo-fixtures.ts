@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import MailComposer from "nodemailer/lib/mail-composer";
@@ -18,7 +19,7 @@ for (const e of entries) {
   const headers: Record<string, string> = {};
   if (e.auth) headers["Authentication-Results"] = e.auth;
   if (e.listUnsubscribe) headers["List-Unsubscribe"] = e.listUnsubscribe;
-  const mail = new MailComposer({
+  const options = {
     from: e.from,
     to: "Alex Rivera <alex@example.com>",
     replyTo: e.replyTo,
@@ -31,7 +32,11 @@ for (const e of entries) {
     html: e.html,
     headers,
     attachments: e.attachments?.map((a) => ({ ...a, content: "demo" })),
-  });
+    // Fixed multipart boundary so regenerating the fixtures gives byte-identical files.
+    // Supported by nodemailer's MailComposer but missing from @types/nodemailer's Mail.Options.
+    baseBoundary: createHash("sha256").update(e.file).digest("hex").slice(0, 16),
+  };
+  const mail = new MailComposer(options);
   const buf = await mail.compile().build();
   writeFileSync(join(out, `${e.file}.eml`), buf);
 }
