@@ -19,7 +19,9 @@
     "analyzed": "{count, plural, one {# correo analizado} other {# correos analizados}}",
     "cost": "≈ {cost} gastados en Jev", "pending": "{count} pendientes", "emptyColumn": "Nada por aquí",
     "showOthers": "Mostrar otros ({count})", "hideOthers": "Ocultar otros", "confidence": "Confianza {value}",
-    "urgency": "Urgencia", "settings": "Ajustes"
+    "urgency": "Urgencia", "settings": "Ajustes",
+    "connected": "Conectado", "connectionProblem": "Problema de conexión", "columns": "Categorías",
+    "emptyTitle": "Aún no hay nada analizado", "emptyBody": "Sincroniza para traer tu correo reciente. Jev coloca cada correo en una columna aquí; tu buzón nunca se modifica."
   },
   "detail": {
     "title": "Por qué esta categoría", "probabilities": "Probabilidad por categoría", "judgments": "Juicios de Jev",
@@ -35,7 +37,8 @@
       "domain_resembles": "Dominio parecido", "has_unsubscribe_header": "Cabecera de baja",
       "recipient_has_replied_in_thread": "Respondiste en el hilo", "recipient_has_written_to_sender_before": "Remitente conocido",
       "risky_attachments": "Adjuntos peligrosos", "mismatched_links": "Enlaces engañosos"
-    }
+    },
+    "value": { "yes": "Sí", "no": "No", "pass": "Correcta", "fail": "Fallida", "none": "Ausente" }
   },
   "setup": {
     "welcomeTitle": "Clasifica tu bandeja con Jev", "welcomeBody": "Esta app se ejecuta en tu ordenador y solo lee tu correo. De cada correo se envía un fragmento corto al modelo Jev de TypeSafe para clasificarlo. No se mueve, borra ni marca nada como leído.",
