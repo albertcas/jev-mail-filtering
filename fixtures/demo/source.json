@@ -3,10 +3,10 @@
     "file": "001-needs-reply-es-client-meeting",
     "label": "needs_reply",
     "lang": "es",
-    "from": "Marta Gil <marta.gil@estudio-gil.es>",
+    "from": "Marta Gil <marta.gil@estudio-gil.example>",
     "subject": "¿Podemos mover la reunión del jueves?",
     "date": "2026-09-28T08:14:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=estudio-gil.es; spf=pass; dmarc=pass",
+    "auth": "mx.example.com; dkim=pass header.d=estudio-gil.example; spf=pass; dmarc=pass",
     "inReplyTo": "<sent-003@example.com>",
     "text": "Hola Alex,\n\nme ha surgido un imprevisto el jueves por la mañana. ¿Te vendría bien pasar la revisión del presupuesto al viernes a las 10:00? Si no, dime qué hueco tienes.\n\nGracias,\nMarta"
   },
@@ -121,7 +121,7 @@
     "subject": "Mensaje no entregado: Presupuesto web de la ferretería",
     "date": "2026-09-21T09:03:00+02:00",
     "auth": "mx.example.com; dkim=pass header.d=example.com; spf=pass; dmarc=pass",
-    "text": "Este es un mensaje generado automáticamente.\n\nNo se ha podido entregar su mensaje a uno o más destinatarios:\n\n  jordi@ferreteria-pig.cat\n  Motivo: 550 5.1.2 El dominio de destino no existe (ferreteria-pig.cat).\n\nAsunto original: Presupuesto web de la ferretería\nFecha original: 21/09/2026 09:02\n\nNo responda a este mensaje."
+    "text": "Este es un mensaje generado automáticamente.\n\nNo se ha podido entregar su mensaje a uno o más destinatarios:\n\n  jordi@ferreteria-pig.example\n  Motivo: 550 5.1.2 El dominio de destino no existe (ferreteria-pig.example).\n\nAsunto original: Presupuesto web de la ferretería\nFecha original: 21/09/2026 09:02\n\nNo responda a este mensaje."
   },
   {
     "file": "013-worth-reading-en-newsletter",
@@ -210,10 +210,10 @@
     "file": "021-needs-reply-es-thread-hardware-store",
     "label": "needs_reply",
     "lang": "es",
-    "from": "Jordi Puig <jordi@ferreteria-puig.cat>",
+    "from": "Jordi Puig <jordi@ferreteria-puig.example>",
     "subject": "Re: Presupuesto web de la ferretería",
     "date": "2026-09-22T18:36:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=ferreteria-puig.cat; spf=pass; dmarc=pass",
+    "auth": "mx.example.com; dkim=pass header.d=ferreteria-puig.example; spf=pass; dmarc=pass",
     "inReplyTo": "<sent-001@example.com>",
     "text": "Buenas tardes, Alex:\n\nGracias por el presupuesto, y perdona el retraso, que esta semana hemos tenido inventario.\n\nNos gusta la opción B, la de la tienda online con recogida en local. Solo una duda: ¿el catálogo lo podríamos actualizar nosotros mismos desde una hoja de cálculo o tendríamos que pedírtelo a ti cada vez? Tenemos unos 1.200 productos y los precios cambian a menudo.\n\nSi eso está resuelto, lo cerramos.\n\nSalut,\nJordi\nFerreteria Puig"
   },
@@ -305,12 +305,12 @@
     "file": "030-commercial-es-sale",
     "label": "commercial",
     "lang": "es",
-    "from": "Deportes Norte <ofertas@deportesnorte.es>",
+    "from": "Deportes Norte <ofertas@deportesnorte.example>",
     "subject": "Solo este fin de semana: -30% en zapatillas de running",
     "date": "2026-09-26T10:00:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=deportesnorte.es; spf=pass; dmarc=pass",
-    "listUnsubscribe": "<https://deportesnorte.es/baja?u=123>",
-    "html": "<h1>-30% en running</h1><p>Aprovecha el descuento en toda la colección de otoño.</p><a href=\"https://deportesnorte.es/running\">Ver ofertas</a>"
+    "auth": "mx.example.com; dkim=pass header.d=deportesnorte.example; spf=pass; dmarc=pass",
+    "listUnsubscribe": "<https://deportesnorte.example/baja?u=123>",
+    "html": "<h1>-30% en running</h1><p>Aprovecha el descuento en toda la colección de otoño.</p><a href=\"https://deportesnorte.example/running\">Ver ofertas</a>"
   },
   {
     "file": "031-needs-reply-en-thread-logo-files",

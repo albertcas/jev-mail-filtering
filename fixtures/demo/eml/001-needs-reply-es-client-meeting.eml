@@ -1,6 +1,6 @@
-Authentication-Results: mx.example.com; dkim=pass header.d=estudio-gil.es;
- spf=pass; dmarc=pass
-From: Marta Gil <marta.gil@estudio-gil.es>
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=estudio-gil.example; spf=pass; dmarc=pass
+From: Marta Gil <marta.gil@estudio-gil.example>
 To: Alex Rivera <alex@example.com>
 In-Reply-To: <sent-003@example.com>
 References: <sent-003@example.com>

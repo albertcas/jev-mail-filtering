@@ -1,6 +1,6 @@
 Authentication-Results: mx.example.com; dkim=pass
- header.d=ferreteria-puig.cat; spf=pass; dmarc=pass
-From: Jordi Puig <jordi@ferreteria-puig.cat>
+ header.d=ferreteria-puig.example; spf=pass; dmarc=pass
+From: Jordi Puig <jordi@ferreteria-puig.example>
 To: Alex Rivera <alex@example.com>
 In-Reply-To: <sent-001@example.com>
 References: <sent-001@example.com>

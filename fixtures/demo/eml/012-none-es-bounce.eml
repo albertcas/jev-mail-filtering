@@ -15,8 +15,9 @@ Este es un mensaje generado autom=C3=A1ticamente.
 No se ha podido entregar=
  su mensaje a uno o m=C3=A1s destinatarios:
 
-  jordi@ferreteria-pig.cat
-  Motivo: 550 5.1.2 El dominio de destino no existe (ferreteria-pig.cat).
+  jordi@ferreteria-pig.example
+  Motivo: 550 5.1.2 El dominio de destino no existe (ferreteria-pig.=
+example).
 
 Asunto original: Presupuesto web de la ferreter=C3=ADa
 Fecha original: 21/09/2026 09:02
