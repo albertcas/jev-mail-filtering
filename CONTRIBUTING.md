@@ -4,7 +4,7 @@ Thanks for your interest. Issues and pull requests are welcome. For anything lar
 
 ## Setup
 
-Requirements: Node.js 20 or later (CI uses 22), and Docker if you want to run the IMAP integration tests.
+Requirements: Node.js 22 or later (CI uses 22), and Docker if you want to run the IMAP integration tests.
 
 ```bash
 git clone https://github.com/albertcas/jev-mail-filtering.git

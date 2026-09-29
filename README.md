@@ -31,7 +31,7 @@ Automated noise (bounces, social network digests) goes to an **Others** filter, 
 
 ## Quick start
 
-You need Node.js 20 or later, a TypeSafe API key with access to Jev, and an email account that supports app passwords.
+You need Node.js 22 or later, a TypeSafe API key with access to Jev, and an email account that supports app passwords.
 
 1. **Start the app** [from source](#from-source) (or [with npx](#with-npx-once-published-on-npm) once the package is published on npm) and open `http://127.0.0.1:3737`. The setup wizard guides you through the rest.
 2. **Create a TypeSafe API key:** see [docs/setup/typesafe-key.md](docs/setup/typesafe-key.md).
@@ -113,7 +113,7 @@ Deterministic code checks what can be verified (authentication results, lookalik
 
 ## Requirements
 
-- Node.js 20 or later, or Docker.
+- Node.js 22 or later, or Docker.
 - A TypeSafe API key with access to Jev (currently in early access). Without one you can still run the demo.
 - A mailbox with IMAP and app passwords: Gmail, iCloud Mail, Yahoo Mail or any standard IMAP server. Outlook/Hotmail is not supported yet (it requires OAuth).
 

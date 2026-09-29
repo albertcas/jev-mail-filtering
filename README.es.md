@@ -31,7 +31,7 @@ El ruido automático (rebotes, resúmenes de redes sociales) va a un filtro **Ot
 
 ## Inicio rápido
 
-Necesitas Node.js 20 o superior, una clave de API de TypeSafe con acceso a Jev y una cuenta de correo que admita contraseñas de aplicación.
+Necesitas Node.js 22 o superior, una clave de API de TypeSafe con acceso a Jev y una cuenta de correo que admita contraseñas de aplicación.
 
 1. **Arranca la app** [desde el código fuente](#desde-el-código-fuente) (o [con npx](#con-npx-cuando-se-publique-en-npm) cuando el paquete se publique en npm) y abre `http://127.0.0.1:3737`. El asistente de configuración te guía en el resto.
 2. **Crea una clave de API de TypeSafe:** consulta [docs/setup/typesafe-key.es.md](docs/setup/typesafe-key.es.md).
@@ -113,7 +113,7 @@ El código determinista comprueba lo que se puede verificar (resultados de auten
 
 ## Requisitos
 
-- Node.js 20 o superior, o Docker.
+- Node.js 22 o superior, o Docker.
 - Una clave de API de TypeSafe con acceso a Jev (ahora en acceso anticipado). Sin ella puedes usar igualmente la demo.
 - Un buzón con IMAP y contraseñas de aplicación: Gmail, iCloud Mail, Yahoo Mail o cualquier servidor IMAP estándar. Outlook/Hotmail aún no está soportado (exige OAuth).
 
