@@ -1,7 +1,10 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { EnvSecretStore, MemorySecretStore, KeyringSecretStore, createSecretStore, type SecretStore } from "@/core/secrets";
 
 describe("secret stores", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
   it("env store reads variables and is read-only", async () => {
     const s: SecretStore = new EnvSecretStore({ TYPESAFE_API_KEY: "k1", IMAP_PASSWORD: "p1" });
     expect(await s.get("typesafe_api_key")).toBe("k1");
@@ -15,8 +18,14 @@ describe("secret stores", () => {
     await expect(s.delete("typesafe_api_key")).rejects.toThrow(/read-only/);
   });
 
-  it("env store empty env var returns null", async () => {
+  it("env store missing var returns null", async () => {
     const s = new EnvSecretStore({});
+    expect(await s.get("typesafe_api_key")).toBeNull();
+    expect(await s.get("imap_password")).toBeNull();
+  });
+
+  it("env store empty string var returns null", async () => {
+    const s = new EnvSecretStore({ TYPESAFE_API_KEY: "", IMAP_PASSWORD: "" });
     expect(await s.get("typesafe_api_key")).toBeNull();
     expect(await s.get("imap_password")).toBeNull();
   });
@@ -75,7 +84,6 @@ describe("secret stores", () => {
       vi.stubEnv("JEV_SECRETS", "env");
       const store = await createSecretStore();
       expect(store.kind).toBe("env");
-      vi.unstubAllEnvs();
     });
 
     it("loader that rejects falls back to env", async () => {

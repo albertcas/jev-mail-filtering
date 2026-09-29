@@ -17,7 +17,7 @@ export class EnvSecretStore implements SecretStore {
   readonly writable = false;
   constructor(private readonly env: Record<string, string | undefined> = process.env) {}
   async get(name: SecretName) {
-    return this.env[ENV_NAMES[name]] ?? null;
+    return this.env[ENV_NAMES[name]] || null;
   }
   async set(): Promise<void> {
     throw new Error("Secrets are read-only in env mode: edit your .env file");
@@ -65,12 +65,15 @@ export async function createSecretStore(
     const store = new KeyringSecretStore(mod);
     // perform real round-trip probe: set → get → delete
     const probe = new mod.Entry(SERVICE, PROBE_USER);
-    probe.setPassword("__test__");
-    const retrieved = probe.getPassword();
-    if (retrieved !== "__test__") {
-      throw new Error("Probe: password mismatch");
+    try {
+      probe.setPassword("__test__");
+      const retrieved = probe.getPassword();
+      if (retrieved !== "__test__") {
+        throw new Error("Probe: password mismatch");
+      }
+    } finally {
+      probe.deletePassword();
     }
-    probe.deletePassword();
     return store;
   } catch {
     return new EnvSecretStore();
