@@ -10,18 +10,19 @@ export interface SecretStore {
 
 const ENV_NAMES: Record<SecretName, string> = { typesafe_api_key: "TYPESAFE_API_KEY", imap_password: "IMAP_PASSWORD" };
 const SERVICE = "jev-mail-filtering";
+const PROBE_USER = "__probe__";
 
 export class EnvSecretStore implements SecretStore {
   readonly kind = "env";
   readonly writable = false;
   constructor(private readonly env: Record<string, string | undefined> = process.env) {}
   async get(name: SecretName) {
-    return this.env[ENV_NAMES[name]] || null;
+    return this.env[ENV_NAMES[name]] ?? null;
   }
-  async set(name: SecretName, value: string): Promise<void> {
+  async set(): Promise<void> {
     throw new Error("Secrets are read-only in env mode: edit your .env file");
   }
-  async delete(name: SecretName): Promise<void> {
+  async delete(): Promise<void> {
     throw new Error("Secrets are read-only in env mode: edit your .env file");
   }
 }
@@ -41,22 +42,35 @@ export class KeyringSecretStore implements SecretStore {
   readonly kind = "keyring";
   readonly writable = true;
   constructor(private readonly mod: KeyringModule) {}
-  private entry(name: SecretName) { return new this.mod.Entry(SERVICE, name); }
+  private entry(name: SecretName | typeof PROBE_USER) { return new this.mod.Entry(SERVICE, name); }
   async get(name: SecretName) {
-    try { return this.entry(name).getPassword() ?? null; } catch { return null; }
+    const pwd = this.entry(name).getPassword();
+    return pwd ?? null;
   }
   async set(name: SecretName, value: string) { this.entry(name).setPassword(value); }
   async delete(name: SecretName) {
-    try { this.entry(name).deletePassword(); } catch { /* already absent */ }
+    const deleted = this.entry(name).deletePassword();
+    if (!deleted) {
+      // entry was already absent
+    }
   }
 }
 
-export async function createSecretStore(): Promise<SecretStore> {
+export async function createSecretStore(
+  loadKeyring: () => Promise<KeyringModule> = () => import("@napi-rs/keyring")
+): Promise<SecretStore> {
   if (process.env.JEV_SECRETS === "env") return new EnvSecretStore();
   try {
-    const mod = await import("@napi-rs/keyring");
+    const mod = await loadKeyring();
     const store = new KeyringSecretStore(mod);
-    await store.get("typesafe_api_key"); // probes the OS backend
+    // perform real round-trip probe: set → get → delete
+    const probe = new mod.Entry(SERVICE, PROBE_USER);
+    probe.setPassword("__test__");
+    const retrieved = probe.getPassword();
+    if (retrieved !== "__test__") {
+      throw new Error("Probe: password mismatch");
+    }
+    probe.deletePassword();
     return store;
   } catch {
     return new EnvSecretStore();
