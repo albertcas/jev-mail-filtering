@@ -20,17 +20,29 @@ const ctx: MailContext = {
 
 describe("parseAuthenticationResults", () => {
   it("uses DMARC when present", () => {
-    expect(parseAuthenticationResults(["mx.google.com; dkim=pass header.i=@a.com; spf=pass; dmarc=fail (p=REJECT)"])).toBe("fail");
-    expect(parseAuthenticationResults(["mx; spf=softfail; dmarc=pass"])).toBe("pass");
+    expect(parseAuthenticationResults(["mx.google.com; dkim=pass header.i=@a.com; spf=pass; dmarc=fail (p=REJECT)"], "a.com")).toBe("fail");
+    expect(parseAuthenticationResults(["mx; spf=softfail; dmarc=pass"], "a.com")).toBe("pass");
   });
-  it("falls back to DKIM/SPF", () => {
-    expect(parseAuthenticationResults(["mx; dkim=pass; spf=none"])).toBe("pass");
-    expect(parseAuthenticationResults(["mx; spf=fail smtp.mailfrom=x.com"])).toBe("fail");
-    expect(parseAuthenticationResults(["mx; spf=softfail"])).toBe("fail");
+  it("falls back to DKIM/SPF with domain alignment", () => {
+    expect(parseAuthenticationResults(["mx; dkim=pass header.d=a.com; spf=none"], "a.com")).toBe("pass");
+    expect(parseAuthenticationResults(["mx; spf=fail smtp.mailfrom=x.com"], "a.com")).toBe("fail");
+    expect(parseAuthenticationResults(["mx; spf=softfail"], "a.com")).toBe("fail");
   });
   it("only reads the top-most header and handles absence", () => {
-    expect(parseAuthenticationResults([])).toBe("none");
-    expect(parseAuthenticationResults(["mx; dmarc=pass", "old; dmarc=fail"])).toBe("pass");
+    expect(parseAuthenticationResults([], "a.com")).toBe("none");
+    expect(parseAuthenticationResults(["mx; dmarc=pass", "old; dmarc=fail"], "a.com")).toBe("pass");
+  });
+  it("rejects DKIM pass without domain alignment", () => {
+    expect(parseAuthenticationResults(["mx; dkim=pass header.d=attacker.com"], "paypal.com")).toBe("none");
+  });
+  it("fails on explicit dkim=fail even with spf=pass", () => {
+    expect(parseAuthenticationResults(["mx; dkim=fail header.d=a.com; spf=pass smtp.mailfrom=a.com"], "a.com")).toBe("fail");
+  });
+  it("accepts aligned dkim=pass with header.d", () => {
+    expect(parseAuthenticationResults(["mx; dmarc=none; dkim=pass header.d=a.com"], "a.com")).toBe("pass");
+  });
+  it("accepts aligned dkim=pass with header.i", () => {
+    expect(parseAuthenticationResults(["mx; dkim=pass header.i=@mail.a.com"], "a.com")).toBe("pass");
   });
 });
 

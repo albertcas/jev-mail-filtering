@@ -14,7 +14,7 @@ export function computeSignals(msg: RawMessage, ctx: MailContext): Signals {
     null;
   const threadIds = [msg.inReplyTo, ...msg.references].filter((x): x is string => !!x);
   return {
-    sender_authentication: parseAuthenticationResults(msg.authenticationResults),
+    sender_authentication: parseAuthenticationResults(msg.authenticationResults, fromDomain),
     reply_to_differs_from_sender: replyDomain !== null && fromDomain !== null && replyDomain !== fromDomain,
     domain_resembles: resembles,
     has_unsubscribe_header: msg.listUnsubscribe !== null,
