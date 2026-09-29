@@ -1,6 +1,6 @@
 # Dirección de diseño: dashboard
 
-Decisiones concretas para el dashboard, el asistente y la demo de JEV Mail Filtering. Los tokens viven en `src/app/globals.css`; las primitivas en `src/app/components/ui/`. Este documento es la fuente de verdad visual para las Tasks 13 a 16.
+Decisiones concretas para el dashboard, el asistente y la demo de JEV Mail Filtering. Los tokens viven en `src/app/globals.css`; las primitivas en `src/app/components/ui/`. Este documento es la fuente de verdad visual del producto. Desde el rediseño aprobado (dirección B, «cliente de correo») el dashboard ya no es un tablero de columnas: ver [Disposición: cliente de correo](#disposición-cliente-de-correo).
 
 ## Lectura del encargo
 
@@ -10,9 +10,38 @@ Diales (design-taste-frontend / ui-ux-pro-max): varianza 4, movimiento 3, densid
 
 ## Principio rector
 
-**Los neutros llevan la interfaz; el color se reserva para el significado.** Solo hay color en las cinco categorías y en los estados (error, aviso, éxito). La acción principal es tinta (casi negro en claro, casi blanco en oscuro), no un color de marca. Así la vista de columnas se lee como un mapa de calor de atención: lo que tiene color es lo que importa.
+**Los neutros llevan la interfaz; el color se reserva para el significado.** Solo hay color en las cinco categorías y en los estados (error, aviso, éxito). La acción principal es tinta (casi negro en claro, casi blanco en oscuro), no un color de marca. Así la bandeja se lee como un mapa de calor de atención: lo que tiene color es lo que importa. La única gran masa oscura es el marco (la barra lateral), que es neutra.
 
 Descartado a propósito: gradientes morados, glassmorphism, tarjetas idénticas sin jerarquía, bordes laterales de color gruesos en tarjetas, rojo saturado a pantalla completa, Inter por defecto, emoji como iconos.
+
+## Disposición: cliente de correo
+
+Aprobada por el usuario sobre la maqueta `layout-b-detail` (dirección B). Tres zonas, como un cliente de correo de escritorio, porque la tarea es la de uno: elegir una bandeja, recorrer correos y leer uno con su explicación al lado.
+
+| Zona | Contenido | Decisiones |
+|---|---|---|
+| **Barra lateral** (oscura en claro y en oscuro) | logo «JEV Mail», **Sync now**, las seis categorías con contador, aviso de demo, estado (última sync, analizados, coste, conexión) y **Settings** | Es el marco, no contenido: un bloque de tinta en modo claro (`--sidebar` `#16191d`) y un escalón por debajo del lienzo en oscuro (`#0b0d10`). Cada categoría tiene **icono propio** (Phosphor, `bold`; escudo relleno para Possible scam) en su color de marca de barra lateral, así la identidad no depende del color ni en el carril de iconos. Solo *Needs reply* lleva el contador en píldora (lo único que pide acción); *Possible scam* lleva su contador en tinta cálida. *Unsure* y *Others* van tras un separador: son bandejas de revisión, no de acción. La categoría activa: fondo `--sidebar-raised` + peso medio + `aria-current`. |
+| **Lista** | cabecera (icono, nombre, contador, orden: «Sorted by urgency» en Needs reply, «Newest first» en el resto) + **Adjust**; filas | Fila = remitente (semibold) + hora, asunto, extracto de una línea, chips: urgencia (solo Needs reply), marca «Moved by you» y hasta 2 razones. Filas redondeadas separadas por aire, sin reglas entre filas. Seleccionada: tinte de su categoría + **barra de acento interior de 3px redondeada** (no un borde lateral: el suelo de oficio veta bordes laterales de color de más de 1px). Aviso «Guidance only» encima de la lista de Possible scam. Estado vacío propio por categoría. |
+| **Panel de lectura** | chip de categoría con confianza, urgencia, asunto, remitente + dirección + fecha, acciones, extracto en texto plano, **Why** | Por qué: razones, barras de probabilidad, señales verificadas, juicios de Jev y modelo. Acciones: «Open in Gmail» (solo Gmail real, nunca demo), «Not this? Move to…» (divulgación que muestra los destinos; deshabilitados en demo con el texto «Disabled in the demo»), «Undo my change» si hay override. Nota de aviso en tinte de Possible scam para esa categoría. Vacío: «Select an email» + pista de teclado. |
+
+### Umbrales: botón «Adjust»
+
+Popover no modal (`role="dialog"` etiquetado por «Decision thresholds») anclado a la cabecera de la lista. Reutiliza la lógica de `ThresholdPanel` a través del hook `useThresholdDraft` (borrador local + aviso al padre con 150 ms de debounce + Save explícito) y los campos compartidos `ThresholdFields`; Settings sigue usando el panel plegable. Al abrir, el foco va al primer deslizador; Esc lo cierra y devuelve el foco al botón; un clic fuera o tabular fuera lo cierra. Sigue montado cuando está cerrado (oculto con `hidden`) para no perder un cambio pendiente del debounce. Save solo fuera de la demo. La tecla `A` lo abre y cierra desde cualquier sitio salvo campos de texto o con un modal abierto; el botón lo anuncia con `aria-keyshortcuts="A"` y un `kbd` visible (oculto en táctil).
+
+### Teclado y ARIA
+
+- **Lista**: patrón `listbox` de selección única con **selección que sigue al foco** y **tabindex itinerante** (la fila seleccionada es la única con `tabIndex=0`, así Tab entra en ella). ↑/↓ mueven, Inicio/Fin saltan a los extremos (reductor puro `nextIndex` en `inbox.ts`, con tests). Enter o Espacio activan: en móvil abren la hoja; en escritorio mueven el foco al panel de lectura. Cada `option` se nombra con remitente, asunto y fecha (`aria-labelledby`) y se describe con sus chips (`aria-describedby`); `aria-selected` anuncia la selección.
+- **Panel de lectura**: `section` con `tabIndex=-1` nombrada por el asunto (región). Esc dentro devuelve el foco a la fila seleccionada.
+- **Categorías**: botones con `aria-current="true"` en la activa dentro de `nav` «Categories» (no son pestañas: cambian la vista de lista, no un panel adyacente). En el carril, el nombre sigue en texto `sr-only` y se muestra como tooltip al pasar el ratón y con foco de teclado.
+- Enlace «Skip to the messages» como primer elemento enfocable; `h1` con el nombre de la app en `sr-only`.
+- En escritorio el panel siempre muestra algo: la selección elegida o, si no hay, el primer correo de la lista (`resolveSelection`). Al mover un correo fuera de la lista, la selección pasa a su vecino (`neighborId`).
+
+### Responsive
+
+- **≥ 1280px**: barra lateral completa (16rem) + lista (22-27rem) + panel de lectura.
+- **768-1279px**: la barra se reduce a un **carril de iconos** con contador bajo cada icono y tooltip; el estado (última sync, analizados, coste) pasa al pie de la lista, y el aviso de demo a la cabecera de la lista.
+- **< 768px**: barra superior oscura (logo, Sync, Settings) + fila desplazable de categorías con contador (objetivos de 44px); lista a ancho completo; tocar un correo abre el panel de lectura a pantalla completa con el primitivo `Sheet` (Esc o ✕ cierran y el foco vuelve a la fila).
+- Sin scroll horizontal de página a 375px (verificado).
 
 ## Paleta
 
@@ -20,8 +49,8 @@ Neutros pizarra fríos, sin `#fff` ni `#000` puros.
 
 | Token | Claro | Oscuro | Uso |
 |---|---|---|---|
-| `--canvas` | `#f4f5f6` | `#0f1114` | fondo de página y de columnas |
-| `--surface` | `#fcfcfd` | `#171a1e` | tarjetas, panel lateral, inputs |
+| `--canvas` | `#f4f5f6` | `#0f1114` | fondo de página, bloque del extracto |
+| `--surface` | `#fcfcfd` | `#171a1e` | lista, panel de lectura, popover, inputs |
 | `--sunken` | `#eceef1` | `#1f2328` | hover, esqueletos, tintes neutros. **Nunca bajo marcas de categoría ni como pista de meter** |
 | `--ink` | `#15181c` | `#eceef0` | texto principal, botón primario |
 | `--ink-2` | `#454c57` | `#b3bac4` | texto secundario, remitente, valores |
@@ -44,7 +73,7 @@ Cada categoría tiene tres tokens: **marca** (`--cat-x`, puntos, relleno de mete
 | Commercial | `#4a3aa7` | `#805d9a` | `#4a3aa7` / `#c6b2e6` | `#eeebf8` / `#251d33` | ciruela apagado: recede, es la columna más poblada |
 | Possible scam | `#dc5a26` | `#d95926` | `#a33d12` / `#f5a47f` | `#fcebe3` / `#351f17` | naranja óxido: el tono más cálido y con más croma destaca sin ser el rojo de "error" |
 | Unsure | `#7c8490` | `#7f8793` | `#454c57` / `#b3bac4` | `#eceef1` / `#1f2328` | gris neutro: "Jev no decidió" no merece un tono propio |
-| Others (`none`) | igual que Unsure | | | | oculta por defecto; se distingue por su etiqueta |
+| Others (`none`) | igual que Unsure | | | | entrada propia en la barra lateral, tras Unsure; se distingue por su etiqueta e icono (bandeja) |
 
 La paleta categórica (las cuatro con tono) se validó con el validador de la skill `dataviz` en modo **all-pairs** (cualquier par puede quedar contiguo porque las barras de probabilidad se ordenan por valor), contra la superficie real de cada modo:
 
@@ -65,12 +94,11 @@ Aun así, **el color nunca va solo**: toda categoría aparece con su nombre escr
 
 ### Tratamiento por categoría
 
-- **Needs reply**: primera columna, la única con urgencia (meter de urgencia en la tarjeta). Contador con peso semibold.
-- **Worth reading**: segunda columna, tarjetas normales.
-- **Commercial**: tarjetas más compactas (sin extracto en densidad alta); el ciruela apagado la hace retroceder.
-- **Possible scam**: sin alarmismo. Punto naranja + icono de escudo en la cabecera, badge con escudo y chips de evidencia en tono `risk` (tinta naranja sobre tinte). Nada de fondos rojos a pantalla completa ni parpadeos; la tarjeta es igual que las demás salvo la evidencia. Destaca porque es el único tono cálido **entre las categorías** y el de más croma. Los tonos de estado `--danger` y `--warning` también son cálidos, pero se reservan para banners y errores de formulario, nunca aparecen en tarjetas ni columnas, y siempre van con icono + texto.
-- **Unsure**: gris; la tarjeta explica por qué (confianza por debajo del umbral) con el meter visible.
-- **Others**: oculta; `ToggleChip` "Show others (n)" con `aria-pressed`.
+- **Needs reply**: categoría inicial, la única con urgencia. En la fila, chip de urgencia con los cuatro criterios con los que se pregunta a Jev (`urgencyLevel`: Today / In 1-2 days / This week / No rush); «Today» en tinte azul con borde de marca, «In 1-2 days» con tinta azul. Contador en píldora en la barra lateral.
+- **Worth reading**, **Commercial**: filas normales; el ciruela apagado hace retroceder a Commercial.
+- **Possible scam**: sin alarmismo. Icono de escudo relleno, badge con escudo y chips de evidencia en tono `risk` (tinta naranja sobre tinte). Nada de fondos rojos a pantalla completa ni parpadeos. Destaca porque es el único tono cálido **entre las categorías** y el de más croma. Los tonos de estado `--danger` y `--warning` se reservan para banners y errores, nunca aparecen en filas, y siempre van con icono + texto.
+- **Unsure**: gris; la fila explica por qué (chip «Minimum confidence n%»).
+- **Others**: entrada propia de la barra lateral (antes estaba oculta tras un `ToggleChip`).
 
 ## Tipografía
 
@@ -103,7 +131,7 @@ Números en filas y meters con `tabular-nums` (clase `.tabular`, y `time`/`data`
 
 ## Indicadores de datos (dataviz)
 
-- **Confianza en la tarjeta**: `Meter` pequeño (6px × 48px) en tinta neutra + porcentaje escrito. Es un escalar acotado, no un gráfico; no lleva color de categoría (la tarjeta ya está en su columna).
+- **Confianza**: porcentaje escrito dentro del badge de categoría del panel de lectura («Needs reply 98%»); la lista no repite medidores, la fila ya está en su categoría.
 - **Distribución de probabilidades (panel)**: barras horizontales ordenadas de mayor a menor, etiqueta directa a la izquierda y valor a la derecha, sin leyenda aparte. Es **una sola serie** sobre categorías nominales, así que todas las barras van en tinta neutra y **solo la categoría elegida** se pinta con su color de marca y su etiqueta en semibold. Barras de 8px, esquina 4px.
 - **Umbrales**: la barra de Possible scam puede mostrar una marca vertical en el umbral `scam` actual para que el recálculo al mover el slider sea visible.
 - Todo meter tiene `role="meter"` con `aria-valuetext` legible; el número siempre aparece en texto porque una barra fina sola no se lee.
@@ -112,37 +140,55 @@ Números en filas y meters con `tabular-nums` (clase `.tabular`, y `time`/`data`
 
 ## Jerarquía, estados y microinteracciones (impeccable)
 
-Jerarquía de la cabecera: título de la bandeja + último sync a la izquierda; `Sync now` (primario, el único botón oscuro de la vista) a la derecha; analizados, coste y estado de conexión como metadatos en `ink-3`. Las columnas no son tarjetas: son zonas del canvas con cabecera (punto de color, nombre, contador tabular) y una regla de 1px.
+Jerarquía: la barra lateral oscura es el marco (Sync now es el único botón claro sobre ella); la cabecera de la lista nombra la bandeja y su orden; el asunto del panel de lectura es el titular más grande de la vista (22px). Analizados, coste y conexión son metadatos en `sidebar-ink-3` (o `ink-3` en el pie de la lista por debajo de 1280px).
 
 Estados:
 
 | Estado | Tratamiento |
 |---|---|
-| Cargando | esqueletos con la forma de la tarjeta (bloques `--sunken`), sin spinners en el contenido |
-| Sincronizando | `Sync now` en modo `loading` (spinner + "Syncing…", `aria-busy`), contador "n pending" con `role="status"`; las tarjetas nuevas entran sin reordenar las existentes |
+| Cargando | esqueletos con la forma de la fila y del panel (bloques `--sunken`), sin spinners en el contenido |
+| Sincronizando | `Sync now` en modo `loading` (spinner + "Syncing…", `aria-busy`), contador "n pending" con `role="status"`; las filas nuevas aparecen en su categoría y la selección se conserva |
 | Vacío (sin datos) | explica qué pasará y ofrece la acción: conectar bandeja o probar la demo |
-| Columna vacía | "Nothing here" en `ink-3` dentro de la columna, sin ilustración |
-| Error IMAP | `Banner` warning `live="polite"`: se muestran resultados guardados |
+| Categoría vacía | frase propia por categoría («Nothing is waiting for your reply.») con icono de bandeja, centrada en la lista |
+| Nada seleccionado | panel de lectura con «Select an email» y la pista de teclado (↑ ↓, A) |
+| Error IMAP | `Banner` warning `live="polite"` en la cabecera de la lista: se muestran resultados guardados |
 | Error Jev | `Banner` danger `live="assertive"` con acción "Fix it" |
-| Demo | `Banner` info estático con "Install it locally →"; controles deshabilitados muestran "Disabled in the demo" |
+| Demo | aviso compacto en la barra lateral (≥ 1280px) o `Banner` info en la cabecera de la lista, con "Install it locally →"; controles deshabilitados muestran "Disabled in the demo" |
 
 Microinteracciones (150-280ms, `--ease-out` exponencial, todas a 0ms con `prefers-reduced-motion`):
 
-- **Override** ("Not this? Move to…"): la tarjeta sale de su columna y aparece en la de destino con un desplazamiento corto + fundido (`--duration-move`, 280ms); se añade el chip "Moved by you" y un "Undo my change". Un solo momento de movimiento con sentido, no animaciones de entrada en toda la página.
-- **Sliders de umbrales**: recálculo en cada evento `input` (sin botón de aplicar); los contadores de columna cambian en el acto y las tarjetas que cambian de columna usan la misma transición que el override. El valor se muestra en `<output>` junto a la etiqueta.
+- **Override** ("Not this? Move to…"): el correo sale de la lista, la selección pasa a su vecino y, en su categoría de destino, la fila entra con un desplazamiento corto + fundido (`--duration-move`, 280ms); se añade el chip "Moved by you" y un "Undo my change". Un solo momento de movimiento con sentido, no animaciones de entrada en toda la página.
+- **Sliders de umbrales** (popover Adjust): recálculo con cada `input` (debounce 150 ms, sin botón de aplicar); los contadores de la barra lateral cambian en el acto y las filas que cambian de categoría usan la misma transición que el override. El valor se muestra en `<output>` junto a la etiqueta. El popover entra con escala 95% + fundido (`@starting-style`).
+- **Selección de fila**: tinte y barra de acento con transición de color corta; sin movimiento.
 - **Botones**: hover de color, `active:translate-y-px` como pulsación física.
-- **Panel lateral**: entra desde la derecha (`translate` + `@starting-style`), sale igual.
+- **Hoja de lectura en móvil** (`Sheet`): entra desde la derecha (`translate` + `@starting-style`), sale igual.
 
 ## Responsive
 
-- ≥ 1280px: cinco columnas visibles.
-- 768-1279px: columnas con scroll horizontal por snap, cabeceras fijas.
-- < 768px: **las columnas pasan a pestañas con contador** ("Needs reply 4"), una lista por pestaña; el panel lateral ocupa todo el ancho. Objetivos táctiles de 44px con `pointer-coarse:` en botones, chips interactivos, inputs y sliders.
-- Sin scroll horizontal de página en 375px.
+Ver [Disposición: cliente de correo](#disposición-cliente-de-correo). Objetivos táctiles de 44px con `pointer-coarse:` en botones, entradas de categoría, inputs y sliders.
 
 ## Modo oscuro
 
 Una sola fuente por token: cada color se declara una vez como `light-dark(<claro>, <oscuro>)` en `:root`, con `color-scheme: light dark`, así que sigue a `prefers-color-scheme` sin bloques duplicados. Un futuro selector manual solo cambia el esquema: `:root[data-theme="light"]` / `[data-theme="dark"]` fijan `color-scheme` y no redefinen ningún valor. Cada valor oscuro está elegido y medido contra su propia superficie, no invertido. Las sombras usan `--shadow-color` con `color-mix()`. Tailwind 4 (Lightning CSS) compila `light-dark()` a un polyfill con `--lightningcss-light/dark` que respeta tanto la media query como `data-theme` (comprobado en el CSS generado y en el navegador).
+
+### Barra lateral: tokens y contraste medido
+
+Valores fijos (no se invierten): la barra es oscura en los dos esquemas. Medidos con `contrast()` de `scripts/validate_palette.js` (dataviz) contra `--sidebar`, `--sidebar-hover` y `--sidebar-raised` en ambos esquemas (60 pares, 0 fallos). Márgenes más justos, sobre `--sidebar-raised` en claro (`#272c33`): `--sidebar-ink-3` 5.07:1, marca de Possible scam 4.06:1, Commercial 4.23:1.
+
+| Token | Valor (claro / oscuro) | Uso | Peor contraste |
+|---|---|---|---|
+| `--sidebar` | `#16191d` / `#0b0d10` | fondo | |
+| `--sidebar-hover` · `--sidebar-raised` | `#20242a` · `#272c33` / `#15181c` · `#1c2026` | hover · categoría activa | |
+| `--sidebar-ink` / `-2` / `-3` | `#eceef0` / `#b3bac4` / `#949ca8` | texto | 12.08 / 7.19 / 5.07 :1 |
+| `--sidebar-accent` + `--sidebar-on-accent` | `#eceef0` + `#15181c` | botón Sync now | 15.31:1 |
+| `--sidebar-focus` | `#6aa3f0` | anillo de foco dentro de `.sidebar-scope` | 5.43:1 |
+| `--sidebar-cat-*` | `#4a8fe7` · `#1fa374` · `#b37ab0` · `#e0652f` · `#949ca8` | iconos de categoría | 4.06:1 (mín. 3) |
+| `--sidebar-cat-possible-scam-ink` | `#f5a47f` | contador de Possible scam | 7.03:1 |
+| píldora Needs reply | texto `--sidebar` sobre `#4a8fe7` | contador | 5.35:1 |
+
+La paleta categórica de la barra se validó aparte (dataviz, `--pairs all`, superficie `#16191d`): banda de luminosidad y croma PASS, suelo de visión normal ΔE 15.4 PASS, CVD peor par Commercial↔Worth reading ΔE 7.9 (deutan), en la franja 6-8 que solo es legal con codificación secundaria: aquí cada categoría lleva **icono distinto y nombre escrito**. La primera propuesta (`#4f94ec`, `#2bb07f`, `#a283c6`, `#ee7443`) fallaba la banda de luminosidad y dejaba Commercial a ΔE 11.3 de Needs reply; se movió Commercial hacia un ciruela rosado y se oscurecieron verde y naranja.
+
+El anillo de foco de modo claro (`#1d63c9`) no llega a 3:1 sobre la barra oscura, por eso `.sidebar-scope` redefine `--focus` con `--sidebar-focus`.
 
 ## Superficies del navegador
 
@@ -164,11 +210,11 @@ Una sola fuente por token: cada color se declara una vez como `light-dark(<claro
 
 ## Criterios de éxito (spec §6.4)
 
-- [x] Se entiende en 5 s qué requiere atención: color solo en categorías, Needs reply primera con urgencia, contadores tabulares en las cabeceras.
+- [x] Se entiende en 5 s qué requiere atención: color solo en categorías, Needs reply abierta por defecto y ordenada por urgencia, contador en píldora en la barra lateral.
 - [x] *Possible scam* destaca sin alarmismo: único tono cálido entre las categorías (danger/warning quedan fuera de las tarjetas), escudo + evidencia, sin rojo a pantalla completa.
 - [x] Modo claro/oscuro: ambos seleccionados y medidos (tabla abajo).
-- [x] Responsive: columnas → pestañas con contador en móvil.
-- [ ] WCAG 2.1 AA: contraste medido aquí; la auditoría completa (`design:accessibility-review`) es la Task 16.
+- [x] Responsive: barra lateral → carril de iconos (768-1279px) → barra superior con selector de categorías y hoja de lectura a pantalla completa (< 768px).
+- [x] WCAG 2.1 AA: axe sin infracciones en claro y oscuro (dashboard, panel de lectura con estafa, popover Adjust, Settings, asistente), también a 800 y 1024px.
 
 ## Contraste medido
 

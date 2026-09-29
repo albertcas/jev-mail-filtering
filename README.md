@@ -10,7 +10,7 @@ You can try it without an API key or a mailbox: demo mode uses 50 fictional emai
 
 ## What it does
 
-| Column | What lands there |
+| Category | What lands there |
 |---|---|
 | **Needs reply** | A person is waiting for your answer, decision or action. Sorted by urgency. |
 | **Worth reading** | Useful, but no reply needed: newsletters you signed up for, receipts, account notices. |
@@ -23,7 +23,7 @@ Automated noise (bounces, social network digests) goes to an **Others** filter, 
 - **Read-only.** The mailbox is opened with `EXAMINE` and read with `BODY.PEEK`: nothing is moved, deleted, labelled or marked as read.
 - **Local.** The app runs on `127.0.0.1:3737`. Your settings, results and credentials stay on your computer.
 - **Explainable.** Every card shows why it is there ("Domain resembles paypal", "Sender authentication failed", "Asks for sensitive data"). The reasons are produced by code, never by a model.
-- **Tunable.** Move the threshold sliders and the columns update instantly, without calling Jev again.
+- **Tunable.** Open **Adjust**, move the threshold sliders and the list and its counters update instantly, without calling Jev again.
 
 | Light | Dark | Phone |
 |---|---|---|
@@ -98,7 +98,7 @@ Evaluated with `jev-1.13.0` on the 50 emails of the demo inbox (English and Span
 
 Read these numbers with care: the evaluation set is 50 fictional emails written by the author, each with a clear-cut label. Real inboxes are messier, so expect lower accuracy on yours. Full report in [docs/eval-results.md](docs/eval-results.md); reproduce it with `npm run eval`.
 
-> **Scam detection is advisory. Never trust it blindly.** An email outside the *Possible scam* column is not guaranteed to be safe.
+> **Scam detection is advisory. Never trust it blindly.** An email outside the *Possible scam* category is not guaranteed to be safe.
 
 ## How it works
 
@@ -109,7 +109,7 @@ IMAP (read-only) ──► signals (code) ──► Jev: 9 questions ──► p
                      mismatched links
 ```
 
-Deterministic code checks what can be verified (authentication results, lookalike domains, links whose text and target disagree, risky attachments). Jev judges what needs language understanding (is someone asking you to act? is this pressure or impersonation?). A small, pure policy function combines both into the final column. Code stays in control of the flow; the model only answers bounded questions. Architecture, the nine questions and the decision rules: [docs/how-it-works.md](docs/how-it-works.md).
+Deterministic code checks what can be verified (authentication results, lookalike domains, links whose text and target disagree, risky attachments). Jev judges what needs language understanding (is someone asking you to act? is this pressure or impersonation?). A small, pure policy function combines both into the final category. Code stays in control of the flow; the model only answers bounded questions. Architecture, the nine questions and the decision rules: [docs/how-it-works.md](docs/how-it-works.md).
 
 ## Requirements
 

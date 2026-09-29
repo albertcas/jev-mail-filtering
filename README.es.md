@@ -10,7 +10,7 @@ Puedes probarlo sin clave de API ni buzón: el modo demo usa 50 correos ficticio
 
 ## Qué hace
 
-| Columna | Qué va ahí |
+| Categoría | Qué va ahí |
 |---|---|
 | **Necesario contestar** | Una persona espera tu respuesta, una decisión o que hagas algo. Ordenado por urgencia. |
 | **Interesante de revisar** | Útil, pero sin necesidad de responder: newsletters a las que te suscribiste, recibos, avisos de tus cuentas. |
@@ -23,7 +23,7 @@ El ruido automático (rebotes, resúmenes de redes sociales) va a un filtro **Ot
 - **Solo lectura.** El buzón se abre con `EXAMINE` y se lee con `BODY.PEEK`: no se mueve, borra, etiqueta ni marca como leído nada.
 - **Local.** La app se ejecuta en `127.0.0.1:3737`. Tus ajustes, resultados y credenciales se quedan en tu ordenador.
 - **Explicable.** Cada tarjeta muestra por qué está ahí («Dominio parecido a paypal», «Autenticación del remitente fallida», «Pide datos sensibles»). Las razones las genera el código, nunca un modelo.
-- **Ajustable.** Mueve los controles de umbral y las columnas se actualizan al instante, sin volver a llamar a Jev.
+- **Ajustable.** Abre **Ajustar**, mueve los controles de umbral y la lista y sus contadores se actualizan al instante, sin volver a llamar a Jev.
 
 | Claro | Oscuro | Móvil |
 |---|---|---|
@@ -109,7 +109,7 @@ IMAP (solo lectura) ──► señales (código) ──► Jev: 9 preguntas ─�
                         enlaces engañosos     tipadas
 ```
 
-El código determinista comprueba lo que se puede verificar (resultados de autenticación, dominios que imitan marcas, enlaces cuyo texto y destino no coinciden, adjuntos peligrosos). Jev juzga lo que requiere entender el lenguaje (¿alguien te pide que hagas algo?, ¿es presión o suplantación?). Una función de política pequeña y pura combina ambas cosas en la columna final. El código controla el flujo; el modelo solo responde preguntas acotadas. Arquitectura, las nueve preguntas y las reglas de decisión: [docs/how-it-works.md](docs/how-it-works.md) (en inglés).
+El código determinista comprueba lo que se puede verificar (resultados de autenticación, dominios que imitan marcas, enlaces cuyo texto y destino no coinciden, adjuntos peligrosos). Jev juzga lo que requiere entender el lenguaje (¿alguien te pide que hagas algo?, ¿es presión o suplantación?). Una función de política pequeña y pura combina ambas cosas en la categoría final. El código controla el flujo; el modelo solo responde preguntas acotadas. Arquitectura, las nueve preguntas y las reglas de decisión: [docs/how-it-works.md](docs/how-it-works.md) (en inglés).
 
 ## Requisitos
 
