@@ -6,7 +6,7 @@ Decisiones concretas para el dashboard, el asistente y la demo de JEV Mail Filte
 
 Herramienta de productividad (modo *Operate*) para una persona que abre su bandeja por la mañana y quiere saber en 5 segundos qué requiere atención. Local, de solo lectura, con datos densos y tono sereno. Es también la pieza principal del portfolio de acastell.dev, así que debe transmitir confianza y oficio sin parecer una plantilla.
 
-Diales (design-taste-frontend / ui-ux-pro-max): varianza 4, movimiento 3, densidad 7.
+Diales (design-taste-frontend / ui-ux-pro-max): varianza 4, movimiento 3, densidad 8 (`--density 8` en ui-ux-pro-max: escala de espaciado de dashboard, 4-32px).
 
 ## Principio rector
 
@@ -22,12 +22,12 @@ Neutros pizarra fríos, sin `#fff` ni `#000` puros.
 |---|---|---|---|
 | `--canvas` | `#f4f5f6` | `#0f1114` | fondo de página y de columnas |
 | `--surface` | `#fcfcfd` | `#171a1e` | tarjetas, panel lateral, inputs |
-| `--sunken` | `#eceef1` | `#1f2328` | pistas de meter, hover, rellenos neutros (nunca bajo marcas de categoría) |
+| `--sunken` | `#eceef1` | `#1f2328` | hover, esqueletos, tintes neutros. **Nunca bajo marcas de categoría ni como pista de meter** |
 | `--ink` | `#15181c` | `#eceef0` | texto principal, botón primario |
 | `--ink-2` | `#454c57` | `#b3bac4` | texto secundario, remitente, valores |
 | `--ink-3` | `#5c6470` | `#8f97a3` | metadatos, extracto, ayudas (sigue ≥ 4.5:1) |
 | `--line` | `#dfe2e6` | `#2b3036` | separadores decorativos |
-| `--line-strong` | `#838b97` | `#6b7380` | bordes de controles (≥ 3:1) |
+| `--line-strong` | `#838b97` | `#6b7380` | bordes de controles y anillo de la pista del meter (≥ 3:1) |
 | `--focus` | `#1d63c9` | `#6aa3f0` | anillo de foco 2px + offset 2px |
 | `--danger` / `-tint` | `#b42318` / `#fcebe9` | `#f2877c` / `#3a1b19` | error IMAP/Jev, borrar datos |
 | `--warning` / `-tint` | `#8a5300` / `#fbf1dc` | `#e8b64c` / `#322710` | servidor no disponible |
@@ -41,7 +41,7 @@ Cada categoría tiene tres tokens: **marca** (`--cat-x`, puntos, relleno de mete
 |---|---|---|---|---|---|
 | Needs reply | `#2a78d6` | `#3987e5` | `#1b58a8` / `#9dc3f4` | `#e7effb` / `#16253a` | azul: "te toca a ti", el color más frío y legible |
 | Worth reading | `#119c6e` | `#199e70` | `#0b6b4c` / `#72d2a9` | `#e2f3ec` / `#11281f` | aguamarina: valor sin urgencia |
-| Commercial | `#4a3aa7` | `#7955a0` | `#4a3aa7` / `#c6b2e6` | `#eeebf8` / `#251d33` | ciruela apagado: recede, es la columna más poblada |
+| Commercial | `#4a3aa7` | `#805d9a` | `#4a3aa7` / `#c6b2e6` | `#eeebf8` / `#251d33` | ciruela apagado: recede, es la columna más poblada |
 | Possible scam | `#dc5a26` | `#d95926` | `#a33d12` / `#f5a47f` | `#fcebe3` / `#351f17` | naranja óxido: el tono más cálido y con más croma destaca sin ser el rojo de "error" |
 | Unsure | `#7c8490` | `#7f8793` | `#454c57` / `#b3bac4` | `#eceef1` / `#1f2328` | gris neutro: "Jev no decidió" no merece un tono propio |
 | Others (`none`) | igual que Unsure | | | | oculta por defecto; se distingue por su etiqueta |
@@ -55,11 +55,11 @@ light (surface #fcfcfd)  PASS lightness band · PASS chroma floor
   Contrast        all 4 ≥ 3:1
 dark (surface #171a1e)   PASS lightness band · PASS chroma floor
   CVD separation  worst #d95926↔#199e70 ΔE 9.4 (deutan)
-  Normal vision   worst #7955a0↔#3987e5 ΔE 16.0
+  Normal vision   worst #805d9a↔#3987e5 ΔE 15.6
   Contrast        all 4 ≥ 3:1
 ```
 
-El modo oscuro es una selección propia, no una inversión: el violeta del claro (`#4a3aa7`) se confundía con el azul en oscuro (ΔE CVD 1.9), así que Commercial pasa a ciruela `#7955a0`, elegido por búsqueda contra el validador.
+El modo oscuro es una selección propia, no una inversión: el violeta del claro (`#4a3aa7`) se confundía con el azul en oscuro (ΔE CVD 1.9), así que Commercial pasa a ciruela `#805d9a`, elegido por búsqueda contra el validador (primero `#7955a0`, que pasaba con 3.01:1 sobre surface; se subió a `#805d9a`, 3.28:1, para tener margen sin perder la separación CVD).
 
 Aun así, **el color nunca va solo**: toda categoría aparece con su nombre escrito, y Possible scam lleva además icono de escudo (`ShieldWarning`).
 
@@ -68,7 +68,7 @@ Aun así, **el color nunca va solo**: toda categoría aparece con su nombre escr
 - **Needs reply**: primera columna, la única con urgencia (meter de urgencia en la tarjeta). Contador con peso semibold.
 - **Worth reading**: segunda columna, tarjetas normales.
 - **Commercial**: tarjetas más compactas (sin extracto en densidad alta); el ciruela apagado la hace retroceder.
-- **Possible scam**: sin alarmismo. Punto naranja + icono de escudo en la cabecera, badge con escudo y chips de evidencia en tono `risk` (tinta naranja sobre tinte). Nada de fondos rojos a pantalla completa ni parpadeos; la tarjeta es igual que las demás salvo la evidencia. Destaca porque es el único tono cálido de la pantalla.
+- **Possible scam**: sin alarmismo. Punto naranja + icono de escudo en la cabecera, badge con escudo y chips de evidencia en tono `risk` (tinta naranja sobre tinte). Nada de fondos rojos a pantalla completa ni parpadeos; la tarjeta es igual que las demás salvo la evidencia. Destaca porque es el único tono cálido **entre las categorías** y el de más croma. Los tonos de estado `--danger` y `--warning` también son cálidos, pero se reservan para banners y errores de formulario, nunca aparecen en tarjetas ni columnas, y siempre van con icono + texto.
 - **Unsure**: gris; la tarjeta explica por qué (confianza por debajo del umbral) con el meter visible.
 - **Others**: oculta; `ToggleChip` "Show others (n)" con `aria-pressed`.
 
@@ -103,10 +103,12 @@ Números en filas y meters con `tabular-nums` (clase `.tabular`, y `time`/`data`
 
 ## Indicadores de datos (dataviz)
 
-- **Confianza en la tarjeta**: `Meter` pequeño (4px × 48px) en tinta neutra + porcentaje escrito. Es un escalar acotado, no un gráfico; no lleva color de categoría (la tarjeta ya está en su columna).
-- **Distribución de probabilidades (panel)**: barras horizontales ordenadas de mayor a menor, etiqueta directa a la izquierda y valor a la derecha, sin leyenda aparte. Es **una sola serie** sobre categorías nominales, así que todas las barras van en tinta neutra y **solo la categoría elegida** se pinta con su color de marca y su etiqueta en semibold. Barras de 8px, esquina 4px, pista `--sunken` tenue.
+- **Confianza en la tarjeta**: `Meter` pequeño (6px × 48px) en tinta neutra + porcentaje escrito. Es un escalar acotado, no un gráfico; no lleva color de categoría (la tarjeta ya está en su columna).
+- **Distribución de probabilidades (panel)**: barras horizontales ordenadas de mayor a menor, etiqueta directa a la izquierda y valor a la derecha, sin leyenda aparte. Es **una sola serie** sobre categorías nominales, así que todas las barras van en tinta neutra y **solo la categoría elegida** se pinta con su color de marca y su etiqueta en semibold. Barras de 8px, esquina 4px.
 - **Umbrales**: la barra de Possible scam puede mostrar una marca vertical en el umbral `scam` actual para que el recálculo al mover el slider sea visible.
-- Todo meter tiene `role="meter"` con `aria-valuetext` legible; el número siempre aparece en texto porque una barra de 4px sola no se lee.
+- Todo meter tiene `role="meter"` con `aria-valuetext` legible; el número siempre aparece en texto porque una barra fina sola no se lee.
+- **Pista del meter**: `--surface` con anillo interior de 1px `--line-strong`. Así cada relleno (tinta neutra o cualquier marca de categoría) mide ≥ 3:1 contra lo que tiene debajo en ambos modos, y el límite de la escala también es visible (≥ 3:1). La pista nunca es `--sunken`: sobre ese fondo aguamarina y ciruela bajaban de 3:1.
+- Valores no finitos (NaN, Infinity) se dibujan como el mínimo.
 
 ## Jerarquía, estados y microinteracciones (impeccable)
 
@@ -140,7 +142,7 @@ Microinteracciones (150-280ms, `--ease-out` exponencial, todas a 0ms con `prefer
 
 ## Modo oscuro
 
-Sigue a `prefers-color-scheme` salvo que la raíz lleve `data-theme="light"`; `data-theme="dark"` lo fuerza (preparado para un selector manual). Cada valor oscuro está elegido y medido contra su propia superficie, no invertido.
+Una sola fuente por token: cada color se declara una vez como `light-dark(<claro>, <oscuro>)` en `:root`, con `color-scheme: light dark`, así que sigue a `prefers-color-scheme` sin bloques duplicados. Un futuro selector manual solo cambia el esquema: `:root[data-theme="light"]` / `[data-theme="dark"]` fijan `color-scheme` y no redefinen ningún valor. Cada valor oscuro está elegido y medido contra su propia superficie, no invertido. Las sombras usan `--shadow-color` con `color-mix()`. Tailwind 4 (Lightning CSS) compila `light-dark()` a un polyfill con `--lightningcss-light/dark` que respeta tanto la media query como `data-theme` (comprobado en el CSS generado y en el navegador).
 
 ## Superficies del navegador
 
@@ -150,27 +152,27 @@ Sigue a `prefers-color-scheme` salvo que la raíz lleve `data-theme="light"`; `d
 
 | Primitiva | Elemento | Comportamiento accesible |
 |---|---|---|
-| `Button` | `<button type="button">` | variantes primary/secondary/ghost/danger; `loading` → `aria-busy`, deshabilitado, spinner `aria-hidden`, etiqueta visible; foco 2px |
+| `Button` | `<button type="button">` | variantes primary/secondary/ghost/danger; `loading` → `aria-busy` + `aria-disabled` e ignora clics (sin `disabled`, para no perder el foco), spinner `aria-hidden`, etiqueta visible; foco 2px |
 | `Badge` | `<span>` | etiqueta de categoría estática; punto o icono `aria-hidden` + texto (nunca solo color) |
 | `Chip` | `<span>` | razón/señal no interactiva; tonos neutral/risk/trust |
 | `ToggleChip` | `<button aria-pressed>` | único chip interactivo (mostrar/ocultar Others) |
-| `Meter` | `<div role="meter">` | `aria-valuenow/min/max`, `aria-label`, `aria-valuetext`; valor visible en texto |
+| `Meter` | `<div role="meter">` | `aria-valuenow/min/max`, `aria-label`, `aria-valuetext`; valor visible en texto; pista surface + anillo `--line-strong`; valores no finitos = mínimo |
 | `Slider` | `<input type="range">` | `<label for>` visible, `<output>` con el valor, `aria-valuetext` formateado, ayuda por `aria-describedby`; `onValueChange` en cada `input` |
-| `Sheet` | `<dialog>` modal | `showModal()` (fondo inerte), `aria-labelledby` al título, Esc cierra vía `onClose`, Tab/Shift+Tab atrapados, foco vuelve al disparador, clic en el fondo cierra |
+| `Sheet` | `<dialog>` modal | `showModal()` (fondo inerte), `aria-labelledby` al título, Esc cierra con un único manejador (`cancel`) que llama a `onClose` una sola vez, Tab/Shift+Tab atrapados, cuerpo desplazable enfocable (`tabIndex=0`, región nombrada por el título), foco vuelve al disparador, clic en el fondo cierra solo si pointerdown y click ocurren ambos en el fondo |
 | `Banner` | `<div>` | icono + texto + tinte; `live`: off / polite (`role="status"`) / assertive (`role="alert"`) |
-| `Field` (+ `Input`, `Select`) | `<label>` + control | etiqueta encima, ayuda y error debajo enlazados con `aria-describedby`, `aria-invalid`, `aria-required`; el error lleva icono |
+| `Field` (+ `Input`, `Select`) | `<label>` + control | etiqueta encima, ayuda y error debajo enlazados con `aria-describedby`, `aria-invalid`, `aria-required`; el error lleva icono; sin `"use client"` (usable desde Server Components) |
 
 ## Criterios de éxito (spec §6.4)
 
 - [x] Se entiende en 5 s qué requiere atención: color solo en categorías, Needs reply primera con urgencia, contadores tabulares en las cabeceras.
-- [x] *Possible scam* destaca sin alarmismo: único tono cálido, escudo + evidencia, sin rojo a pantalla completa.
+- [x] *Possible scam* destaca sin alarmismo: único tono cálido entre las categorías (danger/warning quedan fuera de las tarjetas), escudo + evidencia, sin rojo a pantalla completa.
 - [x] Modo claro/oscuro: ambos seleccionados y medidos (tabla abajo).
 - [x] Responsive: columnas → pestañas con contador en móvil.
 - [ ] WCAG 2.1 AA: contraste medido aquí; la auditoría completa (`design:accessibility-review`) es la Task 16.
 
 ## Contraste medido
 
-Calculado con la función `contrast()` (WCAG 2.x, luminancia relativa) exportada por `scripts/validate_palette.js` de la skill `dataviz`, sobre cada par texto/fondo y elemento/fondo que usan las primitivas. Mínimos: 4.5:1 texto, 3:1 elementos de UI y marcas. **88 pares, 0 fallos.**
+Calculado con la función `contrast()` (WCAG 2.x, luminancia relativa) exportada por `scripts/validate_palette.js` de la skill `dataviz`, sobre cada par texto/fondo y elemento/fondo que usan las primitivas, incluidos los rellenos del meter contra su pista. Mínimos: 4.5:1 texto, 3:1 elementos de UI y marcas. **104 pares, 0 fallos.** Los márgenes más justos: `--line-strong` (claro) sobre canvas 3.15:1, marca de Worth reading (claro) sobre canvas 3.20:1, marca de Commercial (oscuro) sobre surface y sobre la pista del meter 3.28:1.
 
 | Mode | Pair | FG | BG | Ratio | Min | Result |
 |---|---|---|---|---|---|---|
@@ -198,6 +200,14 @@ Calculado con la función `contrast()` (WCAG 2.x, luminancia relativa) exportada
 | light | ink (banner text) on successTint | `#15181c` | `#e5f3eb` | 15.56:1 | 4.5:1 | PASS |
 | light | success on successTint | `#1b7342` | `#e5f3eb` | 5.13:1 | 4.5:1 | PASS |
 | light | success on surface | `#1b7342` | `#fcfcfd` | 5.73:1 | 4.5:1 | PASS |
+| light | meter track ring (lineStrong) on surface | `#838b97` | `#fcfcfd` | 3.35:1 | 3:1 | PASS |
+| light | meter track ring (lineStrong) on canvas | `#838b97` | `#f4f5f6` | 3.15:1 | 3:1 | PASS |
+| light | meter fill neutral (ink2) on meter track (surface) | `#454c57` | `#fcfcfd` | 8.45:1 | 3:1 | PASS |
+| light | meter fill cat-needs-reply on meter track (surface) | `#2a78d6` | `#fcfcfd` | 4.31:1 | 3:1 | PASS |
+| light | meter fill cat-worth-reading on meter track (surface) | `#119c6e` | `#fcfcfd` | 3.41:1 | 3:1 | PASS |
+| light | meter fill cat-commercial on meter track (surface) | `#4a3aa7` | `#fcfcfd` | 8.34:1 | 3:1 | PASS |
+| light | meter fill cat-possible-scam on meter track (surface) | `#dc5a26` | `#fcfcfd` | 3.70:1 | 3:1 | PASS |
+| light | meter fill cat-unsure on meter track (surface) | `#7c8490` | `#fcfcfd` | 3.68:1 | 3:1 | PASS |
 | light | cat-needs-reply mark on surface | `#2a78d6` | `#fcfcfd` | 4.31:1 | 3:1 | PASS |
 | light | cat-needs-reply mark on canvas | `#2a78d6` | `#f4f5f6` | 4.05:1 | 3:1 | PASS |
 | light | cat-needs-reply ink on cat-needs-reply tint | `#1b58a8` | `#e7effb` | 6.03:1 | 4.5:1 | PASS |
@@ -242,6 +252,14 @@ Calculado con la función `contrast()` (WCAG 2.x, luminancia relativa) exportada
 | dark | ink (banner text) on successTint | `#eceef0` | `#132a1e` | 13.11:1 | 4.5:1 | PASS |
 | dark | success on successTint | `#5cc98a` | `#132a1e` | 7.39:1 | 4.5:1 | PASS |
 | dark | success on surface | `#5cc98a` | `#171a1e` | 8.46:1 | 4.5:1 | PASS |
+| dark | meter track ring (lineStrong) on surface | `#6b7380` | `#171a1e` | 3.65:1 | 3:1 | PASS |
+| dark | meter track ring (lineStrong) on canvas | `#6b7380` | `#0f1114` | 3.95:1 | 3:1 | PASS |
+| dark | meter fill neutral (ink2) on meter track (surface) | `#b3bac4` | `#171a1e` | 8.93:1 | 3:1 | PASS |
+| dark | meter fill cat-needs-reply on meter track (surface) | `#3987e5` | `#171a1e` | 4.80:1 | 3:1 | PASS |
+| dark | meter fill cat-worth-reading on meter track (surface) | `#199e70` | `#171a1e` | 5.13:1 | 3:1 | PASS |
+| dark | meter fill cat-commercial on meter track (surface) | `#805d9a` | `#171a1e` | 3.28:1 | 3:1 | PASS |
+| dark | meter fill cat-possible-scam on meter track (surface) | `#d95926` | `#171a1e` | 4.50:1 | 3:1 | PASS |
+| dark | meter fill cat-unsure on meter track (surface) | `#7f8793` | `#171a1e` | 4.81:1 | 3:1 | PASS |
 | dark | cat-needs-reply mark on surface | `#3987e5` | `#171a1e` | 4.80:1 | 3:1 | PASS |
 | dark | cat-needs-reply mark on canvas | `#3987e5` | `#0f1114` | 5.20:1 | 3:1 | PASS |
 | dark | cat-needs-reply ink on cat-needs-reply tint | `#9dc3f4` | `#16253a` | 8.49:1 | 4.5:1 | PASS |
@@ -250,8 +268,8 @@ Calculado con la función `contrast()` (WCAG 2.x, luminancia relativa) exportada
 | dark | cat-worth-reading mark on canvas | `#199e70` | `#0f1114` | 5.55:1 | 3:1 | PASS |
 | dark | cat-worth-reading ink on cat-worth-reading tint | `#72d2a9` | `#11281f` | 8.54:1 | 4.5:1 | PASS |
 | dark | cat-worth-reading ink on surface | `#72d2a9` | `#171a1e` | 9.57:1 | 4.5:1 | PASS |
-| dark | cat-commercial mark on surface | `#7955a0` | `#171a1e` | 3.01:1 | 3:1 | PASS |
-| dark | cat-commercial mark on canvas | `#7955a0` | `#0f1114` | 3.26:1 | 3:1 | PASS |
+| dark | cat-commercial mark on surface | `#805d9a` | `#171a1e` | 3.28:1 | 3:1 | PASS |
+| dark | cat-commercial mark on canvas | `#805d9a` | `#0f1114` | 3.56:1 | 3:1 | PASS |
 | dark | cat-commercial ink on cat-commercial tint | `#c6b2e6` | `#251d33` | 8.38:1 | 4.5:1 | PASS |
 | dark | cat-commercial ink on surface | `#c6b2e6` | `#171a1e` | 9.07:1 | 4.5:1 | PASS |
 | dark | cat-possible-scam mark on surface | `#d95926` | `#171a1e` | 4.50:1 | 3:1 | PASS |

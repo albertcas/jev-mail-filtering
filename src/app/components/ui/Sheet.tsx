@@ -30,22 +30,43 @@ const FOCUSABLE = [
 /**
  * Side panel built on a modal <dialog>:
  * - showModal() makes the page behind inert and renders ::backdrop;
- * - Esc closes (routed through onClose so open state stays in React);
+ * - Esc closes through a single "cancel" handler that calls onClose once
+ *   (open state stays in React; a native close is re-synced once too);
  * - Tab / Shift+Tab are trapped inside the panel;
  * - focus returns to the element that opened it;
- * - clicking the backdrop closes.
+ * - the scrollable body is focusable (tabIndex=0, named by the title);
+ * - clicking the backdrop closes only if the press also started on it.
  * Right-hand panel from sm up, full-width sheet on phones.
  */
 export function Sheet({ open, onClose, title, closeLabel, description, children, footer, className }: SheetProps) {
   const ref = useRef<HTMLDialogElement>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
+  const onCloseRef = useRef(onClose);
+  const openRef = useRef(open);
+  // Set once a close has been requested for the current open cycle, so onClose fires exactly once.
+  const closeRequested = useRef(false);
+  // A backdrop close needs both pointerdown and click on the backdrop (a text
+  // selection dragged out of the panel must not close it).
+  const pressedBackdrop = useRef(false);
   const titleId = useId();
   const descId = useId();
+
+  useEffect(() => {
+    onCloseRef.current = onClose;
+    openRef.current = open;
+  });
+
+  const requestClose = () => {
+    if (closeRequested.current) return;
+    closeRequested.current = true;
+    onCloseRef.current();
+  };
 
   useEffect(() => {
     const dialog = ref.current;
     if (!dialog) return;
     if (open && !dialog.open) {
+      closeRequested.current = false;
       returnFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       dialog.showModal();
     } else if (!open && dialog.open) {
@@ -56,30 +77,27 @@ export function Sheet({ open, onClose, title, closeLabel, description, children,
   useEffect(() => {
     const dialog = ref.current;
     if (!dialog) return;
+    // Esc: the single path. Keep the dialog open until React closes it.
+    const onCancel = (e: Event) => {
+      e.preventDefault();
+      requestClose();
+    };
     const onDialogClose = () => {
+      // The browser may still close natively (e.g. a repeated Esc without user
+      // activation skips "cancel"); keep React state in sync, once.
+      if (openRef.current) requestClose();
       returnFocus.current?.focus();
       returnFocus.current = null;
     };
-    // Native Esc fires "cancel": keep the dialog open until React says otherwise.
-    const onCancel = (e: Event) => {
-      e.preventDefault();
-      onClose();
-    };
-    dialog.addEventListener("close", onDialogClose);
     dialog.addEventListener("cancel", onCancel);
+    dialog.addEventListener("close", onDialogClose);
     return () => {
-      dialog.removeEventListener("close", onDialogClose);
       dialog.removeEventListener("cancel", onCancel);
+      dialog.removeEventListener("close", onDialogClose);
     };
-  }, [onClose]);
+  }, []);
 
   function onKeyDown(e: KeyboardEvent<HTMLDialogElement>) {
-    if (e.key === "Escape") {
-      // Chrome skips "cancel" on a second Esc without user activation; close explicitly.
-      e.preventDefault();
-      onClose();
-      return;
-    }
     if (e.key !== "Tab" || !ref.current) return;
     const items = Array.from(ref.current.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
       (el) => el.getClientRects().length > 0,
@@ -103,8 +121,12 @@ export function Sheet({ open, onClose, title, closeLabel, description, children,
       aria-labelledby={titleId}
       aria-describedby={description ? descId : undefined}
       onKeyDown={onKeyDown}
+      onPointerDown={(e) => {
+        pressedBackdrop.current = e.target === e.currentTarget;
+      }}
       onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
+        if (pressedBackdrop.current && e.target === e.currentTarget) requestClose();
+        pressedBackdrop.current = false;
       }}
       className={cn(
         "fixed inset-y-0 right-0 left-auto m-0 h-dvh max-h-dvh w-full max-w-none bg-transparent p-0 text-ink sm:w-[min(30rem,100vw)]",
@@ -127,14 +149,22 @@ export function Sheet({ open, onClose, title, closeLabel, description, children,
           </div>
           <button
             type="button"
-            onClick={onClose}
+            onClick={requestClose}
             aria-label={closeLabel}
             className="-mr-1.5 inline-flex size-9 shrink-0 items-center justify-center rounded-md text-ink-2 transition-colors duration-(--duration-fast) hover:bg-sunken hover:text-ink pointer-coarse:size-11"
           >
             <XIcon aria-hidden size={18} weight="bold" />
           </button>
         </header>
-        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-4">{children}</div>
+        {/* Focusable so keyboard users can scroll long content; named by the title. */}
+        <div
+          role="region"
+          aria-labelledby={titleId}
+          tabIndex={0}
+          className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-4"
+        >
+          {children}
+        </div>
         {footer ? <footer className="border-t border-line px-5 py-3">{footer}</footer> : null}
       </div>
     </dialog>

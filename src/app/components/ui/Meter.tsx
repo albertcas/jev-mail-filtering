@@ -13,7 +13,7 @@ export type MeterProps = {
   showValue?: boolean;
   /** Fill color: neutral ink, or a category mark when the bar stands for that category. */
   tone?: "neutral" | CategoryTone;
-  /** sm = 4px bar inside cards; md = 8px bar in the detail panel. */
+  /** sm = 6px bar inside cards; md = 8px bar in the detail panel. */
   size?: "sm" | "md";
   /** Bar width (CSS length). The label column is the caller's job. */
   width?: string;
@@ -23,7 +23,10 @@ export type MeterProps = {
 /**
  * A bounded scalar (confidence, a probability, urgency) drawn as a thin bar.
  * role="meter" with aria-valuenow/min/max; the number is always shown in text
- * too, because a 4px bar alone is not readable.
+ * too, because a thin bar alone is not readable.
+ * The track is --surface with a 1px --line-strong inset ring, so every fill
+ * (neutral ink or any category mark) keeps >= 3:1 against what it sits on,
+ * in both modes; category marks never sit on --sunken.
  */
 export function Meter({
   value,
@@ -37,7 +40,9 @@ export function Meter({
   width = "3rem",
   className,
 }: MeterProps) {
-  const clamped = Math.min(max, Math.max(min, value));
+  // NaN / Infinity (e.g. a missing probability) render as the minimum.
+  const safe = Number.isFinite(value) ? value : min;
+  const clamped = Math.min(max, Math.max(min, safe));
   const fraction = max === min ? 0 : (clamped - min) / (max - min);
   const text = valueText ?? `${Math.round(fraction * 100)}%`;
 
@@ -51,8 +56,8 @@ export function Meter({
         aria-valuemax={max}
         aria-valuetext={text}
         className={cn(
-          "relative min-w-0 overflow-hidden rounded-sm bg-sunken",
-          size === "sm" ? "h-1" : "h-2",
+          "relative min-w-0 overflow-hidden rounded-sm bg-surface shadow-[inset_0_0_0_1px_var(--line-strong)]",
+          size === "sm" ? "h-1.5" : "h-2",
         )}
         style={{ width }}
       >

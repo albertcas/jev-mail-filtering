@@ -1,3 +1,5 @@
+"use client";
+
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { CircleNotchIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "./cn";
@@ -8,7 +10,8 @@ type Size = "sm" | "md";
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: Variant;
   size?: Size;
-  /** Shows a spinner, sets aria-busy and blocks further clicks. Keep the label visible. */
+  /** Shows a spinner, sets aria-busy + aria-disabled and ignores clicks while keeping
+   *  focus (a disabled button would drop keyboard focus mid-action). Keep the label visible. */
   loading?: boolean;
   /** Leading icon (decorative; the label names the action). */
   icon?: ReactNode;
@@ -35,21 +38,30 @@ export function Button({
   className,
   children,
   type = "button",
+  onClick,
   ...rest
 }: ButtonProps) {
-  const inert = disabled || loading;
   return (
     <button
       type={type}
-      disabled={inert}
+      disabled={disabled}
       aria-busy={loading || undefined}
+      aria-disabled={loading || undefined}
+      onClick={(e) => {
+        if (loading) {
+          e.preventDefault(); // also blocks form submission
+          return;
+        }
+        onClick?.(e);
+      }}
       className={cn(
         "inline-flex shrink-0 select-none items-center justify-center whitespace-nowrap rounded-md font-medium",
         "transition-[background-color,color,transform] duration-(--duration-fast) ease-(--ease-out)",
-        "active:translate-y-px pointer-coarse:min-h-11",
-        "disabled:active:translate-y-0",
+        "pointer-coarse:min-h-11",
         // Loading keeps full strength (work in progress, not unavailable); disabled fades.
-        loading ? "cursor-progress" : "disabled:cursor-not-allowed disabled:opacity-55",
+        loading
+          ? "cursor-progress"
+          : "active:translate-y-px disabled:cursor-not-allowed disabled:opacity-55 disabled:active:translate-y-0",
         variants[variant],
         sizes[size],
         className,

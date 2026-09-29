@@ -1,5 +1,3 @@
-"use client";
-
 import { useId, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes } from "react";
 import { WarningCircleIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "./cn";
@@ -23,7 +21,11 @@ export type FieldProps = {
   className?: string;
 };
 
-/** Label above, control, hint, error below. Never placeholder-as-label. */
+/**
+ * Label above, control, hint, error below. Never placeholder-as-label.
+ * No "use client": useId works in Server Components, and the render-prop
+ * children could not cross a client boundary anyway.
+ */
 export function Field({ label, hint, error, required, children, className }: FieldProps) {
   const id = useId();
   const hintId = `${id}-hint`;
