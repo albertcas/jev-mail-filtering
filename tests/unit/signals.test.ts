@@ -68,6 +68,28 @@ describe("resemblesBrand", () => {
     expect(resemblesBrand("empresa.es")).toBeNull();
     expect(resemblesBrand("amazing-deals.com")).toBeNull();
   });
+  it("keeps the phishing patterns: confusables, brand tokens, official domain spelled in subdomains", () => {
+    for (const [host, brand] of [
+      ["paypa1-secure.com", "paypal"],
+      ["arnazon.es", "amazon"],
+      ["dhl-tracking-parcel.info", "dhl"],
+      ["paypal.com.verify-account.net", "paypal"],
+      ["www.paypal.com.verify-account.net", "paypal"],
+      ["correos-envio.top", "correos"],
+      ["amazom.com", "amazon"],
+      ["micros0ftt.com", "microsoft"],
+    ] as const) expect(resemblesBrand(host), host).toBe(brand);
+  });
+  it("treats the brand's own label on any public suffix as official", () => {
+    for (const host of ["google.es", "amazon.ca", "amazon.com.mx", "paypal.co.uk", "santander.co.uk", "dhl.fr", "news.amazon.com.mx"]) {
+      expect(resemblesBrand(host), host).toBeNull();
+    }
+  });
+  it("does not flag brand-owned domains, subdomains of other platforms or unrelated near-names", () => {
+    for (const host of ["google-analytics.com", "www.google-analytics.com", "amazon.mailchimp.com", "apply.com", "paypay.ne.jp"]) {
+      expect(resemblesBrand(host), host).toBeNull();
+    }
+  });
   it("extracts registrable domains from hosts and addresses", () => {
     expect(registrableDomain("news@mail.shop.co.uk")).toBe("shop.co.uk");
     expect(registrableDomain("not a domain")).toBeNull();
@@ -79,6 +101,16 @@ describe("links and attachments", () => {
     expect(hasMismatchedLinks([{ text: "www.bbva.es", href: "https://bbva-login.top/x" }])).toBe(true);
     expect(hasMismatchedLinks([{ text: "Ver pedido", href: "https://evil.top" }])).toBe(false);
     expect(hasMismatchedLinks([{ text: "https://www.bbva.es/", href: "https://bbva.es/a" }])).toBe(false);
+  });
+  it("ignores file names and non-ICANN suffixes in link text", () => {
+    expect(hasMismatchedLinks([{ text: "Descargar factura.pdf", href: "https://cdn.proveedor.es/f/123" }])).toBe(false);
+    for (const name of ["informe.zip", "contrato.docx", "datos.xlsx", "foto.png", "foto.JPG", "foto.jpeg", "anim.gif", "notas.txt", "lista.csv", "setup.exe", "pagina.html", "pagina.htm"]) {
+      expect(hasMismatchedLinks([{ text: `Abrir ${name}`, href: "https://files.example.com/x" }]), name).toBe(false);
+    }
+    expect(hasMismatchedLinks([{ text: "config.local", href: "https://files.example.com/x" }])).toBe(false);
+  });
+  it("still finds a real domain after a file name in the same text", () => {
+    expect(hasMismatchedLinks([{ text: "factura.pdf en www.bbva.es", href: "https://bbva-login.top/x" }])).toBe(true);
   });
   it("detects risky attachments", () => {
     expect(hasRiskyAttachment([{ filename: "factura.pdf.exe", contentType: "application/octet-stream" }])).toBe(true);

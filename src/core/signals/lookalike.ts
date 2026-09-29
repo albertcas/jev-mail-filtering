@@ -1,11 +1,11 @@
-import { getDomain } from "tldts";
+import { getDomain, parse } from "tldts";
 
 /** Brand label → official registrable domains. Extend via PR. */
 export const BRANDS: Record<string, string[]> = {
   paypal: ["paypal.com", "paypal.es", "paypal.me"],
-  amazon: ["amazon.com", "amazon.es", "amazon.co.uk", "amazon.de", "amazon.fr", "amazon.it", "amazonses.com"],
+  amazon: ["amazon.com", "amazon.es", "amazon.co.uk", "amazon.de", "amazon.fr", "amazon.it", "amazonses.com", "amazon-adsystem.com"],
   apple: ["apple.com", "icloud.com"],
-  google: ["google.com", "gmail.com", "youtube.com"],
+  google: ["google.com", "gmail.com", "youtube.com", "google-analytics.com"],
   microsoft: ["microsoft.com", "outlook.com", "live.com", "office.com"],
   netflix: ["netflix.com"],
   facebook: ["facebook.com", "facebookmail.com", "meta.com"],
@@ -51,18 +51,38 @@ export function levenshtein(a: string, b: string): number {
   return dp[b.length]!;
 }
 
-/** Returns the brand label a host imitates, or null. Official domains never match. */
+/** Real, unrelated brands one edit away from a protected one (paypay.ne.jp is not PayPal). Extend via PR. */
+const DISTINCT_BRANDS = new Set(["paypay"]);
+
+/** Brands this short (apple, fedex, dhl, bbva) only match exactly: fuzzy matching them hits real words (apply.com). */
+const FUZZY_MIN_LENGTH = 6;
+
+/**
+ * Returns the brand label a host imitates, or null. Only the registrable domain
+ * decides, so a brand word in a subdomain of an unrelated platform
+ * (amazon.mailchimp.com) is not an imitation. Flags:
+ *  (a) a registrable label confusable-equal to a brand, or within edit distance
+ *      (1 for 6–7 chars, 2 from 8) of it: arnazon.es, amazom.com;
+ *  (b) a brand as a hyphen-separated token of the registrable label:
+ *      paypa1-secure.com, dhl-tracking-parcel.info;
+ *  (c) subdomain labels that spell an official brand domain: paypal.com.verify-account.net.
+ * The brand's own label on any public suffix (paypal.co.uk, amazon.com.mx) and the listed
+ * official domains never match.
+ */
 export function resemblesBrand(host: string): string | null {
-  const domain = registrableDomain(host);
-  if (!domain) return null;
-  const tokens = normalizeConfusables(host).split(/[.\-_]/);
-  const label = normalizeConfusables(domain.split(".")[0] ?? "");
+  const p = parse(host.trim().toLowerCase());
+  if (!p.domain || !p.domainWithoutSuffix) return null;
+  const rawLabel = p.domainWithoutSuffix;
+  const label = normalizeConfusables(rawLabel);
+  const tokens = label.split(/[-_]/);
+  const sub = `.${p.subdomain ?? ""}.`;
   for (const [brand, official] of Object.entries(BRANDS)) {
-    if (official.includes(domain)) continue;
-    if (tokens.includes(brand)) return brand;
-    if (brand.length >= 5) {
+    if (official.includes(p.domain) || rawLabel === brand) continue;
+    if (label === brand || tokens.includes(brand)) return brand;
+    if (official.some((d) => sub.includes(`.${d}.`))) return brand;
+    if (brand.length >= FUZZY_MIN_LENGTH && !DISTINCT_BRANDS.has(rawLabel)) {
       const maxDistance = brand.length >= 8 ? 2 : 1;
-      if (label !== brand && levenshtein(label, brand) <= maxDistance) return brand;
+      if (levenshtein(label, brand) <= maxDistance) return brand;
     }
   }
   return null;
