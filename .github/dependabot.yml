@@ -8,6 +8,19 @@ updates:
     groups:
       minor-and-patch:
         update-types: [minor, patch]
+    ignore:
+      # 13.x triggers node-gyp on npm ci/install with a lockfile and breaks Windows installs without Visual Studio.
+      - dependency-name: better-sqlite3
+        update-types: [version-update:semver-major]
+      # typescript-eslint doesn't support TypeScript 7 yet.
+      - dependency-name: typescript
+        update-types: [version-update:semver-major]
+      # The Next.js / typescript-eslint config isn't ready for ESLint 10 yet.
+      - dependency-name: eslint
+        update-types: [version-update:semver-major]
+      # Types must match the minimum supported runtime (Node 22, see engines).
+      - dependency-name: "@types/node"
+        update-types: [version-update:semver-major]
   - package-ecosystem: github-actions
     directory: /
     schedule:
