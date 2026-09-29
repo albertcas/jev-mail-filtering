@@ -1,26 +1,298 @@
 @import "tailwindcss";
 
+/*
+ * JEV Mail Filtering design tokens. Decisions and measured contrast live in
+ * docs/design/dashboard-direction.md. Rule of the system: neutrals carry the
+ * interface, color is reserved for meaning (the five categories + status).
+ *
+ * Every color is a semantic token. Components never use raw hex.
+ * Category marks (--cat-*) sit on --canvas or --surface only (>= 3:1 there);
+ * text in a category voice uses --cat-*-ink (>= 4.5:1 on its tint and on surface).
+ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+
+  /* Neutrals: cool slate, off-white / off-black (no pure #fff / #000). */
+  --canvas: #f4f5f6;
+  --surface: #fcfcfd;
+  --sunken: #eceef1;
+  --ink: #15181c;
+  --ink-2: #454c57;
+  --ink-3: #5c6470;
+  --line: #dfe2e6; /* decorative hairlines only */
+  --line-strong: #838b97; /* control borders, >= 3:1 */
+
+  /* Interaction. The primary action is ink, not a brand hue. */
+  --accent: #15181c;
+  --accent-hover: #2b3038;
+  --on-accent: #fcfcfd;
+  --focus: #1d63c9;
+  --selection: #cfe0f7;
+  --scrim: rgb(15 17 20 / 0.42);
+  --shadow-tint: 220 20% 20%;
+
+  /* Status (reserved; always paired with icon + text). */
+  --danger: #b42318;
+  --danger-tint: #fcebe9;
+  --warning: #8a5300;
+  --warning-tint: #fbf1dc;
+  --success: #1b7342;
+  --success-tint: #e5f3eb;
+  --info: #454c57;
+  --info-tint: #eceef1;
+
+  /* Categories: mark (fills, rules, dots), ink (text), tint (quiet backgrounds). */
+  --cat-needs-reply: #2a78d6;
+  --cat-needs-reply-ink: #1b58a8;
+  --cat-needs-reply-tint: #e7effb;
+  --cat-worth-reading: #119c6e;
+  --cat-worth-reading-ink: #0b6b4c;
+  --cat-worth-reading-tint: #e2f3ec;
+  --cat-commercial: #4a3aa7;
+  --cat-commercial-ink: #4a3aa7;
+  --cat-commercial-tint: #eeebf8;
+  --cat-possible-scam: #dc5a26;
+  --cat-possible-scam-ink: #a33d12;
+  --cat-possible-scam-tint: #fcebe3;
+  --cat-unsure: #7c8490;
+  --cat-unsure-ink: #454c57;
+  --cat-unsure-tint: #eceef1;
+  --cat-none: #7c8490;
+  --cat-none-ink: #454c57;
+  --cat-none-tint: #eceef1;
+
+  /* Spacing: 4px grid (matches Tailwind's --spacing: 0.25rem, so p-4 == --space-4). */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+
+  /* Motion */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-move: 280ms;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* Dark: selected steps, not an automatic flip. Follows the OS unless the page
+   stamps data-theme="light"; data-theme="dark" forces it. */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --canvas: #0f1114;
+    --surface: #171a1e;
+    --sunken: #1f2328;
+    --ink: #eceef0;
+    --ink-2: #b3bac4;
+    --ink-3: #8f97a3;
+    --line: #2b3036;
+    --line-strong: #6b7380;
+    --accent: #eceef0;
+    --accent-hover: #d3d7dc;
+    --on-accent: #15181c;
+    --focus: #6aa3f0;
+    --selection: #1f3a5f;
+    --scrim: rgb(0 0 0 / 0.6);
+    --shadow-tint: 220 30% 2%;
+    --danger: #f2877c;
+    --danger-tint: #3a1b19;
+    --warning: #e8b64c;
+    --warning-tint: #322710;
+    --success: #5cc98a;
+    --success-tint: #132a1e;
+    --info: #b3bac4;
+    --info-tint: #1f2328;
+    --cat-needs-reply: #3987e5;
+    --cat-needs-reply-ink: #9dc3f4;
+    --cat-needs-reply-tint: #16253a;
+    --cat-worth-reading: #199e70;
+    --cat-worth-reading-ink: #72d2a9;
+    --cat-worth-reading-tint: #11281f;
+    --cat-commercial: #7955a0;
+    --cat-commercial-ink: #c6b2e6;
+    --cat-commercial-tint: #251d33;
+    --cat-possible-scam: #d95926;
+    --cat-possible-scam-ink: #f5a47f;
+    --cat-possible-scam-tint: #351f17;
+    --cat-unsure: #7f8793;
+    --cat-unsure-ink: #b3bac4;
+    --cat-unsure-tint: #1f2328;
+    --cat-none: #7f8793;
+    --cat-none-ink: #b3bac4;
+    --cat-none-tint: #1f2328;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #0f1114;
+  --surface: #171a1e;
+  --sunken: #1f2328;
+  --ink: #eceef0;
+  --ink-2: #b3bac4;
+  --ink-3: #8f97a3;
+  --line: #2b3036;
+  --line-strong: #6b7380;
+  --accent: #eceef0;
+  --accent-hover: #d3d7dc;
+  --on-accent: #15181c;
+  --focus: #6aa3f0;
+  --selection: #1f3a5f;
+  --scrim: rgb(0 0 0 / 0.6);
+  --shadow-tint: 220 30% 2%;
+  --danger: #f2877c;
+  --danger-tint: #3a1b19;
+  --warning: #e8b64c;
+  --warning-tint: #322710;
+  --success: #5cc98a;
+  --success-tint: #132a1e;
+  --info: #b3bac4;
+  --info-tint: #1f2328;
+  --cat-needs-reply: #3987e5;
+  --cat-needs-reply-ink: #9dc3f4;
+  --cat-needs-reply-tint: #16253a;
+  --cat-worth-reading: #199e70;
+  --cat-worth-reading-ink: #72d2a9;
+  --cat-worth-reading-tint: #11281f;
+  --cat-commercial: #7955a0;
+  --cat-commercial-ink: #c6b2e6;
+  --cat-commercial-tint: #251d33;
+  --cat-possible-scam: #d95926;
+  --cat-possible-scam-ink: #f5a47f;
+  --cat-possible-scam-tint: #351f17;
+  --cat-unsure: #7f8793;
+  --cat-unsure-ink: #b3bac4;
+  --cat-unsure-tint: #1f2328;
+  --cat-none: #7f8793;
+  --cat-none-ink: #b3bac4;
+  --cat-none-tint: #1f2328;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-move: 0ms;
+  }
+}
+
+/* Tailwind utilities read the runtime tokens (bg-surface, text-ink-2, border-line…). */
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-on-accent: var(--on-accent);
+  --color-focus: var(--focus);
+  --color-danger: var(--danger);
+  --color-danger-tint: var(--danger-tint);
+  --color-warning: var(--warning);
+  --color-warning-tint: var(--warning-tint);
+  --color-success: var(--success);
+  --color-success-tint: var(--success-tint);
+  --color-info: var(--info);
+  --color-info-tint: var(--info-tint);
+
+  --color-cat-needs-reply: var(--cat-needs-reply);
+  --color-cat-needs-reply-ink: var(--cat-needs-reply-ink);
+  --color-cat-needs-reply-tint: var(--cat-needs-reply-tint);
+  --color-cat-worth-reading: var(--cat-worth-reading);
+  --color-cat-worth-reading-ink: var(--cat-worth-reading-ink);
+  --color-cat-worth-reading-tint: var(--cat-worth-reading-tint);
+  --color-cat-commercial: var(--cat-commercial);
+  --color-cat-commercial-ink: var(--cat-commercial-ink);
+  --color-cat-commercial-tint: var(--cat-commercial-tint);
+  --color-cat-possible-scam: var(--cat-possible-scam);
+  --color-cat-possible-scam-ink: var(--cat-possible-scam-ink);
+  --color-cat-possible-scam-tint: var(--cat-possible-scam-tint);
+  --color-cat-unsure: var(--cat-unsure);
+  --color-cat-unsure-ink: var(--cat-unsure-ink);
+  --color-cat-unsure-tint: var(--cat-unsure-tint);
+  --color-cat-none: var(--cat-none);
+  --color-cat-none-ink: var(--cat-none-ink);
+  --color-cat-none-tint: var(--cat-none-tint);
+
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "Cascadia Mono", monospace;
+
+  /* Product type scale, ratio ~1.14, fixed rem (no fluid type in a tool).
+     text-base (14px) is the UI body; text-md (16px) is for reading prose. */
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.8125rem;
+  --text-sm--line-height: 1.125rem;
+  --text-base: 0.875rem;
+  --text-base--line-height: 1.25rem;
+  --text-md: 1rem;
+  --text-md--line-height: 1.5rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.5rem;
+  --text-xl: 1.375rem;
+  --text-xl--line-height: 1.75rem;
+
+  /* Shape lock: 4 small marks · 6 controls · 10 containers · 14 sheet. Pills only for chips. */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+
+  --shadow-card: 0 1px 2px hsl(var(--shadow-tint) / 0.06), 0 2px 6px hsl(var(--shadow-tint) / 0.04);
+  --shadow-raised: 0 2px 4px hsl(var(--shadow-tint) / 0.08), 0 12px 32px hsl(var(--shadow-tint) / 0.14);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+    accent-color: var(--ink);
+    scrollbar-color: var(--line-strong) transparent;
+  }
+
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    caret-color: var(--focus);
+  }
+
+  ::selection {
+    background: var(--selection);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+
+  /* Numbers that sit in rows and meters align. */
+  .tabular,
+  data,
+  time {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Native <dialog> backdrop for the Sheet primitive. */
+  dialog::backdrop {
+    background: var(--scrim);
+  }
 }
