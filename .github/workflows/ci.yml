@@ -13,6 +13,7 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
+      - run: npm run eval
       - run: npm run build
         env: { DEMO_MODE: "1" }
   integration:

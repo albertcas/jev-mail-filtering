@@ -1,0 +1,1402 @@
+{
+  "6261d026b35cc275e4d1aaf31ce3f260cf3689e2f6a20c7a08f44c5fef8fd012": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1102,
+    "category": {
+      "choice": "needs_reply",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 1,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.95,
+      "personal_not_bulk": 0.96,
+      "promotional": 0.02,
+      "impersonation": 0.04,
+      "pressure_tactics": 0.02,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 2.01,
+      "confidence": 0.8
+    }
+  },
+  "582105c3f8a33d104a9a96d27e5727d475c83b5b4a5e974465938fd48e60de7c": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1178,
+    "category": {
+      "choice": "worth_reading",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 1,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.07,
+      "personal_not_bulk": 0.63,
+      "promotional": 0.05,
+      "impersonation": 0.1,
+      "pressure_tactics": 0.03,
+      "requests_sensitive_data": 0.02,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 0.22,
+      "confidence": 0.78
+    }
+  },
+  "ea3d5380458c819568d757f60c2b61826f6dcfa6a1639e90e1a9543f6b3fbfbc": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1148,
+    "category": {
+      "choice": "commercial",
+      "confidence": 0.99,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0.01,
+        "commercial": 0.99,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.24,
+      "personal_not_bulk": 0.21,
+      "promotional": 0.99,
+      "impersonation": 0.07,
+      "pressure_tactics": 0.38,
+      "requests_sensitive_data": 0.03,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 0.97,
+      "confidence": 0.95
+    }
+  },
+  "38d6ec50c85c1ee1cc7e1d9f09addd3ccdb40acad6baeb664165a0b290c0fa62": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1113,
+    "category": {
+      "choice": "needs_reply",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 1,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.97,
+      "personal_not_bulk": 0.96,
+      "promotional": 0.02,
+      "impersonation": 0.04,
+      "pressure_tactics": 0.05,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 1.31,
+      "confidence": 0.69
+    }
+  },
+  "868eedc2eda8f1257cccd13d80763c72b05190dd526d2c72189a8c2510a7aca1": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1187,
+    "category": {
+      "choice": "possible_scam",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 1,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.92,
+      "personal_not_bulk": 0.28,
+      "promotional": 0.18,
+      "impersonation": 0.97,
+      "pressure_tactics": 0.88,
+      "requests_sensitive_data": 0.58,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 1.65,
+      "confidence": 0.42
+    }
+  },
+  "83e4ea9c530cdbf46b860946224c66f3ba0bf1f9293c3737c2ed2780f474c1d7": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1149,
+    "category": {
+      "choice": "worth_reading",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 1,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.39,
+      "personal_not_bulk": 0.65,
+      "promotional": 0.07,
+      "impersonation": 0.07,
+      "pressure_tactics": 0.02,
+      "requests_sensitive_data": 0.02,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 0.05,
+      "confidence": 0.95
+    }
+  },
+  "2f916de8307ad3fa91f04579d7ff55e29713c4faed7732141fc3f8aac3d0dd99": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1097,
+    "category": {
+      "choice": "needs_reply",
+      "confidence": 0.99,
+      "probabilities": {
+        "needs_reply": 1,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.98,
+      "personal_not_bulk": 0.93,
+      "promotional": 0.01,
+      "impersonation": 0.02,
+      "pressure_tactics": 0.04,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 1.34,
+      "confidence": 0.65
+    }
+  },
+  "b290461768c6bf55c8ccb83ac265b1565afac6bcedaf298d74c07a5a42e1bd26": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1146,
+    "category": {
+      "choice": "commercial",
+      "confidence": 0.99,
+      "probabilities": {
+        "needs_reply": 0.01,
+        "worth_reading": 0,
+        "commercial": 0.99,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.89,
+      "personal_not_bulk": 0.41,
+      "promotional": 0.98,
+      "impersonation": 0.08,
+      "pressure_tactics": 0.06,
+      "requests_sensitive_data": 0.02,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 0.81,
+      "confidence": 0.77
+    }
+  },
+  "eec51ee688cd0ac5a1ed48ac580da6d6c4c8ae114bde82aedf14f85f76781e36": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1225,
+    "category": {
+      "choice": "worth_reading",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 1,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.34,
+      "personal_not_bulk": 0.13,
+      "promotional": 0.16,
+      "impersonation": 0.05,
+      "pressure_tactics": 0.02,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 0.01,
+      "confidence": 0.99
+    }
+  },
+  "53fc2666d0075581abadd30defee25a20712f53109b4fb7e39faa64c72c4865f": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1125,
+    "category": {
+      "choice": "possible_scam",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 1,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.95,
+      "personal_not_bulk": 0.36,
+      "promotional": 0.04,
+      "impersonation": 0.98,
+      "pressure_tactics": 0.96,
+      "requests_sensitive_data": 0.98,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 1.92,
+      "confidence": 0
+    }
+  },
+  "c9ebd67d41c5b7d3ffa97215d59795f24f8a53ece35371874c97ad5ab1bacbed": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1160,
+    "category": {
+      "choice": "needs_reply",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 1,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.95,
+      "personal_not_bulk": 0.94,
+      "promotional": 0.1,
+      "impersonation": 0.05,
+      "pressure_tactics": 0.02,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 1.09,
+      "confidence": 0.9
+    }
+  },
+  "a453d3a8cfa562878d25866b468d48f23a6eee412ed98c0e1a7110a7a0da6b6d": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1154,
+    "category": {
+      "choice": "none",
+      "confidence": 0.97,
+      "probabilities": {
+        "needs_reply": 0.01,
+        "worth_reading": 0.02,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0.97
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.02,
+      "personal_not_bulk": 0.69,
+      "promotional": 0.06,
+      "impersonation": 0.08,
+      "pressure_tactics": 0.02,
+      "requests_sensitive_data": 0.02,
+      "addresses_the_classifier": 0.06
+    },
+    "urgency": {
+      "score": 1.19,
+      "confidence": 0
+    }
+  },
+  "eae0386bd33e1311fb9afc509def875583c07ec7ca8c77d25def24bcccc1e4b0": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1159,
+    "category": {
+      "choice": "worth_reading",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 1,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.23,
+      "personal_not_bulk": 0.14,
+      "promotional": 0.14,
+      "impersonation": 0.05,
+      "pressure_tactics": 0.02,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.05
+    },
+    "urgency": {
+      "score": 0,
+      "confidence": 1
+    }
+  },
+  "c20d32460d017d05081a8424791dbcc78c82142e1061787b094b9c6ae1002f0e": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1144,
+    "category": {
+      "choice": "needs_reply",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 1,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.98,
+      "personal_not_bulk": 0.81,
+      "promotional": 0.02,
+      "impersonation": 0.03,
+      "pressure_tactics": 0.04,
+      "requests_sensitive_data": 0.02,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 0.61,
+      "confidence": 0.5
+    }
+  },
+  "8648085c80e3743b9061157ab0f540c030dd34104dae07d43647555f5cabb961": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1112,
+    "category": {
+      "choice": "commercial",
+      "confidence": 0.96,
+      "probabilities": {
+        "needs_reply": 0.03,
+        "worth_reading": 0,
+        "commercial": 0.97,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.91,
+      "personal_not_bulk": 0.4,
+      "promotional": 0.98,
+      "impersonation": 0.08,
+      "pressure_tactics": 0.04,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 0.82,
+      "confidence": 0.58
+    }
+  },
+  "4bedf1f8c3a401285d11d6a3573a514454e9110805161a43d37d1e4548a56dea": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1161,
+    "category": {
+      "choice": "worth_reading",
+      "confidence": 0.96,
+      "probabilities": {
+        "needs_reply": 0.01,
+        "worth_reading": 0.97,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0.02
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.86,
+      "personal_not_bulk": 0.74,
+      "promotional": 0.03,
+      "impersonation": 0.1,
+      "pressure_tactics": 0.07,
+      "requests_sensitive_data": 0.05,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 2.78,
+      "confidence": 0.78
+    }
+  },
+  "83cd8243aa952146055a75706d9013d2bf90921eeb76ce2731c09d4ce5ecbf01": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1093,
+    "category": {
+      "choice": "possible_scam",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 1,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.93,
+      "personal_not_bulk": 0.19,
+      "promotional": 0.05,
+      "impersonation": 0.98,
+      "pressure_tactics": 0.98,
+      "requests_sensitive_data": 0.95,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 1.82,
+      "confidence": 0
+    }
+  },
+  "8881ad59f402178773673b0bc6db96aa687da46c9c062bae2794723628b76102": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1124,
+    "category": {
+      "choice": "needs_reply",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 1,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.99,
+      "personal_not_bulk": 0.75,
+      "promotional": 0.02,
+      "impersonation": 0.06,
+      "pressure_tactics": 0.07,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 1.49,
+      "confidence": 0.51
+    }
+  },
+  "b6f81ee78145939ded093e2f15ea6d055fe7d73595822173f06f73418adb6ef5": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1183,
+    "category": {
+      "choice": "commercial",
+      "confidence": 0.95,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0.04,
+        "commercial": 0.96,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.08,
+      "personal_not_bulk": 0.16,
+      "promotional": 0.98,
+      "impersonation": 0.06,
+      "pressure_tactics": 0.05,
+      "requests_sensitive_data": 0.02,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 0.05,
+      "confidence": 0.95
+    }
+  },
+  "75f6ddea8154b8bc5386c85ed72501875bd8c7ea44e23b1dd15ad159d64133c0": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1143,
+    "category": {
+      "choice": "worth_reading",
+      "confidence": 0.87,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0.9,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0.1
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.71,
+      "personal_not_bulk": 0.75,
+      "promotional": 0.02,
+      "impersonation": 0.1,
+      "pressure_tactics": 0.04,
+      "requests_sensitive_data": 0.03,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 2,
+      "confidence": 0
+    }
+  },
+  "4133804965502362db79a2bcc0fdb7824972850a870dc6891ce859257c8822ea": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1171,
+    "category": {
+      "choice": "needs_reply",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 1,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.9,
+      "personal_not_bulk": 0.96,
+      "promotional": 0.11,
+      "impersonation": 0.05,
+      "pressure_tactics": 0.02,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 1.9,
+      "confidence": 0.83
+    }
+  },
+  "421abdf200470a146b427e0d21611d5049e4f77cde33e19bc0fede0252c6436c": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1176,
+    "category": {
+      "choice": "possible_scam",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 1,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.94,
+      "personal_not_bulk": 0.28,
+      "promotional": 0.04,
+      "impersonation": 0.97,
+      "pressure_tactics": 0.95,
+      "requests_sensitive_data": 0.99,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 2.32,
+      "confidence": 0.32
+    }
+  },
+  "5360022102df5d612370af08c22fa688269e47a5794b94135b92b20884637395": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1165,
+    "category": {
+      "choice": "worth_reading",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 1,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.49,
+      "personal_not_bulk": 0.74,
+      "promotional": 0.07,
+      "impersonation": 0.09,
+      "pressure_tactics": 0.02,
+      "requests_sensitive_data": 0.03,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 0.09,
+      "confidence": 0.91
+    }
+  },
+  "e8df9585fadd6fdc7410a283c6f96ac9dfe0fee502d4b76df554225703b468b8": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1123,
+    "category": {
+      "choice": "needs_reply",
+      "confidence": 0.99,
+      "probabilities": {
+        "needs_reply": 0.99,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 0.01,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.97,
+      "personal_not_bulk": 0.95,
+      "promotional": 0.02,
+      "impersonation": 0.02,
+      "pressure_tactics": 0.15,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 1.95,
+      "confidence": 0.83
+    }
+  },
+  "cffa8c816cadd1d72e7049cc15cc32151f2ae5e6bb6de6f637ec78df850d18c6": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1143,
+    "category": {
+      "choice": "commercial",
+      "confidence": 0.99,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 1,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.29,
+      "personal_not_bulk": 0.13,
+      "promotional": 0.99,
+      "impersonation": 0.08,
+      "pressure_tactics": 0.12,
+      "requests_sensitive_data": 0.02,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 0.48,
+      "confidence": 0.52
+    }
+  },
+  "7e83563050054c91d07c04f0b6868df4c8682bd7859df1cfe5561ec8b4a3933d": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1121,
+    "category": {
+      "choice": "possible_scam",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 1,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.95,
+      "personal_not_bulk": 0.34,
+      "promotional": 0.06,
+      "impersonation": 0.63,
+      "pressure_tactics": 0.97,
+      "requests_sensitive_data": 0.21,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 1.89,
+      "confidence": 0
+    }
+  },
+  "f6ee49da221f6208dd16cd0e004cb17d6b0152512581168de810d5c96724c369": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1146,
+    "category": {
+      "choice": "needs_reply",
+      "confidence": 0.99,
+      "probabilities": {
+        "needs_reply": 0.99,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 0.01,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.97,
+      "personal_not_bulk": 0.87,
+      "promotional": 0.04,
+      "impersonation": 0.09,
+      "pressure_tactics": 0.41,
+      "requests_sensitive_data": 0.03,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 3,
+      "confidence": 1
+    }
+  },
+  "68a301b589ed7cf0c983da487d62a65773e88216a07a1a83c58adf024ead0ab8": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1146,
+    "category": {
+      "choice": "worth_reading",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 1,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.02,
+      "personal_not_bulk": 0.14,
+      "promotional": 0.02,
+      "impersonation": 0.06,
+      "pressure_tactics": 0.01,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 0,
+      "confidence": 1
+    }
+  },
+  "2479f264b6ad10d0a0761f47ac4a9c25a2e882aa2f20e8fed252a67f75af3046": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1125,
+    "category": {
+      "choice": "none",
+      "confidence": 0.93,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0.06,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0.94
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.37,
+      "personal_not_bulk": 0.44,
+      "promotional": 0.09,
+      "impersonation": 0.07,
+      "pressure_tactics": 0.03,
+      "requests_sensitive_data": 0.02,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 0.05,
+      "confidence": 0.95
+    }
+  },
+  "3bc993663c5b7afe763c7c91b82871247daf56209b7d5b790a6d64017643d25e": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1103,
+    "category": {
+      "choice": "commercial",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 1,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.18,
+      "personal_not_bulk": 0.17,
+      "promotional": 0.99,
+      "impersonation": 0.09,
+      "pressure_tactics": 0.47,
+      "requests_sensitive_data": 0.02,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 1.53,
+      "confidence": 0.46
+    }
+  },
+  "3b52c3ceb6ef0d7a91524e80b61cfce63993850c5adcb555212b772e054c604c": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1119,
+    "category": {
+      "choice": "needs_reply",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 1,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.96,
+      "personal_not_bulk": 0.97,
+      "promotional": 0.03,
+      "impersonation": 0.04,
+      "pressure_tactics": 0.02,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 1.83,
+      "confidence": 0.79
+    }
+  },
+  "5fe8148c2a84450e3f6a64cf5f5235bcbe16e218180bb99c6bcf89e03257931f": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1135,
+    "category": {
+      "choice": "worth_reading",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 1,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.07,
+      "personal_not_bulk": 0.25,
+      "promotional": 0.01,
+      "impersonation": 0.06,
+      "pressure_tactics": 0.02,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 0.51,
+      "confidence": 0.49
+    }
+  },
+  "0673a3e6409b93c1b14b24021fc3b9e6ad98da65feb5f0363c387a31dc3a7562": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1208,
+    "category": {
+      "choice": "possible_scam",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 1,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.98,
+      "personal_not_bulk": 0.17,
+      "promotional": 0.18,
+      "impersonation": 0.62,
+      "pressure_tactics": 0.98,
+      "requests_sensitive_data": 0.98,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 2.12,
+      "confidence": 0.12
+    }
+  },
+  "0e1272cba0a1fd0fd85dbcc37716d7e1d38355810f0ffe7214de806b62f8c9d0": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1133,
+    "category": {
+      "choice": "commercial",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 1,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.22,
+      "personal_not_bulk": 0.31,
+      "promotional": 0.99,
+      "impersonation": 0.09,
+      "pressure_tactics": 0.35,
+      "requests_sensitive_data": 0.02,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 1.37,
+      "confidence": 0.62
+    }
+  },
+  "d0fc20416ceb59db368b04dbdfcdb67d9f5705ef104c6321bc9fe023795787e1": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1130,
+    "category": {
+      "choice": "needs_reply",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 1,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.98,
+      "personal_not_bulk": 0.97,
+      "promotional": 0.02,
+      "impersonation": 0.03,
+      "pressure_tactics": 0.02,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.02
+    },
+    "urgency": {
+      "score": 2.37,
+      "confidence": 0.57
+    }
+  },
+  "10601ce33d6116c13c3d807b28ede905dd7e7b66dbfd41e9fd094b0852d72b97": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1148,
+    "category": {
+      "choice": "possible_scam",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 1,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.87,
+      "personal_not_bulk": 0.14,
+      "promotional": 0.66,
+      "impersonation": 0.96,
+      "pressure_tactics": 0.97,
+      "requests_sensitive_data": 0.35,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 2.42,
+      "confidence": 0.42
+    }
+  },
+  "19126b4d0eb79c20a662b9755b6847514f9bc3efc30106a3aa4c95f4343b7076": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1131,
+    "category": {
+      "choice": "worth_reading",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 1,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.02,
+      "personal_not_bulk": 0.78,
+      "promotional": 0.07,
+      "impersonation": 0.1,
+      "pressure_tactics": 0.03,
+      "requests_sensitive_data": 0.03,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 0,
+      "confidence": 1
+    }
+  },
+  "79e4d2cc6bdcbd71725ee43c0adfe72b04e2f202ee6c84dc2fcd76d30abdb632": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1154,
+    "category": {
+      "choice": "commercial",
+      "confidence": 0.99,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 1,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.27,
+      "personal_not_bulk": 0.2,
+      "promotional": 0.99,
+      "impersonation": 0.09,
+      "pressure_tactics": 0.76,
+      "requests_sensitive_data": 0.03,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 1.31,
+      "confidence": 0.69
+    }
+  },
+  "bfd1a5da42dcaf1f9ca2378a076814a3de5e44b0e78feb742bd6c9aa0655e01d": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1141,
+    "category": {
+      "choice": "needs_reply",
+      "confidence": 0.98,
+      "probabilities": {
+        "needs_reply": 0.98,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 0.02,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.98,
+      "personal_not_bulk": 0.93,
+      "promotional": 0.15,
+      "impersonation": 0.12,
+      "pressure_tactics": 0.5,
+      "requests_sensitive_data": 0.03,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 3,
+      "confidence": 1
+    }
+  },
+  "ae569b681d047b515701dab34345529f0d39c8ad36a7fff2a2f59c93172c63e5": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1158,
+    "category": {
+      "choice": "worth_reading",
+      "confidence": 0.99,
+      "probabilities": {
+        "needs_reply": 0.01,
+        "worth_reading": 0.99,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.56,
+      "personal_not_bulk": 0.65,
+      "promotional": 0.07,
+      "impersonation": 0.09,
+      "pressure_tactics": 0.03,
+      "requests_sensitive_data": 0.01,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 0.64,
+      "confidence": 0.36
+    }
+  },
+  "d3bfac0ae06ac2c42f71315a76a71aeb4a81118c7d8be641816c747d9be808f6": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1094,
+    "category": {
+      "choice": "worth_reading",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 1,
+        "commercial": 0,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.06,
+      "personal_not_bulk": 0.53,
+      "promotional": 0.11,
+      "impersonation": 0.12,
+      "pressure_tactics": 0.03,
+      "requests_sensitive_data": 0.04,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 0.28,
+      "confidence": 0.72
+    }
+  },
+  "f446a661c0d9194f0b2f4d2cf34e9e3990669a021e8b8c51550f71aa36b6c73f": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1141,
+    "category": {
+      "choice": "commercial",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 1,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.19,
+      "personal_not_bulk": 0.13,
+      "promotional": 0.99,
+      "impersonation": 0.07,
+      "pressure_tactics": 0.69,
+      "requests_sensitive_data": 0.02,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 1.9,
+      "confidence": 0.87
+    }
+  },
+  "41029250ff2f1d56798d26972258cb53bf7945e2d3eb3ad590e34aabd8dee5a0": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1114,
+    "category": {
+      "choice": "possible_scam",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 1,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.93,
+      "personal_not_bulk": 0.22,
+      "promotional": 0.17,
+      "impersonation": 0.97,
+      "pressure_tactics": 0.86,
+      "requests_sensitive_data": 0.95,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 2.08,
+      "confidence": 0.08
+    }
+  },
+  "589219ce8b176d51e5d1b27438b10af7bb5e6ab5ca7d497d13cfcb6eefb22c08": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1163,
+    "category": {
+      "choice": "commercial",
+      "confidence": 0.99,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 1,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.38,
+      "personal_not_bulk": 0.17,
+      "promotional": 0.98,
+      "impersonation": 0.08,
+      "pressure_tactics": 0.34,
+      "requests_sensitive_data": 0.03,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 1.62,
+      "confidence": 0.61
+    }
+  },
+  "10304341b6cd2417ea283bf8df22236abe052b3b3fff080679a06b93b9c862c8": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1189,
+    "category": {
+      "choice": "possible_scam",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 1,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.95,
+      "personal_not_bulk": 0.36,
+      "promotional": 0.09,
+      "impersonation": 0.54,
+      "pressure_tactics": 0.97,
+      "requests_sensitive_data": 0.95,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 2.32,
+      "confidence": 0.32
+    }
+  },
+  "e233d39e0e49fccce053728a4a94f50035b436d1e8b95a72bb99f61db51a1100": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1177,
+    "category": {
+      "choice": "commercial",
+      "confidence": 0.97,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0.02,
+        "commercial": 0.98,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.37,
+      "personal_not_bulk": 0.17,
+      "promotional": 0.99,
+      "impersonation": 0.08,
+      "pressure_tactics": 0.67,
+      "requests_sensitive_data": 0.03,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 1.07,
+      "confidence": 0.91
+    }
+  },
+  "4206a782678c19c566b29a0b6010a1bbe3f9d919c1fdf893a4b2d6df7046408c": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1158,
+    "category": {
+      "choice": "possible_scam",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 1,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.93,
+      "personal_not_bulk": 0.21,
+      "promotional": 0.05,
+      "impersonation": 0.98,
+      "pressure_tactics": 0.98,
+      "requests_sensitive_data": 0.98,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 2.11,
+      "confidence": 0.11
+    }
+  },
+  "10b43e286ed2c78422738e667f2c580afbece9878f06403f3b335eb6e17d7875": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1142,
+    "category": {
+      "choice": "commercial",
+      "confidence": 0.99,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0.01,
+        "commercial": 0.99,
+        "possible_scam": 0,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.35,
+      "personal_not_bulk": 0.14,
+      "promotional": 0.99,
+      "impersonation": 0.07,
+      "pressure_tactics": 0.47,
+      "requests_sensitive_data": 0.03,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 1.15,
+      "confidence": 0.85
+    }
+  },
+  "4b7c84969f7ebe7809dd125c556f651dacfb500c40b7495ca7a833e2b0666be3": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1141,
+    "category": {
+      "choice": "possible_scam",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 1,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.96,
+      "personal_not_bulk": 0.21,
+      "promotional": 0.1,
+      "impersonation": 0.97,
+      "pressure_tactics": 0.87,
+      "requests_sensitive_data": 0.96,
+      "addresses_the_classifier": 0.98
+    },
+    "urgency": {
+      "score": 1.9,
+      "confidence": 0
+    }
+  },
+  "0abe1ab32cc9fde13c1b3111675d82bff40de7a487b8780b0eddd22ffcfc506e": {
+    "model": "jev-1.13.0",
+    "inputTokens": 1144,
+    "category": {
+      "choice": "possible_scam",
+      "confidence": 1,
+      "probabilities": {
+        "needs_reply": 0,
+        "worth_reading": 0,
+        "commercial": 0,
+        "possible_scam": 1,
+        "none": 0
+      }
+    },
+    "nouls": {
+      "asks_recipient_to_act": 0.93,
+      "personal_not_bulk": 0.21,
+      "promotional": 0.05,
+      "impersonation": 0.98,
+      "pressure_tactics": 0.96,
+      "requests_sensitive_data": 0.97,
+      "addresses_the_classifier": 0.03
+    },
+    "urgency": {
+      "score": 1.76,
+      "confidence": 0
+    }
+  }
+}
