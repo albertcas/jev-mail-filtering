@@ -1,8 +1,8 @@
 Authentication-Results: mx.example.com; dkim=pass
- header.d=porchlightdomains.com; spf=pass; dmarc=pass
-From: Porchlight Domains <billing@porchlightdomains.com>
+ header.d=porchlightdomains.example; spf=pass; dmarc=pass
+From: Porchlight Domains <billing@porchlightdomains.example>
 To: Alex Rivera <alex@example.com>
-Subject: Receipt: alexrivera.dev renewed for 1 year
+Subject: Receipt: alexrivera.example renewed for 1 year
 Message-ID: <037-worth-reading-en-domain-renewal@demo.jev.local>
 Date: Sun, 20 Sep 2026 08:25:00 +0000
 MIME-Version: 1.0
@@ -14,7 +14,7 @@ Content-Transfer-Encoding: 7bit
 
 Hi Alex,
 
-Your domain alexrivera.dev has been renewed automatically.
+Your domain alexrivera.example has been renewed automatically.
 
 New expiry date: 20 September 2027
 Amount charged: USD 14.00 (card ending 0932)

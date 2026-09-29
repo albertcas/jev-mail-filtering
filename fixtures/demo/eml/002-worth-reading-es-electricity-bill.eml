@@ -1,6 +1,7 @@
 Authentication-Results: mx.example.com; dkim=pass
- header.d=luzclara-energia.es; spf=pass; dmarc=pass
-From: =?UTF-8?Q?Luz_Clara_Energ=C3=ADa?= <facturas@luzclara-energia.es>
+ header.d=luzclara-energia.example; spf=pass; dmarc=pass
+From: =?UTF-8?Q?Luz_Clara_Energ=C3=ADa?=
+ <facturas@luzclara-energia.example>
 To: Alex Rivera <alex@example.com>
 Subject: =?UTF-8?Q?Tu_factura_de_luz_de_septiembre_ya_est?=
  =?UTF-8?Q?=C3=A1_disponible?=

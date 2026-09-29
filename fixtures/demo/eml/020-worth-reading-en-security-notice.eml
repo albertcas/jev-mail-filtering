@@ -1,6 +1,7 @@
-Authentication-Results: mx.example.com; dkim=pass header.d=codehaven.dev;
- spf=pass smtp.mailfrom=codehaven.dev; dmarc=pass
-From: Codehaven <noreply@codehaven.dev>
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=codehaven.example; spf=pass smtp.mailfrom=codehaven.example;
+ dmarc=pass
+From: Codehaven <noreply@codehaven.example>
 To: Alex Rivera <alex@example.com>
 Subject: [Codehaven] A new SSH key was added to your account
 Message-ID: <020-worth-reading-en-security-notice@demo.jev.local>

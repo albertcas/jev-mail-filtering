@@ -1,6 +1,7 @@
-Authentication-Results: mx.example.com; dkim=pass header.d=bancolitoral.es;
- spf=pass smtp.mailfrom=bancolitoral.es; dmarc=pass
-From: Banco Litoral <alertas@bancolitoral.es>
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=bancolitoral.example; spf=pass
+ smtp.mailfrom=bancolitoral.example; dmarc=pass
+From: Banco Litoral <alertas@bancolitoral.example>
 To: Alex Rivera <alex@example.com>
 Subject: =?UTF-8?Q?Nuevo_inicio_de_sesi=C3=B3n_en_tu_banca_?=
  =?UTF-8?Q?online?=
@@ -13,7 +14,7 @@ Content-Type: text/plain; charset=utf-8
 Hola, Alex:
 
 Se ha iniciado sesi=C3=B3n en tu banca online el 26/09/2026 a =
-las 21:31 desde un navegador Firefox en Windows (Valencia).
+las 21:31 desde un navegador de escritorio (Valencia).
 
 Si has sido t=C3=BA, no tienes que hacer nada.
 

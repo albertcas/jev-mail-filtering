@@ -1,6 +1,6 @@
 Authentication-Results: mx.example.com; dkim=pass
- header.d=northwind-outfitters.com; spf=pass; dmarc=pass
-From: Northwind Outfitters <orders@northwind-outfitters.com>
+ header.d=northwind-outfitters.example; spf=pass; dmarc=pass
+From: Northwind Outfitters <orders@northwind-outfitters.example>
 To: Alex Rivera <alex@example.com>
 Subject: Your order #NW-58210 has shipped
 Message-ID: <006-worth-reading-en-order-shipped@demo.jev.local>
@@ -12,6 +12,6 @@ Content-Type: text/html; charset=utf-8
 <p>Hi Alex,</p><p>Good news =E2=80=94 your order is on its way.=
 </p><ul><li>1 =C3=97 Waterproof hiking jacket (M)</li><li>1 =C3=97 Merino =
 wool socks, 2-pack</li></ul><p>Estimated delivery: Thursday, 24 September.=
-</p><p><a href=3D"https://northwind-outfitters.com/orders/NW-58210/track">T=
-rack your package</a></p><p>Thanks for shopping with us,<br>Northwind =
+</p><p><a href=3D"https://northwind-outfitters.example/orders/NW-58210/trac=
+k">Track your package</a></p><p>Thanks for shopping with us,<br>Northwind =
 Outfitters</p>

@@ -1,8 +1,9 @@
-Authentication-Results: mx.example.com; dkim=pass header.d=fieldnotes.dev;
- spf=pass; dmarc=pass
-List-Unsubscribe: <mailto:unsubscribe@fieldnotes.dev?subject=unsubscribe>,
- <https://fieldnotes.dev/unsubscribe/a91f>
-From: Frontend Field Notes <hello@fieldnotes.dev>
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=fieldnotes.example; spf=pass; dmarc=pass
+List-Unsubscribe:
+ <mailto:unsubscribe@fieldnotes.example?subject=unsubscribe>,
+ <https://fieldnotes.example/unsubscribe/a91f>
+From: Frontend Field Notes <hello@fieldnotes.example>
 To: Alex Rivera <alex@example.com>
 Subject: Field Notes #142: the quiet death of the CSS reset
 Message-ID: <013-worth-reading-en-newsletter@demo.jev.local>
@@ -15,6 +16,6 @@ Content-Type: text/html; charset=utf-8
 defaults have made most CSS resets unnecessary, a practical look at =
 container queries in production dashboards, and a short essay on writing =
 error messages people actually read.</p><p><a href=3D"https://fieldnotes.=
-dev/142">Read issue #142 on the web</a></p><p>=E2=80=94 Nadia</p><p =
-style=3D"font-size:11px">You subscribed at fieldnotes.dev. <a =
-href=3D"https://fieldnotes.dev/unsubscribe/a91f">Unsubscribe</a></p>
+example/142">Read issue #142 on the web</a></p><p>=E2=80=94 Nadia</p><p =
+style=3D"font-size:11px">You subscribed at fieldnotes.example. <a =
+href=3D"https://fieldnotes.example/unsubscribe/a91f">Unsubscribe</a></p>

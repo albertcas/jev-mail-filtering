@@ -1,7 +1,8 @@
 Authentication-Results: mx.example.com; dkim=pass
- header.d=academiacodenorte.es; spf=pass; dmarc=pass
-List-Unsubscribe: <https://academiacodenorte.es/newsletter/baja?id=3310>
-From: Academia CodeNorte <info@academiacodenorte.es>
+ header.d=academiacodenorte.example; spf=pass; dmarc=pass
+List-Unsubscribe:
+ <https://academiacodenorte.example/newsletter/baja?id=3310>
+From: Academia CodeNorte <info@academiacodenorte.example>
 To: Alex Rivera <alex@example.com>
 Subject: =?UTF-8?Q?=C3=9Altima_semana=3A_TypeScript_avanzad?=
  =?UTF-8?Q?o_con_un_20_=25_de_descuento?=
@@ -15,6 +16,7 @@ Content-Type: text/html; charset=utf-8
 semanas, tutor=C3=ADas en directo) empieza el 5 de octubre. =
 Matric=C3=BAlate esta semana y ll=C3=A9vate un 20 % de descuento con el =
 c=C3=B3digo <strong>TS20</strong>.</p><p><a href=3D"https://academiacodenor=
-te.es/cursos/typescript-avanzado">Reservar mi plaza</a></p><p =
+te.example/cursos/typescript-avanzado">Reservar mi plaza</a></p><p =
 style=3D"font-size:11px"><a href=3D"https://academiacodenorte.=
-es/newsletter/baja?id=3D3310">Darse de baja</a></p>
+example/newsletter/baja?id=3D3310">Darse de =
+baja</a></p>

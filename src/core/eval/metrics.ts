@@ -31,6 +31,9 @@ export function computeMetrics(rows: EvalRow[]): Metrics {
 export function renderMarkdown(m: Metrics, meta: { model: string; date: string }): string {
   const pct = (x: number) => `${(x * 100).toFixed(0)}%`;
   const labels = Object.keys(m.confusion);
+  // A ratio with a zero denominator is undefined, not 0%: show "–" (e.g. `unsure` is predicted but never expected).
+  const predicted = (l: string) => labels.reduce((s, e) => s + m.confusion[e]![l]!, 0);
+  const cell = (x: number, denominator: number) => (denominator === 0 ? "–" : pct(x));
   return [
     `# Evaluation results`,
     ``,
@@ -38,7 +41,7 @@ export function renderMarkdown(m: Metrics, meta: { model: string; date: string }
     ``,
     `| Category | Precision | Recall | Support |`,
     `|---|---|---|---|`,
-    ...Object.entries(m.perClass).map(([k, v]) => `| ${k} | ${pct(v.precision)} | ${pct(v.recall)} | ${v.support} |`),
+    ...Object.entries(m.perClass).map(([k, v]) => `| ${k} | ${cell(v.precision, predicted(k))} | ${cell(v.recall, v.support)} | ${v.support} |`),
     ``,
     `| Language | Accuracy |`,
     `|---|---|`,

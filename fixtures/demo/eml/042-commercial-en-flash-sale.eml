@@ -1,7 +1,7 @@
 Authentication-Results: mx.example.com; dkim=pass
- header.d=driftwoodsupply.com; spf=pass; dmarc=pass
-List-Unsubscribe: <https://driftwoodsupply.com/unsubscribe?e=a1b2c3>
-From: "Driftwood Supply Co." <hello@driftwoodsupply.com>
+ header.d=driftwoodsupply.example; spf=pass; dmarc=pass
+List-Unsubscribe: <https://driftwoodsupply.example/unsubscribe?e=a1b2c3>
+From: "Driftwood Supply Co." <hello@driftwoodsupply.example>
 To: Alex Rivera <alex@example.com>
 Subject: 48-hour flash sale: up to 50% off camping gear
 Message-ID: <042-commercial-en-flash-sale@demo.jev.local>
@@ -12,6 +12,6 @@ Content-Type: text/html; charset=utf-8
 
 <h1>Flash sale =E2=80=94 48 hours only</h1><p>Tents, stoves and sleeping =
 bags up to 50% off while stocks last. Free returns on every order.</p><p><a=
- href=3D"https://driftwoodsupply.com/sale">Shop the sale</a></p><p =
-style=3D"font-size:11px"><a href=3D"https://driftwoodsupply.com/unsubscribe=
-?e=3Da1b2c3">Unsubscribe</a></p>
+ href=3D"https://driftwoodsupply.example/sale">Shop the sale</a></p><p =
+style=3D"font-size:11px"><a href=3D"https://driftwoodsupply.=
+example/unsubscribe?e=3Da1b2c3">Unsubscribe</a></p>

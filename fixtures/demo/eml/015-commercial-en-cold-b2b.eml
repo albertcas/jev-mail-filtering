@@ -1,6 +1,6 @@
-Authentication-Results: mx.example.com; dkim=pass header.d=leadspire.io;
- spf=pass; dmarc=pass
-From: Kevin Marsh <kevin@leadspire.io>
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=leadspire.example; spf=pass; dmarc=pass
+From: Kevin Marsh <kevin@leadspire.example>
 To: Alex Rivera <alex@example.com>
 Subject: Quick question about example.com
 Message-ID: <015-commercial-en-cold-b2b@demo.jev.local>

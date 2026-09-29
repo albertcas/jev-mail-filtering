@@ -1,6 +1,6 @@
 Authentication-Results: mx.example.com; dkim=pass
- header.d=brightline-legal.com; spf=pass; dmarc=pass
-From: Rachel Kim <rachel.kim@brightline-legal.com>
+ header.d=brightline-legal.example; spf=pass; dmarc=pass
+From: Rachel Kim <rachel.kim@brightline-legal.example>
 To: Alex Rivera <alex@example.com>
 In-Reply-To: <sent-004@example.com>
 References: <sent-004@example.com>

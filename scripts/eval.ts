@@ -35,18 +35,31 @@ if (live) {
   if (!existsSync(cachePath)) {
     fail(`No recorded Jev answers at ${cachePath}.\nRun \`npm run eval -- --live\` first (needs TYPESAFE_API_KEY) to record them.`);
   }
-  classifier = new CachedClassifier(loadCache(cachePath));
+  let cache: ReturnType<typeof loadCache>;
+  try {
+    cache = loadCache(cachePath);
+  } catch (err) {
+    fail(`Could not read recorded Jev answers at ${cachePath} (${err instanceof SyntaxError ? err.message : "unexpected format"}).\nRe-run \`npm run eval -- --live\` (needs TYPESAFE_API_KEY) to record them again.`);
+  }
+  classifier = new CachedClassifier(cache);
 }
 
 const source = new FixtureMailSource({ emlDir: join(dir, "eml"), contextFile: join(dir, "context.json") });
 const ctx = await source.loadContext(recipient);
 const { messages } = await source.fetchNew({ folder: "INBOX", sinceDate: new Date(0), afterUid: 0, uidValidity: null, maxMessages: 1000 });
 
+// Check coverage before classifying so a --live run never spends credit on an incomplete set.
+const seen = new Set(messages.map((m) => m.messageId));
+const missing = [...labels.values()].filter((e) => !seen.has(`<${e.file}@demo.jev.local>`)).map((e) => e.file);
+if (missing.length > 0 || messages.length !== labels.size) {
+  fail(`Found ${messages.length} .eml for ${labels.size} labelled emails${missing.length ? ` (missing: ${missing.join(", ")})` : ""}.\nRun \`npm run fixtures:demo\` to regenerate fixtures/demo/eml.`);
+}
+
 const rows: EvalRow[] = [];
 let model = "unknown";
 for (const m of messages) {
   const label = labels.get(m.messageId);
-  if (!label) throw new Error(`No label for ${m.messageId}`);
+  if (!label) fail(`No label in source.json for ${m.messageId}`);
   const signals = computeSignals(m, ctx);
   const answers = await classifier.classify(buildState(m, signals, recipient)).catch((err: unknown) => {
     if (err instanceof CacheMissError) {
@@ -58,6 +71,10 @@ for (const m of messages) {
   const actual = decide(answers, signals, DEFAULT_THRESHOLDS).category;
   rows.push({ expected: label.label, actual, lang: label.lang });
   if (actual !== label.label) console.log(`✗ ${label.file}: expected ${label.label}, got ${actual}`);
+}
+
+if (rows.length !== labels.size) {
+  fail(`Evaluated ${rows.length} of ${labels.size} labelled emails.\nRun \`npm run fixtures:demo\` to regenerate fixtures/demo/eml.`);
 }
 
 const metrics = computeMetrics(rows);

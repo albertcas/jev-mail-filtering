@@ -14,10 +14,10 @@
     "file": "002-worth-reading-es-electricity-bill",
     "label": "worth_reading",
     "lang": "es",
-    "from": "Luz Clara Energía <facturas@luzclara-energia.es>",
+    "from": "Luz Clara Energía <facturas@luzclara-energia.example>",
     "subject": "Tu factura de luz de septiembre ya está disponible",
     "date": "2026-09-19T07:30:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=luzclara-energia.es; spf=pass; dmarc=pass",
+    "auth": "mx.example.com; dkim=pass header.d=luzclara-energia.example; spf=pass; dmarc=pass",
     "text": "Hola Alex:\n\nYa tienes disponible tu factura del periodo 18/08/2026 – 17/09/2026.\n\nImporte: 47,36 €\nConsumo: 182 kWh\nFecha de cargo: 3 de octubre de 2026, en la cuenta que tienes domiciliada.\n\nTe adjuntamos la factura en PDF. También puedes consultarla en tu área de cliente.\n\nUn saludo,\nEquipo de Luz Clara Energía",
     "attachments": [{ "filename": "factura-LC-2026-09.pdf", "contentType": "application/pdf" }]
   },
@@ -25,12 +25,12 @@
     "file": "003-commercial-en-saas-upgrade",
     "label": "commercial",
     "lang": "en",
-    "from": "Taskflow <team@taskflow.app>",
-    "subject": "Unlock Taskflow Pro — 40% off annual plans this week",
+    "from": "Planlane <team@planlane.example>",
+    "subject": "Unlock Planlane Pro — 40% off annual plans this week",
     "date": "2026-09-19T15:00:00+00:00",
-    "auth": "mx.example.com; dkim=pass header.d=taskflow.app; spf=pass; dmarc=pass",
-    "listUnsubscribe": "<https://taskflow.app/unsubscribe?u=8812>",
-    "html": "<h2>Your team is growing. Your plan should too.</h2><p>Get unlimited boards, time tracking and guest seats with Taskflow Pro. For the next 7 days, annual plans are <strong>40% off</strong>.</p><p><a href=\"https://taskflow.app/pricing?promo=PRO40\">Upgrade now</a></p><p style=\"font-size:11px\">You are receiving this because you have a Taskflow account. <a href=\"https://taskflow.app/unsubscribe?u=8812\">Unsubscribe</a></p>"
+    "auth": "mx.example.com; dkim=pass header.d=planlane.example; spf=pass; dmarc=pass",
+    "listUnsubscribe": "<https://planlane.example/unsubscribe?u=8812>",
+    "html": "<h2>Your team is growing. Your plan should too.</h2><p>Get unlimited boards, time tracking and guest seats with Planlane Pro. For the next 7 days, annual plans are <strong>40% off</strong>.</p><p><a href=\"https://planlane.example/pricing?promo=PRO40\">Upgrade now</a></p><p style=\"font-size:11px\">You are receiving this because you have a Planlane account. <a href=\"https://planlane.example/unsubscribe?u=8812\">Unsubscribe</a></p>"
   },
   {
     "file": "004-needs-reply-en-coworker-review",
@@ -56,11 +56,11 @@
     "file": "006-worth-reading-en-order-shipped",
     "label": "worth_reading",
     "lang": "en",
-    "from": "Northwind Outfitters <orders@northwind-outfitters.com>",
+    "from": "Northwind Outfitters <orders@northwind-outfitters.example>",
     "subject": "Your order #NW-58210 has shipped",
     "date": "2026-09-21T11:05:00+01:00",
-    "auth": "mx.example.com; dkim=pass header.d=northwind-outfitters.com; spf=pass; dmarc=pass",
-    "html": "<p>Hi Alex,</p><p>Good news — your order is on its way.</p><ul><li>1 × Waterproof hiking jacket (M)</li><li>1 × Merino wool socks, 2-pack</li></ul><p>Estimated delivery: Thursday, 24 September.</p><p><a href=\"https://northwind-outfitters.com/orders/NW-58210/track\">Track your package</a></p><p>Thanks for shopping with us,<br>Northwind Outfitters</p>"
+    "auth": "mx.example.com; dkim=pass header.d=northwind-outfitters.example; spf=pass; dmarc=pass",
+    "html": "<p>Hi Alex,</p><p>Good news — your order is on its way.</p><ul><li>1 × Waterproof hiking jacket (M)</li><li>1 × Merino wool socks, 2-pack</li></ul><p>Estimated delivery: Thursday, 24 September.</p><p><a href=\"https://northwind-outfitters.example/orders/NW-58210/track\">Track your package</a></p><p>Thanks for shopping with us,<br>Northwind Outfitters</p>"
   },
   {
     "file": "007-needs-reply-es-family-lunch",
@@ -76,22 +76,22 @@
     "file": "008-commercial-es-cold-b2b",
     "label": "commercial",
     "lang": "es",
-    "from": "Iván Soler <ivan@crecemarketing.es>",
+    "from": "Iván Soler <ivan@crecemarketing.example>",
     "subject": "Más clientes para tu estudio en 90 días",
     "date": "2026-09-22T09:47:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=crecemarketing.es; spf=pass; dmarc=pass",
-    "text": "Hola Alex,\n\nhe visto la web de tu estudio y creo que estáis dejando pasar muchas oportunidades en Google. En Crece Marketing ayudamos a estudios de diseño como el tuyo a conseguir entre 5 y 10 clientes nuevos al mes con campañas de captación.\n\n¿Te encajaría una llamada de 15 minutos esta semana para enseñarte cómo lo hacemos?\n\nUn saludo,\nIván Soler\nDirector comercial · Crece Marketing"
+    "auth": "mx.example.com; dkim=pass header.d=crecemarketing.example; spf=pass; dmarc=pass",
+    "text": "Hola Alex,\n\nhe visto la web de tu estudio y creo que estáis dejando pasar muchas oportunidades en los buscadores. En Crece Marketing ayudamos a estudios de diseño como el tuyo a conseguir entre 5 y 10 clientes nuevos al mes con campañas de captación.\n\n¿Te encajaría una llamada de 15 minutos esta semana para enseñarte cómo lo hacemos?\n\nUn saludo,\nIván Soler\nDirector comercial · Crece Marketing"
   },
   {
     "file": "009-worth-reading-es-newsletter",
     "label": "worth_reading",
     "lang": "es",
-    "from": "La Letra Pequeña <boletin@laletrapequena.es>",
+    "from": "La Letra Pequeña <boletin@laletrapequena.example>",
     "subject": "La Letra Pequeña #87: tipografías variables sin miedo",
     "date": "2026-09-23T07:00:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=laletrapequena.es; spf=pass; dmarc=pass",
-    "listUnsubscribe": "<https://laletrapequena.es/baja?s=alex>",
-    "html": "<h1>La Letra Pequeña #87</h1><p>Hola, suscriptora o suscriptor:</p><p>Esta semana hablamos de tipografías variables: qué son los ejes, cómo cargarlas sin disparar el peso de la página y por qué ya no hace falta servir seis archivos distintos para una sola familia.</p><p>También repasamos tres herramientas para comprobar el contraste de texto sobre imágenes y os recomendamos una charla sobre legibilidad en pantallas pequeñas.</p><p><a href=\"https://laletrapequena.es/87\">Leer el número completo</a></p><p>Nos leemos el próximo miércoles.</p><p style=\"font-size:11px\">Recibes este boletín porque te suscribiste en laletrapequena.es. <a href=\"https://laletrapequena.es/baja?s=alex\">Darse de baja</a></p>"
+    "auth": "mx.example.com; dkim=pass header.d=laletrapequena.example; spf=pass; dmarc=pass",
+    "listUnsubscribe": "<https://laletrapequena.example/baja?s=alex>",
+    "html": "<h1>La Letra Pequeña #87</h1><p>Hola, suscriptora o suscriptor:</p><p>Esta semana hablamos de tipografías variables: qué son los ejes, cómo cargarlas sin disparar el peso de la página y por qué ya no hace falta servir seis archivos distintos para una sola familia.</p><p>También repasamos tres herramientas para comprobar el contraste de texto sobre imágenes y os recomendamos una charla sobre legibilidad en pantallas pequeñas.</p><p><a href=\"https://laletrapequena.example/87\">Leer el número completo</a></p><p>Nos leemos el próximo miércoles.</p><p style=\"font-size:11px\">Recibes este boletín porque te suscribiste en laletrapequena.example. <a href=\"https://laletrapequena.example/baja?s=alex\">Darse de baja</a></p>"
   },
   {
     "file": "010-scam-en-microsoft-password",
@@ -107,10 +107,10 @@
     "file": "011-needs-reply-en-client-proposal",
     "label": "needs_reply",
     "lang": "en",
-    "from": "Oliver Grant <oliver@grantandhale.co.uk>",
+    "from": "Oliver Grant <oliver@grantandhale.example>",
     "subject": "Questions on the website proposal",
     "date": "2026-09-24T14:18:00+01:00",
-    "auth": "mx.example.com; dkim=pass header.d=grantandhale.co.uk; spf=pass; dmarc=pass",
+    "auth": "mx.example.com; dkim=pass header.d=grantandhale.example; spf=pass; dmarc=pass",
     "text": "Hi Alex,\n\nThanks for sending the proposal over — the team really liked the direction, especially the idea of putting the case studies front and centre.\n\nBefore we sign off, a few questions:\n\n1. Does the quote include migrating the 60-odd blog posts from our current site, or is that extra?\n2. Could we split the payment into three milestones instead of two?\n3. Would a launch before the end of November be realistic?\n\nIf it's easier, happy to jump on a call next week.\n\nBest,\nOliver Grant\nPartner, Grant & Hale"
   },
   {
@@ -127,12 +127,12 @@
     "file": "013-worth-reading-en-newsletter",
     "label": "worth_reading",
     "lang": "en",
-    "from": "Frontend Field Notes <hello@fieldnotes.dev>",
+    "from": "Frontend Field Notes <hello@fieldnotes.example>",
     "subject": "Field Notes #142: the quiet death of the CSS reset",
     "date": "2026-09-24T06:30:00+00:00",
-    "auth": "mx.example.com; dkim=pass header.d=fieldnotes.dev; spf=pass; dmarc=pass",
-    "listUnsubscribe": "<mailto:unsubscribe@fieldnotes.dev?subject=unsubscribe>, <https://fieldnotes.dev/unsubscribe/a91f>",
-    "html": "<h1>Field Notes #142</h1><p>Hi there,</p><p>This week: why modern browser defaults have made most CSS resets unnecessary, a practical look at container queries in production dashboards, and a short essay on writing error messages people actually read.</p><p><a href=\"https://fieldnotes.dev/142\">Read issue #142 on the web</a></p><p>— Nadia</p><p style=\"font-size:11px\">You subscribed at fieldnotes.dev. <a href=\"https://fieldnotes.dev/unsubscribe/a91f\">Unsubscribe</a></p>"
+    "auth": "mx.example.com; dkim=pass header.d=fieldnotes.example; spf=pass; dmarc=pass",
+    "listUnsubscribe": "<mailto:unsubscribe@fieldnotes.example?subject=unsubscribe>, <https://fieldnotes.example/unsubscribe/a91f>",
+    "html": "<h1>Field Notes #142</h1><p>Hi there,</p><p>This week: why modern browser defaults have made most CSS resets unnecessary, a practical look at container queries in production dashboards, and a short essay on writing error messages people actually read.</p><p><a href=\"https://fieldnotes.example/142\">Read issue #142 on the web</a></p><p>— Nadia</p><p style=\"font-size:11px\">You subscribed at fieldnotes.example. <a href=\"https://fieldnotes.example/unsubscribe/a91f\">Unsubscribe</a></p>"
   },
   {
     "file": "014-needs-reply-es-wedding-rsvp",
@@ -148,21 +148,21 @@
     "file": "015-commercial-en-cold-b2b",
     "label": "commercial",
     "lang": "en",
-    "from": "Kevin Marsh <kevin@leadspire.io>",
+    "from": "Kevin Marsh <kevin@leadspire.example>",
     "subject": "Quick question about example.com",
     "date": "2026-09-23T13:26:00+00:00",
-    "auth": "mx.example.com; dkim=pass header.d=leadspire.io; spf=pass; dmarc=pass",
+    "auth": "mx.example.com; dkim=pass header.d=leadspire.example; spf=pass; dmarc=pass",
     "text": "Hi Alex,\n\nI was looking at example.com and noticed you don't seem to be running outbound campaigns yet. Leadspire books 15–20 qualified sales meetings a month for agencies your size, and you only pay per meeting held.\n\nWorth a 10-minute chat on Thursday?\n\nCheers,\nKevin Marsh\nGrowth Lead, Leadspire"
   },
   {
     "file": "016-worth-reading-es-security-notice",
     "label": "worth_reading",
     "lang": "es",
-    "from": "Banco Litoral <alertas@bancolitoral.es>",
+    "from": "Banco Litoral <alertas@bancolitoral.example>",
     "subject": "Nuevo inicio de sesión en tu banca online",
     "date": "2026-09-26T21:34:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=bancolitoral.es; spf=pass smtp.mailfrom=bancolitoral.es; dmarc=pass",
-    "text": "Hola, Alex:\n\nSe ha iniciado sesión en tu banca online el 26/09/2026 a las 21:31 desde un navegador Firefox en Windows (Valencia).\n\nSi has sido tú, no tienes que hacer nada.\n\nSi no reconoces este acceso, entra en la app de Banco Litoral y cambia tu clave, o llámanos al 900 123 456. Recuerda que nunca te pediremos claves ni códigos por correo electrónico.\n\nBanco Litoral"
+    "auth": "mx.example.com; dkim=pass header.d=bancolitoral.example; spf=pass smtp.mailfrom=bancolitoral.example; dmarc=pass",
+    "text": "Hola, Alex:\n\nSe ha iniciado sesión en tu banca online el 26/09/2026 a las 21:31 desde un navegador de escritorio (Valencia).\n\nSi has sido tú, no tienes que hacer nada.\n\nSi no reconoces este acceso, entra en la app de Banco Litoral y cambia tu clave, o llámanos al 900 123 456. Recuerda que nunca te pediremos claves ni códigos por correo electrónico.\n\nBanco Litoral"
   },
   {
     "file": "017-scam-en-paypal",
@@ -189,21 +189,21 @@
     "file": "019-commercial-es-product-launch",
     "label": "commercial",
     "lang": "es",
-    "from": "Tostadores del Sur <hola@tostadoresdelsur.es>",
+    "from": "Tostadores del Sur <hola@tostadoresdelsur.example>",
     "subject": "Nuevo: Yirgacheffe de Etiopía, recién tostado",
     "date": "2026-09-24T11:00:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=tostadoresdelsur.es; spf=pass; dmarc=pass",
-    "listUnsubscribe": "<https://tostadoresdelsur.es/newsletter/baja?id=5521>",
-    "html": "<h1>Llega el café de otoño</h1><p>Notas de bergamota, melocotón y té negro. Nuestro nuevo lote de Etiopía ya está disponible en grano y molido, en bolsas de 250 g y 1 kg.</p><p>Envío gratis a partir de 30 €.</p><p><a href=\"https://tostadoresdelsur.es/cafe/etiopia-yirgacheffe\">Comprar ahora</a></p><p style=\"font-size:11px\"><a href=\"https://tostadoresdelsur.es/newsletter/baja?id=5521\">Darme de baja</a></p>"
+    "auth": "mx.example.com; dkim=pass header.d=tostadoresdelsur.example; spf=pass; dmarc=pass",
+    "listUnsubscribe": "<https://tostadoresdelsur.example/newsletter/baja?id=5521>",
+    "html": "<h1>Llega el café de otoño</h1><p>Notas de bergamota, melocotón y té negro. Nuestro nuevo lote de Etiopía ya está disponible en grano y molido, en bolsas de 250 g y 1 kg.</p><p>Envío gratis a partir de 30 €.</p><p><a href=\"https://tostadoresdelsur.example/cafe/etiopia-yirgacheffe\">Comprar ahora</a></p><p style=\"font-size:11px\"><a href=\"https://tostadoresdelsur.example/newsletter/baja?id=5521\">Darme de baja</a></p>"
   },
   {
     "file": "020-worth-reading-en-security-notice",
     "label": "worth_reading",
     "lang": "en",
-    "from": "Codehaven <noreply@codehaven.dev>",
+    "from": "Codehaven <noreply@codehaven.example>",
     "subject": "[Codehaven] A new SSH key was added to your account",
     "date": "2026-09-25T17:48:00+00:00",
-    "auth": "mx.example.com; dkim=pass header.d=codehaven.dev; spf=pass smtp.mailfrom=codehaven.dev; dmarc=pass",
+    "auth": "mx.example.com; dkim=pass header.d=codehaven.example; spf=pass smtp.mailfrom=codehaven.example; dmarc=pass",
     "text": "Hi alexrivera,\n\nThe following SSH key was added to your account:\n\n  laptop-2026 (ED25519) SHA256:q3Vd8c1mZkT7yJ0pLr2x\n\nIf you added this key, you can ignore this email.\n\nIf you didn't, remove the key from Settings > SSH keys and review your account's security log.\n\nThanks,\nThe Codehaven Team"
   },
   {
@@ -232,11 +232,11 @@
     "file": "023-worth-reading-es-order-shipped",
     "label": "worth_reading",
     "lang": "es",
-    "from": "Librería Alcalá <pedidos@libreria-alcala.es>",
+    "from": "Librería Alcalá <pedidos@libreria-alcala.example>",
     "subject": "Tu pedido #10482 ya está en camino",
     "date": "2026-09-26T13:12:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=libreria-alcala.es; spf=pass; dmarc=pass",
-    "html": "<p>Hola Alex,</p><p>Tu pedido <b>#10482</b> ha salido de nuestro almacén:</p><ul><li>«Diseño de interfaces que respiran» – 1 ud.</li><li>«Manual de tipografía» – 1 ud.</li></ul><p>Lo recibirás entre el martes y el miércoles.</p><p><a href=\"https://libreria-alcala.es/cuenta/pedidos/10482\">Seguir mi pedido</a></p><p>¡Gracias por comprar en una librería de barrio!</p>"
+    "auth": "mx.example.com; dkim=pass header.d=libreria-alcala.example; spf=pass; dmarc=pass",
+    "html": "<p>Hola Alex,</p><p>Tu pedido <b>#10482</b> ha salido de nuestro almacén:</p><ul><li>«Diseño de interfaces que respiran» – 1 ud.</li><li>«Manual de tipografía» – 1 ud.</li></ul><p>Lo recibirás entre el martes y el miércoles.</p><p><a href=\"https://libreria-alcala.example/cuenta/pedidos/10482\">Seguir mi pedido</a></p><p>¡Gracias por comprar en una librería de barrio!</p>"
   },
   {
     "file": "024-needs-reply-en-family-visit",
@@ -252,12 +252,12 @@
     "file": "025-commercial-en-product-launch",
     "label": "commercial",
     "lang": "en",
-    "from": "Lumen Audio <news@lumenaudio.com>",
+    "from": "Lumen Audio <news@lumenaudio.example>",
     "subject": "Introducing Lumen Pods 2 — quieter, lighter, 30-hour battery",
     "date": "2026-09-22T16:00:00+00:00",
-    "auth": "mx.example.com; dkim=pass header.d=lumenaudio.com; spf=pass; dmarc=pass",
-    "listUnsubscribe": "<https://lumenaudio.com/email/unsubscribe?t=77c1>",
-    "html": "<h1>Meet Lumen Pods 2</h1><p>Adaptive noise cancelling, 30 hours of battery with the case and a new fit that stays put on your run.</p><p>Pre-order today and get a free travel case.</p><p><a href=\"https://lumenaudio.com/pods-2\">Pre-order now</a></p><p style=\"font-size:11px\"><a href=\"https://lumenaudio.com/email/unsubscribe?t=77c1\">Unsubscribe</a></p>"
+    "auth": "mx.example.com; dkim=pass header.d=lumenaudio.example; spf=pass; dmarc=pass",
+    "listUnsubscribe": "<https://lumenaudio.example/email/unsubscribe?t=77c1>",
+    "html": "<h1>Meet Lumen Pods 2</h1><p>Adaptive noise cancelling, 30 hours of battery with the case and a new fit that stays put on your run.</p><p>Pre-order today and get a free travel case.</p><p><a href=\"https://lumenaudio.example/pods-2\">Pre-order now</a></p><p style=\"font-size:11px\"><a href=\"https://lumenaudio.example/email/unsubscribe?t=77c1\">Unsubscribe</a></p>"
   },
   {
     "file": "026-scam-en-invoice-exe",
@@ -274,10 +274,10 @@
     "file": "027-needs-reply-es-deadline-today",
     "label": "needs_reply",
     "lang": "es",
-    "from": "Nuria Ribera <nuria@gestoriaribera.es>",
+    "from": "Nuria Ribera <nuria@gestoriaribera.example>",
     "subject": "URGENTE: facturas del trimestre, las necesito hoy",
     "date": "2026-09-29T08:05:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=gestoriaribera.es; spf=pass; dmarc=pass",
+    "auth": "mx.example.com; dkim=pass header.d=gestoriaribera.example; spf=pass; dmarc=pass",
     "text": "Buenos días, Alex:\n\nPara poder presentar el IVA del tercer trimestre a tiempo necesito que me envíes hoy, antes de las 14:00, las facturas emitidas de julio a septiembre y los tickets de gastos que quieras deducir.\n\nSi te falta alguna, mándame lo que tengas y me dices qué queda pendiente.\n\nGracias,\nNuria Ribera\nGestoría Ribera"
   },
   {
@@ -294,12 +294,12 @@
     "file": "029-none-en-social-digest",
     "label": "none",
     "lang": "en",
-    "from": "Threadly <digest@threadly.io>",
+    "from": "Threadly <digest@threadly.example>",
     "subject": "Alex, you have 4 new notifications",
     "date": "2026-09-27T08:00:00+00:00",
-    "auth": "mx.example.com; dkim=pass header.d=threadly.io; spf=pass; dmarc=pass",
-    "listUnsubscribe": "<https://threadly.io/settings/email?unsub=digest>",
-    "html": "<p>Here's what you missed on Threadly this week:</p><ul><li>Jamie and 2 others liked your post</li><li>Rosa Lind started following you</li><li>3 people viewed your profile</li></ul><p><a href=\"https://threadly.io/notifications\">See all notifications</a></p><p style=\"font-size:11px\">You're receiving your weekly digest. <a href=\"https://threadly.io/settings/email?unsub=digest\">Change email settings</a></p>"
+    "auth": "mx.example.com; dkim=pass header.d=threadly.example; spf=pass; dmarc=pass",
+    "listUnsubscribe": "<https://threadly.example/settings/email?unsub=digest>",
+    "html": "<p>Here's what you missed on Threadly this week:</p><ul><li>Jamie and 2 others liked your post</li><li>Rosa Lind started following you</li><li>3 people viewed your profile</li></ul><p><a href=\"https://threadly.example/notifications\">See all notifications</a></p><p style=\"font-size:11px\">You're receiving your weekly digest. <a href=\"https://threadly.example/settings/email?unsub=digest\">Change email settings</a></p>"
   },
   {
     "file": "030-commercial-es-sale",
@@ -316,10 +316,10 @@
     "file": "031-needs-reply-en-thread-logo-files",
     "label": "needs_reply",
     "lang": "en",
-    "from": "Daniel Okafor <daniel@okafor-studio.com>",
+    "from": "Daniel Okafor <daniel@okafor-studio.example>",
     "subject": "Re: Logo files for the rebrand",
     "date": "2026-09-27T11:27:00+01:00",
-    "auth": "mx.example.com; dkim=pass header.d=okafor-studio.com; spf=pass; dmarc=pass",
+    "auth": "mx.example.com; dkim=pass header.d=okafor-studio.example; spf=pass; dmarc=pass",
     "inReplyTo": "<sent-002@example.com>",
     "text": "Hi Alex,\n\nThanks for the files, they look great. One thing: the printer is asking for the logo in CMYK and as outlined PDF, not just SVG. Can you export those, or should I ask them to convert it?\n\nAlso — do you want the dark-background version on the business cards or the standard one?\n\nCheers,\nDaniel"
   },
@@ -347,12 +347,12 @@
     "file": "034-commercial-en-coupon",
     "label": "commercial",
     "lang": "en",
-    "from": "Greenleaf Grocers <deals@greenleafgrocers.com>",
+    "from": "Greenleaf Grocers <deals@greenleafgrocers.example>",
     "subject": "Here's $10 off your next order 🥕",
     "date": "2026-09-25T09:00:00+00:00",
-    "auth": "mx.example.com; dkim=pass header.d=greenleafgrocers.com; spf=pass; dmarc=pass",
-    "listUnsubscribe": "<https://greenleafgrocers.com/unsubscribe?c=ALX10>",
-    "html": "<h2>We miss you, Alex!</h2><p>Use code <strong>FRESH10</strong> for $10 off any order over $50. Valid until Sunday.</p><p><a href=\"https://greenleafgrocers.com/shop?code=FRESH10\">Start shopping</a></p><p style=\"font-size:11px\"><a href=\"https://greenleafgrocers.com/unsubscribe?c=ALX10\">Unsubscribe</a></p>"
+    "auth": "mx.example.com; dkim=pass header.d=greenleafgrocers.example; spf=pass; dmarc=pass",
+    "listUnsubscribe": "<https://greenleafgrocers.example/unsubscribe?c=ALX10>",
+    "html": "<h2>We miss you, Alex!</h2><p>Use code <strong>FRESH10</strong> for $10 off any order over $50. Valid until Sunday.</p><p><a href=\"https://greenleafgrocers.example/shop?code=FRESH10\">Start shopping</a></p><p style=\"font-size:11px\"><a href=\"https://greenleafgrocers.example/unsubscribe?c=ALX10\">Unsubscribe</a></p>"
   },
   {
     "file": "035-needs-reply-es-coworker-cover",
@@ -379,32 +379,32 @@
     "file": "037-worth-reading-en-domain-renewal",
     "label": "worth_reading",
     "lang": "en",
-    "from": "Porchlight Domains <billing@porchlightdomains.com>",
-    "subject": "Receipt: alexrivera.dev renewed for 1 year",
+    "from": "Porchlight Domains <billing@porchlightdomains.example>",
+    "subject": "Receipt: alexrivera.example renewed for 1 year",
     "date": "2026-09-20T08:25:00+00:00",
-    "auth": "mx.example.com; dkim=pass header.d=porchlightdomains.com; spf=pass; dmarc=pass",
-    "text": "Hi Alex,\n\nYour domain alexrivera.dev has been renewed automatically.\n\nNew expiry date: 20 September 2027\nAmount charged: USD 14.00 (card ending 0932)\n\nYour receipt is attached. You don't need to do anything else.\n\nPorchlight Domains",
+    "auth": "mx.example.com; dkim=pass header.d=porchlightdomains.example; spf=pass; dmarc=pass",
+    "text": "Hi Alex,\n\nYour domain alexrivera.example has been renewed automatically.\n\nNew expiry date: 20 September 2027\nAmount charged: USD 14.00 (card ending 0932)\n\nYour receipt is attached. You don't need to do anything else.\n\nPorchlight Domains",
     "attachments": [{ "filename": "receipt-PD-449120.pdf", "contentType": "application/pdf" }]
   },
   {
     "file": "038-commercial-es-coupon",
     "label": "commercial",
     "lang": "es",
-    "from": "Hornos Mediterráneo <promo@hornosmediterraneo.es>",
+    "from": "Hornos Mediterráneo <promo@hornosmediterraneo.example>",
     "subject": "Tu cupón de 5 € caduca el domingo 🍕",
     "date": "2026-09-27T12:00:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=hornosmediterraneo.es; spf=pass; dmarc=pass",
-    "listUnsubscribe": "<https://hornosmediterraneo.es/baja?c=88311>",
-    "html": "<h2>¡No lo dejes escapar!</h2><p>Usa el código <strong>PIZZA5</strong> en tu próximo pedido a domicilio y te descontamos 5 €. Válido hasta el domingo 4 de octubre.</p><p><a href=\"https://hornosmediterraneo.es/pedir?cupon=PIZZA5\">Pedir ahora</a></p><p style=\"font-size:11px\"><a href=\"https://hornosmediterraneo.es/baja?c=88311\">No quiero recibir más ofertas</a></p>"
+    "auth": "mx.example.com; dkim=pass header.d=hornosmediterraneo.example; spf=pass; dmarc=pass",
+    "listUnsubscribe": "<https://hornosmediterraneo.example/baja?c=88311>",
+    "html": "<h2>¡No lo dejes escapar!</h2><p>Usa el código <strong>PIZZA5</strong> en tu próximo pedido a domicilio y te descontamos 5 €. Válido hasta el domingo 4 de octubre.</p><p><a href=\"https://hornosmediterraneo.example/pedir?cupon=PIZZA5\">Pedir ahora</a></p><p style=\"font-size:11px\"><a href=\"https://hornosmediterraneo.example/baja?c=88311\">No quiero recibir más ofertas</a></p>"
   },
   {
     "file": "039-needs-reply-en-deadline-today",
     "label": "needs_reply",
     "lang": "en",
-    "from": "Rachel Kim <rachel.kim@brightline-legal.com>",
+    "from": "Rachel Kim <rachel.kim@brightline-legal.example>",
     "subject": "Re: Q4 retainer contract — need your signature today",
     "date": "2026-09-29T09:12:00+01:00",
-    "auth": "mx.example.com; dkim=pass header.d=brightline-legal.com; spf=pass; dmarc=pass",
+    "auth": "mx.example.com; dkim=pass header.d=brightline-legal.example; spf=pass; dmarc=pass",
     "inReplyTo": "<sent-004@example.com>",
     "text": "Hi Alex,\n\nI've made the two changes you asked for (payment terms now net-30, and the IP clause limited to final deliverables). The client wants to start on 1 October, so I need the signed copy back today, before 5 pm UK time, to get it countersigned.\n\nCan you confirm you're happy with the changes and send it over?\n\nBest,\nRachel Kim\nBrightline Legal"
   },
@@ -412,20 +412,20 @@
     "file": "040-worth-reading-es-dentist-reminder",
     "label": "worth_reading",
     "lang": "es",
-    "from": "Clínica Dental Sonrisa Norte <citas@clinicasonrisanorte.es>",
+    "from": "Clínica Dental Sonrisa Norte <citas@clinicasonrisanorte.example>",
     "subject": "Recordatorio: tu cita del viernes 2 de octubre",
     "date": "2026-09-28T10:00:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=clinicasonrisanorte.es; spf=pass; dmarc=pass",
+    "auth": "mx.example.com; dkim=pass header.d=clinicasonrisanorte.example; spf=pass; dmarc=pass",
     "text": "Hola Alex:\n\nTe recordamos tu cita de revisión y limpieza el viernes 2 de octubre a las 17:30 con la Dra. Serrano, en C/ Mayor 14, 1.º.\n\nNo es necesario que respondas a este correo. Si no puedes venir, llámanos al 960 000 111 con al menos 24 horas de antelación.\n\nClínica Dental Sonrisa Norte"
   },
   {
     "file": "041-worth-reading-en-invoice",
     "label": "worth_reading",
     "lang": "en",
-    "from": "Hetzner Billing <billing@hetzner.com>",
+    "from": "Nordhost Billing <billing@nordhost.example>",
     "subject": "Your invoice for September 2026",
     "date": "2026-09-25T06:00:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=hetzner.com; spf=pass; dmarc=pass",
+    "auth": "mx.example.com; dkim=pass header.d=nordhost.example; spf=pass; dmarc=pass",
     "text": "Dear customer,\n\nyour invoice for September 2026 (EUR 8.21) is now available in your account. The amount will be charged automatically.\n\nKind regards",
     "attachments": [{ "filename": "invoice-2026-09.pdf", "contentType": "application/pdf" }]
   },
@@ -433,12 +433,12 @@
     "file": "042-commercial-en-flash-sale",
     "label": "commercial",
     "lang": "en",
-    "from": "Driftwood Supply Co. <hello@driftwoodsupply.com>",
+    "from": "Driftwood Supply Co. <hello@driftwoodsupply.example>",
     "subject": "48-hour flash sale: up to 50% off camping gear",
     "date": "2026-09-28T07:00:00+00:00",
-    "auth": "mx.example.com; dkim=pass header.d=driftwoodsupply.com; spf=pass; dmarc=pass",
-    "listUnsubscribe": "<https://driftwoodsupply.com/unsubscribe?e=a1b2c3>",
-    "html": "<h1>Flash sale — 48 hours only</h1><p>Tents, stoves and sleeping bags up to 50% off while stocks last. Free returns on every order.</p><p><a href=\"https://driftwoodsupply.com/sale\">Shop the sale</a></p><p style=\"font-size:11px\"><a href=\"https://driftwoodsupply.com/unsubscribe?e=a1b2c3\">Unsubscribe</a></p>"
+    "auth": "mx.example.com; dkim=pass header.d=driftwoodsupply.example; spf=pass; dmarc=pass",
+    "listUnsubscribe": "<https://driftwoodsupply.example/unsubscribe?e=a1b2c3>",
+    "html": "<h1>Flash sale — 48 hours only</h1><p>Tents, stoves and sleeping bags up to 50% off while stocks last. Free returns on every order.</p><p><a href=\"https://driftwoodsupply.example/sale\">Shop the sale</a></p><p style=\"font-size:11px\"><a href=\"https://driftwoodsupply.example/unsubscribe?e=a1b2c3\">Unsubscribe</a></p>"
   },
   {
     "file": "043-scam-en-netflix-payment",
@@ -454,12 +454,12 @@
     "file": "044-commercial-es-rural-getaways",
     "label": "commercial",
     "lang": "es",
-    "from": "Escapadas Rurales <ofertas@escapadasrurales.es>",
+    "from": "Escapadas Rurales <ofertas@escapadasrurales.example>",
     "subject": "Puente de octubre: casas rurales desde 49 € la noche",
     "date": "2026-09-23T18:00:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=escapadasrurales.es; spf=pass; dmarc=pass",
-    "listUnsubscribe": "<https://escapadasrurales.es/baja?u=alx>",
-    "html": "<h1>¿Te escapas en el puente?</h1><p>Casas con chimenea en el Pirineo, el Matarraña y la Sierra de Gredos desde 49 € la noche. Reserva antes del jueves y la cancelación es gratuita.</p><p><a href=\"https://escapadasrurales.es/puente-octubre\">Ver casas disponibles</a></p><p style=\"font-size:11px\"><a href=\"https://escapadasrurales.es/baja?u=alx\">Darse de baja</a></p>"
+    "auth": "mx.example.com; dkim=pass header.d=escapadasrurales.example; spf=pass; dmarc=pass",
+    "listUnsubscribe": "<https://escapadasrurales.example/baja?u=alx>",
+    "html": "<h1>¿Te escapas en el puente?</h1><p>Casas con chimenea en el Pirineo, el Matarraña y la Sierra de Gredos desde 49 € la noche. Reserva antes del jueves y la cancelación es gratuita.</p><p><a href=\"https://escapadasrurales.example/puente-octubre\">Ver casas disponibles</a></p><p style=\"font-size:11px\"><a href=\"https://escapadasrurales.example/baja?u=alx\">Darse de baja</a></p>"
   },
   {
     "file": "045-scam-es-fake-invoice-html",
@@ -476,12 +476,12 @@
     "file": "046-commercial-es-course-enrolment",
     "label": "commercial",
     "lang": "es",
-    "from": "Academia CodeNorte <info@academiacodenorte.es>",
+    "from": "Academia CodeNorte <info@academiacodenorte.example>",
     "subject": "Última semana: TypeScript avanzado con un 20 % de descuento",
     "date": "2026-09-21T10:30:00+02:00",
-    "auth": "mx.example.com; dkim=pass header.d=academiacodenorte.es; spf=pass; dmarc=pass",
-    "listUnsubscribe": "<https://academiacodenorte.es/newsletter/baja?id=3310>",
-    "html": "<h2>Quedan 7 plazas</h2><p>Nuestro curso online de TypeScript avanzado (8 semanas, tutorías en directo) empieza el 5 de octubre. Matricúlate esta semana y llévate un 20 % de descuento con el código <strong>TS20</strong>.</p><p><a href=\"https://academiacodenorte.es/cursos/typescript-avanzado\">Reservar mi plaza</a></p><p style=\"font-size:11px\"><a href=\"https://academiacodenorte.es/newsletter/baja?id=3310\">Darse de baja</a></p>"
+    "auth": "mx.example.com; dkim=pass header.d=academiacodenorte.example; spf=pass; dmarc=pass",
+    "listUnsubscribe": "<https://academiacodenorte.example/newsletter/baja?id=3310>",
+    "html": "<h2>Quedan 7 plazas</h2><p>Nuestro curso online de TypeScript avanzado (8 semanas, tutorías en directo) empieza el 5 de octubre. Matricúlate esta semana y llévate un 20 % de descuento con el código <strong>TS20</strong>.</p><p><a href=\"https://academiacodenorte.example/cursos/typescript-avanzado\">Reservar mi plaza</a></p><p style=\"font-size:11px\"><a href=\"https://academiacodenorte.example/newsletter/baja?id=3310\">Darse de baja</a></p>"
   },
   {
     "file": "047-scam-es-caixabank-verification",
@@ -498,12 +498,12 @@
     "file": "048-commercial-en-conference-tickets",
     "label": "commercial",
     "lang": "en",
-    "from": "DevSummit Europe <tickets@devsummit.eu>",
+    "from": "DevSummit Europe <tickets@devsummit.example>",
     "subject": "Early-bird tickets end Friday — save €200",
     "date": "2026-09-20T14:00:00+00:00",
-    "auth": "mx.example.com; dkim=pass header.d=devsummit.eu; spf=pass; dmarc=pass",
-    "listUnsubscribe": "<https://devsummit.eu/unsubscribe?r=4411>",
-    "html": "<h1>DevSummit Europe 2027 · Lisbon</h1><p>Two days, 60 talks, and the best hallway track in Europe. Early-bird pricing (€390 instead of €590) ends this Friday.</p><p><a href=\"https://devsummit.eu/tickets\">Get your ticket</a></p><p style=\"font-size:11px\"><a href=\"https://devsummit.eu/unsubscribe?r=4411\">Unsubscribe</a></p>"
+    "auth": "mx.example.com; dkim=pass header.d=devsummit.example; spf=pass; dmarc=pass",
+    "listUnsubscribe": "<https://devsummit.example/unsubscribe?r=4411>",
+    "html": "<h1>DevSummit Europe 2027 · Lisbon</h1><p>Two days, 60 talks, and the best hallway track in Europe. Early-bird pricing (€390 instead of €590) ends this Friday.</p><p><a href=\"https://devsummit.example/tickets\">Get your ticket</a></p><p style=\"font-size:11px\"><a href=\"https://devsummit.example/unsubscribe?r=4411\">Unsubscribe</a></p>"
   },
   {
     "file": "049-scam-es-injection",

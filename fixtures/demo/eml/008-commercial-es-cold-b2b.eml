@@ -1,6 +1,6 @@
 Authentication-Results: mx.example.com; dkim=pass
- header.d=crecemarketing.es; spf=pass; dmarc=pass
-From: =?UTF-8?Q?Iv=C3=A1n_Soler?= <ivan@crecemarketing.es>
+ header.d=crecemarketing.example; spf=pass; dmarc=pass
+From: =?UTF-8?Q?Iv=C3=A1n_Soler?= <ivan@crecemarketing.example>
 To: Alex Rivera <alex@example.com>
 Subject: =?UTF-8?Q?M=C3=A1s_clientes_para_tu_estudio_en_90_?=
  =?UTF-8?Q?d=C3=ADas?=
@@ -13,8 +13,8 @@ Content-Type: text/plain; charset=utf-8
 Hola Alex,
 
 he visto la web de tu estudio y creo que est=C3=A1is dejando =
-pasar muchas oportunidades en Google. En Crece Marketing ayudamos a =
-estudios de dise=C3=B1o como el tuyo a conseguir entre 5 y 10 clientes =
+pasar muchas oportunidades en los buscadores. En Crece Marketing ayudamos a=
+ estudios de dise=C3=B1o como el tuyo a conseguir entre 5 y 10 clientes =
 nuevos al mes con campa=C3=B1as de captaci=C3=B3n.
 
 =C2=BFTe encajar=C3=ADa una llamada de 15 minutos esta semana para =

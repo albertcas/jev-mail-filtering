@@ -1,6 +1,6 @@
 Authentication-Results: mx.example.com; dkim=pass
- header.d=gestoriaribera.es; spf=pass; dmarc=pass
-From: Nuria Ribera <nuria@gestoriaribera.es>
+ header.d=gestoriaribera.example; spf=pass; dmarc=pass
+From: Nuria Ribera <nuria@gestoriaribera.example>
 To: Alex Rivera <alex@example.com>
 Subject: URGENTE: facturas del trimestre, las necesito hoy
 Message-ID: <027-needs-reply-es-deadline-today@demo.jev.local>

@@ -1,7 +1,8 @@
 Authentication-Results: mx.example.com; dkim=pass
- header.d=tostadoresdelsur.es; spf=pass; dmarc=pass
-List-Unsubscribe: <https://tostadoresdelsur.es/newsletter/baja?id=5521>
-From: Tostadores del Sur <hola@tostadoresdelsur.es>
+ header.d=tostadoresdelsur.example; spf=pass; dmarc=pass
+List-Unsubscribe:
+ <https://tostadoresdelsur.example/newsletter/baja?id=5521>
+From: Tostadores del Sur <hola@tostadoresdelsur.example>
 To: Alex Rivera <alex@example.com>
 Subject: =?UTF-8?Q?Nuevo=3A_Yirgacheffe_de_Etiop=C3=ADa=2C_?=
  =?UTF-8?Q?reci=C3=A9n_tostado?=
@@ -15,7 +16,7 @@ Content-Type: text/html; charset=utf-8
 melocot=C3=B3n y t=C3=A9 negro. Nuestro nuevo lote de Etiop=C3=ADa ya =
 est=C3=A1 disponible en grano y molido, en bolsas de 250 g y 1 kg.=
 </p><p>Env=C3=ADo gratis a partir de 30 =E2=82=AC.</p><p><a =
-href=3D"https://tostadoresdelsur.es/cafe/etiopia-yirgacheffe">Comprar =
+href=3D"https://tostadoresdelsur.example/cafe/etiopia-yirgacheffe">Comprar =
 ahora</a></p><p style=3D"font-size:11px"><a href=3D"https://tostadoresdelsu=
-r.es/newsletter/baja?id=3D5521">Darme de =
+r.example/newsletter/baja?id=3D5521">Darme de =
 baja</a></p>

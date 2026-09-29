@@ -1,6 +1,6 @@
 Authentication-Results: mx.example.com; dkim=pass
- header.d=grantandhale.co.uk; spf=pass; dmarc=pass
-From: Oliver Grant <oliver@grantandhale.co.uk>
+ header.d=grantandhale.example; spf=pass; dmarc=pass
+From: Oliver Grant <oliver@grantandhale.example>
 To: Alex Rivera <alex@example.com>
 Subject: Questions on the website proposal
 Message-ID: <011-needs-reply-en-client-proposal@demo.jev.local>

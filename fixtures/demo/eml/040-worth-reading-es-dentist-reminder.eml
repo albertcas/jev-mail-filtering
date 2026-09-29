@@ -1,7 +1,7 @@
 Authentication-Results: mx.example.com; dkim=pass
- header.d=clinicasonrisanorte.es; spf=pass; dmarc=pass
+ header.d=clinicasonrisanorte.example; spf=pass; dmarc=pass
 From: =?UTF-8?Q?Cl=C3=ADnica_Dental_Sonrisa_Norte?=
- <citas@clinicasonrisanorte.es>
+ <citas@clinicasonrisanorte.example>
 To: Alex Rivera <alex@example.com>
 Subject: Recordatorio: tu cita del viernes 2 de octubre
 Message-ID: <040-worth-reading-es-dentist-reminder@demo.jev.local>

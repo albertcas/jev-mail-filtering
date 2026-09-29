@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import MailComposer from "nodemailer/lib/mail-composer";
+import { CATEGORY_LABELS } from "@/core/classify/answers";
 
 type Entry = {
   file: string; label: string; lang: "es" | "en"; from: string; subject: string; date: string; auth?: string;
@@ -11,6 +12,11 @@ type Entry = {
 
 const dir = join(process.cwd(), "fixtures", "demo");
 const entries = JSON.parse(readFileSync(join(dir, "source.json"), "utf8")) as Entry[];
+const LABELS: readonly string[] = CATEGORY_LABELS;
+for (const e of entries) {
+  if (!LABELS.includes(e.label)) throw new Error(`${e.file}: invalid label "${e.label}"`);
+  if (e.lang !== "es" && e.lang !== "en") throw new Error(`${e.file}: invalid lang "${String(e.lang)}"`);
+}
 const out = join(dir, "eml");
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });

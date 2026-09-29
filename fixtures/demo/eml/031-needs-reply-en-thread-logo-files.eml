@@ -1,6 +1,6 @@
 Authentication-Results: mx.example.com; dkim=pass
- header.d=okafor-studio.com; spf=pass; dmarc=pass
-From: Daniel Okafor <daniel@okafor-studio.com>
+ header.d=okafor-studio.example; spf=pass; dmarc=pass
+From: Daniel Okafor <daniel@okafor-studio.example>
 To: Alex Rivera <alex@example.com>
 In-Reply-To: <sent-002@example.com>
 References: <sent-002@example.com>
