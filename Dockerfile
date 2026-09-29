@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends python3 make g+
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npx next build --webpack && node -e "require('fs').cpSync('.next/static','.next/standalone/.next/static',{recursive:true});require('fs').cpSync('messages','.next/standalone/messages',{recursive:true});require('fs').cpSync('fixtures/demo','.next/standalone/fixtures/demo',{recursive:true})"
+RUN npx next build --webpack && node -e "require('fs').cpSync('.next/static','.next/standalone/.next/static',{recursive:true});require('fs').cpSync('messages','.next/standalone/messages',{recursive:true});require('fs').cpSync('fixtures/demo','.next/standalone/fixtures/demo',{recursive:true});for(const f of require('fs').readdirSync('.next/standalone'))if(f.startsWith('.env'))require('fs').rmSync('.next/standalone/'+f)"
 
 FROM node:22-slim
 WORKDIR /app

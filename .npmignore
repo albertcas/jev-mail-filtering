@@ -1,1 +1,3 @@
 tests/
+# next build copies .env* into .next/standalone; never publish them.
+.env*

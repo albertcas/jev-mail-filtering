@@ -2,6 +2,8 @@ name: CI
 on:
   push: { branches: [main] }
   pull_request:
+permissions:
+  contents: read
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -56,9 +58,19 @@ jobs:
         with: { node-version: 22, cache: npm }
       - run: npm ci
       - run: npm pack
+      - name: Tarball must not contain .env files
+        shell: bash
+        run: |
+          if tar -tzf jev-mail-filtering-*.tgz | grep -E '(^|/)\.env'; then
+            echo "::error::the npm tarball contains .env files"; exit 1
+          fi
       - shell: bash
         run: |
           mkdir -p /tmp/try && cd /tmp/try && npm init -y >/dev/null
           npm i "$GITHUB_WORKSPACE"/jev-mail-filtering-*.tgz
-          (npx jev-mail-filtering --demo --no-open &) ; sleep 20
-          curl -sf http://127.0.0.1:3737/api/status | grep '"demo":true'
+          (npx jev-mail-filtering --demo --no-open > server.log 2>&1 &)
+          for i in $(seq 1 60); do
+            if curl -sf http://127.0.0.1:3737/api/status | grep -q '"demo":true'; then echo "server up after ${i}s"; exit 0; fi
+            sleep 1
+          done
+          echo "::error::demo server did not answer within 60 s"; cat server.log; exit 1
