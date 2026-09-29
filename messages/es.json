@@ -1,5 +1,5 @@
 {
-  "app": { "name": "JEV Mail Filtering", "tagline": "Tu bandeja, clasificada por Jev. En local y solo lectura." },
+  "app": { "name": "JEV Mail Filtering", "shortName": "JEV Mail", "tagline": "Tu bandeja, clasificada por Jev. En local y solo lectura." },
   "categories": {
     "needs_reply": "Necesario contestar", "worth_reading": "Interesante de revisar", "commercial": "Comercial",
     "possible_scam": "Posible estafa", "unsure": "Sin clasificar", "none": "Otros"
@@ -17,18 +17,26 @@
   "dashboard": {
     "syncNow": "Sincronizar", "syncing": "Sincronizando…", "lastSync": "Última sincronización {time}", "never": "Sin sincronizar",
     "analyzed": "{count, plural, one {# correo analizado} other {# correos analizados}}",
-    "cost": "≈ {cost} gastados en Jev", "pending": "{count} pendientes", "emptyColumn": "Nada por aquí",
-    "showOthers": "Mostrar otros ({count})", "hideOthers": "Ocultar otros", "confidence": "Confianza {value}",
+    "cost": "≈ {cost} gastados en Jev", "pending": "{count} pendientes", "confidence": "Confianza {value}",
     "urgency": "Urgencia", "settings": "Ajustes",
     "connected": "Conectado", "connectionProblem": "Problema de conexión", "columns": "Categorías",
-    "emptyTitle": "Aún no hay nada analizado", "emptyBody": "Sincroniza para traer tu correo reciente. Jev coloca cada correo en una columna aquí; tu buzón nunca se modifica.",
+    "emptyTitle": "Aún no hay nada analizado", "emptyBody": "Sincroniza para traer tu correo reciente. Jev clasifica cada correo en una categoría aquí; tu buzón nunca se modifica.",
     "noSubject": "(sin asunto)", "urgencyValue": "{value}/3", "minConfidenceChip": "Confianza mínima {value}",
-    "scamAdvisory": "Solo orientativo: Jev puede pasar por alto una estafa o marcar un correo legítimo. Si dudas, contacta con el remitente por un canal de confianza."
+    "scamAdvisory": "Solo orientativo: Jev puede pasar por alto una estafa o marcar un correo legítimo. Si dudas, contacta con el remitente por un canal de confianza.",
+    "adjust": "Ajustar", "sortUrgency": "Ordenado por urgencia", "sortDate": "Más recientes primero", "skipToList": "Saltar a los correos",
+    "urgencyLevel": { "today": "Hoy", "days": "En 1-2 días", "week": "Esta semana", "none": "Sin prisa" },
+    "empty": {
+      "needs_reply": "Nada espera tu respuesta.", "worth_reading": "Nada interesante por ahora.",
+      "commercial": "Sin correo comercial.", "possible_scam": "Ningún correo sospechoso.",
+      "unsure": "Jev ha estado seguro con todos los correos.", "none": "No hay otros correos."
+    }
   },
   "detail": {
     "title": "Por qué esta categoría", "probabilities": "Probabilidad por categoría", "judgments": "Juicios de Jev",
     "signals": "Señales verificadas", "model": "Modelo {model}", "openInGmail": "Abrir en Gmail",
     "moveTo": "¿No es esto? Mover a…", "undo": "Deshacer mi cambio", "close": "Cerrar",
+    "emptyTitle": "Selecciona un correo", "emptyHint": "Usa las teclas ↑ y ↓ para recorrer la lista y A para ajustar los umbrales.",
+    "why": "Por qué", "excerpt": "Inicio del correo",
     "noul": {
       "asks_recipient_to_act": "Te pide actuar", "personal_not_bulk": "Escrito para ti", "promotional": "Promocional",
       "impersonation": "Suplantación", "pressure_tactics": "Tácticas de presión", "requests_sensitive_data": "Pide datos sensibles",

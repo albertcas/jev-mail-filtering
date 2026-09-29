@@ -65,6 +65,30 @@
   --cat-none-ink: light-dark(#454c57, #b3bac4);
   --cat-none-tint: light-dark(#eceef1, #1f2328);
 
+  /* Sidebar: a dark rail in BOTH schemes (the mail-client frame). Light
+     scheme = ink slab; dark scheme = a step below the canvas. Its text and
+     category marks are fixed values measured against --sidebar,
+     --sidebar-hover and --sidebar-raised in both schemes (>= 4.5:1 text,
+     >= 3:1 marks; see docs/design/dashboard-direction.md). */
+  --sidebar: light-dark(#16191d, #0b0d10);
+  --sidebar-hover: light-dark(#20242a, #15181c);
+  --sidebar-raised: light-dark(#272c33, #1c2026);
+  --sidebar-line: light-dark(#2b3036, #1f2328);
+  --sidebar-ink: #eceef0;
+  --sidebar-ink-2: #b3bac4;
+  --sidebar-ink-3: #949ca8;
+  --sidebar-accent: #eceef0;
+  --sidebar-accent-hover: #d3d7dc;
+  --sidebar-on-accent: #15181c;
+  --sidebar-focus: #6aa3f0;
+  --sidebar-cat-needs-reply: #4a8fe7;
+  --sidebar-cat-worth-reading: #1fa374;
+  --sidebar-cat-commercial: #b37ab0;
+  --sidebar-cat-possible-scam: #e0652f;
+  --sidebar-cat-possible-scam-ink: #f5a47f;
+  --sidebar-cat-unsure: #949ca8;
+  --sidebar-cat-none: #949ca8;
+
   /* Spacing: 4px grid (matches Tailwind's --spacing: 0.25rem, so p-4 == --space-4). */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -140,6 +164,24 @@
   --color-cat-none: var(--cat-none);
   --color-cat-none-ink: var(--cat-none-ink);
   --color-cat-none-tint: var(--cat-none-tint);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-hover: var(--sidebar-hover);
+  --color-sidebar-raised: var(--sidebar-raised);
+  --color-sidebar-line: var(--sidebar-line);
+  --color-sidebar-ink: var(--sidebar-ink);
+  --color-sidebar-ink-2: var(--sidebar-ink-2);
+  --color-sidebar-ink-3: var(--sidebar-ink-3);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-hover: var(--sidebar-accent-hover);
+  --color-sidebar-on-accent: var(--sidebar-on-accent);
+  --color-sidebar-cat-needs-reply: var(--sidebar-cat-needs-reply);
+  --color-sidebar-cat-worth-reading: var(--sidebar-cat-worth-reading);
+  --color-sidebar-cat-commercial: var(--sidebar-cat-commercial);
+  --color-sidebar-cat-possible-scam: var(--sidebar-cat-possible-scam);
+  --color-sidebar-cat-possible-scam-ink: var(--sidebar-cat-possible-scam-ink);
+  --color-sidebar-cat-unsure: var(--sidebar-cat-unsure);
+  --color-sidebar-cat-none: var(--sidebar-cat-none);
 
   --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "Cascadia Mono", monospace;
@@ -228,6 +270,17 @@
   data,
   time {
     font-variant-numeric: tabular-nums;
+  }
+
+  /* Inside the dark sidebar the focus ring and scrollbars switch to the
+     sidebar's own measured values (the light-scheme --focus is too dark there). */
+  .sidebar-scope {
+    --focus: var(--sidebar-focus);
+    scrollbar-color: var(--sidebar-ink-3) transparent;
+  }
+  .sidebar-scope ::selection {
+    background: #1f3a5f;
+    color: var(--sidebar-ink);
   }
 
   /* Native <dialog> backdrop for the Sheet primitive. */
