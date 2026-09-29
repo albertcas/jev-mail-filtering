@@ -11,7 +11,7 @@ import { AdjustPopover } from "./AdjustPopover";
 import { DemoBanner } from "./DemoBanner";
 import { ErrorBanner } from "./ErrorBanner";
 import type { ColumnId } from "./format";
-import { NAV, groupByCategory, neighborId, resolveSelection } from "./inbox";
+import { NAV, focusAfterMove, groupByCategory, neighborId, resolveSelection } from "./inbox";
 import { MessageList, type ActivateSource } from "./MessageList";
 import { MessageDetail, ReadingPane } from "./ReadingPane";
 import { MobileBar, Sidebar, StatusSummary } from "./Sidebar";
@@ -39,6 +39,9 @@ export function Dashboard({ demo, gmail }: { demo: boolean; gmail: boolean }) {
   const [category, setCategory] = useState<ColumnId>("needs_reply");
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
+  // The email shown in the phone sheet. Kept (not derived from the selection)
+  // so the sheet stays mounted with it while it closes after a move.
+  const [sheetItem, setSheetItem] = useState<DashboardItem | null>(null);
   const [syncing, setSyncing] = useState(false);
   const [loadError, setLoadError] = useState(false);
   const [syncError, setSyncError] = useState(false);
@@ -47,6 +50,9 @@ export function Dashboard({ demo, gmail }: { demo: boolean; gmail: boolean }) {
   const [now, setNow] = useState(() => Date.now());
   const isPhone = useIsPhone();
   const paneRef = useRef<HTMLElement>(null);
+  // After a successful move: the row to focus once the list has refreshed
+  // (desktop) or once the phone sheet has closed. null id = the list itself.
+  const pendingFocus = useRef<{ id: number | null } | null>(null);
 
   // Latest request wins: slider drags and sync polling can overlap.
   const seq = useRef(0);
@@ -58,12 +64,12 @@ export function Dashboard({ demo, gmail }: { demo: boolean; gmail: boolean }) {
   const latestThresholds = useRef<Thresholds | null>(null);
 
   /** Reload status + items. Pass `th` only for a new threshold choice; otherwise the latest one is used. */
-  const refresh = useCallback(async (th?: Thresholds) => {
+  const refresh = useCallback(async (th?: Thresholds): Promise<boolean> => {
     if (th) latestThresholds.current = th;
     const mine = ++seq.current;
     try {
       const [s, m] = await Promise.all([api.status(), api.messages(latestThresholds.current ?? undefined)]);
-      if (mine !== seq.current) return;
+      if (mine !== seq.current) return false;
       latestThresholds.current = m.thresholds;
       const prev = lastCategory.current;
       setMoved(new Set(m.items.filter((i) => prev.has(i.id) && prev.get(i.id) !== i.category).map((i) => i.id)));
@@ -72,8 +78,10 @@ export function Dashboard({ demo, gmail }: { demo: boolean; gmail: boolean }) {
       setItems(m.items);
       setThresholds(m.thresholds);
       setLoadError(false);
+      return true;
     } catch {
       if (mine === seq.current) setLoadError(true);
+      return false;
     }
   }, []);
 
@@ -139,25 +147,64 @@ export function Dashboard({ demo, gmail }: { demo: boolean; gmail: boolean }) {
 
   const activate = (id: number, source: ActivateSource) => {
     select(id);
-    if (isPhone) setSheetOpen(true);
-    else if (source === "keyboard") paneRef.current?.focus();
+    if (isPhone) {
+      setSheetItem(list.find((i) => i.id === id) ?? null);
+      setSheetOpen(true);
+    } else if (source === "keyboard") paneRef.current?.focus();
   };
 
+  /** Focus a row of the current list by id, or the list container when id is null. */
+  const focusInList = (id: number | null) => {
+    const el =
+      id === null
+        ? document.getElementById("message-list")
+        : document.querySelector<HTMLElement>(`#message-list [role=option][data-id="${id}"]`);
+    el?.focus();
+  };
+
+  // Desktop: once the refreshed list is rendered, focus the row that took over
+  // the selection (the moved row is gone, and focus must not fall to <body>).
+  useEffect(() => {
+    if (isPhone || !pendingFocus.current) return;
+    const { id } = pendingFocus.current;
+    pendingFocus.current = null;
+    focusInList(focusAfterMove(list, id));
+  }, [items, isPhone, list]);
+
+  // Phone: the sheet has closed (focus went back to the opener, which may have
+  // left the list): move focus to the neighbour row or the list.
+  const onSheetClosed = () => {
+    if (!pendingFocus.current) return;
+    const { id } = pendingFocus.current;
+    pendingFocus.current = null;
+    focusInList(focusAfterMove(list, id));
+  };
+
+  // On phones the sheet's email is the one being moved; on wider screens, the selection.
+  const sheetCurrent = (sheetItem && items?.find((i) => i.id === sheetItem.id)) || sheetItem;
+  const moving = isPhone ? sheetCurrent : selected;
+
   const onMove = async (to: DisplayCategory | "none" | null) => {
-    if (!selected) return;
+    if (!moving) return;
     setMoveError(false);
     // When the email leaves this list, the selection moves on to its neighbour.
-    const leaves = to !== null && to !== selected.category;
-    const next = leaves ? neighborId(list, selected.id) : selected.id;
+    const leaves = to !== null && to !== moving.category;
+    const next = leaves ? neighborId(list, moving.id) : moving.id;
     try {
-      await api.override(selected.id, to);
+      await api.override(moving.id, to);
     } catch {
       setMoveError(true); // shown in the reading pane, where the user is
       return;
     }
-    if (isPhone) setSheetOpen(false);
-    setSelectedId(isPhone && leaves ? null : next);
-    await refresh();
+    setSelectedId(next);
+    pendingFocus.current = isPhone ? null : { id: next };
+    const ok = await refresh();
+    if (!ok) pendingFocus.current = null;
+    if (isPhone) {
+      // Close with the moved email still mounted; focus moves on in onSheetClosed.
+      pendingFocus.current = ok ? { id: next } : null;
+      setSheetOpen(false);
+    }
   };
 
   const focusSelectedRow = () =>
@@ -261,14 +308,15 @@ export function Dashboard({ demo, gmail }: { demo: boolean; gmail: boolean }) {
         />
       </main>
 
-      {isPhone && selected ? (
+      {isPhone && sheetCurrent ? (
         <Sheet
           open={sheetOpen}
           onClose={() => setSheetOpen(false)}
+          onAfterClose={onSheetClosed}
           closeLabel={t("detail.close")}
-          title={selected.subject || t("dashboard.noSubject")}
+          title={sheetCurrent.subject || t("dashboard.noSubject")}
         >
-          <MessageDetail key={selected.id} item={selected} inSheet {...detail} />
+          <MessageDetail key={sheetCurrent.id} item={sheetCurrent} inSheet {...detail} />
         </Sheet>
       ) : null}
     </div>

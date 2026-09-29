@@ -15,6 +15,9 @@ export type SheetProps = {
   children: ReactNode;
   /** Sticky footer, e.g. "Not this? Move to...". */
   footer?: ReactNode;
+  /** Runs once the panel has closed and focus went back to its opener, e.g. to
+   *  move focus elsewhere when the opener no longer exists. */
+  onAfterClose?: () => void;
   className?: string;
 };
 
@@ -36,12 +39,13 @@ const FOCUSABLE = [
  * - focus returns to the element that opened it;
  * - the scrollable body is focusable (tabIndex=0, named by the title);
  * - clicking the backdrop closes only if the press also started on it.
- * Right-hand panel from sm up, full-width sheet on phones.
+ * Right-hand panel from md (768px) up, full-screen sheet below it.
  */
-export function Sheet({ open, onClose, title, closeLabel, description, children, footer, className }: SheetProps) {
+export function Sheet({ open, onClose, title, closeLabel, description, children, footer, onAfterClose, className }: SheetProps) {
   const ref = useRef<HTMLDialogElement>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
   const onCloseRef = useRef(onClose);
+  const onAfterCloseRef = useRef(onAfterClose);
   const openRef = useRef(open);
   // Set once a close has been requested for the current open cycle, so onClose fires exactly once.
   const closeRequested = useRef(false);
@@ -53,6 +57,7 @@ export function Sheet({ open, onClose, title, closeLabel, description, children,
 
   useEffect(() => {
     onCloseRef.current = onClose;
+    onAfterCloseRef.current = onAfterClose;
     openRef.current = open;
   });
 
@@ -88,6 +93,7 @@ export function Sheet({ open, onClose, title, closeLabel, description, children,
       if (openRef.current) requestClose();
       returnFocus.current?.focus();
       returnFocus.current = null;
+      onAfterCloseRef.current?.();
     };
     dialog.addEventListener("cancel", onCancel);
     dialog.addEventListener("close", onDialogClose);
@@ -129,13 +135,13 @@ export function Sheet({ open, onClose, title, closeLabel, description, children,
         pressedBackdrop.current = false;
       }}
       className={cn(
-        "fixed inset-y-0 right-0 left-auto m-0 h-dvh max-h-dvh w-full max-w-none bg-transparent p-0 text-ink sm:w-[min(30rem,100vw)]",
+        "fixed inset-y-0 right-0 left-auto m-0 h-dvh max-h-dvh w-full max-w-none bg-transparent p-0 text-ink md:w-[min(30rem,100vw)]",
         "transition-[translate,display,overlay] transition-discrete duration-(--duration-move) ease-(--ease-out)",
         "translate-x-full open:translate-x-0 starting:open:translate-x-full",
         className,
       )}
     >
-      <div className="flex h-full flex-col border-l border-line bg-surface shadow-raised sm:rounded-l-xl">
+      <div className="flex h-full flex-col border-l border-line bg-surface shadow-raised md:rounded-l-xl">
         <header className="flex items-start gap-3 border-b border-line px-5 py-4">
           <div className="min-w-0 flex-1">
             <h2 id={titleId} className="text-lg font-semibold text-balance text-ink">

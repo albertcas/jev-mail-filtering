@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   NAV,
+  displayExcerpt,
+  focusAfterMove,
   groupByCategory,
   isTypingTarget,
   neighborId,
@@ -121,5 +123,35 @@ describe("isTypingTarget", () => {
     expect(isTypingTarget({ tagName: "BUTTON" })).toBe(false);
     expect(isTypingTarget({ tagName: "DIV" })).toBe(false);
     expect(isTypingTarget(null)).toBe(false);
+  });
+});
+
+describe("displayExcerpt", () => {
+  it("leaves short excerpts alone", () => {
+    expect(displayExcerpt("Hi Alex, can you sign it today?")).toBe("Hi Alex, can you sign it today?");
+    expect(displayExcerpt("")).toBe("");
+  });
+  it("trims a cut excerpt back to the last whole word and adds an ellipsis", () => {
+    const s = `${"word ".repeat(55)}happy w`; // 282 chars, cut mid-word
+    expect(s.length).toBeGreaterThanOrEqual(280);
+    const out = displayExcerpt(s);
+    expect(out.endsWith("happy…")).toBe(true);
+    expect(out).not.toMatch(/\sw…$/);
+  });
+  it("handles an excerpt exactly at the limit and one without spaces", () => {
+    expect(displayExcerpt(`${"a".repeat(270)} bcdefghij`)).toBe(`${"a".repeat(270)}…`);
+    expect(displayExcerpt("x".repeat(280))).toBe(`${"x".repeat(280)}…`);
+  });
+});
+
+describe("focusAfterMove", () => {
+  const list = [item(1), item(2), item(3)];
+  it("focuses the preferred row while it is in the refreshed list", () => {
+    expect(focusAfterMove(list, 2)).toBe(2);
+  });
+  it("falls back to the first row, then to the list container (null)", () => {
+    expect(focusAfterMove(list, 9)).toBe(1);
+    expect(focusAfterMove(list, null)).toBe(1);
+    expect(focusAfterMove([], 2)).toBeNull();
   });
 });

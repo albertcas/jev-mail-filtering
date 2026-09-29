@@ -81,3 +81,27 @@ export function isTypingTarget(el: { tagName?: string; type?: string; isContentE
   if (tag === "INPUT") return !NON_TEXT_INPUTS.has((el.type ?? "text").toLowerCase());
   return false;
 }
+
+/** Length at which sync stores an excerpt (run-sync slices to 280): at or past it the text was cut. */
+export const EXCERPT_LIMIT = 280;
+
+/**
+ * The stored excerpt for display. When it hit the storage limit it was cut
+ * mid-word, so trim back to the last whitespace and add an ellipsis.
+ */
+export function displayExcerpt(s: string): string {
+  if (s.length < EXCERPT_LIMIT) return s;
+  const cut = s.search(/\s\S*$/);
+  const head = (cut > 0 ? s.slice(0, cut) : s).trimEnd();
+  return `${head}…`;
+}
+
+/**
+ * Where keyboard focus goes after a successful "Move to…"/"Undo", once the
+ * list has refreshed: the row that should be selected if it is still in the
+ * list, else the first row, else null (the list container itself).
+ */
+export function focusAfterMove(list: readonly DashboardItem[], preferredId: number | null): number | null {
+  if (preferredId !== null && list.some((i) => i.id === preferredId)) return preferredId;
+  return list[0]?.id ?? null;
+}
