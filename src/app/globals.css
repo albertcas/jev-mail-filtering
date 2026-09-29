@@ -1,0 +1,290 @@
+@import "tailwindcss";
+
+/*
+ * JEV Mail Filtering design tokens. Decisions and measured contrast live in
+ * docs/design/dashboard-direction.md. Rule of the system: neutrals carry the
+ * interface, color is reserved for meaning (the five categories + status).
+ *
+ * Every color is a semantic token. Components never use raw hex.
+ * Category marks (--cat-*) sit on --canvas or --surface only (>= 3:1 there, never on --sunken);
+ * text in a category voice uses --cat-*-ink (>= 4.5:1 on its tint and on surface).
+ */
+
+:root {
+  /* One source of truth per token: light-dark(<light>, <dark>). The scheme
+     follows the OS; a root data-theme attribute pins it (see below). Dark
+     values are selected and measured, not an automatic flip. */
+  color-scheme: light dark;
+
+  /* Neutrals: cool slate, off-white / off-black (no pure #fff / #000). */
+  --canvas: light-dark(#f4f5f6, #0f1114);
+  --surface: light-dark(#fcfcfd, #171a1e);
+  --sunken: light-dark(#eceef1, #1f2328);
+  --ink: light-dark(#15181c, #eceef0);
+  --ink-2: light-dark(#454c57, #b3bac4);
+  --ink-3: light-dark(#5c6470, #8f97a3);
+  --line: light-dark(#dfe2e6, #2b3036); /* decorative hairlines only */
+  --line-strong: light-dark(#838b97, #6b7380); /* control borders, meter tracks: >= 3:1 */
+
+  /* Interaction. The primary action is ink, not a brand hue. */
+  --accent: light-dark(#15181c, #eceef0);
+  --accent-hover: light-dark(#2b3038, #d3d7dc);
+  --on-accent: light-dark(#fcfcfd, #15181c);
+  --focus: light-dark(#1d63c9, #6aa3f0);
+  --selection: light-dark(#cfe0f7, #1f3a5f);
+  --scrim: light-dark(rgb(15 17 20 / 0.42), rgb(0 0 0 / 0.6));
+  --shadow-color: light-dark(rgb(38 44 54), rgb(0 0 0));
+
+  /* Status (reserved; always paired with icon + text). */
+  --danger: light-dark(#b42318, #f2877c);
+  --danger-tint: light-dark(#fcebe9, #3a1b19);
+  --warning: light-dark(#8a5300, #e8b64c);
+  --warning-tint: light-dark(#fbf1dc, #322710);
+  --success: light-dark(#1b7342, #5cc98a);
+  --success-tint: light-dark(#e5f3eb, #132a1e);
+  --info: light-dark(#454c57, #b3bac4);
+  --info-tint: light-dark(#eceef1, #1f2328);
+
+  /* Categories: mark (fills, rules, dots), ink (text), tint (quiet backgrounds). */
+  --cat-needs-reply: light-dark(#2a78d6, #3987e5);
+  --cat-needs-reply-ink: light-dark(#1b58a8, #9dc3f4);
+  --cat-needs-reply-tint: light-dark(#e7effb, #16253a);
+  --cat-worth-reading: light-dark(#119c6e, #199e70);
+  --cat-worth-reading-ink: light-dark(#0b6b4c, #72d2a9);
+  --cat-worth-reading-tint: light-dark(#e2f3ec, #11281f);
+  --cat-commercial: light-dark(#4a3aa7, #805d9a);
+  --cat-commercial-ink: light-dark(#4a3aa7, #c6b2e6);
+  --cat-commercial-tint: light-dark(#eeebf8, #251d33);
+  --cat-possible-scam: light-dark(#dc5a26, #d95926);
+  --cat-possible-scam-ink: light-dark(#a33d12, #f5a47f);
+  --cat-possible-scam-tint: light-dark(#fcebe3, #351f17);
+  --cat-unsure: light-dark(#7c8490, #7f8793);
+  --cat-unsure-ink: light-dark(#454c57, #b3bac4);
+  --cat-unsure-tint: light-dark(#eceef1, #1f2328);
+  --cat-none: light-dark(#7c8490, #7f8793);
+  --cat-none-ink: light-dark(#454c57, #b3bac4);
+  --cat-none-tint: light-dark(#eceef1, #1f2328);
+
+  /* Sidebar: a dark rail in BOTH schemes (the mail-client frame). Light
+     scheme = ink slab; dark scheme = a step below the canvas. Its text and
+     category marks are fixed values measured against --sidebar,
+     --sidebar-hover and --sidebar-raised in both schemes (>= 4.5:1 text,
+     >= 3:1 marks; see docs/design/dashboard-direction.md). */
+  --sidebar: light-dark(#16191d, #0b0d10);
+  --sidebar-hover: light-dark(#20242a, #15181c);
+  --sidebar-raised: light-dark(#272c33, #1c2026);
+  --sidebar-line: light-dark(#2b3036, #1f2328);
+  --sidebar-ink: #eceef0;
+  --sidebar-ink-2: #b3bac4;
+  --sidebar-ink-3: #949ca8;
+  --sidebar-accent: #eceef0;
+  --sidebar-accent-hover: #d3d7dc;
+  --sidebar-on-accent: #15181c;
+  --sidebar-focus: #6aa3f0;
+  --sidebar-cat-needs-reply: #4a8fe7;
+  --sidebar-cat-worth-reading: #1fa374;
+  --sidebar-cat-commercial: #b37ab0;
+  --sidebar-cat-possible-scam: #e0652f;
+  --sidebar-cat-possible-scam-ink: #f5a47f;
+  --sidebar-cat-unsure: #949ca8;
+  --sidebar-cat-none: #949ca8;
+
+  /* Spacing: 4px grid (matches Tailwind's --spacing: 0.25rem, so p-4 == --space-4). */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+
+  /* Motion */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-move: 280ms;
+}
+
+/* Manual override for a future theme switcher: only the scheme changes, the
+   token values above stay the single source. */
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-move: 0ms;
+  }
+}
+
+/* Tailwind utilities read the runtime tokens (bg-surface, text-ink-2, border-line…). */
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-on-accent: var(--on-accent);
+  --color-focus: var(--focus);
+  --color-danger: var(--danger);
+  --color-danger-tint: var(--danger-tint);
+  --color-warning: var(--warning);
+  --color-warning-tint: var(--warning-tint);
+  --color-success: var(--success);
+  --color-success-tint: var(--success-tint);
+  --color-info: var(--info);
+  --color-info-tint: var(--info-tint);
+
+  --color-cat-needs-reply: var(--cat-needs-reply);
+  --color-cat-needs-reply-ink: var(--cat-needs-reply-ink);
+  --color-cat-needs-reply-tint: var(--cat-needs-reply-tint);
+  --color-cat-worth-reading: var(--cat-worth-reading);
+  --color-cat-worth-reading-ink: var(--cat-worth-reading-ink);
+  --color-cat-worth-reading-tint: var(--cat-worth-reading-tint);
+  --color-cat-commercial: var(--cat-commercial);
+  --color-cat-commercial-ink: var(--cat-commercial-ink);
+  --color-cat-commercial-tint: var(--cat-commercial-tint);
+  --color-cat-possible-scam: var(--cat-possible-scam);
+  --color-cat-possible-scam-ink: var(--cat-possible-scam-ink);
+  --color-cat-possible-scam-tint: var(--cat-possible-scam-tint);
+  --color-cat-unsure: var(--cat-unsure);
+  --color-cat-unsure-ink: var(--cat-unsure-ink);
+  --color-cat-unsure-tint: var(--cat-unsure-tint);
+  --color-cat-none: var(--cat-none);
+  --color-cat-none-ink: var(--cat-none-ink);
+  --color-cat-none-tint: var(--cat-none-tint);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-hover: var(--sidebar-hover);
+  --color-sidebar-raised: var(--sidebar-raised);
+  --color-sidebar-line: var(--sidebar-line);
+  --color-sidebar-ink: var(--sidebar-ink);
+  --color-sidebar-ink-2: var(--sidebar-ink-2);
+  --color-sidebar-ink-3: var(--sidebar-ink-3);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-hover: var(--sidebar-accent-hover);
+  --color-sidebar-on-accent: var(--sidebar-on-accent);
+  --color-sidebar-cat-needs-reply: var(--sidebar-cat-needs-reply);
+  --color-sidebar-cat-worth-reading: var(--sidebar-cat-worth-reading);
+  --color-sidebar-cat-commercial: var(--sidebar-cat-commercial);
+  --color-sidebar-cat-possible-scam: var(--sidebar-cat-possible-scam);
+  --color-sidebar-cat-possible-scam-ink: var(--sidebar-cat-possible-scam-ink);
+  --color-sidebar-cat-unsure: var(--sidebar-cat-unsure);
+  --color-sidebar-cat-none: var(--sidebar-cat-none);
+
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "Cascadia Mono", monospace;
+
+  /* Product type scale, ratio ~1.14, fixed rem (no fluid type in a tool).
+     text-base (14px) is the UI body; text-md (16px) is for reading prose. */
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.8125rem;
+  --text-sm--line-height: 1.125rem;
+  --text-base: 0.875rem;
+  --text-base--line-height: 1.25rem;
+  --text-md: 1rem;
+  --text-md--line-height: 1.5rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.5rem;
+  --text-xl: 1.375rem;
+  --text-xl--line-height: 1.75rem;
+
+  /* Shape lock: 4 small marks · 6 controls · 10 containers · 14 sheet. Pills only for chips. */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+
+  --shadow-card: 0 1px 2px color-mix(in srgb, var(--shadow-color) 6%, transparent), 0 2px 6px color-mix(in srgb, var(--shadow-color) 4%, transparent);
+  --shadow-raised: 0 2px 4px color-mix(in srgb, var(--shadow-color) 8%, transparent), 0 12px 32px color-mix(in srgb, var(--shadow-color) 14%, transparent);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Setup wizard: each step settles in once (the flow's single motion moment);
+     the first-sync bar sweeps while the run is in progress. Both collapse with
+     prefers-reduced-motion (duration token = 0ms / motion-reduce utilities). */
+  --animate-step: step-in var(--duration-move) var(--ease-out) both;
+  --animate-indeterminate: indeterminate 1.6s var(--ease-out) infinite;
+
+  @keyframes step-in {
+    from {
+      opacity: 0;
+      translate: 0 6px;
+    }
+  }
+  @keyframes indeterminate {
+    from {
+      translate: -100% 0;
+    }
+    to {
+      translate: 300% 0;
+    }
+  }
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+    accent-color: var(--ink);
+    scrollbar-color: var(--line-strong) transparent;
+  }
+
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    caret-color: var(--focus);
+  }
+
+  ::selection {
+    background: var(--selection);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+
+  /* Numbers that sit in rows and meters align. */
+  .tabular,
+  data,
+  time {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Inside the dark sidebar the focus ring and scrollbars switch to the
+     sidebar's own measured values (the light-scheme --focus is too dark there). */
+  .sidebar-scope {
+    --focus: var(--sidebar-focus);
+    scrollbar-color: var(--sidebar-ink-3) transparent;
+  }
+  .sidebar-scope ::selection {
+    background: #1f3a5f;
+    color: var(--sidebar-ink);
+  }
+
+  /* Native <dialog> backdrop for the Sheet primitive. */
+  dialog::backdrop {
+    background: var(--scrim);
+  }
+}

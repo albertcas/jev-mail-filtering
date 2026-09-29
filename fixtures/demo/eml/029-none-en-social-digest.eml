@@ -1,0 +1,19 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=threadly.example; spf=pass; dmarc=pass
+List-Unsubscribe: <https://threadly.example/settings/email?unsub=digest>
+From: Threadly <digest@threadly.example>
+To: Alex Rivera <alex@example.com>
+Subject: Alex, you have 4 new notifications
+Message-ID: <029-none-en-social-digest@demo.jev.local>
+Date: Sun, 27 Sep 2026 08:00:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<p>Here's what you missed on Threadly this week:</p><ul><li>Jamie and 2 =
+others liked your post</li><li>Rosa Lind started following you</li><li>3 =
+people viewed your profile</li></ul><p><a href=3D"https://threadly.=
+example/notifications">See all notifications</a></p><p =
+style=3D"font-size:11px">You're receiving your weekly digest. <a =
+href=3D"https://threadly.example/settings/email?unsub=3Ddigest">Change =
+email settings</a></p>

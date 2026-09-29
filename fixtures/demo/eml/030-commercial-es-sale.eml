@@ -1,0 +1,15 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=deportesnorte.example; spf=pass; dmarc=pass
+List-Unsubscribe: <https://deportesnorte.example/baja?u=123>
+From: Deportes Norte <ofertas@deportesnorte.example>
+To: Alex Rivera <alex@example.com>
+Subject: Solo este fin de semana: -30% en zapatillas de running
+Message-ID: <030-commercial-es-sale@demo.jev.local>
+Date: Sat, 26 Sep 2026 08:00:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<h1>-30% en running</h1><p>Aprovecha el descuento en toda la colecci=C3=B3n=
+ de oto=C3=B1o.</p><a href=3D"https://deportesnorte.example/running">Ver =
+ofertas</a>

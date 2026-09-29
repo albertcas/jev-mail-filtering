@@ -1,0 +1,38 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=luzclara-energia.example; spf=pass; dmarc=pass
+From: =?UTF-8?Q?Luz_Clara_Energ=C3=ADa?=
+ <facturas@luzclara-energia.example>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Tu_factura_de_luz_de_septiembre_ya_est?=
+ =?UTF-8?Q?=C3=A1_disponible?=
+Message-ID: <002-worth-reading-es-electricity-bill@demo.jev.local>
+Date: Sat, 19 Sep 2026 05:30:00 +0000
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="--_NmP-ffb5d0f390715542-Part_1"
+
+----_NmP-ffb5d0f390715542-Part_1
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Hola Alex:
+
+Ya tienes disponible tu factura del periodo 18/08/2026 =
+=E2=80=93 17/09/2026.
+
+Importe: 47,36 =E2=82=AC
+Consumo: 182 kWh
+Fecha de cargo: 3 de octubre de 2026, en la cuenta que tienes domiciliada.
+
+Te adjuntamos la factura en PDF. Tambi=C3=A9n puedes consultarla en tu =
+=C3=A1rea de cliente.
+
+Un saludo,
+Equipo de Luz Clara =
+Energ=C3=ADa
+----_NmP-ffb5d0f390715542-Part_1
+Content-Type: application/pdf; name=factura-LC-2026-09.pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=factura-LC-2026-09.pdf
+
+ZGVtbw==
+----_NmP-ffb5d0f390715542-Part_1--

@@ -1,0 +1,27 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=brightline-legal.example; spf=pass; dmarc=pass
+From: Rachel Kim <rachel.kim@brightline-legal.example>
+To: Alex Rivera <alex@example.com>
+In-Reply-To: <sent-004@example.com>
+References: <sent-004@example.com>
+Subject: =?UTF-8?Q?Re=3A_Q4_retainer_contract_=E2=80=94_nee?=
+ =?UTF-8?Q?d_your_signature_today?=
+Message-ID: <039-needs-reply-en-deadline-today@demo.jev.local>
+Date: Tue, 29 Sep 2026 08:12:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hi Alex,
+
+I've made the two changes you asked for (payment terms now net-30=
+, and the IP clause limited to final deliverables). The client wants to =
+start on 1 October, so I need the signed copy back today, before 5 pm UK =
+time, to get it countersigned.
+
+Can you confirm you're happy with the =
+changes and send it over?
+
+Best,
+Rachel Kim
+Brightline Legal

@@ -1,0 +1,27 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=nordhost.example; spf=pass; dmarc=pass
+From: Nordhost Billing <billing@nordhost.example>
+To: Alex Rivera <alex@example.com>
+Subject: Your invoice for September 2026
+Message-ID: <041-worth-reading-en-invoice@demo.jev.local>
+Date: Fri, 25 Sep 2026 04:00:00 +0000
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="--_NmP-9199e4b8d720659f-Part_1"
+
+----_NmP-9199e4b8d720659f-Part_1
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Dear customer,
+
+your invoice for September 2026 (EUR 8.21) is now available=
+ in your account. The amount will be charged automatically.
+
+Kind regards
+----_NmP-9199e4b8d720659f-Part_1
+Content-Type: application/pdf; name=invoice-2026-09.pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=invoice-2026-09.pdf
+
+ZGVtbw==
+----_NmP-9199e4b8d720659f-Part_1--

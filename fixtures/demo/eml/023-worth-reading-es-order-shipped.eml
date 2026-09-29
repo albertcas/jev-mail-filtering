@@ -1,0 +1,19 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=libreria-alcala.example; spf=pass; dmarc=pass
+From: =?UTF-8?Q?Librer=C3=ADa_Alcal=C3=A1?=
+ <pedidos@libreria-alcala.example>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Tu_pedido_=2310482_ya_est=C3=A1_en_camin?= =?UTF-8?Q?o?=
+Message-ID: <023-worth-reading-es-order-shipped@demo.jev.local>
+Date: Sat, 26 Sep 2026 11:12:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<p>Hola Alex,</p><p>Tu pedido <b>#10482</b> ha salido de nuestro =
+almac=C3=A9n:</p><ul><li>=C2=ABDise=C3=B1o de interfaces que respiran=C2=BB=
+ =E2=80=93 1 ud.</li><li>=C2=ABManual de tipograf=C3=ADa=C2=BB =E2=80=93 1 =
+ud.</li></ul><p>Lo recibir=C3=A1s entre el martes y el mi=C3=A9rcoles.=
+</p><p><a href=3D"https://libreria-alcala.example/cuenta/pedidos/10482">Seg=
+uir mi pedido</a></p><p>=C2=A1Gracias por comprar en una librer=C3=ADa de =
+barrio!</p>

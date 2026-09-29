@@ -1,0 +1,24 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=okafor-studio.example; spf=pass; dmarc=pass
+From: Daniel Okafor <daniel@okafor-studio.example>
+To: Alex Rivera <alex@example.com>
+In-Reply-To: <sent-002@example.com>
+References: <sent-002@example.com>
+Subject: Re: Logo files for the rebrand
+Message-ID: <031-needs-reply-en-thread-logo-files@demo.jev.local>
+Date: Sun, 27 Sep 2026 10:27:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hi Alex,
+
+Thanks for the files, they look great. One thing: the printer is =
+asking for the logo in CMYK and as outlined PDF, not just SVG. Can you =
+export those, or should I ask them to convert it?
+
+Also =E2=80=94 do you =
+want the dark-background version on the business cards or the standard one?
+
+Cheers,
+Daniel

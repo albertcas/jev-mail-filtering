@@ -1,0 +1,18 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=greenleafgrocers.example; spf=pass; dmarc=pass
+List-Unsubscribe: <https://greenleafgrocers.example/unsubscribe?c=ALX10>
+From: Greenleaf Grocers <deals@greenleafgrocers.example>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Here=27s_=2410_off_your_next_order_?=
+ =?UTF-8?Q?=F0=9F=A5=95?=
+Message-ID: <034-commercial-en-coupon@demo.jev.local>
+Date: Fri, 25 Sep 2026 09:00:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<h2>We miss you, Alex!</h2><p>Use code <strong>FRESH10</strong> for $10 off=
+ any order over $50. Valid until Sunday.</p><p><a href=3D"https://greenleaf=
+grocers.example/shop?code=3DFRESH10">Start shopping</a></p><p =
+style=3D"font-size:11px"><a href=3D"https://greenleafgrocers.=
+example/unsubscribe?c=3DALX10">Unsubscribe</a></p>

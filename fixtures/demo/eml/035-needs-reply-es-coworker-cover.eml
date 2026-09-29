@@ -1,0 +1,23 @@
+Authentication-Results: mx.example.com; dkim=pass header.d=example.com;
+ spf=pass; dmarc=pass
+From: =?UTF-8?Q?Luc=C3=ADa_Ortega?= <lucia.ortega@example.com>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?=C2=BFMe_cubres_en_la_reuni=C3=B3n_con_e?=
+ =?UTF-8?Q?l_cliente_del_mi=C3=A9rcoles=3F?=
+Message-ID: <035-needs-reply-es-coworker-cover@demo.jev.local>
+Date: Mon, 28 Sep 2026 15:55:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hola Alex,
+
+el mi=C3=A9rcoles tengo m=C3=A9dico a primera hora y no llego a=
+ la reuni=C3=B3n de seguimiento con Estudio Gil (10:00). =C2=BFPodr=C3=ADas=
+ llevarla t=C3=BA? Solo hay que repasar el calendario de entregas; te paso =
+mis notas esta tarde.
+
+Si no puedes, d=C3=ADmelo y la muevo.
+
+=C2=A1Gracias!
+Luc=C3=ADa

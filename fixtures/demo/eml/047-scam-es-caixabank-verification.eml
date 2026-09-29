@@ -1,0 +1,19 @@
+Authentication-Results: mx.example.com; spf=fail
+ smtp.mailfrom=caixabank-verificacion.com; dkim=none; dmarc=fail
+From: CaixaBank <avisos@caixabank-verificacion.com>
+To: Alex Rivera <alex@example.com>
+Reply-To: soporte@clientes-verificacion.net
+Subject: =?UTF-8?Q?Verifique_su_identidad_para_evitar_la_su?=
+ =?UTF-8?Q?spensi=C3=B3n_de_su_cuenta?=
+Message-ID: <047-scam-es-caixabank-verification@demo.jev.local>
+Date: Fri, 25 Sep 2026 00:30:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<p>Estimado cliente:</p><p>Debido a la nueva normativa europea de seguridad=
+, es obligatorio actualizar sus datos. Si no lo hace antes de 24 horas, su =
+cuenta ser=C3=A1 suspendida.</p><p><a href=3D"https://caixabank-verificacio=
+n.com/acceso">www.caixabank.es/particulares</a></p><p>Necesitar=C3=A1 su =
+usuario, contrase=C3=B1a y la clave de firma que recibir=C3=A1 por SMS.=
+</p><p>CaixaBank</p>

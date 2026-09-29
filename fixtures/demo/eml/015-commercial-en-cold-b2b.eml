@@ -1,0 +1,23 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=leadspire.example; spf=pass; dmarc=pass
+From: Kevin Marsh <kevin@leadspire.example>
+To: Alex Rivera <alex@example.com>
+Subject: Quick question about example.com
+Message-ID: <015-commercial-en-cold-b2b@demo.jev.local>
+Date: Wed, 23 Sep 2026 13:26:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hi Alex,
+
+I was looking at example.com and noticed you don't seem to be =
+running outbound campaigns yet. Leadspire books 15=E2=80=9320 qualified =
+sales meetings a month for agencies your size, and you only pay per meeting=
+ held.
+
+Worth a 10-minute chat on Thursday?
+
+Cheers,
+Kevin Marsh
+Growth Lead, Leadspire

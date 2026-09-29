@@ -1,0 +1,18 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=devsummit.example; spf=pass; dmarc=pass
+List-Unsubscribe: <https://devsummit.example/unsubscribe?r=4411>
+From: DevSummit Europe <tickets@devsummit.example>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Early-bird_tickets_end_Friday_=E2=80=94_?=
+ =?UTF-8?Q?save_=E2=82=AC200?=
+Message-ID: <048-commercial-en-conference-tickets@demo.jev.local>
+Date: Sun, 20 Sep 2026 14:00:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<h1>DevSummit Europe 2027 =C2=B7 Lisbon</h1><p>Two days, 60 talks, and the =
+best hallway track in Europe. Early-bird pricing (=E2=82=AC390 instead of =
+=E2=82=AC590) ends this Friday.</p><p><a href=3D"https://devsummit.=
+example/tickets">Get your ticket</a></p><p style=3D"font-size:11px"><a =
+href=3D"https://devsummit.example/unsubscribe?r=3D4411">Unsubscribe</a></p>

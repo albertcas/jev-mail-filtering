@@ -1,0 +1,25 @@
+Authentication-Results: mx.example.com; dkim=pass header.d=example.com;
+ spf=pass; dmarc=pass
+From: Sistema de entrega de correo <mailer-daemon@example.com>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Mensaje_no_entregado=3A_Presupuesto_web_?=
+ =?UTF-8?Q?de_la_ferreter=C3=ADa?=
+Message-ID: <012-none-es-bounce@demo.jev.local>
+Date: Mon, 21 Sep 2026 07:03:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Este es un mensaje generado autom=C3=A1ticamente.
+
+No se ha podido entregar=
+ su mensaje a uno o m=C3=A1s destinatarios:
+
+  jordi@ferreteria-pig.example
+  Motivo: 550 5.1.2 El dominio de destino no existe (ferreteria-pig.=
+example).
+
+Asunto original: Presupuesto web de la ferreter=C3=ADa
+Fecha original: 21/09/2026 09:02
+
+No responda a este mensaje.

@@ -1,0 +1,11 @@
+From: "Tienda" <news@tienda.es>
+To: yo@mail.com
+Subject: =?UTF-8?Q?Rebajas_de_oto=C3=B1o?=
+Message-ID: <html-only@tienda.es>
+Date: Mon, 21 Sep 2026 09:00:00 +0200
+List-Unsubscribe: <https://tienda.es/unsub>
+Authentication-Results: mx.mail.com; dkim=pass header.d=tienda.es; spf=pass; dmarc=pass
+MIME-Version: 1.0
+Content-Type: text/html; charset=UTF-8
+
+<html><body><h1>Rebajas</h1><p>Hasta un 50% en <a href="https://tienda.es/ofertas">www.tienda.es</a></p><img src="https://track.tienda.es/p.gif"></body></html>

@@ -1,0 +1,19 @@
+Authentication-Results: mx.example.net; dkim=pass header.d=example.net;
+ spf=pass; dmarc=pass
+From: Carmen Rivera <carmen.rivera@example.net>
+To: Alex Rivera <alex@example.com>
+Subject: Comida del domingo
+Message-ID: <007-needs-reply-es-family-lunch@demo.jev.local>
+Date: Sun, 27 Sep 2026 17:22:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hola cari=C3=B1o,
+
+=C2=BFven=C3=ADs a comer el domingo? Vienen tambi=C3=A9n=
+ tus t=C3=ADos y quiero saber cu=C3=A1ntos seremos para hacer la paella. =
+Dime algo antes del viernes, que tengo que ir al mercado.
+
+Un beso,
+Mam=C3=A1

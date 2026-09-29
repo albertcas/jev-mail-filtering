@@ -1,0 +1,9 @@
+services:
+  jev-mail-filtering:
+    build: .
+    ports: ["127.0.0.1:3737:3737"]
+    env_file: .env
+    volumes: ["jev-data:/data"]
+    restart: unless-stopped
+volumes:
+  jev-data:

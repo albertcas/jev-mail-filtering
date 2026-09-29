@@ -1,0 +1,27 @@
+Authentication-Results: mx.example.com; dkim=pass header.d=example.com;
+ spf=pass; dmarc=pass
+From: Priya Nair <priya.nair@example.com>
+To: Alex Rivera <alex@example.com>
+Subject: FYI: notes from Monday's all-hands
+Message-ID: <028-worth-reading-en-internal-fyi@demo.jev.local>
+Date: Mon, 28 Sep 2026 10:40:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hi all,
+
+For those who couldn't make it, a quick summary of Monday's =
+all-hands:
+
+- Q3 closed 8% above target, mostly thanks to the retainer =
+clients.
+- We're moving to the new project tracker on 12 October; training =
+sessions will be announced next week.
+- The office will be closed on 12 =
+October (public holiday).
+
+Slides are in the shared drive under Company > =
+All-hands. No action needed.
+
+Priya

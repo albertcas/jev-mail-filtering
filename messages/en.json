@@ -1,0 +1,121 @@
+{
+  "app": { "name": "JEV Mail Filtering", "shortName": "JEV Mail", "tagline": "Your inbox, triaged by Jev. Locally, read-only." },
+  "categories": {
+    "needs_reply": "Needs reply", "worth_reading": "Worth reading", "commercial": "Commercial",
+    "possible_scam": "Possible scam", "unsure": "Unsure", "none": "Others"
+  },
+  "reason": {
+    "resembles": "Domain resembles {brand}", "authFailed": "Sender authentication failed",
+    "mismatchedLinks": "Links point somewhere else", "replyToDiffers": "Replies go to another domain",
+    "riskyAttachment": "Risky attachment", "impersonation": "Impersonates an organisation",
+    "requestsSensitiveData": "Asks for sensitive data", "pressureTactics": "Pressure tactics",
+    "addressesClassifier": "Tries to instruct automated filters", "ongoingThread": "You replied in this thread",
+    "knownSender": "You have written to this sender", "asksToAct": "Asks you to act",
+    "personal": "Written for you", "promotional": "Promotional", "bulkUnsubscribe": "Bulk mail (unsubscribe link)",
+    "manualOverride": "Moved by you"
+  },
+  "dashboard": {
+    "syncNow": "Sync now", "syncing": "Syncing…", "lastSync": "Last sync {time}", "never": "Never synced",
+    "analyzed": "{count, plural, one {# email analysed} other {# emails analysed}}",
+    "cost": "≈ {cost} spent on Jev", "pending": "{count} pending", "confidence": "Confidence {value}",
+    "urgency": "Urgency", "settings": "Settings",
+    "connected": "Connected", "connectionProblem": "Connection problem", "columns": "Categories",
+    "emptyTitle": "Nothing analysed yet", "emptyBody": "Sync now to fetch your recent mail. Jev sorts each email into a category here; your mailbox is never changed.",
+    "noSubject": "(no subject)", "urgencyValue": "{value}/3", "minConfidenceChip": "Minimum confidence {value}",
+    "scamAdvisory": "Guidance only: Jev can miss a scam or flag a genuine email. If in doubt, contact the sender through a channel you already trust.",
+    "adjust": "Adjust", "sortUrgency": "Sorted by urgency", "sortDate": "Newest first", "skipToList": "Skip to the messages",
+    "urgencyLevel": { "today": "Today", "days": "In 1-2 days", "week": "This week", "none": "No rush" },
+    "empty": {
+      "needs_reply": "Nothing is waiting for your reply.", "worth_reading": "Nothing worth reading right now.",
+      "commercial": "No commercial mail.", "possible_scam": "No suspicious emails found.",
+      "unsure": "Jev was confident about every email.", "none": "No other emails."
+    }
+  },
+  "detail": {
+    "probabilities": "Category probabilities", "judgments": "Jev judgments",
+    "signals": "Verified signals", "model": "Model {model}", "openInGmail": "Open in Gmail",
+    "moveTo": "Not this? Move to…", "undo": "Undo my change", "close": "Close",
+    "emptyTitle": "Select an email", "emptyHint": "Use the ↑ and ↓ keys to move through the list, and A to adjust the thresholds.",
+    "why": "Why", "reasons": "Reasons", "excerpt": "Preview",
+    "noul": {
+      "asks_recipient_to_act": "Asks you to act", "personal_not_bulk": "Written for you", "promotional": "Promotional",
+      "impersonation": "Impersonation", "pressure_tactics": "Pressure tactics", "requests_sensitive_data": "Asks for sensitive data",
+      "addresses_the_classifier": "Instructs automated filters"
+    },
+    "signal": {
+      "sender_authentication": "Sender authentication", "reply_to_differs_from_sender": "Reply-To differs",
+      "domain_resembles": "Lookalike domain", "has_unsubscribe_header": "Unsubscribe header",
+      "recipient_has_replied_in_thread": "You replied in thread", "recipient_has_written_to_sender_before": "Known sender",
+      "risky_attachments": "Risky attachments", "mismatched_links": "Mismatched links"
+    },
+    "value": { "yes": "Yes", "no": "No", "pass": "Passed", "fail": "Failed", "none": "Not present" },
+    "scamThreshold": "Minimum scam probability: {value}"
+  },
+  "setup": {
+    "welcomeTitle": "Triage your inbox with Jev", "welcomeBody": "This app runs on your computer and only reads your mail. For each email, a short excerpt is sent to TypeSafe's Jev model to classify it. Nothing is moved, deleted or marked as read.",
+    "tryDemo": "Try with a demo inbox", "start": "Connect my inbox",
+    "keyTitle": "TypeSafe API key", "keyStep1": "Open the TypeSafe console and sign in.", "keyStep2": "Create a new API key.", "keyStep3": "Paste it here.", "keyOpen": "Open console.typesafe.ai", "keyLabel": "API key", "verify": "Verify", "keyOk": "Key verified", "keyInvalid": "That key was rejected", "network": "Could not reach the service. Check your connection.",
+    "mailTitle": "Your mailbox", "provider": "Provider", "other": "Other IMAP", "email": "Email address", "displayName": "Your name (optional)", "appPassword": "App password", "host": "IMAP server", "port": "Port", "secure": "Use TLS", "testConnection": "Test connection", "mailOk": "Connected: {count} folders found", "mailAuth": "The server rejected the email or app password", "howTo": "How to create an app password",
+    "scopeTitle": "What to analyse", "folder": "Folder", "days": "Days back", "estimate": "About {count} emails · ≈ {cost}",
+    "firstSync": "Analyse my inbox", "envMode": "Secrets are read from your .env file (Docker mode).",
+    "stepOf": "Step {current} of {total}", "progress": "Setup progress", "stepKey": "API key", "stepMailbox": "Mailbox", "stepScope": "What to analyse",
+    "back": "Back", "continue": "Continue", "cancel": "Back to inbox", "newTab": "(opens in a new tab)",
+    "welcomeFact1": "Runs on this computer. Your mail and settings stay here.", "welcomeFact2": "Read-only. Nothing is moved, deleted or marked as read.", "welcomeFact3": "For each email, the sender, subject, start of the text, link domains and attachment names go to Jev, TypeSafe's model, to be classified.",
+    "welcomeNeeds": "You'll need a TypeSafe API key and an app password from your mail provider. It takes about five minutes.",
+    "keyIntro": "The key lets this app call Jev with your own TypeSafe account. Checking it is free.",
+    "keyHowTo": "How to create your key", "keySaved": "A key is already saved on this computer. Paste a new one only to replace it.",
+    "keyStored": "Saved in your system keychain, never in the browser.", "keyEnvMissing": "Add the key to your .env file as TYPESAFE_API_KEY and restart the app. You can check a key here first; it won't be saved.",
+    "keyEnvOk": "The key works. Add it to your .env file as TYPESAFE_API_KEY and restart the app to continue.", "recheck": "Check again", "keyRequired": "Paste your API key first.",
+    "mailIntro": "Your provider needs an app password: a separate password just for this app that you can revoke at any time. Your usual password won't work.",
+    "guideOpen": "Open the app password page", "guideFull": "Full step-by-step guide",
+    "guide": {
+      "gmail": {
+        "step1": "Turn on 2-Step Verification in your Google Account. App passwords only appear once it's on.",
+        "step2": "Open App passwords, type a name such as “JEV Mail Filtering” and select Create.",
+        "step3": "Copy the 16-character password and paste it below. Google shows it only once."
+      },
+      "icloud": {
+        "step1": "Check that two-factor authentication is on for your Apple Account.",
+        "step2": "Sign in to your Apple Account, open Sign-In and Security › App-Specific Passwords and create one.",
+        "step3": "Paste it below, with your iCloud address (…@icloud.com) as the email."
+      },
+      "yahoo": {
+        "step1": "Open Account security in your Yahoo account.",
+        "step2": "Select Generate app password, type a name such as “JEV Mail Filtering” and select Generate.",
+        "step3": "Copy the password and paste it below."
+      },
+      "imap": {
+        "step1": "Look up your provider's IMAP server. Most use port 993 with TLS.",
+        "step2": "If your account uses two-step sign-in, create an app password in its security settings.",
+        "step3": "Enter the server, your email and the password below."
+      }
+    },
+    "mailEnvNote": "In .env mode the app password comes from IMAP_PASSWORD. Leave this empty to use it.", "mailEnvMissing": "In .env mode the app password is read from IMAP_PASSWORD, which isn't set. Add it to your .env file and restart; what you type here is only used to test the connection.", "testToContinue": "Test the connection to continue",
+    "passwordRequired": "Paste the app password first.", "emailRequired": "Enter your email address.", "hostRequired": "Enter the IMAP server, for example imap.example.com.", "badRequest": "Check the fields and try again.",
+    "scopeIntro": "Choose what Jev reads on the first run. Later syncs only fetch new mail.",
+    "daysHint": "Between 1 and 90 days.", "estimating": "Estimating…", "estimateHint": "An estimate from the number of emails; the real cost depends on their length. At most {max} emails per sync.",
+    "estimateUnavailable": "Couldn't estimate the cost right now. You can still start.",
+    "syncingTitle": "Analysing your inbox", "syncingBody": "Jev is sorting your recent mail. This can take a few minutes; keep this page open. Your mailbox is not changed.",
+    "syncingStarted": "Fetching your mail…", "syncNotReady": "The analysis couldn't start: the API key or the app password is missing. In .env mode, check TYPESAFE_API_KEY and IMAP_PASSWORD."
+  },
+  "settings": {
+    "title": "Settings", "thresholds": "Decision thresholds", "thresholdsHelp": "Changes apply instantly and never call Jev again.",
+    "scam": "Minimum scam probability", "minConfidence": "Minimum confidence", "strongNoul": "Evidence threshold",
+    "save": "Save", "saved": "Saved", "interval": "Sync every (minutes)", "language": "Language",
+    "danger": "Danger zone", "wipe": "Delete all local data", "wipeConfirm": "This deletes the local database and stored credentials. Your mailbox is not touched. Continue?",
+    "backToInbox": "Back to inbox", "intro": "Everything here is stored on this computer.",
+    "thresholdsSection": "Decisions", "thresholdsSectionHelp": "How sure Jev must be before an email lands in a column.",
+    "syncSection": "Sync", "syncHelp": "How often new mail is fetched and analysed while the app is running.", "frequency": "Sync every",
+    "minutes": "{count, plural, one {# minute} other {# minutes}}", "hours": "{count, plural, one {# hour} other {# hours}}",
+    "modelSection": "Model", "modelHelp": "Advanced. jev-latest always uses the newest Jev. Pin a version such as jev-1.13.0 to keep results stable.", "model": "Jev model", "modelInvalid": "Enter a model name without spaces, for example jev-latest.",
+    "languageHelp": "Applies to this browser.",
+    "account": "Account", "accountHelp": "The mailbox this app reads.", "server": "Server", "reconfigure": "Reconfigure", "reconfigureHelp": "Change the mailbox, app password or API key.",
+    "dangerHelp": "Removes the local database, your settings and the stored credentials. Your mailbox is not touched.", "wipeFailed": "Couldn't delete the data. Try again.", "saveFailed": "Couldn't save. Try again."
+  },
+  "errors": {
+    "imap_auth": "Your mail provider rejected the app password.", "imap_unavailable": "Could not reach your mail server. Showing saved results.",
+    "jev_auth": "Your TypeSafe key was rejected or has no credit.", "fixLink": "Fix it",
+    "overrideFailed": "Could not save your change. Try again.", "syncFailed": "The sync could not run. Try again in a moment.", "retry": "Retry"
+  },
+  "demo": { "banner": "Demo with fictional data", "install": "Install it locally →", "readOnly": "Disabled in the demo" }
+}

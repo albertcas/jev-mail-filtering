@@ -1,0 +1,18 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=amazon-customer-prize.net; spf=pass; dmarc=pass
+From: Amazon Rewards <rewards@amazon-customer-prize.net>
+To: Alex Rivera <alex@example.com>
+Reply-To: claims@prize-desk-online.top
+Subject: Congratulations! You've been selected for a $500 gift card
+Message-ID: <036-scam-en-amazon-prize@demo.jev.local>
+Date: Thu, 24 Sep 2026 19:40:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<p>Dear valued customer,</p><p>You have been randomly selected to receive a=
+ <b>$500 Amazon gift card</b> as part of our loyalty program. To claim your=
+ reward, complete a short survey and pay the $2.95 shipping fee.</p><p><a =
+href=3D"https://amazon-customer-prize.net/claim?id=3D77231">www.amazon.=
+com/rewards/claim</a></p><p>Offer expires in 12 hours.=
+</p>

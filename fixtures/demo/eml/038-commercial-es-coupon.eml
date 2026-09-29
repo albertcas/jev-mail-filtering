@@ -1,0 +1,21 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=hornosmediterraneo.example; spf=pass; dmarc=pass
+List-Unsubscribe: <https://hornosmediterraneo.example/baja?c=88311>
+From: =?UTF-8?Q?Hornos_Mediterr=C3=A1neo?=
+ <promo@hornosmediterraneo.example>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Tu_cup=C3=B3n_de_5_=E2=82=AC_caduca_el_d?=
+ =?UTF-8?Q?omingo_=F0=9F=8D=95?=
+Message-ID: <038-commercial-es-coupon@demo.jev.local>
+Date: Sun, 27 Sep 2026 10:00:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<h2>=C2=A1No lo dejes escapar!</h2><p>Usa el c=C3=B3digo =
+<strong>PIZZA5</strong> en tu pr=C3=B3ximo pedido a domicilio y te =
+descontamos 5 =E2=82=AC. V=C3=A1lido hasta el domingo 4 de octubre.=
+</p><p><a href=3D"https://hornosmediterraneo.example/pedir?=
+cupon=3DPIZZA5">Pedir ahora</a></p><p style=3D"font-size:11px"><a =
+href=3D"https://hornosmediterraneo.example/baja?c=3D88311">No quiero =
+recibir m=C3=A1s ofertas</a></p>

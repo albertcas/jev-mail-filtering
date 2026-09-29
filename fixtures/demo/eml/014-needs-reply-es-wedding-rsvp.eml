@@ -1,0 +1,23 @@
+Authentication-Results: mx.example.org; dkim=pass header.d=example.org;
+ spf=pass; dmarc=pass
+From: =?UTF-8?Q?Laura_M=C3=A9ndez?= <laura.mendez@example.org>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?=C2=A1Nos_casamos!_Confirma_tu_asistenci?= =?UTF-8?Q?a?=
+Message-ID: <014-needs-reply-es-wedding-rsvp@demo.jev.local>
+Date: Sun, 20 Sep 2026 10:10:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+=C2=A1Hola Alex!
+
+Dani y yo nos casamos el s=C3=A1bado 14 de noviembre en =
+la Mas=C3=ADa Can Roca, a las 12:30. Nos har=C3=ADa much=C3=ADsima =
+ilusi=C3=B3n que vinieras.
+
+=C2=BFNos confirmas antes del 10 de octubre si =
+vienes y si traes acompa=C3=B1ante? Dinos tambi=C3=A9n si tienes alguna =
+alergia o intolerancia para el men=C3=BA.
+
+=C2=A1Un abrazo enorme!
+Laura
