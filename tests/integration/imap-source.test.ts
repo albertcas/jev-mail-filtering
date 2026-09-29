@@ -44,9 +44,11 @@ describe.skipIf(!enabled)("ImapMailSource against GreenMail", () => {
   });
 
   it("maps authentication failures to ImapAuthError", async () => {
-    // GreenMail 2.1 accepted a wrong password for an existing user in CI, so use an account that doesn't exist.
-    const bad = new ImapMailSource({ ...conf, user: `nobody${Date.now()}@localhost`, password: "wrong" });
+    const bad = new ImapMailSource({ ...conf, password: "wrong" });
     await expect(bad.listFolders()).rejects.toBeInstanceOf(ImapAuthError);
     await bad.close();
+    const unknown = new ImapMailSource({ ...conf, user: `nobody${Date.now()}@localhost` });
+    await expect(unknown.listFolders()).rejects.toBeInstanceOf(ImapAuthError);
+    await unknown.close();
   });
 });

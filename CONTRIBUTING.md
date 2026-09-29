@@ -34,7 +34,7 @@ npm run test:e2e         # Playwright, builds and starts the demo on 127.0.0.1:3
 
 ```bash
 docker run -d --rm --name greenmail -p 3025:3025 -p 3143:3143 -p 8080:8080 \
-  -e GREENMAIL_OPTS="-Dgreenmail.setup.test.smtp -Dgreenmail.setup.test.imap -Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users.login=email -Dgreenmail.auth.disabled=false" \
+  -e GREENMAIL_OPTS="-Dgreenmail.setup.test.smtp -Dgreenmail.setup.test.imap -Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users.login=email" \
   greenmail/standalone:2.1.0
 GREENMAIL=1 npm run test:integration
 docker stop greenmail

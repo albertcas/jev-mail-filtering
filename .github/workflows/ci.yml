@@ -25,7 +25,7 @@ jobs:
         image: greenmail/standalone:2.1.0
         ports: ["3025:3025", "3143:3143", "8080:8080"]
         env:
-          GREENMAIL_OPTS: "-Dgreenmail.setup.test.smtp -Dgreenmail.setup.test.imap -Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users.login=email -Dgreenmail.auth.disabled=false"
+          GREENMAIL_OPTS: "-Dgreenmail.setup.test.smtp -Dgreenmail.setup.test.imap -Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users.login=email"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
