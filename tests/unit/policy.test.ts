@@ -70,6 +70,9 @@ describe("parseThresholds (Review Focus #5)", () => {
     expect(parseThresholds({ scam: "abc", minConfidence: Number.NaN, strongNoul: -1 })).toEqual({ ...DEFAULT_THRESHOLDS, strongNoul: 0 });
     expect(parseThresholds({ scam: "0.3", minConfidence: 2 })).toEqual({ ...DEFAULT_THRESHOLDS, scam: 0.3, minConfidence: 1 });
   });
+  it("treats blank/whitespace strings and null as invalid, falls back to defaults", () => {
+    expect(parseThresholds({ scam: "", minConfidence: null, strongNoul: "  " })).toEqual(DEFAULT_THRESHOLDS);
+  });
 });
 
 describe("sortForColumn", () => {
