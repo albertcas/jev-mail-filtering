@@ -1,0 +1,23 @@
+Authentication-Results: mx.example.org; dkim=pass header.d=example.org;
+ spf=pass; dmarc=pass
+From: Emma Rivera <emma.rivera@example.org>
+To: Alex Rivera <alex@example.com>
+Subject: Can I crash at yours the weekend of the 10th?
+Message-ID: <024-needs-reply-en-family-visit@demo.jev.local>
+Date: Sat, 26 Sep 2026 21:05:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hey you,
+
+I've got a job interview in town on Friday the 9th and it would =
+be way cheaper to stay the weekend instead of flying back the same day. =
+Could I sleep on your sofa Friday and Saturday night? I promise to bring =
+the good cheese.
+
+Let me know soon so I can book the flights before prices =
+go up.
+
+Love,
+Em

@@ -1,0 +1,19 @@
+Authentication-Results: mx.example.com; spf=fail
+ smtp.mailfrom=bbva-alertas-clientes.com; dkim=none; dmarc=fail
+From: BBVA Seguridad <seguridad@bbva-alertas-clientes.com>
+To: Alex Rivera <alex@example.com>
+Reply-To: atencion.clientes@soporte-banca24.net
+Subject: Su tarjeta ha sido bloqueada temporalmente
+Message-ID: <022-scam-es-bbva-card-blocked@demo.jev.local>
+Date: Tue, 22 Sep 2026 23:55:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<p>Estimado cliente,</p><p>Por motivos de seguridad hemos bloqueado =
+temporalmente su tarjeta terminada en 4417. Para desbloquearla debe =
+verificar su identidad introduciendo su n=C3=BAmero de tarjeta, fecha de =
+caducidad y CVV en el siguiente enlace:</p><p><a href=3D"https://bbva-alert=
+as-clientes.com/verificar">https://www.bbva.es/verificacion</a></p><p>Si no=
+ completa la verificaci=C3=B3n hoy, la tarjeta quedar=C3=A1 cancelada de =
+forma definitiva.</p><p>BBVA</p>

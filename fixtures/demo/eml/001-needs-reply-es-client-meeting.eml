@@ -1,0 +1,22 @@
+Authentication-Results: mx.example.com; dkim=pass header.d=estudio-gil.es;
+ spf=pass; dmarc=pass
+From: Marta Gil <marta.gil@estudio-gil.es>
+To: Alex Rivera <alex@example.com>
+In-Reply-To: <sent-003@example.com>
+References: <sent-003@example.com>
+Subject: =?UTF-8?Q?=C2=BFPodemos_mover_la_reuni=C3=B3n_del_?=
+ =?UTF-8?Q?jueves=3F?=
+Message-ID: <001-needs-reply-es-client-meeting@demo.jev.local>
+Date: Mon, 28 Sep 2026 06:14:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hola Alex,
+
+me ha surgido un imprevisto el jueves por la ma=C3=B1ana. =
+=C2=BFTe vendr=C3=ADa bien pasar la revisi=C3=B3n del presupuesto al =
+viernes a las 10:00? Si no, dime qu=C3=A9 hueco tienes.
+
+Gracias,
+Marta

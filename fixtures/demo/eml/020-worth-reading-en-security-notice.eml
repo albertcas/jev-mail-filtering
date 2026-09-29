@@ -1,0 +1,24 @@
+Authentication-Results: mx.example.com; dkim=pass header.d=codehaven.dev;
+ spf=pass smtp.mailfrom=codehaven.dev; dmarc=pass
+From: Codehaven <noreply@codehaven.dev>
+To: Alex Rivera <alex@example.com>
+Subject: [Codehaven] A new SSH key was added to your account
+Message-ID: <020-worth-reading-en-security-notice@demo.jev.local>
+Date: Fri, 25 Sep 2026 17:48:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hi alexrivera,
+
+The following SSH key was added to your account:
+
+  laptop-2026 (ED25519) SHA256:q3Vd8c1mZkT7yJ0pLr2x
+
+If you added this key, you can ignore this email.
+
+If you didn't, remove =
+the key from Settings > SSH keys and review your account's security log.
+
+Thanks,
+The Codehaven Team

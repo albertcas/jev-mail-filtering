@@ -1,0 +1,17 @@
+Authentication-Results: mx.example.com; spf=fail
+ smtp.mailfrom=netflix-payment-update.com; dkim=none; dmarc=fail
+From: Netflix <billing@netflix-payment-update.com>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Your_membership_is_on_hold_=E2=80=94_upd?=
+ =?UTF-8?Q?ate_your_payment_details?=
+Message-ID: <043-scam-en-netflix-payment@demo.jev.local>
+Date: Sat, 26 Sep 2026 04:03:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<p>Hi,</p><p>We couldn't process your last payment, so your membership has =
+been put on hold. Update your card details within 24 hours to keep watching=
+.</p><p><a href=3D"https://netflix-payment-update.com/billing">https://www.=
+netflix.com/youraccount</a></p><p>=E2=80=94 The Netflix =
+Team</p>

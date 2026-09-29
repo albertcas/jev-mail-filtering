@@ -1,0 +1,25 @@
+Authentication-Results: mx.example.com; dkim=pass header.d=bancolitoral.es;
+ spf=pass smtp.mailfrom=bancolitoral.es; dmarc=pass
+From: Banco Litoral <alertas@bancolitoral.es>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Nuevo_inicio_de_sesi=C3=B3n_en_tu_banca_?=
+ =?UTF-8?Q?online?=
+Message-ID: <016-worth-reading-es-security-notice@demo.jev.local>
+Date: Sat, 26 Sep 2026 19:34:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hola, Alex:
+
+Se ha iniciado sesi=C3=B3n en tu banca online el 26/09/2026 a =
+las 21:31 desde un navegador Firefox en Windows (Valencia).
+
+Si has sido t=C3=BA, no tienes que hacer nada.
+
+Si no reconoces este acceso=
+, entra en la app de Banco Litoral y cambia tu clave, o ll=C3=A1manos al =
+900 123 456. Recuerda que nunca te pediremos claves ni c=C3=B3digos por =
+correo electr=C3=B3nico.
+
+Banco Litoral

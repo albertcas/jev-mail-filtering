@@ -1,0 +1,20 @@
+Authentication-Results: mx.example.com; dkim=pass header.d=fieldnotes.dev;
+ spf=pass; dmarc=pass
+List-Unsubscribe: <mailto:unsubscribe@fieldnotes.dev?subject=unsubscribe>,
+ <https://fieldnotes.dev/unsubscribe/a91f>
+From: Frontend Field Notes <hello@fieldnotes.dev>
+To: Alex Rivera <alex@example.com>
+Subject: Field Notes #142: the quiet death of the CSS reset
+Message-ID: <013-worth-reading-en-newsletter@demo.jev.local>
+Date: Thu, 24 Sep 2026 06:30:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<h1>Field Notes #142</h1><p>Hi there,</p><p>This week: why modern browser =
+defaults have made most CSS resets unnecessary, a practical look at =
+container queries in production dashboards, and a short essay on writing =
+error messages people actually read.</p><p><a href=3D"https://fieldnotes.=
+dev/142">Read issue #142 on the web</a></p><p>=E2=80=94 Nadia</p><p =
+style=3D"font-size:11px">You subscribed at fieldnotes.dev. <a =
+href=3D"https://fieldnotes.dev/unsubscribe/a91f">Unsubscribe</a></p>

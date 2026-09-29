@@ -1,0 +1,18 @@
+Authentication-Results: mx.example.com; spf=fail
+ smtp.mailfrom=correos-aduanas-envio.com; dkim=none; dmarc=fail
+From: Correos <notificaciones@correos-aduanas-envio.com>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Su_paquete_est=C3=A1_retenido_en_aduanas?=
+ =?UTF-8?Q?_=E2=80=93_pago_pendiente_de_1=2C99_?= =?UTF-8?Q?=E2=82=AC?=
+Message-ID: <005-scam-es-correos-customs@demo.jev.local>
+Date: Sun, 20 Sep 2026 02:17:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<p>Estimado cliente:</p><p>Su env=C3=ADo <b>ES2026091884</b> no ha podido =
+ser entregado porque tiene tasas de aduana pendientes (1,99 =E2=82=AC). Si =
+no abona el importe en 48 horas, el paquete ser=C3=A1 devuelto al remitente=
+.</p><p><a href=3D"https://correos-aduanas-envio.com/pago/ES2026091884">www=
+.correos.es/pagar-aduana</a></p><p>Atentamente,=
+<br>Correos</p>

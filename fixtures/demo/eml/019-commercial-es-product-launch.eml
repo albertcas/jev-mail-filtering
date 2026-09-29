@@ -1,0 +1,21 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=tostadoresdelsur.es; spf=pass; dmarc=pass
+List-Unsubscribe: <https://tostadoresdelsur.es/newsletter/baja?id=5521>
+From: Tostadores del Sur <hola@tostadoresdelsur.es>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Nuevo=3A_Yirgacheffe_de_Etiop=C3=ADa=2C_?=
+ =?UTF-8?Q?reci=C3=A9n_tostado?=
+Message-ID: <019-commercial-es-product-launch@demo.jev.local>
+Date: Thu, 24 Sep 2026 09:00:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<h1>Llega el caf=C3=A9 de oto=C3=B1o</h1><p>Notas de bergamota, =
+melocot=C3=B3n y t=C3=A9 negro. Nuestro nuevo lote de Etiop=C3=ADa ya =
+est=C3=A1 disponible en grano y molido, en bolsas de 250 g y 1 kg.=
+</p><p>Env=C3=ADo gratis a partir de 30 =E2=82=AC.</p><p><a =
+href=3D"https://tostadoresdelsur.es/cafe/etiopia-yirgacheffe">Comprar =
+ahora</a></p><p style=3D"font-size:11px"><a href=3D"https://tostadoresdelsu=
+r.es/newsletter/baja?id=3D5521">Darme de =
+baja</a></p>

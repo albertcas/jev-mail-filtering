@@ -1,0 +1,21 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=clinicasonrisanorte.es; spf=pass; dmarc=pass
+From: =?UTF-8?Q?Cl=C3=ADnica_Dental_Sonrisa_Norte?=
+ <citas@clinicasonrisanorte.es>
+To: Alex Rivera <alex@example.com>
+Subject: Recordatorio: tu cita del viernes 2 de octubre
+Message-ID: <040-worth-reading-es-dentist-reminder@demo.jev.local>
+Date: Mon, 28 Sep 2026 08:00:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hola Alex:
+
+Te recordamos tu cita de revisi=C3=B3n y limpieza el viernes 2 =
+de octubre a las 17:30 con la Dra. Serrano, en C/ Mayor 14, 1.=C2=BA.
+
+No es necesario que respondas a este correo. Si no puedes venir, =
+ll=C3=A1manos al 960 000 111 con al menos 24 horas de antelaci=C3=B3n.
+
+Cl=C3=ADnica Dental Sonrisa Norte

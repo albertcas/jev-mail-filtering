@@ -1,0 +1,20 @@
+Authentication-Results: mx.example.com; dkim=pass header.d=example.com;
+ spf=pass; dmarc=pass
+From: Sam Patel <sam.patel@example.com>
+To: Alex Rivera <alex@example.com>
+Subject: Could you review my PR before Thursday's release?
+Message-ID: <004-needs-reply-en-coworker-review@demo.jev.local>
+Date: Mon, 28 Sep 2026 14:42:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hey Alex,
+
+I've opened the PR that moves the checkout form to the new =
+validation library. It's about 400 lines, mostly tests. Since you wrote the=
+ original form, could you take a look before Thursday's release? Let me =
+know if you won't have time and I'll ask Hannah instead.
+
+Thanks!
+Sam

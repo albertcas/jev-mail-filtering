@@ -1,0 +1,19 @@
+Authentication-Results: mx.example.com; dkim=pass header.d=lumenaudio.com;
+ spf=pass; dmarc=pass
+List-Unsubscribe: <https://lumenaudio.com/email/unsubscribe?t=77c1>
+From: Lumen Audio <news@lumenaudio.com>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Introducing_Lumen_Pods_2_=E2=80=94_quiet?=
+ =?UTF-8?Q?er=2C_lighter=2C_30-hour_battery?=
+Message-ID: <025-commercial-en-product-launch@demo.jev.local>
+Date: Tue, 22 Sep 2026 16:00:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<h1>Meet Lumen Pods 2</h1><p>Adaptive noise cancelling, 30 hours of battery=
+ with the case and a new fit that stays put on your run.</p><p>Pre-order =
+today and get a free travel case.</p><p><a href=3D"https://lumenaudio.=
+com/pods-2">Pre-order now</a></p><p style=3D"font-size:11px"><a =
+href=3D"https://lumenaudio.com/email/unsubscribe?t=3D77c1">Unsubscribe</a><=
+/p>

@@ -1,0 +1,26 @@
+Authentication-Results: mx.example.com; dkim=pass header.d=example.com;
+ spf=pass; dmarc=pass
+From: =?UTF-8?Q?Rosa_Beltr=C3=A1n?= <rosa.beltran@example.com>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Para_tu_informaci=C3=B3n=3A_corte_de_luz?=
+ =?UTF-8?Q?_en_la_oficina_el_viernes?=
+Message-ID: <032-worth-reading-es-internal-fyi@demo.jev.local>
+Date: Mon, 28 Sep 2026 07:30:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hola a todos:
+
+Os aviso de que la compa=C3=B1=C3=ADa el=C3=A9ctrica =
+har=C3=A1 un corte programado en el edificio este viernes 2 de octubre, de =
+9:00 a 12:00. Durante ese tiempo no habr=C3=A1 red ni calefacci=C3=B3n en =
+la oficina.
+
+Quien lo prefiera puede teletrabajar esa ma=C3=B1ana; no hace =
+falta que me avis=C3=A9is.
+
+Un saludo,
+Rosa
+Oficina y =
+administraci=C3=B3n

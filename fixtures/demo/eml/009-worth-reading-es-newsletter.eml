@@ -1,0 +1,25 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=laletrapequena.es; spf=pass; dmarc=pass
+List-Unsubscribe: <https://laletrapequena.es/baja?s=alex>
+From: =?UTF-8?Q?La_Letra_Peque=C3=B1a?= <boletin@laletrapequena.es>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?La_Letra_Peque=C3=B1a_=2387=3A_tipograf?=
+ =?UTF-8?Q?=C3=ADas_variables_sin_miedo?=
+Message-ID: <009-worth-reading-es-newsletter@demo.jev.local>
+Date: Wed, 23 Sep 2026 05:00:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<h1>La Letra Peque=C3=B1a #87</h1><p>Hola, suscriptora o =
+suscriptor:</p><p>Esta semana hablamos de tipograf=C3=ADas variables: =
+qu=C3=A9 son los ejes, c=C3=B3mo cargarlas sin disparar el peso de la =
+p=C3=A1gina y por qu=C3=A9 ya no hace falta servir seis archivos distintos =
+para una sola familia.</p><p>Tambi=C3=A9n repasamos tres herramientas para =
+comprobar el contraste de texto sobre im=C3=A1genes y os recomendamos una =
+charla sobre legibilidad en pantallas peque=C3=B1as.</p><p><a =
+href=3D"https://laletrapequena.es/87">Leer el n=C3=BAmero =
+completo</a></p><p>Nos leemos el pr=C3=B3ximo mi=C3=A9rcoles.</p><p =
+style=3D"font-size:11px">Recibes este bolet=C3=ADn porque te suscribiste en=
+ laletrapequena.es. <a href=3D"https://laletrapequena.es/baja?=
+s=3Dalex">Darse de baja</a></p>

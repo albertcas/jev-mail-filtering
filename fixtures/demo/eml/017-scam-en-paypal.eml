@@ -1,0 +1,15 @@
+Authentication-Results: mx.example.com; spf=fail
+ smtp.mailfrom=paypa1-secure.com; dkim=none; dmarc=fail
+From: PayPal Service <service@paypa1-secure.com>
+To: Alex Rivera <alex@example.com>
+Reply-To: support@paypal-help-desk.ru
+Subject: Your account has been limited
+Message-ID: <017-scam-en-paypal@demo.jev.local>
+Date: Sun, 27 Sep 2026 03:12:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<p>We noticed unusual activity. <a href=3D"https://paypa1-secure.=
+com/login">https://www.paypal.com/verify</a> within 24 hours or your =
+account will be permanently closed.</p>

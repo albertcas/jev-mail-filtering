@@ -1,0 +1,30 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=grantandhale.co.uk; spf=pass; dmarc=pass
+From: Oliver Grant <oliver@grantandhale.co.uk>
+To: Alex Rivera <alex@example.com>
+Subject: Questions on the website proposal
+Message-ID: <011-needs-reply-en-client-proposal@demo.jev.local>
+Date: Thu, 24 Sep 2026 13:18:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hi Alex,
+
+Thanks for sending the proposal over =E2=80=94 the team really =
+liked the direction, especially the idea of putting the case studies front =
+and centre.
+
+Before we sign off, a few questions:
+
+1. Does the quote =
+include migrating the 60-odd blog posts from our current site, or is that =
+extra?
+2. Could we split the payment into three milestones instead of two?
+3. Would a launch before the end of November be realistic?
+
+If it's easier, happy to jump on a call next week.
+
+Best,
+Oliver Grant
+Partner, Grant & Hale

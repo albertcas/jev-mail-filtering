@@ -1,0 +1,30 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=ferreteria-puig.cat; spf=pass; dmarc=pass
+From: Jordi Puig <jordi@ferreteria-puig.cat>
+To: Alex Rivera <alex@example.com>
+In-Reply-To: <sent-001@example.com>
+References: <sent-001@example.com>
+Subject: =?UTF-8?Q?Re=3A_Presupuesto_web_de_la_ferreter?=
+ =?UTF-8?Q?=C3=ADa?=
+Message-ID: <021-needs-reply-es-thread-hardware-store@demo.jev.local>
+Date: Tue, 22 Sep 2026 16:36:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Buenas tardes, Alex:
+
+Gracias por el presupuesto, y perdona el retraso, que=
+ esta semana hemos tenido inventario.
+
+Nos gusta la opci=C3=B3n B, la de la=
+ tienda online con recogida en local. Solo una duda: =C2=BFel cat=C3=A1logo=
+ lo podr=C3=ADamos actualizar nosotros mismos desde una hoja de =
+c=C3=A1lculo o tendr=C3=ADamos que ped=C3=ADrtelo a ti cada vez? Tenemos =
+unos 1.200 productos y los precios cambian a menudo.
+
+Si eso est=C3=A1 resuelto, lo cerramos.
+
+Salut,
+Jordi
+Ferreteria Puig

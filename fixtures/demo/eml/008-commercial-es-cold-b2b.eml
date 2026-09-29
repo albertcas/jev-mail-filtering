@@ -1,0 +1,25 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=crecemarketing.es; spf=pass; dmarc=pass
+From: =?UTF-8?Q?Iv=C3=A1n_Soler?= <ivan@crecemarketing.es>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?M=C3=A1s_clientes_para_tu_estudio_en_90_?=
+ =?UTF-8?Q?d=C3=ADas?=
+Message-ID: <008-commercial-es-cold-b2b@demo.jev.local>
+Date: Tue, 22 Sep 2026 07:47:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hola Alex,
+
+he visto la web de tu estudio y creo que est=C3=A1is dejando =
+pasar muchas oportunidades en Google. En Crece Marketing ayudamos a =
+estudios de dise=C3=B1o como el tuyo a conseguir entre 5 y 10 clientes =
+nuevos al mes con campa=C3=B1as de captaci=C3=B3n.
+
+=C2=BFTe encajar=C3=ADa una llamada de 15 minutos esta semana para =
+ense=C3=B1arte c=C3=B3mo lo hacemos?
+
+Un saludo,
+Iv=C3=A1n Soler
+Director comercial =C2=B7 Crece Marketing

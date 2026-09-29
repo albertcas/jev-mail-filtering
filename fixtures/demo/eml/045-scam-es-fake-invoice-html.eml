@@ -1,0 +1,35 @@
+Authentication-Results: mx.example.com; spf=softfail
+ smtp.mailfrom=pagos-proveedor.top; dkim=none; dmarc=none
+From: =?UTF-8?Q?Departamento_de_Facturaci=C3=B3n?=
+ <facturacion@pagos-proveedor.top>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Factura_pendiente_n=C2=BA_2026-4471_?=
+ =?UTF-8?Q?=E2=80=93_requiere_pago_inmediato?=
+Message-ID: <045-scam-es-fake-invoice-html@demo.jev.local>
+Date: Sun, 27 Sep 2026 04:44:00 +0000
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="--_NmP-34abf1666376fa6b-Part_1"
+
+----_NmP-34abf1666376fa6b-Part_1
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Buenos d=C3=ADas:
+
+Le adjuntamos la factura n=C2=BA 2026-4471 por importe =
+de 1.346,20 =E2=82=AC, vencida desde el 15/09/2026. Abra el documento =
+adjunto e introduzca sus credenciales de correo para visualizarla y =
+proceder al pago.
+
+Si no recibimos el pago en 24 horas, el expediente =
+pasar=C3=A1 a nuestro departamento jur=C3=ADdico.
+
+Atentamente,
+Departamento de Facturaci=C3=B3n
+----_NmP-34abf1666376fa6b-Part_1
+Content-Type: text/html; name=Factura_2026-4471.html
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=Factura_2026-4471.html
+
+ZGVtbw==
+----_NmP-34abf1666376fa6b-Part_1--

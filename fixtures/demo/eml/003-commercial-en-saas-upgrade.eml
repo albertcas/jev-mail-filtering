@@ -1,0 +1,20 @@
+Authentication-Results: mx.example.com; dkim=pass header.d=taskflow.app;
+ spf=pass; dmarc=pass
+List-Unsubscribe: <https://taskflow.app/unsubscribe?u=8812>
+From: Taskflow <team@taskflow.app>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Unlock_Taskflow_Pro_=E2=80=94_40=25_off_?=
+ =?UTF-8?Q?annual_plans_this_week?=
+Message-ID: <003-commercial-en-saas-upgrade@demo.jev.local>
+Date: Sat, 19 Sep 2026 15:00:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<h2>Your team is growing. Your plan should too.</h2><p>Get unlimited boards=
+, time tracking and guest seats with Taskflow Pro. For the next 7 days, =
+annual plans are <strong>40% off</strong>.</p><p><a =
+href=3D"https://taskflow.app/pricing?promo=3DPRO40">Upgrade now</a></p><p =
+style=3D"font-size:11px">You are receiving this because you have a Taskflow=
+ account. <a href=3D"https://taskflow.app/unsubscribe?=
+u=3D8812">Unsubscribe</a></p>

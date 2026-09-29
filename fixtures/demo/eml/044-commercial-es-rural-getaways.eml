@@ -1,0 +1,19 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=escapadasrurales.es; spf=pass; dmarc=pass
+List-Unsubscribe: <https://escapadasrurales.es/baja?u=alx>
+From: Escapadas Rurales <ofertas@escapadasrurales.es>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Puente_de_octubre=3A_casas_rurales_desde?=
+ =?UTF-8?Q?_49_=E2=82=AC_la_noche?=
+Message-ID: <044-commercial-es-rural-getaways@demo.jev.local>
+Date: Wed, 23 Sep 2026 16:00:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<h1>=C2=BFTe escapas en el puente?</h1><p>Casas con chimenea en el Pirineo,=
+ el Matarra=C3=B1a y la Sierra de Gredos desde 49 =E2=82=AC la noche. =
+Reserva antes del jueves y la cancelaci=C3=B3n es gratuita.</p><p><a =
+href=3D"https://escapadasrurales.es/puente-octubre">Ver casas =
+disponibles</a></p><p style=3D"font-size:11px"><a href=3D"https://escapadas=
+rurales.es/baja?u=3Dalx">Darse de baja</a></p>

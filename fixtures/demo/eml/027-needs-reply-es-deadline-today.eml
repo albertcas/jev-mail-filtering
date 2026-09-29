@@ -1,0 +1,23 @@
+Authentication-Results: mx.example.com; dkim=pass
+ header.d=gestoriaribera.es; spf=pass; dmarc=pass
+From: Nuria Ribera <nuria@gestoriaribera.es>
+To: Alex Rivera <alex@example.com>
+Subject: URGENTE: facturas del trimestre, las necesito hoy
+Message-ID: <027-needs-reply-es-deadline-today@demo.jev.local>
+Date: Tue, 29 Sep 2026 06:05:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Buenos d=C3=ADas, Alex:
+
+Para poder presentar el IVA del tercer trimestre a=
+ tiempo necesito que me env=C3=ADes hoy, antes de las 14:00, las facturas =
+emitidas de julio a septiembre y los tickets de gastos que quieras deducir.
+
+Si te falta alguna, m=C3=A1ndame lo que tengas y me dices qu=C3=A9 queda =
+pendiente.
+
+Gracias,
+Nuria Ribera
+Gestor=C3=ADa Ribera

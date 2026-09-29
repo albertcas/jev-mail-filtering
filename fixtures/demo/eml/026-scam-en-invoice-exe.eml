@@ -1,0 +1,30 @@
+Authentication-Results: mx.example.com; spf=softfail
+ smtp.mailfrom=global-invoicing-services.biz; dkim=none; dmarc=none
+From: Accounts Payable <accounts@global-invoicing-services.biz>
+To: Alex Rivera <alex@example.com>
+Subject: FINAL NOTICE: overdue invoice INV-88213
+Message-ID: <026-scam-en-invoice-exe@demo.jev.local>
+Date: Fri, 25 Sep 2026 05:21:00 +0000
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="--_NmP-52051c4319ee69ce-Part_1"
+
+----_NmP-52051c4319ee69ce-Part_1
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Hello,
+
+Our records show that invoice INV-88213 for USD 2,480.00 is now 30 =
+days overdue. Please open the attached invoice and arrange payment today to=
+ avoid legal action and a late fee.
+
+Regards,
+Accounts Payable =
+Department
+----_NmP-52051c4319ee69ce-Part_1
+Content-Type: application/octet-stream; name=INV-88213.pdf.exe
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=INV-88213.pdf.exe
+
+ZGVtbw==
+----_NmP-52051c4319ee69ce-Part_1--

@@ -1,0 +1,19 @@
+Authentication-Results: mx.example.com; spf=fail
+ smtp.mailfrom=apple-id-unlock.support; dkim=none; dmarc=fail
+From: Apple Support <no_reply@apple-id-unlock.support>
+To: Alex Rivera <alex@example.com>
+Reply-To: unlock-team@secure-idcenter.co
+Subject: Your Apple ID has been locked for security reasons
+Message-ID: <050-scam-en-apple-id-locked@demo.jev.local>
+Date: Mon, 28 Sep 2026 01:17:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<p>Dear Customer,</p><p>Your Apple ID was used to sign in to iCloud from an=
+ unknown device in Moscow. For your protection, your account has been =
+locked.</p><p>To unlock it, verify your identity and payment =
+information:</p><p><a href=3D"https://apple-id-unlock.=
+support/verify">https://appleid.apple.com/unlock</a></p><p>If you do not =
+verify within 24 hours, all your photos and data will be deleted.=
+</p><p>Apple Support</p>

@@ -1,0 +1,25 @@
+Authentication-Results: mx.example.com; dkim=pass header.d=example.com;
+ spf=pass; dmarc=pass
+From: Hannah Brooks <hannah.brooks@example.com>
+To: Alex Rivera <alex@example.com>
+Subject: =?UTF-8?Q?Team_offsite_on_16_October_=E2=80=94_ple?=
+ =?UTF-8?Q?ase_RSVP_by_Friday?=
+Message-ID: <018-needs-reply-en-offsite-rsvp@demo.jev.local>
+Date: Fri, 25 Sep 2026 08:15:00 +0000
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Hi Alex,
+
+We're finalising numbers for the team offsite at the Old Mill on =
+Friday 16 October (9:30=E2=80=9317:00, dinner afterwards).
+
+Could you reply by this Friday to let me know:
+- whether you're coming
+- if you'll stay for dinner
+- any dietary requirements
+
+Thanks!
+Hannah
+People Ops
