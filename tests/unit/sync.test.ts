@@ -141,4 +141,26 @@ describe("SyncRunner", () => {
     expect(r.isRunning).toBe(false);
     expect(await r.trigger()).toMatchObject({ classified: 3 });
   });
+  it("whenIdle resolves at once when idle and only after the in-flight run otherwise", async () => {
+    await new SyncRunner(async () => null).whenIdle();
+    let release!: () => void;
+    const gate = new Promise<void>((r) => { release = r; });
+    const d = deps({ classify: async () => { await gate; return okAnswers; } });
+    const r = new SyncRunner(async () => d);
+    void r.trigger();
+    let idle = false;
+    const waiting = r.whenIdle().then(() => { idle = true; });
+    await new Promise((res) => setTimeout(res, 20));
+    expect(idle).toBe(false);
+    release();
+    await waiting;
+    expect(r.isRunning).toBe(false);
+    expect(d.repo.countPending()).toBe(0);
+  });
+  it("whenIdle never rejects, even when the run fails", async () => {
+    const r = new SyncRunner(async () => { throw new Error("boom"); });
+    const run = r.trigger();
+    await expect(r.whenIdle()).resolves.toBeUndefined();
+    await expect(run).rejects.toThrow("boom");
+  });
 });

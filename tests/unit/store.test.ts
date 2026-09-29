@@ -1,3 +1,6 @@
+import { existsSync, mkdtempSync, statSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
 import { openDatabase } from "@/core/store/db";
 import { createRepo, type NewMessage, type Repo } from "@/core/store/repo";
@@ -62,5 +65,17 @@ describe("repo", () => {
     repo.wipe();
     expect(repo.getMailbox("INBOX")).toBeNull();
     expect(repo.lastRun()).toBeNull();
+  });
+  it("compact vacuums and truncates the WAL after a wipe", () => {
+    const dir = mkdtempSync(join(tmpdir(), "jev-store-"));
+    const file = join(dir, "data.db");
+    const disk = createRepo(openDatabase(file));
+    for (let i = 0; i < 50; i++) disk.insertMessage({ ...msg(`<m${i}@x>`), excerpt: "x".repeat(2000) });
+    disk.wipe();
+    disk.compact();
+    expect(disk.countPending()).toBe(0);
+    const wal = `${file}-wal`;
+    if (existsSync(wal)) expect(statSync(wal).size).toBe(0);
+    expect(statSync(file).size).toBeLessThan(50 * 2000);
   });
 });

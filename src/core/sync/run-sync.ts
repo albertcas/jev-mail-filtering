@@ -97,6 +97,11 @@ export class SyncRunner {
     return this.#current !== null;
   }
 
+  /** Resolves once no sync is in flight (never rejects: the run's own caller sees its error). */
+  async whenIdle(): Promise<void> {
+    while (this.#current) await this.#current.catch(() => undefined);
+  }
+
   trigger(): Promise<SyncReport | null> {
     this.#current ??= (async () => {
       try {

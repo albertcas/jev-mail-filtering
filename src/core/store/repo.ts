@@ -103,6 +103,11 @@ export function createRepo(db: Db) {
         for (const t of [overrides, classifications, messages, mailboxes, syncRuns, settings]) tx.delete(t).run();
       });
     },
+    /** Reclaim the wiped pages so deleted mail does not linger in the file or its WAL. */
+    compact() {
+      db.$client.exec("VACUUM");
+      db.$client.pragma("wal_checkpoint(TRUNCATE)");
+    },
   };
 }
 export type Repo = ReturnType<typeof createRepo>;
