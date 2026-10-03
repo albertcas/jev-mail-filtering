@@ -160,7 +160,7 @@ Evaluado con `jev-1.13.0` sobre los 50 correos de la bandeja de demostración (i
 | Otros (ruido) | 100 % | 100 % | 2 |
 | **Global** | | **100 %** (50/50) | Inglés 100 % · Castellano 100 % |
 
-Lee estas cifras con cuidado: el conjunto de evaluación son 50 correos ficticios escritos por el autor, cada uno con una etiqueta clara. Las bandejas reales son más complicadas, así que espera una precisión menor en la tuya. Informe completo en [docs/eval-results.md](docs/eval-results.md); reprodúcelo con `npm run eval`.
+Lee estas cifras con cuidado: el conjunto de evaluación son 50 correos ficticios escritos por el autor, cada uno con una etiqueta clara, y es el mismo que se tenía delante al escribir las preguntas. Es una comprobación, no un benchmark: con una muestra tan pequeña, no fallar ninguno de 12 correos de estafa sigue siendo compatible con que se escape hasta un 22 % de ellos. Las bandejas reales son más complicadas, así que espera una precisión menor en la tuya. Informe completo en [docs/eval-results.md](docs/eval-results.md); reprodúcelo con `npm run eval`.
 
 > **La detección de estafas es orientativa. No confíes en ella a ciegas.** Que un correo no esté en *Posible estafa* no garantiza que sea seguro.
 

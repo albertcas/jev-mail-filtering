@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { CATEGORY_LABELS } from "@/core/classify/answers";
+import { DEFAULT_MODEL } from "@/core/config";
 
 const dir = join(fileURLToPath(new URL(".", import.meta.url)), "../../fixtures/demo");
 const entries = JSON.parse(readFileSync(join(dir, "source.json"), "utf8")) as { file: string; label: string; lang: string }[];
@@ -35,5 +36,11 @@ describe("demo inbox (fixtures/demo)", () => {
   it("has exactly one generated .eml per entry", () => {
     const emls = readdirSync(join(dir, "eml")).filter((f) => f.endsWith(".eml")).sort();
     expect(emls).toEqual(entries.map((e) => `${e.file}.eml`).sort());
+  });
+
+  it("was evaluated with the model the app uses by default", () => {
+    // Changing DEFAULT_MODEL without re-recording (`npm run eval -- --live`) would publish accuracy figures for another model.
+    const cache = JSON.parse(readFileSync(join(dir, "jev-cache.json"), "utf8")) as Record<string, { model: string }>;
+    expect([...new Set(Object.values(cache).map((a) => a.model))]).toEqual([DEFAULT_MODEL]);
   });
 });

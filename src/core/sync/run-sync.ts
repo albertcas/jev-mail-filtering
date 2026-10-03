@@ -1,7 +1,7 @@
 import { APIError, AuthenticationError, PermissionDeniedError } from "@typesafe-ai/sdk";
 import type { Classifier } from "@/core/classify/jev-classifier";
 import { buildState, excerpt, type JevState } from "@/core/classify/state";
-import { CLASSIFY_CONCURRENCY, MAX_MESSAGES_PER_SYNC } from "@/core/config";
+import { CLASSIFY_CONCURRENCY, MAX_MESSAGES_PER_SYNC, retryDelayMs } from "@/core/config";
 import { ImapAuthError } from "@/core/mail/imap-source";
 import type { FetchResult, MailSource } from "@/core/mail/source";
 import { computeSignals } from "@/core/signals";
@@ -63,8 +63,8 @@ export async function runSync(d: SyncDeps): Promise<SyncReport> {
       d.repo.setMailbox(d.folder, uidValidity, lastUid);
     }
 
-    // 2. Classify pending messages with bounded concurrency.
-    const pending = d.repo.listPending(MAX_MESSAGES_PER_SYNC);
+    // 2. Classify pending messages with bounded concurrency. Messages still waiting out a retry delay are skipped.
+    const pending = d.repo.listPending(MAX_MESSAGES_PER_SYNC, now());
     let next = 0;
     let stopped = false;
     const worker = async () => {
@@ -82,7 +82,8 @@ export async function runSync(d: SyncDeps): Promise<SyncReport> {
             return;
           }
           console.error(`sync: classification failed for message ${msg.id}: ${err instanceof Error ? err.name : "error"}`);
-          d.repo.recordFailure(msg.id);
+          // Back off: the SDK already retried transient errors within this call, so wait longer each time.
+          d.repo.recordFailure(msg.id, new Date(now().getTime() + retryDelayMs(msg.attempts + 1)));
           report.failed++;
         }
       }
