@@ -69,6 +69,8 @@ The questions live in [`src/core/classify/questions.ts`](src/core/classify/quest
 2. Re-record the answers with a real key: `TYPESAFE_API_KEY=… npm run eval -- --live`. This updates `fixtures/demo/jev-cache.json` and `docs/eval-results.md`.
 3. Commit both files and mention the accuracy change in the pull request.
 
+The app's default model is pinned to the version the answers were recorded with (`DEFAULT_MODEL` in [`src/core/config.ts`](src/core/config.ts)). To move to a newer Jev, change it and re-record in the same pull request; a unit test fails while the two differ.
+
 To add an evaluation email, add an entry to `fixtures/demo/source.json` (fictional people only; legitimate senders use reserved domains such as `*.example` or `example.com`), run `npm run fixtures:demo`, then record answers as above.
 
 ## Style
