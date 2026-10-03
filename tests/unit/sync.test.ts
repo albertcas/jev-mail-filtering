@@ -2,6 +2,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it, vi } from "vitest";
 import { APIError, AuthenticationError, PermissionDeniedError } from "@typesafe-ai/sdk";
+import { RETRY_BASE_MS, RETRY_MAX_MS, retryDelayMs } from "@/core/config";
 import { openDatabase } from "@/core/store/db";
 import { createRepo } from "@/core/store/repo";
 import { FixtureMailSource } from "@/core/mail/fixture-source";
@@ -11,6 +12,7 @@ import { runSync, SyncRunner, type SyncDeps } from "@/core/sync/run-sync";
 import type { Classifier } from "@/core/classify/jev-classifier";
 import type { JevAnswers } from "@/core/classify/answers";
 
+const T0 = Date.parse("2026-09-29T12:00:00Z");
 const fx = join(fileURLToPath(new URL(".", import.meta.url)), "../fixtures");
 const okAnswers: JevAnswers = {
   model: "jev-1.13.0", inputTokens: 700,
@@ -26,9 +28,19 @@ function deps(classifier: Classifier): SyncDeps {
     recipient: { name: "Yo", address: "yo@mail.com" },
     folder: "INBOX",
     days: 14,
-    now: () => new Date("2026-09-29T12:00:00Z"),
+    now: () => new Date(T0),
   };
 }
+
+describe("retryDelayMs", () => {
+  it("doubles from 10 minutes and is capped at 24 hours", () => {
+    expect([1, 2, 3, 4].map(retryDelayMs)).toEqual([10, 20, 40, 80].map((m) => m * 60_000));
+    expect(retryDelayMs(8)).toBe(1280 * 60_000);
+    expect(retryDelayMs(9)).toBe(RETRY_MAX_MS);
+    expect(retryDelayMs(500)).toBe(RETRY_MAX_MS);
+    expect(retryDelayMs(0)).toBe(RETRY_BASE_MS);
+  });
+});
 
 describe("runSync", () => {
   it("ingests, classifies and advances the cursor; second run is a no-op", async () => {
@@ -39,12 +51,33 @@ describe("runSync", () => {
     expect(await runSync(d)).toEqual({ fetched: 0, classified: 0, failed: 0, error: null });
     expect(classify).toHaveBeenCalledTimes(3);
   });
-  it("keeps failures pending and retries them next run", async () => {
+  it("keeps failures pending and retries them once their delay has passed", async () => {
     let fail = true;
-    const d = deps({ classify: async () => { if (fail) throw new Error("boom"); return okAnswers; } });
+    let clock = T0;
+    const classify = vi.fn(async () => { if (fail) throw new Error("boom"); return okAnswers; });
+    const d = { ...deps({ classify }), now: () => new Date(clock) };
     expect(await runSync(d)).toMatchObject({ classified: 0, failed: 3, error: null });
     fail = false;
+    // Too early: the failed messages are still pending but not attempted again.
+    clock = T0 + RETRY_BASE_MS - 1;
+    expect(await runSync(d)).toMatchObject({ fetched: 0, classified: 0, failed: 0 });
+    expect(classify).toHaveBeenCalledTimes(3);
+    expect(d.repo.countPending()).toBe(3);
+    clock = T0 + RETRY_BASE_MS;
     expect(await runSync(d)).toMatchObject({ fetched: 0, classified: 3, failed: 0 });
+  });
+  it("a message that always fails is retried less and less often, never on every sync", async () => {
+    let clock = T0;
+    const classify = vi.fn(async (): Promise<JevAnswers> => { throw new Error("boom"); });
+    const d = { ...deps({ classify }), now: () => new Date(clock) };
+    // A sync every 15 minutes for 3 days.
+    for (let i = 0; i < 3 * 24 * 4; i++) {
+      await runSync(d);
+      clock += 15 * 60_000;
+    }
+    // 3 messages × 10 attempts (delays of 10 min, 20 min… then 24 h) instead of 3 × 288.
+    expect(classify).toHaveBeenCalledTimes(30);
+    expect(d.repo.countPending()).toBe(3);
   });
   it("stops on Jev authentication errors", async () => {
     const d = deps({ classify: async () => { throw new AuthenticationError(401, undefined, new Headers(), "bad key"); } });
@@ -82,7 +115,8 @@ describe("runSync failure modes", () => {
     const base = deps({ classify: async () => { throw new Error("boom"); } });
     await runSync(base);
     expect(base.repo.countPending()).toBe(3);
-    const d = { ...base, classifier: { classify: async () => okAnswers }, source: failingSource(new Error("down")) };
+    const later = () => new Date(T0 + RETRY_BASE_MS);
+    const d = { ...base, now: later, classifier: { classify: async () => okAnswers }, source: failingSource(new Error("down")) };
     expect(await runSync(d)).toMatchObject({ error: "imap_unavailable", classified: 3, failed: 0 });
     expect(d.repo.countPending()).toBe(0);
   });

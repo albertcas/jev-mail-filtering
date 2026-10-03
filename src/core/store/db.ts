@@ -12,6 +12,12 @@ export function openDatabase(file: string) {
   sqlite.pragma("journal_mode = WAL");
   sqlite.pragma("foreign_keys = ON");
   sqlite.exec(schema.SCHEMA_SQL);
+  // v1 → v2: `CREATE TABLE IF NOT EXISTS` leaves an existing v1 table untouched, so add the retry column here.
+  const columns = sqlite.pragma("table_info(messages)") as { name: string }[];
+  if (!columns.some((c) => c.name === "next_attempt_at")) {
+    sqlite.exec("ALTER TABLE messages ADD COLUMN next_attempt_at INTEGER NOT NULL DEFAULT 0");
+  }
+  sqlite.pragma(`user_version = ${schema.SCHEMA_VERSION}`);
   return drizzle(sqlite, { schema });
 }
 export type Db = ReturnType<typeof openDatabase>;

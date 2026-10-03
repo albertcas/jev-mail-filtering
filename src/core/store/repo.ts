@@ -1,4 +1,4 @@
-import { desc, eq, sql } from "drizzle-orm";
+import { and, desc, eq, lte, sql } from "drizzle-orm";
 import type { Db } from "./db";
 import { classifications, mailboxes, messages, overrides, settings, syncRuns } from "./schema";
 import { JevAnswersSchema, type JevAnswers } from "@/core/classify/answers";
@@ -32,8 +32,11 @@ export function createRepo(db: Db) {
     insertMessage(m: NewMessage): boolean {
       return db.insert(messages).values(m).onConflictDoNothing({ target: messages.messageId }).run().changes > 0;
     },
-    listPending(limit: number): StoredMessage[] {
-      return db.select().from(messages).where(eq(messages.status, "pending")).orderBy(desc(messages.date)).limit(limit).all();
+    /** Pending messages that are due: never tried, or whose retry delay has passed. */
+    listPending(limit: number, now: Date): StoredMessage[] {
+      return db.select().from(messages)
+        .where(and(eq(messages.status, "pending"), lte(messages.nextAttemptAt, now.getTime())))
+        .orderBy(desc(messages.date)).limit(limit).all();
     },
     countPending(): number {
       return db.select({ n: sql<number>`count(*)` }).from(messages).where(eq(messages.status, "pending")).get()!.n;
@@ -45,8 +48,14 @@ export function createRepo(db: Db) {
         tx.update(messages).set({ status: "classified" }).where(eq(messages.id, id)).run();
       });
     },
-    recordFailure(id: number) {
-      db.update(messages).set({ attempts: sql`${messages.attempts} + 1` }).where(eq(messages.id, id)).run();
+    /** Counts the failed attempt and holds the message back until `nextAttemptAt`. */
+    recordFailure(id: number, nextAttemptAt: Date) {
+      db.update(messages).set({ attempts: sql`${messages.attempts} + 1`, nextAttemptAt: nextAttemptAt.getTime() })
+        .where(eq(messages.id, id)).run();
+    },
+    /** Makes every pending message due now, keeping its attempt count (used when the user asks for a sync). */
+    clearRetryDelays() {
+      db.update(messages).set({ nextAttemptAt: 0 }).where(eq(messages.status, "pending")).run();
     },
     listClassified(): ClassifiedRow[] {
       const rows = db
