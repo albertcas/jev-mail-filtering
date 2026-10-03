@@ -6,6 +6,11 @@ export const MAX_MESSAGES_PER_SYNC = 500;
 export const JEV_PRICE_PER_TOKEN = 0.042 / 1_000_000;
 export const AVG_TOKENS_PER_EMAIL = 1500;
 export const CLASSIFY_CONCURRENCY = 4;
+/**
+ * The pinned Jev version the recorded evaluation ran on (docs/eval-results.md). `jev-latest` would move to a new
+ * model without the evaluation being re-run; bump this together with `npm run eval -- --live`.
+ */
+export const DEFAULT_MODEL = "jev-1.13.0";
 /** A message whose classification keeps failing waits longer each time, so it cannot be retried on every sync forever. */
 export const RETRY_BASE_MS = 10 * 60_000;
 export const RETRY_MAX_MS = 24 * 60 * 60_000;
@@ -25,7 +30,7 @@ export const AppConfigSchema = z.object({
   folder: z.string().min(1).default("INBOX"),
   days: z.number().int().min(1).max(90).default(14),
   intervalMinutes: z.number().int().min(5).max(1440).default(15),
-  model: z.string().min(1).default("jev-latest"),
+  model: z.string().min(1).default(DEFAULT_MODEL),
 });
 export type AppConfig = z.infer<typeof AppConfigSchema>;
 

@@ -107,7 +107,7 @@
     "thresholdsSection": "Decisions", "thresholdsSectionHelp": "How sure Jev must be before an email lands in a column.",
     "syncSection": "Sync", "syncHelp": "How often new mail is fetched and analysed while the app is running.", "frequency": "Sync every",
     "minutes": "{count, plural, one {# minute} other {# minutes}}", "hours": "{count, plural, one {# hour} other {# hours}}",
-    "modelSection": "Model", "modelHelp": "Advanced. jev-latest always uses the newest Jev. Pin a version such as jev-1.13.0 to keep results stable.", "model": "Jev model", "modelInvalid": "Enter a model name without spaces, for example jev-latest.",
+    "modelSection": "Model", "modelHelp": "Advanced. The default is the pinned version the published evaluation ran on, so results stay stable. jev-latest always uses the newest Jev, which may classify differently.", "model": "Jev model", "modelInvalid": "Enter a model name without spaces, for example jev-1.13.0.",
     "languageHelp": "Applies to this browser.",
     "account": "Account", "accountHelp": "The mailbox this app reads.", "server": "Server", "reconfigure": "Reconfigure", "reconfigureHelp": "Change the mailbox, app password or API key.",
     "dangerHelp": "Removes the local database, your settings and the stored credentials. Your mailbox is not touched.", "wipeFailed": "Couldn't delete the data. Try again.", "saveFailed": "Couldn't save. Try again."

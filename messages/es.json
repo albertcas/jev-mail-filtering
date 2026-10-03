@@ -107,7 +107,7 @@
     "thresholdsSection": "Decisiones", "thresholdsSectionHelp": "Cuánta seguridad necesita Jev para colocar un correo en una columna.",
     "syncSection": "Sincronización", "syncHelp": "Cada cuánto se trae y analiza el correo nuevo mientras la app está abierta.", "frequency": "Sincronizar cada",
     "minutes": "{count, plural, one {# minuto} other {# minutos}}", "hours": "{count, plural, one {# hora} other {# horas}}",
-    "modelSection": "Modelo", "modelHelp": "Avanzado. jev-latest usa siempre el Jev más reciente. Fija una versión como jev-1.13.0 para que los resultados no cambien.", "model": "Modelo de Jev", "modelInvalid": "Escribe un nombre de modelo sin espacios, por ejemplo jev-latest.",
+    "modelSection": "Modelo", "modelHelp": "Avanzado. Por defecto se usa la versión fijada con la que se hizo la evaluación publicada, para que los resultados no cambien. jev-latest usa siempre el Jev más reciente, que puede clasificar distinto.", "model": "Modelo de Jev", "modelInvalid": "Escribe un nombre de modelo sin espacios, por ejemplo jev-1.13.0.",
     "languageHelp": "Se aplica a este navegador.",
     "account": "Cuenta", "accountHelp": "El buzón que lee esta app.", "server": "Servidor", "reconfigure": "Reconfigurar", "reconfigureHelp": "Cambia el buzón, la contraseña de aplicación o la clave de API.",
     "dangerHelp": "Elimina la base de datos local, tu configuración y las credenciales guardadas. Tu buzón no se toca.", "wipeFailed": "No se pudieron borrar los datos. Inténtalo de nuevo.", "saveFailed": "No se pudo guardar. Inténtalo de nuevo."

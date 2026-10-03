@@ -1,5 +1,6 @@
 import { TypeSafeClient } from "@typesafe-ai/sdk";
 import { JevAnswersSchema, NOUL_IDS, type JevAnswers } from "./answers";
+import { DEFAULT_MODEL } from "@/core/config";
 import { QUESTIONS } from "./questions";
 import type { JevState } from "./state";
 
@@ -13,7 +14,7 @@ export class JevClassifier implements Classifier {
   constructor(opts: { apiKey: string; model?: string; fetch?: (input: string, init?: RequestInit) => Promise<Response> }) {
     this.#client = new TypeSafeClient({
       apiKey: opts.apiKey,
-      defaultModel: opts.model ?? "jev-latest",
+      defaultModel: opts.model ?? DEFAULT_MODEL,
       timeout: 15_000,
       logLevel: "off",
       ...(opts.fetch ? { fetch: opts.fetch } : {}),
