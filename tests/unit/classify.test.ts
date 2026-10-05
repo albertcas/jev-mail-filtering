@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
+import { DEFAULT_MODEL } from "@/core/config";
 import { buildState, BODY_EXCERPT_MAX } from "@/core/classify/state";
 import { JevClassifier } from "@/core/classify/jev-classifier";
 import { CachedClassifier, CacheMissError, RecordingClassifier, cacheKey } from "@/core/classify/cached-classifier";
@@ -52,7 +53,7 @@ describe("JevClassifier", () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const body = JSON.parse((fetchMock.mock.calls[0] as unknown as [string, RequestInit])[1].body as string);
     expect(Object.keys(body.questions)).toHaveLength(9);
-    expect(body.model).toBe("jev-latest");
+    expect(body.model).toBe(DEFAULT_MODEL);
     expect(a).toMatchObject({ model: "jev-1.13.0", inputTokens: 812, category: { choice: "commercial" }, nouls: { promotional: 0.95 }, urgency: { score: 0.4 } });
   });
   it("rejects malformed answers", async () => {

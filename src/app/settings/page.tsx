@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
+import { DEFAULT_MODEL } from "@/core/config";
 import { getContext } from "@/server/context";
 import { SettingsForm } from "../components/settings/SettingsForm";
 
@@ -29,7 +30,7 @@ export default async function SettingsPage() {
           : null
       }
       intervalMinutes={config?.intervalMinutes ?? 15}
-      model={config?.model ?? "jev-latest"}
+      model={config?.model ?? DEFAULT_MODEL}
     />
   );
 }

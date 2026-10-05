@@ -160,7 +160,7 @@ Evaluated with `jev-1.13.0` on the 50 emails of the demo inbox (English and Span
 | Others (noise) | 100% | 100% | 2 |
 | **Overall** | | **100%** (50/50) | English 100% · Spanish 100% |
 
-Read these numbers with care: the evaluation set is 50 fictional emails written by the author, each with a clear-cut label. Real inboxes are messier, so expect lower accuracy on yours. Full report in [docs/eval-results.md](docs/eval-results.md); reproduce it with `npm run eval`.
+Read these numbers with care: the evaluation set is 50 fictional emails written by the author, each with a clear-cut label, and the same set was at hand while the questions were written. It is a sanity check, not a benchmark: with a sample this small, no misses in 12 scam emails is still compatible with missing up to about 22% of them. Real inboxes are messier, so expect lower accuracy on yours. Full report in [docs/eval-results.md](docs/eval-results.md); reproduce it with `npm run eval`.
 
 > **Scam detection is advisory. Never trust it blindly.** An email outside the *Possible scam* category is not guaranteed to be safe.
 

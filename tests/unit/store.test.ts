@@ -2,6 +2,7 @@ import { existsSync, mkdtempSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
+import Database from "better-sqlite3";
 import { openDatabase } from "@/core/store/db";
 import { createRepo, type NewMessage, type Repo } from "@/core/store/repo";
 import { DEFAULT_THRESHOLDS } from "@/core/policy/thresholds";
@@ -31,22 +32,30 @@ describe("repo", () => {
   });
   it("moves a message from pending to classified", () => {
     repo.insertMessage(msg("<a@x>"));
-    const [p] = repo.listPending(10);
+    const [p] = repo.listPending(10, new Date());
     repo.saveClassification(p!.id, answers, new Date(5));
     expect(repo.countPending()).toBe(0);
     const [row] = repo.listClassified();
     expect(row!.answers.category.choice).toBe("needs_reply");
     expect(repo.totalInputTokens()).toBe(900);
   });
-  it("keeps failed messages pending and counts attempts", () => {
+  it("keeps failed messages pending, counts attempts and holds them back until the retry time", () => {
     repo.insertMessage(msg("<a@x>"));
-    const [p] = repo.listPending(10);
-    repo.recordFailure(p!.id);
-    expect(repo.listPending(10)[0]!.attempts).toBe(1);
+    const [p] = repo.listPending(10, new Date(1000));
+    repo.recordFailure(p!.id, new Date(5000));
+    expect(repo.countPending()).toBe(1);
+    expect(repo.listPending(10, new Date(4999))).toEqual([]);
+    expect(repo.listPending(10, new Date(5000))[0]!.attempts).toBe(1);
+  });
+  it("clearRetryDelays makes held-back messages due again without resetting their attempts", () => {
+    repo.insertMessage(msg("<a@x>"));
+    repo.recordFailure(repo.listPending(10, new Date(1000))[0]!.id, new Date(5000));
+    repo.clearRetryDelays();
+    expect(repo.listPending(10, new Date(1000))).toMatchObject([{ attempts: 1, nextAttemptAt: 0 }]);
   });
   it("stores overrides and removes them with null", () => {
     repo.insertMessage(msg("<a@x>"));
-    const id = repo.listPending(10)[0]!.id;
+    const id = repo.listPending(10, new Date())[0]!.id;
     repo.saveClassification(id, answers, new Date());
     repo.setOverride(id, "commercial", new Date());
     expect(repo.listClassified()[0]!.override).toBe("commercial");
@@ -83,5 +92,24 @@ describe("repo", () => {
     openDatabase(join(dir, "data.db"));
     expect(statSync(dir).mode & 0o777).toBe(0o700);
     expect(statSync(join(dir, "data.db")).mode & 0o777).toBe(0o600);
+  });
+  it("upgrades a database created before retry delays existed, keeping its messages", () => {
+    const file = join(mkdtempSync(join(tmpdir(), "jev-v1-")), "data.db");
+    const v1 = new Database(file);
+    v1.exec(`CREATE TABLE messages (
+      id INTEGER PRIMARY KEY AUTOINCREMENT, message_id TEXT NOT NULL UNIQUE, folder TEXT NOT NULL, uid INTEGER NOT NULL,
+      from_name TEXT NOT NULL, from_address TEXT NOT NULL, subject TEXT NOT NULL, date INTEGER NOT NULL,
+      excerpt TEXT NOT NULL, signals_json TEXT NOT NULL, state_json TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'pending', attempts INTEGER NOT NULL DEFAULT 0, created_at INTEGER NOT NULL);
+      INSERT INTO messages (message_id, folder, uid, from_name, from_address, subject, date, excerpt, signals_json, state_json, attempts, created_at)
+        VALUES ('<old@x>', 'INBOX', 1, 'Ana', 'ana@x.es', 'Hola', 1000, 'Hola', '{}', '{}', 7, 1);
+      PRAGMA user_version = 1;`);
+    v1.close();
+    const db = openDatabase(file);
+    const upgraded = createRepo(db);
+    expect(db.$client.pragma("user_version", { simple: true })).toBe(2);
+    // An old failing message is due at once, with its attempt count intact so its next delay is already long.
+    expect(upgraded.listPending(10, new Date(0))).toMatchObject([{ messageId: "<old@x>", attempts: 7, nextAttemptAt: 0 }]);
+    openDatabase(file); // opening an already-upgraded database is a no-op
   });
 });

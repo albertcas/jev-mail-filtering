@@ -20,6 +20,8 @@ export const messages = sqliteTable("messages", {
   stateJson: text("state_json").notNull(),
   status: text("status", { enum: ["pending", "classified"] }).notNull().default("pending"),
   attempts: integer("attempts").notNull().default(0),
+  /** Epoch ms before which a failed classification is not retried; 0 means "as soon as possible". */
+  nextAttemptAt: integer("next_attempt_at").notNull().default(0),
   createdAt: integer("created_at").notNull(),
 });
 
@@ -52,13 +54,17 @@ export const settings = sqliteTable("settings", {
   valueJson: text("value_json").notNull(),
 });
 
+export const SCHEMA_VERSION = 2;
+
+/** Creates a current-version database. Databases created by an older version are upgraded in `openDatabase`. */
 export const SCHEMA_SQL = `
 CREATE TABLE IF NOT EXISTS mailboxes (folder TEXT PRIMARY KEY, uid_validity INTEGER NOT NULL, last_uid INTEGER NOT NULL);
 CREATE TABLE IF NOT EXISTS messages (
   id INTEGER PRIMARY KEY AUTOINCREMENT, message_id TEXT NOT NULL UNIQUE, folder TEXT NOT NULL, uid INTEGER NOT NULL,
   from_name TEXT NOT NULL, from_address TEXT NOT NULL, subject TEXT NOT NULL, date INTEGER NOT NULL,
   excerpt TEXT NOT NULL, signals_json TEXT NOT NULL, state_json TEXT NOT NULL,
-  status TEXT NOT NULL DEFAULT 'pending', attempts INTEGER NOT NULL DEFAULT 0, created_at INTEGER NOT NULL);
+  status TEXT NOT NULL DEFAULT 'pending', attempts INTEGER NOT NULL DEFAULT 0, next_attempt_at INTEGER NOT NULL DEFAULT 0,
+  created_at INTEGER NOT NULL);
 CREATE INDEX IF NOT EXISTS messages_status ON messages(status);
 CREATE TABLE IF NOT EXISTS classifications (message_id INTEGER PRIMARY KEY REFERENCES messages(id) ON DELETE CASCADE,
   model TEXT NOT NULL, answers_json TEXT NOT NULL, input_tokens INTEGER NOT NULL, classified_at INTEGER NOT NULL);
@@ -67,5 +73,4 @@ CREATE TABLE IF NOT EXISTS overrides (message_id INTEGER PRIMARY KEY REFERENCES 
 CREATE TABLE IF NOT EXISTS sync_runs (id INTEGER PRIMARY KEY AUTOINCREMENT, started_at INTEGER NOT NULL, finished_at INTEGER,
   fetched INTEGER NOT NULL DEFAULT 0, classified INTEGER NOT NULL DEFAULT 0, failed INTEGER NOT NULL DEFAULT 0, error TEXT);
 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value_json TEXT NOT NULL);
-PRAGMA user_version = 1;
 `;
